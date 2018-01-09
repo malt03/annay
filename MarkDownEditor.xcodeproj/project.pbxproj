@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED187FD220052D30002E51C0 /* markdown.html in Resources */ = {isa = PBXBuildFile; fileRef = ED187FD120052D30002E51C0 /* markdown.html */; };
+		ED187FD420053206002E51C0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED187FD320053206002E51C0 /* WebView.swift */; };
+		ED2E147D20053BF2003D55A3 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E147C20053BE9003D55A3 /* RxBlocking.framework */; };
+		ED2E147E20053BF2003D55A3 /* RxBlocking.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2E147C20053BE9003D55A3 /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2E147F20053BF2003D55A3 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E147B20053BE9003D55A3 /* RxCocoa.framework */; };
+		ED2E148020053BF2003D55A3 /* RxCocoa.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2E147B20053BE9003D55A3 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2E148120053BF2003D55A3 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E147A20053BE9003D55A3 /* RxSwift.framework */; };
+		ED2E148220053BF2003D55A3 /* RxSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2E147A20053BE9003D55A3 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149120055548003D55A3 /* markdown-it-task-checkbox.min.js */; };
+		ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149320055563003D55A3 /* markdown-it.min.js */; };
+		ED2E1496200555A5003D55A3 /* markdown-it-sub.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E1495200555A5003D55A3 /* markdown-it-sub.min.js */; };
+		ED2E1498200555C6003D55A3 /* markdown-it-sup.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E1497200555C5003D55A3 /* markdown-it-sup.min.js */; };
+		ED2E149A20055650003D55A3 /* markdown-it-footnote.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149920055650003D55A3 /* markdown-it-footnote.min.js */; };
+		ED2E149C2005575A003D55A3 /* markdown-it-emoji.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149B2005575A003D55A3 /* markdown-it-emoji.min.js */; };
+		ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149F20055B87003D55A3 /* highlight.pack.js */; };
+		ED2E1561200561D7003D55A3 /* atom-one-dark.css in Resources */ = {isa = PBXBuildFile; fileRef = ED2E151D200561A8003D55A3 /* atom-one-dark.css */; };
+		ED2E1562200561D7003D55A3 /* atom-one-light.css in Resources */ = {isa = PBXBuildFile; fileRef = ED2E1529200561AC003D55A3 /* atom-one-light.css */; };
+		ED2E159B20056622003D55A3 /* markdown.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E159A20056621003D55A3 /* markdown.js */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FD2005111A0079F3D0 /* DirectoryBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
@@ -16,7 +34,38 @@
 		EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EDDED73D20051BC10079F3D0 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ED2E148020053BF2003D55A3 /* RxCocoa.framework in Embed Libraries */,
+				ED2E147E20053BF2003D55A3 /* RxBlocking.framework in Embed Libraries */,
+				ED2E148220053BF2003D55A3 /* RxSwift.framework in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		ED187FD120052D30002E51C0 /* markdown.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = markdown.html; sourceTree = "<group>"; };
+		ED187FD320053206002E51C0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		ED2E147A20053BE9003D55A3 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = SOURCE_ROOT; };
+		ED2E147B20053BE9003D55A3 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = SOURCE_ROOT; };
+		ED2E147C20053BE9003D55A3 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/Mac/RxBlocking.framework; sourceTree = SOURCE_ROOT; };
+		ED2E149120055548003D55A3 /* markdown-it-task-checkbox.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it-task-checkbox.min.js"; sourceTree = "<group>"; };
+		ED2E149320055563003D55A3 /* markdown-it.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it.min.js"; sourceTree = "<group>"; };
+		ED2E1495200555A5003D55A3 /* markdown-it-sub.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it-sub.min.js"; sourceTree = "<group>"; };
+		ED2E1497200555C5003D55A3 /* markdown-it-sup.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it-sup.min.js"; sourceTree = "<group>"; };
+		ED2E149920055650003D55A3 /* markdown-it-footnote.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it-footnote.min.js"; sourceTree = "<group>"; };
+		ED2E149B2005575A003D55A3 /* markdown-it-emoji.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it-emoji.min.js"; sourceTree = "<group>"; };
+		ED2E149F20055B87003D55A3 /* highlight.pack.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.pack.js; sourceTree = "<group>"; };
+		ED2E151D200561A8003D55A3 /* atom-one-dark.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "atom-one-dark.css"; sourceTree = "<group>"; };
+		ED2E1529200561AC003D55A3 /* atom-one-light.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "atom-one-light.css"; sourceTree = "<group>"; };
+		ED2E159A20056621003D55A3 /* markdown.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = markdown.js; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryBrowserViewController.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
@@ -34,17 +83,98 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED2E147F20053BF2003D55A3 /* RxCocoa.framework in Frameworks */,
+				ED2E147D20053BF2003D55A3 /* RxBlocking.framework in Frameworks */,
+				ED2E148120053BF2003D55A3 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED187FD72005395A002E51C0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EDDED6FA20050C0B0079F3D0 /* TextView.swift */,
+				EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */,
+				ED187FD320053206002E51C0 /* WebView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		ED187FD82005396C002E51C0 /* WebPage */ = {
+			isa = PBXGroup;
+			children = (
+				ED2E149E20055B87003D55A3 /* highlight */,
+				ED2E159C2005662A003D55A3 /* markdown-it */,
+				ED2E159A20056621003D55A3 /* markdown.js */,
+				ED187FD120052D30002E51C0 /* markdown.html */,
+			);
+			path = WebPage;
+			sourceTree = "<group>";
+		};
+		ED2E147820053BCC003D55A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED2E147920053BD6003D55A3 /* Carthage */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED2E147920053BD6003D55A3 /* Carthage */ = {
+			isa = PBXGroup;
+			children = (
+				ED2E147C20053BE9003D55A3 /* RxBlocking.framework */,
+				ED2E147B20053BE9003D55A3 /* RxCocoa.framework */,
+				ED2E147A20053BE9003D55A3 /* RxSwift.framework */,
+			);
+			name = Carthage;
+			sourceTree = "<group>";
+		};
+		ED2E149E20055B87003D55A3 /* highlight */ = {
+			isa = PBXGroup;
+			children = (
+				ED2E149F20055B87003D55A3 /* highlight.pack.js */,
+				ED2E14A020055B87003D55A3 /* styles */,
+			);
+			path = highlight;
+			sourceTree = "<group>";
+		};
+		ED2E14A020055B87003D55A3 /* styles */ = {
+			isa = PBXGroup;
+			children = (
+				ED2E151D200561A8003D55A3 /* atom-one-dark.css */,
+				ED2E1529200561AC003D55A3 /* atom-one-light.css */,
+			);
+			path = styles;
+			sourceTree = "<group>";
+		};
+		ED2E159C2005662A003D55A3 /* markdown-it */ = {
+			isa = PBXGroup;
+			children = (
+				ED2E149120055548003D55A3 /* markdown-it-task-checkbox.min.js */,
+				ED2E149320055563003D55A3 /* markdown-it.min.js */,
+				ED2E1495200555A5003D55A3 /* markdown-it-sub.min.js */,
+				ED2E1497200555C5003D55A3 /* markdown-it-sup.min.js */,
+				ED2E149920055650003D55A3 /* markdown-it-footnote.min.js */,
+				ED2E149B2005575A003D55A3 /* markdown-it-emoji.min.js */,
+			);
+			path = "markdown-it";
+			sourceTree = "<group>";
+		};
+		EDDED73A20051B880079F3D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EDEB7A4E2004EDF000F8C48A = {
 			isa = PBXGroup;
 			children = (
 				EDEB7A592004EDF000F8C48A /* MarkDownEditor */,
 				EDEB7A582004EDF000F8C48A /* Products */,
+				EDDED73A20051B880079F3D0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,15 +189,16 @@
 		EDEB7A592004EDF000F8C48A /* MarkDownEditor */ = {
 			isa = PBXGroup;
 			children = (
+				ED2E147820053BCC003D55A3 /* Frameworks */,
+				ED187FD82005396C002E51C0 /* WebPage */,
+				ED187FD72005395A002E51C0 /* Common */,
 				EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */,
 				EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */,
 				EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */,
-				EDDED6FA20050C0B0079F3D0 /* TextView.swift */,
 				EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */,
 				EDEB7A602004EDF000F8C48A /* Main.storyboard */,
 				EDEB7A632004EDF000F8C48A /* Info.plist */,
 				EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */,
-				EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */,
 			);
 			path = MarkDownEditor;
 			sourceTree = "<group>";
@@ -82,6 +213,7 @@
 				EDEB7A532004EDF000F8C48A /* Sources */,
 				EDEB7A542004EDF000F8C48A /* Frameworks */,
 				EDEB7A552004EDF000F8C48A /* Resources */,
+				EDDED73D20051BC10079F3D0 /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -104,7 +236,13 @@
 				TargetAttributes = {
 					EDEB7A562004EDF000F8C48A = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -131,8 +269,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED2E149A20055650003D55A3 /* markdown-it-footnote.min.js in Resources */,
+				ED2E1561200561D7003D55A3 /* atom-one-dark.css in Resources */,
+				ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */,
 				EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */,
 				EDEB7A622004EDF000F8C48A /* Main.storyboard in Resources */,
+				ED2E149C2005575A003D55A3 /* markdown-it-emoji.min.js in Resources */,
+				ED2E1496200555A5003D55A3 /* markdown-it-sub.min.js in Resources */,
+				ED187FD220052D30002E51C0 /* markdown.html in Resources */,
+				ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */,
+				ED2E1498200555C6003D55A3 /* markdown-it-sup.min.js in Resources */,
+				ED2E1562200561D7003D55A3 /* atom-one-light.css in Resources */,
+				ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */,
+				ED2E159B20056622003D55A3 /* markdown.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +295,7 @@
 				EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */,
 				EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */,
 				EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */,
+				ED187FD420053206002E51C0 /* WebView.swift in Sources */,
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
 				EDDED6FD2005111A0079F3D0 /* DirectoryBrowserViewController.swift in Sources */,
 			);
@@ -275,13 +425,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = MarkDownEditor/MarkDownEditor.entitlements;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = MarkDownEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MarkDownEditor",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dena.MarkDownEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -290,13 +451,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = MarkDownEditor/MarkDownEditor.entitlements;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = MarkDownEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MarkDownEditor",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dena.MarkDownEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

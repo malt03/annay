@@ -1,0 +1,37 @@
+# xcode noise
+build/*
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
+*.mode1
+*.mode2v3
+*.mode1v3
+xcuserdata
+Snapshots
+
+# old skool
+.svn
+
+# osx noise
+.DS_Store
+out/
+
+.idea/
+
+# CocoaPods
+Pods/
+*.xcworkspace/
+
+# bundle
+vendor/
+.bundle
+fastlane/report.xml
+*.ipa
+*.app.dSYM.zip
+certs/*.mobileprovision
+
+.envrc
+
+Carthage
+Settings.bundle/Acknowledgements.plist

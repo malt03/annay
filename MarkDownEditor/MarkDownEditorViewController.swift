@@ -7,10 +7,13 @@
 //
 
 import Cocoa
+import RxCocoa
+import RxSwift
 
 final class MarkDownEditorViewController: NSViewController {
-  @IBOutlet private var textView: NSTextView!
-
+  @IBOutlet private weak var textView: TextView!
+  @IBOutlet private weak var webView: WebView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     prepareTextView()
@@ -18,6 +21,7 @@ final class MarkDownEditorViewController: NSViewController {
   
   override func cancelOperation(_ sender: Any?) {
     NSApplication.shared.endEditing()
+    webView.isHidden = false
   }
 
   private func prepareTextView() {
@@ -28,5 +32,11 @@ final class MarkDownEditorViewController: NSViewController {
     textView.isAutomaticSpellingCorrectionEnabled = false
     textView.isContinuousSpellCheckingEnabled = false
     textView.isGrammarCheckingEnabled = false
+  }
+}
+
+extension MarkDownEditorViewController: NSTextViewDelegate {
+  func textDidChange(_ notification: Notification) {
+    webView.update(markdown: textView.text.replacingOccurrences(of: "\n", with: "\\n"))
   }
 }

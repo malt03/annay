@@ -13,4 +13,8 @@ final class TextView: NSTextView {
     super.awakeFromNib()
     font = NSFont(name: "Osaka-Mono", size: 16)
   }
+  
+  var text: String {
+    return textStorage?.string ?? ""
+  }
 }
