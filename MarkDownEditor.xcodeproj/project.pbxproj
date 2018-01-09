@@ -7,20 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
+		EDDED6FD2005111A0079F3D0 /* DirectoryBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */; };
+		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
 		EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */; };
-		EDEB7A5D2004EDF000F8C48A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5C2004EDF000F8C48A /* ViewController.swift */; };
 		EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */; };
 		EDEB7A622004EDF000F8C48A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A602004EDF000F8C48A /* Main.storyboard */; };
+		EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryBrowserViewController.swift; sourceTree = "<group>"; };
+		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
 		EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkDownEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EDEB7A5C2004EDF000F8C48A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDEB7A612004EDF000F8C48A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EDEB7A632004EDF000F8C48A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkDownEditor.entitlements; sourceTree = "<group>"; };
+		EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,11 +60,14 @@
 			isa = PBXGroup;
 			children = (
 				EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */,
-				EDEB7A5C2004EDF000F8C48A /* ViewController.swift */,
+				EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */,
+				EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */,
+				EDDED6FA20050C0B0079F3D0 /* TextView.swift */,
 				EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */,
 				EDEB7A602004EDF000F8C48A /* Main.storyboard */,
 				EDEB7A632004EDF000F8C48A /* Info.plist */,
 				EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */,
+				EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */,
 			);
 			path = MarkDownEditor;
 			sourceTree = "<group>";
@@ -134,8 +143,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDEB7A5D2004EDF000F8C48A /* ViewController.swift in Sources */,
+				EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */,
+				EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */,
 				EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */,
+				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
+				EDDED6FD2005111A0079F3D0 /* DirectoryBrowserViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
