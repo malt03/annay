@@ -22,9 +22,8 @@
 		ED2E149A20055650003D55A3 /* markdown-it-footnote.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149920055650003D55A3 /* markdown-it-footnote.min.js */; };
 		ED2E149C2005575A003D55A3 /* markdown-it-emoji.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149B2005575A003D55A3 /* markdown-it-emoji.min.js */; };
 		ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149F20055B87003D55A3 /* highlight.pack.js */; };
-		ED2E1561200561D7003D55A3 /* atom-one-dark.css in Resources */ = {isa = PBXBuildFile; fileRef = ED2E151D200561A8003D55A3 /* atom-one-dark.css */; };
-		ED2E1562200561D7003D55A3 /* atom-one-light.css in Resources */ = {isa = PBXBuildFile; fileRef = ED2E1529200561AC003D55A3 /* atom-one-light.css */; };
 		ED2E159B20056622003D55A3 /* markdown.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E159A20056621003D55A3 /* markdown.js */; };
+		EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */ = {isa = PBXBuildFile; fileRef = EDCED8C42005DAD100C514B1 /* monokai-sublime.css */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FD2005111A0079F3D0 /* DirectoryBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
@@ -63,9 +62,8 @@
 		ED2E149920055650003D55A3 /* markdown-it-footnote.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it-footnote.min.js"; sourceTree = "<group>"; };
 		ED2E149B2005575A003D55A3 /* markdown-it-emoji.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it-emoji.min.js"; sourceTree = "<group>"; };
 		ED2E149F20055B87003D55A3 /* highlight.pack.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.pack.js; sourceTree = "<group>"; };
-		ED2E151D200561A8003D55A3 /* atom-one-dark.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "atom-one-dark.css"; sourceTree = "<group>"; };
-		ED2E1529200561AC003D55A3 /* atom-one-light.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "atom-one-light.css"; sourceTree = "<group>"; };
 		ED2E159A20056621003D55A3 /* markdown.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = markdown.js; sourceTree = "<group>"; };
+		EDCED8C42005DAD100C514B1 /* monokai-sublime.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.css"; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryBrowserViewController.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
@@ -135,18 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				ED2E149F20055B87003D55A3 /* highlight.pack.js */,
-				ED2E14A020055B87003D55A3 /* styles */,
+				EDCED8C42005DAD100C514B1 /* monokai-sublime.css */,
 			);
 			path = highlight;
-			sourceTree = "<group>";
-		};
-		ED2E14A020055B87003D55A3 /* styles */ = {
-			isa = PBXGroup;
-			children = (
-				ED2E151D200561A8003D55A3 /* atom-one-dark.css */,
-				ED2E1529200561AC003D55A3 /* atom-one-light.css */,
-			);
-			path = styles;
 			sourceTree = "<group>";
 		};
 		ED2E159C2005662A003D55A3 /* markdown-it */ = {
@@ -270,16 +259,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED2E149A20055650003D55A3 /* markdown-it-footnote.min.js in Resources */,
-				ED2E1561200561D7003D55A3 /* atom-one-dark.css in Resources */,
 				ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */,
 				EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */,
 				EDEB7A622004EDF000F8C48A /* Main.storyboard in Resources */,
 				ED2E149C2005575A003D55A3 /* markdown-it-emoji.min.js in Resources */,
 				ED2E1496200555A5003D55A3 /* markdown-it-sub.min.js in Resources */,
 				ED187FD220052D30002E51C0 /* markdown.html in Resources */,
+				EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */,
 				ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */,
 				ED2E1498200555C6003D55A3 /* markdown-it-sup.min.js in Resources */,
-				ED2E1562200561D7003D55A3 /* atom-one-light.css in Resources */,
 				ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */,
 				ED2E159B20056622003D55A3 /* markdown.js in Resources */,
 			);
