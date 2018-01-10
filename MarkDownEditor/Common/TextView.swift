@@ -12,6 +12,7 @@ final class TextView: NSTextView {
   override func awakeFromNib() {
     super.awakeFromNib()
     font = NSFont(name: "Osaka-Mono", size: 16)
+    textContainerInset = NSSize(width: 10, height: 10)
   }
   
   var text: String {
