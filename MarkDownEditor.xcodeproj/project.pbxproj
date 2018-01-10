@@ -23,6 +23,13 @@
 		ED2E149C2005575A003D55A3 /* markdown-it-emoji.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149B2005575A003D55A3 /* markdown-it-emoji.min.js */; };
 		ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149F20055B87003D55A3 /* highlight.pack.js */; };
 		ED2E159B20056622003D55A3 /* markdown.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E159A20056621003D55A3 /* markdown.js */; };
+		ED2E159F200624CA003D55A3 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E159E200624C2003D55A3 /* Realm.framework */; };
+		ED2E15A0200624CA003D55A3 /* Realm.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2E159E200624C2003D55A3 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2E15A1200624CE003D55A3 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E159D200624C2003D55A3 /* RealmSwift.framework */; };
+		ED2E15A2200624CE003D55A3 /* RealmSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2E159D200624C2003D55A3 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */; };
+		ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */; };
+		ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15AD200666B1003D55A3 /* NodeModel.swift */; };
 		EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */ = {isa = PBXBuildFile; fileRef = EDCED8C42005DAD100C514B1 /* monokai-sublime.css */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FD2005111A0079F3D0 /* DirectoryBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */; };
@@ -40,6 +47,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				ED2E15A0200624CA003D55A3 /* Realm.framework in Embed Libraries */,
+				ED2E15A2200624CE003D55A3 /* RealmSwift.framework in Embed Libraries */,
 				ED2E148020053BF2003D55A3 /* RxCocoa.framework in Embed Libraries */,
 				ED2E147E20053BF2003D55A3 /* RxBlocking.framework in Embed Libraries */,
 				ED2E148220053BF2003D55A3 /* RxSwift.framework in Embed Libraries */,
@@ -63,6 +72,11 @@
 		ED2E149B2005575A003D55A3 /* markdown-it-emoji.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it-emoji.min.js"; sourceTree = "<group>"; };
 		ED2E149F20055B87003D55A3 /* highlight.pack.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = highlight.pack.js; sourceTree = "<group>"; };
 		ED2E159A20056621003D55A3 /* markdown.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = markdown.js; sourceTree = "<group>"; };
+		ED2E159D200624C2003D55A3 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
+		ED2E159E200624C2003D55A3 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = SOURCE_ROOT; };
+		ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Extensions.swift"; sourceTree = "<group>"; };
+		ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
+		ED2E15AD200666B1003D55A3 /* NodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeModel.swift; sourceTree = "<group>"; };
 		EDCED8C42005DAD100C514B1 /* monokai-sublime.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.css"; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryBrowserViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +95,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED2E159F200624CA003D55A3 /* Realm.framework in Frameworks */,
+				ED2E15A1200624CE003D55A3 /* RealmSwift.framework in Frameworks */,
 				ED2E147F20053BF2003D55A3 /* RxCocoa.framework in Frameworks */,
 				ED2E147D20053BF2003D55A3 /* RxBlocking.framework in Frameworks */,
 				ED2E148120053BF2003D55A3 /* RxSwift.framework in Frameworks */,
@@ -96,6 +112,7 @@
 				EDDED6FA20050C0B0079F3D0 /* TextView.swift */,
 				EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */,
 				ED187FD320053206002E51C0 /* WebView.swift */,
+				ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -122,6 +139,8 @@
 		ED2E147920053BD6003D55A3 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				ED2E159E200624C2003D55A3 /* Realm.framework */,
+				ED2E159D200624C2003D55A3 /* RealmSwift.framework */,
 				ED2E147C20053BE9003D55A3 /* RxBlocking.framework */,
 				ED2E147B20053BE9003D55A3 /* RxCocoa.framework */,
 				ED2E147A20053BE9003D55A3 /* RxSwift.framework */,
@@ -188,6 +207,8 @@
 				EDEB7A602004EDF000F8C48A /* Main.storyboard */,
 				EDEB7A632004EDF000F8C48A /* Info.plist */,
 				EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */,
+				ED2E15AD200666B1003D55A3 /* NodeModel.swift */,
+				ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */,
 			);
 			path = MarkDownEditor;
 			sourceTree = "<group>";
@@ -281,9 +302,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */,
+				ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */,
 				EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */,
 				EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */,
+				ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */,
 				ED187FD420053206002E51C0 /* WebView.swift in Sources */,
+				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
 				EDDED6FD2005111A0079F3D0 /* DirectoryBrowserViewController.swift in Sources */,
 			);

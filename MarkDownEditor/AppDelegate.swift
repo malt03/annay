@@ -7,8 +7,11 @@
 //
 
 import Cocoa
+import RealmSwift
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+  func applicationDidFinishLaunching(_ notification: Notification) {
+    Realm.prepare()
+  }
 }
-

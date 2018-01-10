@@ -13,13 +13,10 @@ final class WebView: WKWebView {
   override func awakeFromNib() {
     super.awakeFromNib()
     let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
-    print(url)
     loadFileURL(url, allowingReadAccessTo: url)
   }
   
   func update(markdown: String) {
-    evaluateJavaScript("update(\"\(markdown)\")", completionHandler: { (obj, err) in
-      print(obj)
-    })
+    evaluateJavaScript("update(\"\(markdown)\")", completionHandler: nil)
   }
 }
