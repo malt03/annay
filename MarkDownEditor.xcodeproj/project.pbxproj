@@ -30,9 +30,10 @@
 		ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */; };
 		ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */; };
 		ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15AD200666B1003D55A3 /* NodeModel.swift */; };
+		ED434EFB20079CB600C2357D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED434EFD20079CB600C2357D /* Localizable.strings */; };
+		ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED434F0220079DBD00C2357D /* LocalizedString.swift */; };
 		EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */ = {isa = PBXBuildFile; fileRef = EDCED8C42005DAD100C514B1 /* monokai-sublime.css */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
-		EDDED6FD2005111A0079F3D0 /* DirectoryBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
 		EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */; };
 		EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */; };
@@ -77,9 +78,12 @@
 		ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Extensions.swift"; sourceTree = "<group>"; };
 		ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		ED2E15AD200666B1003D55A3 /* NodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeModel.swift; sourceTree = "<group>"; };
+		ED434EF120079BF600C2357D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		ED434F0020079CD100C2357D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ED434F0120079CFA00C2357D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ED434F0220079DBD00C2357D /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		EDCED8C42005DAD100C514B1 /* monokai-sublime.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.css"; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
-		EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryBrowserViewController.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
 		EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkDownEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 				EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */,
 				ED187FD320053206002E51C0 /* WebView.swift */,
 				ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */,
+				ED434F0220079DBD00C2357D /* LocalizedString.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -128,12 +133,12 @@
 			path = WebPage;
 			sourceTree = "<group>";
 		};
-		ED2E147820053BCC003D55A3 /* Frameworks */ = {
+		ED2E147820053BCC003D55A3 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
 				ED2E147920053BD6003D55A3 /* Carthage */,
 			);
-			name = Frameworks;
+			name = Framework;
 			sourceTree = "<group>";
 		};
 		ED2E147920053BD6003D55A3 /* Carthage */ = {
@@ -170,6 +175,31 @@
 			path = "markdown-it";
 			sourceTree = "<group>";
 		};
+		ED2E15AF200669B8003D55A3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */,
+				ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		ED2E15B0200669C8003D55A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED2E15AD200666B1003D55A3 /* NodeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ED434EF820079C9700C2357D /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				ED434EFD20079CB600C2357D /* Localizable.strings */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
 		EDDED73A20051B880079F3D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,18 +227,17 @@
 		EDEB7A592004EDF000F8C48A /* MarkDownEditor */ = {
 			isa = PBXGroup;
 			children = (
-				ED2E147820053BCC003D55A3 /* Frameworks */,
+				ED434EF820079C9700C2357D /* Support */,
+				ED2E147820053BCC003D55A3 /* Framework */,
 				ED187FD82005396C002E51C0 /* WebPage */,
 				ED187FD72005395A002E51C0 /* Common */,
+				ED2E15AF200669B8003D55A3 /* ViewController */,
+				ED2E15B0200669C8003D55A3 /* Model */,
 				EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */,
-				EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */,
-				EDDED6FC2005111A0079F3D0 /* DirectoryBrowserViewController.swift */,
 				EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */,
 				EDEB7A602004EDF000F8C48A /* Main.storyboard */,
 				EDEB7A632004EDF000F8C48A /* Info.plist */,
 				EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */,
-				ED2E15AD200666B1003D55A3 /* NodeModel.swift */,
-				ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */,
 			);
 			path = MarkDownEditor;
 			sourceTree = "<group>";
@@ -263,6 +292,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = EDEB7A4E2004EDF000F8C48A;
 			productRefGroup = EDEB7A582004EDF000F8C48A /* Products */;
@@ -288,6 +318,7 @@
 				ED187FD220052D30002E51C0 /* markdown.html in Resources */,
 				EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */,
 				ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */,
+				ED434EFB20079CB600C2357D /* Localizable.strings in Resources */,
 				ED2E1498200555C6003D55A3 /* markdown-it-sup.min.js in Resources */,
 				ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */,
 				ED2E159B20056622003D55A3 /* markdown.js in Resources */,
@@ -309,17 +340,27 @@
 				ED187FD420053206002E51C0 /* WebView.swift in Sources */,
 				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
-				EDDED6FD2005111A0079F3D0 /* DirectoryBrowserViewController.swift in Sources */,
+				ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		ED434EFD20079CB600C2357D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED434F0020079CD100C2357D /* Base */,
+				ED434F0120079CFA00C2357D /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		EDEB7A602004EDF000F8C48A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				EDEB7A612004EDF000F8C48A /* Base */,
+				ED434EF120079BF600C2357D /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -331,6 +372,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -388,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

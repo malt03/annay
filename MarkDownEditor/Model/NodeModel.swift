@@ -17,7 +17,8 @@ final class NodeModel: Object {
   @objc dynamic var body: String?
   
   @objc dynamic var parent: NodeModel?
-  let children = LinkingObjects(fromType: NodeModel.self, property: "parent").sorted(byKeyPath: "index")
+  private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
+  var sortedChildren: Results<NodeModel> { return children.sorted(byKeyPath: "index") }
   let descendants = List<NodeModel>()
   @objc dynamic var index = 0
   
@@ -27,6 +28,15 @@ final class NodeModel: Object {
 }
 
 extension NodeModel {
+  @discardableResult
+  static func createDirectory(name: String = Localized("New Directory"), parent: NodeModel?) -> NodeModel {
+    let node = NodeModel()
+    node.name = name
+    node.parent = parent
+    node.save()
+    return node
+  }
+  
   private static var _root: NodeModel?
   static var root: NodeModel {
     if let root = _root { return root }
@@ -36,9 +46,8 @@ extension NodeModel {
       let tmp = Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: rootId) {
       root = tmp
     } else {
-      root = NodeModel()
+      root = createDirectory(name: "", parent: nil)
       rootId = root.id
-      root.save()
     }
     
     _root = root

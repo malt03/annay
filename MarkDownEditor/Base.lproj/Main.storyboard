@@ -745,6 +745,20 @@
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="hkY-av-AqO" id="SgN-Px-bBE">
                                             <rect key="frame" x="0.0" y="0.0" width="278" height="708"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <gestureRecognizers>
+                                                <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="LMQ-W6-UtE">
+                                                    <connections>
+                                                        <action selector="secondaryClicked:" target="PrQ-Do-4mD" id="Pjo-0A-qeH"/>
+                                                        <outlet property="delegate" destination="PrQ-Do-4mD" id="b7E-sy-y4d"/>
+                                                    </connections>
+                                                </clickGestureRecognizer>
+                                                <clickGestureRecognizer delaysSecondaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="z93-g6-nAu">
+                                                    <buttonMask key="buttonMask" secondary="YES"/>
+                                                    <connections>
+                                                        <action selector="secondaryClicked:" target="PrQ-Do-4mD" id="J9w-NY-TyF"/>
+                                                    </connections>
+                                                </clickGestureRecognizer>
+                                            </gestureRecognizers>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
@@ -790,7 +804,7 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Gdv-iM-9Ja">
-                                    <rect key="frame" x="1" y="117.22547298669815" width="236.29069900512695" height="16"/>
+                                    <rect key="frame" x="1" y="117" width="236.29069900512695" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Ycd-CN-v0v">
@@ -806,6 +820,9 @@
                             <constraint firstAttribute="trailing" secondItem="Mcp-JE-IhX" secondAttribute="trailing" id="xfJ-lp-2xp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="outlineView" destination="SgN-Px-bBE" id="0qa-0v-86C"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-201" y="1382"/>
