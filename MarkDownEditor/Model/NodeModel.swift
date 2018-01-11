@@ -33,7 +33,7 @@ extension NodeModel {
     let node = NodeModel()
     node.name = name
     node.parent = parent
-    node.index = (parent?.sortedChildren.last?.index ?? -1) + 1
+    node.index = (parent?.sortedChildren.first?.index ?? -1) + 1
     node.save()
     return node
   }

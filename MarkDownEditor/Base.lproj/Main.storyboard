@@ -669,6 +669,19 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Debug" id="h8N-Zh-3Ec">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Debug" systemMenu="help" id="Q2p-8R-1kw">
+                                    <items>
+                                        <menuItem title="Reset Realm" id="oR4-ep-Ume">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="resetRealm:" target="Voe-Tx-rLC" id="DJ1-H5-572"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>

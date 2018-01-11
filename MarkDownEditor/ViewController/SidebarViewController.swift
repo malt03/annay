@@ -26,8 +26,13 @@ final class SidebarViewController: NSViewController {
   }
 
   @objc private func createDirectory() {
-    NodeModel.createDirectory(parent: selectedNode ?? .root)
+    let insertedNode = NodeModel.createDirectory(parent: selectedNode ?? .root)
     outlineView.insertItems(at: IndexSet(integer: 0), inParent: selectedNode, withAnimation: .slideDown)
+    if let selectedNode = selectedNode, !outlineView.isItemExpanded(selectedNode) {
+      outlineView.expandItem(selectedNode)
+    }
+    
+    outlineView.selectRowIndexes(IndexSet(integer: outlineView.row(forItem: insertedNode)), byExtendingSelection: false)
   }
   
   private var selectedNode: NodeModel? {

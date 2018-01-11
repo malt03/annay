@@ -14,4 +14,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_ notification: Notification) {
     Realm.prepare()
   }
+  
+  @IBAction private func resetRealm(_ sender: NSMenuItem) {
+    Realm.transaction { (realm) in
+      realm.deleteAll()
+    }
+  }
 }
