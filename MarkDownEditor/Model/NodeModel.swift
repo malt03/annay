@@ -18,7 +18,7 @@ final class NodeModel: Object {
   
   @objc dynamic var parent: NodeModel?
   private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
-  var sortedChildren: Results<NodeModel> { return children.sorted(byKeyPath: "index") }
+  var sortedChildren: Results<NodeModel> { return children.sorted(byKeyPath: "index", ascending: false) }
   let descendants = List<NodeModel>()
   @objc dynamic var index = 0
   
@@ -33,6 +33,7 @@ extension NodeModel {
     let node = NodeModel()
     node.name = name
     node.parent = parent
+    node.index = (parent?.sortedChildren.last?.index ?? -1) + 1
     node.save()
     return node
   }

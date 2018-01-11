@@ -14,7 +14,12 @@ final class SidebarViewController: NSViewController {
   
   @IBAction private func secondaryClicked(_ sender: NSClickGestureRecognizer) {
     let location = sender.location(in: outlineView)
-    outlineView.selectRowIndexes(IndexSet(integer: outlineView.row(at: location)), byExtendingSelection: false)
+    let row = outlineView.row(at: location)
+    if row > 0 {
+      outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+    } else {
+      outlineView.deselectAll(nil)
+    }
     let menu = NSMenu()
     menu.addItem(NSMenuItem(title: Localized("New Directory"), action: #selector(createDirectory), keyEquivalent: ""))
     menu.popUp(positioning: nil, at: location, in: outlineView)
@@ -22,24 +27,11 @@ final class SidebarViewController: NSViewController {
 
   @objc private func createDirectory() {
     NodeModel.createDirectory(parent: selectedNode ?? .root)
+    outlineView.insertItems(at: IndexSet(integer: 0), inParent: selectedNode, withAnimation: .slideDown)
   }
   
   private var selectedNode: NodeModel? {
     return outlineView.item(atRow: outlineView.selectedRow) as? NodeModel
-  }
-
-  private var nodeModelToken: NotificationToken?
-
-  override func viewWillAppear() {
-    super.viewWillAppear()
-    nodeModelToken = Realm.instance.objects(NodeModel.self).observe { [weak self] _ in
-      self?.outlineView.reloadData()
-    }
-  }
-
-  override func viewWillDisappear() {
-    nodeModelToken?.invalidate()
-    super.viewWillDisappear()
   }
 }
 
