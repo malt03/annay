@@ -12,13 +12,13 @@ import RealmSwift
 final class SidebarViewController: NSViewController {
   @IBOutlet private weak var outlineView: NSOutlineView!
   
+  private var secondaryClickedRow = -1
+  
   @IBAction private func secondaryClicked(_ sender: NSClickGestureRecognizer) {
     let location = sender.location(in: outlineView)
-    let row = outlineView.row(at: location)
-    if row >= 0 {
-      outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-    } else {
-      outlineView.deselectAll(nil)
+    secondaryClickedRow = outlineView.row(at: location)
+    if secondaryClickedRow >= 0 && !outlineView.selectedRowIndexes.contains(secondaryClickedRow) {
+      outlineView.selectRowIndexes(IndexSet(integer: secondaryClickedRow), byExtendingSelection: false)
     }
     let menu = NSMenu()
     menu.addItem(NSMenuItem(title: Localized("New Directory"), action: #selector(createDirectory), keyEquivalent: ""))
@@ -36,7 +36,7 @@ final class SidebarViewController: NSViewController {
   }
   
   private var selectedNode: NodeModel? {
-    return outlineView.item(atRow: outlineView.selectedRow) as? NodeModel
+    return outlineView.item(atRow: secondaryClickedRow) as? NodeModel
   }
 }
 
