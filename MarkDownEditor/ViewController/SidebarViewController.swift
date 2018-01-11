@@ -15,7 +15,7 @@ final class SidebarViewController: NSViewController {
   @IBAction private func secondaryClicked(_ sender: NSClickGestureRecognizer) {
     let location = sender.location(in: outlineView)
     let row = outlineView.row(at: location)
-    if row > 0 {
+    if row >= 0 {
       outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
     } else {
       outlineView.deselectAll(nil)
