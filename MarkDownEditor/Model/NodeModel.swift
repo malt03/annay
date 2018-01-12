@@ -22,19 +22,42 @@ final class NodeModel: Object {
   let descendants = List<NodeModel>()
   @objc dynamic var index = 0
   
+  private func setParent(_ parent: NodeModel) {
+    self.parent = parent
+    parent.setAsAncestor(descendant: self)
+  }
+  
+  private func setAsAncestor(descendant: NodeModel) {
+    descendants.append(descendant)
+    parent?.setAsAncestor(descendant: descendant)
+  }
+  
   override static func primaryKey() -> String? {
     return "id"
   }
 }
 
 extension NodeModel {
-  @discardableResult
   static func createDirectory(name: String = Localized("New Directory"), parent: NodeModel?) -> NodeModel {
     let node = NodeModel()
-    node.name = name
-    node.parent = parent
-    node.index = (parent?.sortedChildren.first?.index ?? -1) + 1
-    node.save()
+    Realm.transaction { (realm) in
+      node.name = name
+      if let parent = parent { node.setParent(parent) }
+      node.index = (parent?.sortedChildren.first?.index ?? -1) + 1
+      realm.add(node)
+    }
+    return node
+  }
+  
+  static func createNote(name: String = Localized("New Note"), in directory: NodeModel) -> NodeModel {
+    let node = NodeModel()
+    Realm.transaction { (realm) in
+      node.name = name
+      node.isDirectory = false
+      node.setParent(directory)
+      node.index = (directory.sortedChildren.first?.index ?? -1) + 1
+      realm.add(node)
+    }
     return node
   }
   

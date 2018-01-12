@@ -22,6 +22,7 @@ final class SidebarViewController: NSViewController {
     }
     let menu = NSMenu()
     menu.addItem(NSMenuItem(title: Localized("New Directory"), action: #selector(createDirectory), keyEquivalent: ""))
+    menu.addItem(NSMenuItem(title: Localized("New Note"), action: #selector(createNote), keyEquivalent: ""))
     menu.popUp(positioning: nil, at: location, in: outlineView)
   }
 
@@ -38,12 +39,22 @@ final class SidebarViewController: NSViewController {
 
   @objc private func createDirectory() {
     let insertedNode = NodeModel.createDirectory(parent: selectedNode ?? .root)
+    insertInSelectedRow(node: insertedNode)
+  }
+  
+  @objc private func createNote() {
+    let insertedNode = NodeModel.createNote(in: selectedNode ?? .root)
+    insertInSelectedRow(node: insertedNode)
+  }
+  
+  private func insertInSelectedRow(node: NodeModel) {
     outlineView.insertItems(at: IndexSet(integer: 0), inParent: selectedNode, withAnimation: .slideDown)
     if let selectedNode = selectedNode, !outlineView.isItemExpanded(selectedNode) {
       outlineView.expandItem(selectedNode)
     }
-    
-    outlineView.selectRowIndexes(IndexSet(integer: outlineView.row(forItem: insertedNode)), byExtendingSelection: false)
+    let row = outlineView.row(forItem: node)
+    outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+    outlineView.editColumn(0, row: row, with: nil, select: true)
   }
   
   private var selectedNode: NodeModel? {
