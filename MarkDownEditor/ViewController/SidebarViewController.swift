@@ -47,23 +47,27 @@ final class SidebarViewController: NSViewController {
   }
 
   @objc private func createDirectory() {
-    let insertedNode = NodeModel.createDirectory(parent: selectedNode ?? .root)
-    insertInSelectedRow(node: insertedNode)
+    let insertedNode = NodeModel.createDirectory(parent: selectedParent)
+    insertInSelectedParent(node: insertedNode)
   }
   
   @objc private func createNote() {
-    let insertedNode = NodeModel.createNote(in: selectedNode ?? .root)
-    insertInSelectedRow(node: insertedNode)
+    let insertedNode = NodeModel.createNote(in: selectedParent)
+    insertInSelectedParent(node: insertedNode)
   }
   
-  private func insertInSelectedRow(node: NodeModel) {
-    outlineView.insertItems(at: IndexSet(integer: 0), inParent: selectedNode, withAnimation: .slideDown)
-    if let selectedNode = selectedNode, !outlineView.isItemExpanded(selectedNode) {
-      outlineView.expandItem(selectedNode)
-    }
+  private func insertInSelectedParent(node: NodeModel) {
+    outlineView.insertItems(at: IndexSet(integer: 0), inParent: selectedParent, withAnimation: .slideDown)
+    outlineView.expandItem(selectedParent)
     let row = outlineView.row(forItem: node)
     outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
     outlineView.editColumn(0, row: row, with: nil, select: true)
+  }
+  
+  private var selectedParent: NodeModel {
+    guard let selectedNode = selectedNode else { return .root }
+    if selectedNode.isDirectory { return selectedNode }
+    return selectedNode.parent ?? .root
   }
   
   private var selectedNode: NodeModel? {
@@ -85,6 +89,10 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   func outlineView(_ outlineView: NSOutlineView, itemForPersistentObject object: Any) -> Any? {
     guard let id = object as? String else { return nil }
     return NodeModel.node(for: id)
+  }
+  
+  func outlineViewSelectionDidChange(_ notification: Notification) {
+    (outlineView.item(atRow: outlineView.selectedRow) as? NodeModel)?.selected()
   }
   
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {

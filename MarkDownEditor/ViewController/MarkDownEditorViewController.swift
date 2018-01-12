@@ -7,16 +7,38 @@
 //
 
 import Cocoa
-import RxCocoa
-import RxSwift
+import RealmSwift
 
 final class MarkDownEditorViewController: NSViewController {
   @IBOutlet private weak var textView: TextView!
   @IBOutlet private weak var webView: WebView!
   
+  private var selectedNote: NodeModel?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     prepareTextView()
+  }
+  
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    NotificationCenter.default.addObserver(self, selector: #selector(noteSelected(_:)), name: .NoteSelected, object: nil)
+  }
+  
+  override func viewWillDisappear() {
+    NotificationCenter.default.removeObserver(self)
+    super.viewWillDisappear()
+  }
+  
+  @objc private func noteSelected(_ notification: Notification) {
+    setSelectedNote(notification.object as? NodeModel)
+  }
+  
+  private func setSelectedNote(_ note: NodeModel?) {
+    selectedNote = note
+    textView.isEditable = selectedNote != nil
+    textView.string = note?.body ?? ""
+    updateWebView()
   }
   
   override func cancelOperation(_ sender: Any?) {
@@ -33,10 +55,20 @@ final class MarkDownEditorViewController: NSViewController {
     textView.isContinuousSpellCheckingEnabled = false
     textView.isGrammarCheckingEnabled = false
   }
+  
+  private func updateWebView() {
+    let markDown = (selectedNote?.body ?? "").replacingOccurrences(of: "\n", with: "\\n")
+    webView.update(markdown: markDown)
+  }
 }
 
 extension MarkDownEditorViewController: NSTextViewDelegate {
   func textDidChange(_ notification: Notification) {
-    webView.update(markdown: textView.text.replacingOccurrences(of: "\n", with: "\\n"))
+    if let note = selectedNote {
+      Realm.transaction { _ in
+        note.setBody(textView.string)
+      }
+    }
+    updateWebView()
   }
 }

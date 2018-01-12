@@ -9,12 +9,22 @@
 import RealmSwift
 import Cocoa
 
+extension NSNotification.Name {
+  static let NoteSelected = NSNotification.Name(rawValue: "NodeModel/NoteSelected")
+}
+
 final class NodeModel: Object {
   @objc dynamic var id = UUID().uuidString
   @objc dynamic var name = ""
   @objc dynamic var isDirectory = true
   
   @objc dynamic var body: String?
+  
+  func setBody(_ body: String?) {
+    self.body = body
+    let markdownName = body?.components(separatedBy: CharacterSet.newlines)[0] ?? Localized("New Note")
+    name = markdownName.replacingOccurrences(of: "^#+ ", with: "", options: .regularExpression)
+  }
   
   @objc dynamic var parent: NodeModel?
   private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
@@ -32,6 +42,12 @@ final class NodeModel: Object {
 }
 
 extension NodeModel {
+  func selected() {
+    if !isDirectory {
+      NotificationCenter.default.post(name: .NoteSelected, object: self)
+    }
+  }
+  
   static func createDirectory(name: String = Localized("New Directory"), parent: NodeModel?) -> NodeModel {
     let node = NodeModel()
     Realm.transaction { (realm) in

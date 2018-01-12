@@ -858,7 +858,7 @@
                                     <rect key="frame" x="1" y="1" width="463" height="728"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" textCompletion="NO" id="PWg-u2-RO2" customClass="TextView" customModule="MarkDownEditor" customModuleProvider="target">
+                                        <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" textCompletion="NO" id="PWg-u2-RO2" customClass="TextView" customModule="MarkDownEditor" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="463" height="728"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

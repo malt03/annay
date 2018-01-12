@@ -10,9 +10,26 @@ import Cocoa
 import RealmSwift
 
 final class NodeTableCellView: NSTableCellView {
+  private var token: NotificationToken?
+  
   private var node: NodeModel!
   func prepare(node: NodeModel) {
     self.node = node
+    
+    textField?.isEditable = node.isDirectory
+    
+    token = node.observe { [weak self] (change) in
+      guard let s = self else { return }
+      switch change {
+      case .change(let propertyChanges):
+        for propertyChange in propertyChanges {
+          if propertyChange.name == "name" {
+            s.textField?.stringValue = propertyChange.newValue as! String
+          }
+        }
+      default: break
+      }
+    }
     textField?.stringValue = node.name
   }
   
