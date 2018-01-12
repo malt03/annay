@@ -32,6 +32,7 @@
 		ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15AD200666B1003D55A3 /* NodeModel.swift */; };
 		ED434EFB20079CB600C2357D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED434EFD20079CB600C2357D /* Localizable.strings */; };
 		ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED434F0220079DBD00C2357D /* LocalizedString.swift */; };
+		ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD02008EC2B0097996A /* NodeTableCellView.swift */; };
 		EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */ = {isa = PBXBuildFile; fileRef = EDCED8C42005DAD100C514B1 /* monokai-sublime.css */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
@@ -82,6 +83,7 @@
 		ED434F0020079CD100C2357D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED434F0120079CFA00C2357D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED434F0220079DBD00C2357D /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		ED841BD02008EC2B0097996A /* NodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableCellView.swift; sourceTree = "<group>"; };
 		EDCED8C42005DAD100C514B1 /* monokai-sublime.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.css"; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			children = (
 				EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */,
 				ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */,
+				ED841BD02008EC2B0097996A /* NodeTableCellView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
 				ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */,
+				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

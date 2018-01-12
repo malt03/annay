@@ -788,18 +788,21 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="directoryCell" id="JNK-gA-qZk">
+                                                        <tableCellView identifier="node" id="JNK-gA-qZk" customClass="NodeTableCellView" customModule="MarkDownEditor" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="278" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1TI-PZ-Ak0">
                                                                     <rect key="frame" x="0.0" y="0.0" width="278" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="SA0-du-ejM">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="SA0-du-ejM">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <action selector="editted:" target="JNK-gA-qZk" id="uJM-VS-cSM"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <connections>
@@ -810,6 +813,7 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
+                                                <action trigger="doubleAction" selector="outlineViewDoubleAction:" target="PrQ-Do-4mD" id="5EY-Cw-kbm"/>
                                                 <outlet property="dataSource" destination="PrQ-Do-4mD" id="xTA-Xq-jIx"/>
                                                 <outlet property="delegate" destination="PrQ-Do-4mD" id="TI5-ZP-rRN"/>
                                             </connections>

@@ -25,6 +25,17 @@ final class SidebarViewController: NSViewController {
     menu.popUp(positioning: nil, at: location, in: outlineView)
   }
 
+  @IBAction private func outlineViewDoubleAction(_ sender: NSOutlineView) {
+    guard let clickedItem = outlineView.item(atRow: sender.clickedRow) as? NodeModel else { return }
+    if clickedItem.isDirectory {
+      if outlineView.isItemExpanded(clickedItem) {
+        outlineView.collapseItem(clickedItem)
+      } else {
+        outlineView.expandItem(clickedItem)
+      }
+    }
+  }
+
   @objc private func createDirectory() {
     let insertedNode = NodeModel.createDirectory(parent: selectedNode ?? .root)
     outlineView.insertItems(at: IndexSet(integer: 0), inParent: selectedNode, withAnimation: .slideDown)
@@ -62,13 +73,10 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
 
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-    let identifier = NSUserInterfaceItemIdentifier(rawValue: "directoryCell")
+    let identifier = NSUserInterfaceItemIdentifier(rawValue: "node")
     guard
-      let directoryCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView,
-      let textField = directoryCell.textField
-      else { return nil }
-    textField.stringValue = (item as! NodeModel).name
-    textField.sizeToFit()
-    return textField
+      let nodeCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? NodeTableCellView else { return nil }
+    nodeCell.prepare(node: item as! NodeModel)
+    return nodeCell
   }
 }
