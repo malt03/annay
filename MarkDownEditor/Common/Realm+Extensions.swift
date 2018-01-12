@@ -9,7 +9,11 @@
 import RealmSwift
 
 extension Realm {
+  private static var prepared = false
+  
   static func prepare() {
+    if prepared { return }
+    prepared = true
     Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
   }
   

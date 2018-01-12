@@ -32,6 +32,7 @@ final class SidebarViewController: NSViewController {
     let menu = NSMenu()
     menu.addItem(NSMenuItem(title: Localized("New Directory"), action: #selector(createDirectory), keyEquivalent: ""))
     menu.addItem(NSMenuItem(title: Localized("New Note"), action: #selector(createNote), keyEquivalent: ""))
+    menu.addItem(NSMenuItem(title: Localized("Delete"), action: #selector(delete), keyEquivalent: ""))
     menu.popUp(positioning: nil, at: location, in: outlineView)
   }
 
@@ -56,9 +57,26 @@ final class SidebarViewController: NSViewController {
     insertInSelectedParent(node: insertedNode)
   }
   
+  @objc private func delete() {
+    let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }
+    let nodesWithoutChildren = nodes.filter { (node) in
+      guard let parent = node.parent else { return true }
+      return !nodes.contains(parent)
+    }
+    Realm.transaction { _ in
+      for node in nodesWithoutChildren {
+        node.isDeleted = true
+        let index = outlineView.childIndex(forItem: node)
+        let parent = node.parent == .root ? nil : node.parent
+        outlineView.removeItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .effectFade)
+      }
+    }
+  }
+  
   private func insertInSelectedParent(node: NodeModel) {
-    outlineView.insertItems(at: IndexSet(integer: 0), inParent: selectedParent, withAnimation: .slideDown)
-    outlineView.expandItem(selectedParent)
+    let parent = selectedParent == .root ? nil : selectedParent
+    outlineView.insertItems(at: IndexSet(integer: 0), inParent: parent, withAnimation: .slideDown)
+    if let parent = parent { outlineView.expandItem(parent) }
     let row = outlineView.row(forItem: node)
     outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
     outlineView.editColumn(0, row: row, with: nil, select: true)

@@ -27,15 +27,19 @@ final class NodeModel: Object {
   }
   
   @objc dynamic var parent: NodeModel?
-  private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
-  var sortedChildren: Results<NodeModel> { return children.sorted(byKeyPath: "index", ascending: false) }
   let descendants = List<NodeModel>()
   @objc dynamic var index = 0
+  @objc dynamic var isDeleted = false
   
   override static func primaryKey() -> String? {
     return "id"
   }
   
+  private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
+  var sortedChildren: Results<NodeModel> { return children.filter("isDeleted = %@", false).sorted(byKeyPath: "index", ascending: false) }
+  
+  static var deleted: Results<NodeModel> { return Realm.instance.objects(NodeModel.self).filter("isDeleted = %@", true) }
+
   static func node(for id: String) -> NodeModel? {
     return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: id)
   }
