@@ -22,18 +22,12 @@ final class NodeModel: Object {
   let descendants = List<NodeModel>()
   @objc dynamic var index = 0
   
-  private func setParent(_ parent: NodeModel) {
-    self.parent = parent
-    parent.setAsAncestor(descendant: self)
-  }
-  
-  private func setAsAncestor(descendant: NodeModel) {
-    descendants.append(descendant)
-    parent?.setAsAncestor(descendant: descendant)
-  }
-  
   override static func primaryKey() -> String? {
     return "id"
+  }
+  
+  static func node(for id: String) -> NodeModel? {
+    return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: id)
   }
 }
 
@@ -61,13 +55,23 @@ extension NodeModel {
     return node
   }
   
+  private func setParent(_ parent: NodeModel) {
+    self.parent = parent
+    parent.setAsAncestor(descendant: self)
+  }
+  
+  private func setAsAncestor(descendant: NodeModel) {
+    descendants.append(descendant)
+    parent?.setAsAncestor(descendant: descendant)
+  }
+
   private static var _root: NodeModel?
   static var root: NodeModel {
     if let root = _root { return root }
     
     let root: NodeModel
     if let rootId = rootId,
-      let tmp = Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: rootId) {
+      let tmp = NodeModel.node(for: rootId) {
       root = tmp
     } else {
       root = createDirectory(name: "", parent: nil)

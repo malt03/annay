@@ -9,10 +9,19 @@
 import Cocoa
 import RealmSwift
 
+extension NSTableView.AutosaveName {
+  static let Sidebar = NSTableView.AutosaveName("Sidebar")
+}
+
 final class SidebarViewController: NSViewController {
   @IBOutlet private weak var outlineView: NSOutlineView!
   
   private var secondaryClickedRow = -1
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    outlineView.autosaveName = .Sidebar
+  }
   
   @IBAction private func secondaryClicked(_ sender: NSClickGestureRecognizer) {
     let location = sender.location(in: outlineView)
@@ -69,6 +78,15 @@ extension SidebarViewController: NSGestureRecognizerDelegate {
 }
 
 extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
+  func outlineView(_ outlineView: NSOutlineView, persistentObjectForItem item: Any?) -> Any? {
+    return (item as? NodeModel)?.id
+  }
+  
+  func outlineView(_ outlineView: NSOutlineView, itemForPersistentObject object: Any) -> Any? {
+    guard let id = object as? String else { return nil }
+    return NodeModel.node(for: id)
+  }
+  
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
     guard let node = item as? NodeModel else { return NodeModel.root.sortedChildren.count }
     return node.sortedChildren.count
@@ -85,8 +103,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
 
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
     let identifier = NSUserInterfaceItemIdentifier(rawValue: "node")
-    guard
-      let nodeCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? NodeTableCellView else { return nil }
+    guard let nodeCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? NodeTableCellView else { return nil }
     nodeCell.prepare(node: item as! NodeModel)
     return nodeCell
   }

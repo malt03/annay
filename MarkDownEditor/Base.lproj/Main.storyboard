@@ -755,7 +755,7 @@
                                     <rect key="frame" x="1" y="1" width="278" height="708"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="hkY-av-AqO" id="SgN-Px-bBE">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="hkY-av-AqO" id="SgN-Px-bBE">
                                             <rect key="frame" x="0.0" y="0.0" width="278" height="708"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <gestureRecognizers>
