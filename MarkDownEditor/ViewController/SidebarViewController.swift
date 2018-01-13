@@ -17,6 +17,7 @@ final class SidebarViewController: NSViewController {
   @IBOutlet private weak var outlineView: NSOutlineView!
   
   private var secondaryClickedRow = -1
+  private var textEditing = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,6 +56,20 @@ final class SidebarViewController: NSViewController {
   @objc private func createNote() {
     let insertedNode = NodeModel.createNote(in: selectedParent)
     insertInSelectedParent(node: insertedNode)
+  }
+  
+  override func keyDown(with event: NSEvent) {
+    // ビープ音を消すため
+    if event.isPushed(.delete) { return }
+    super.keyDown(with: event)
+  }
+  
+  override func keyUp(with event: NSEvent) {
+    super.keyUp(with: event)
+    
+    if !textEditing && event.isPushed(.delete) {
+      delete()
+    }
   }
   
   @objc private func delete() {
@@ -132,5 +147,17 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     guard let nodeCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? NodeTableCellView else { return nil }
     nodeCell.prepare(node: item as! NodeModel)
     return nodeCell
+  }
+}
+
+extension SidebarViewController: NSTextFieldDelegate {
+  func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
+    textEditing = true
+    return true
+  }
+  
+  func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
+    textEditing = false
+    return true
   }
 }

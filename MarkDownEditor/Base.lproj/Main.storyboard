@@ -802,6 +802,7 @@
                                                                     </textFieldCell>
                                                                     <connections>
                                                                         <action selector="editted:" target="JNK-gA-qZk" id="uJM-VS-cSM"/>
+                                                                        <outlet property="delegate" destination="PrQ-Do-4mD" id="9JI-Eh-myx"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
