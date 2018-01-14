@@ -16,7 +16,9 @@ final class NodeTableCellView: NSTableCellView {
   func prepare(node: NodeModel) {
     self.node = node
     
-    textField?.isEditable = node.isDirectory
+    textField?.textColor = NSColor(named: .text)
+    textField?.isEditable = node.isDirectory && !node.isRoot
+    imageView?.image = NSImage(named: .folder)
     
     token = node.observe { [weak self] (change) in
       guard let s = self else { return }

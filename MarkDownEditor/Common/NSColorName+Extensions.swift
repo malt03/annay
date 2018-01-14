@@ -9,5 +9,6 @@
 import Cocoa
 
 extension NSColor.Name {
-  static let Background = NSColor.Name("Background")
+  static let background = NSColor.Name("Background")
+  static let text = NSColor.Name("Text")
 }

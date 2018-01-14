@@ -43,6 +43,18 @@ final class NodeModel: Object {
   static func node(for id: String) -> NodeModel? {
     return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: id)
   }
+  
+  static var roots: Results<NodeModel> {
+    let result = Realm.instance.objects(NodeModel.self).filter("parent = nil").sorted(byKeyPath: "index", ascending: false)
+    if result.count == 0 {
+      createDirectory(name: Localized("Notes"), parent: nil, index: 0)
+    }
+    return result
+  }
+  
+  var isRoot: Bool {
+    return parent == nil
+  }
 }
 
 extension NodeModel {
@@ -52,12 +64,23 @@ extension NodeModel {
     }
   }
   
-  static func createDirectory(name: String = Localized("New Directory"), parent: NodeModel?) -> NodeModel {
+  @discardableResult
+  static func createDirectory(name: String = Localized("New Directory"), parent: NodeModel?, index: Int? = nil) -> NodeModel {
     let node = NodeModel()
     Realm.transaction { (realm) in
       node.name = name
-      if let parent = parent { node.setParent(parent) }
-      node.index = (parent?.sortedChildren.first?.index ?? -1) + 1
+      let i: Int
+      if let index = index {
+        i = index
+      } else {
+        if let parent = parent {
+          node.setParent(parent)
+          i = (parent.sortedChildren.first?.index ?? -1) + 1
+        } else {
+          i = (roots.first?.index ?? -1) + 1
+        }
+      }
+      node.index = i
       realm.add(node)
     }
     return node
@@ -83,23 +106,6 @@ extension NodeModel {
   private func setAsAncestor(descendant: NodeModel) {
     descendants.append(descendant)
     parent?.setAsAncestor(descendant: descendant)
-  }
-
-  private static var _root: NodeModel?
-  static var root: NodeModel {
-    if let root = _root { return root }
-    
-    let root: NodeModel
-    if let rootId = rootId,
-      let tmp = NodeModel.node(for: rootId) {
-      root = tmp
-    } else {
-      root = createDirectory(name: "", parent: nil)
-      rootId = root.id
-    }
-    
-    _root = root
-    return root
   }
 }
 

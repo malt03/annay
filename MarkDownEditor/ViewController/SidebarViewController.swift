@@ -56,6 +56,7 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func createNote() {
+    guard let selectedParent = selectedParent else { return }
     let insertedNode = NodeModel.createNote(in: selectedParent)
     insertInSelectedParent(node: insertedNode)
   }
@@ -84,25 +85,23 @@ final class SidebarViewController: NSViewController {
       for node in nodesWithoutChildren {
         node.isDeleted = true
         let index = outlineView.childIndex(forItem: node)
-        let parent = node.parent == .root ? nil : node.parent
-        outlineView.removeItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .effectFade)
+        outlineView.removeItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .effectFade)
       }
     }
   }
   
   private func insertInSelectedParent(node: NodeModel) {
-    let parent = selectedParent == .root ? nil : selectedParent
-    outlineView.insertItems(at: IndexSet(integer: 0), inParent: parent, withAnimation: .slideDown)
-    if let parent = parent { outlineView.expandItem(parent) }
+    outlineView.insertItems(at: IndexSet(integer: 0), inParent: selectedParent, withAnimation: .slideDown)
+    if let parent = selectedParent { outlineView.expandItem(parent) }
     let row = outlineView.row(forItem: node)
     outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
     outlineView.editColumn(0, row: row, with: nil, select: true)
   }
   
-  private var selectedParent: NodeModel {
-    guard let selectedNode = selectedNode else { return .root }
+  private var selectedParent: NodeModel? {
+    guard let selectedNode = selectedNode else { return nil }
     if selectedNode.isDirectory { return selectedNode }
-    return selectedNode.parent ?? .root
+    return selectedNode.parent
   }
   
   private var selectedNode: NodeModel? {
@@ -131,7 +130,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-    guard let node = item as? NodeModel else { return NodeModel.root.sortedChildren.count }
+    guard let node = item as? NodeModel else { return NodeModel.roots.count }
     return node.sortedChildren.count
   }
   
@@ -140,19 +139,24 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-    guard let node = item as? NodeModel else { return NodeModel.root.sortedChildren[index] }
+    guard let node = item as? NodeModel else { return NodeModel.roots[index] }
     return node.sortedChildren[index]
   }
 
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-    let identifier = NSUserInterfaceItemIdentifier(rawValue: "node")
-    guard let nodeCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? NodeTableCellView else { return nil }
-    nodeCell.prepare(node: item as! NodeModel)
+    let node = item as! NodeModel
+    let identifier = NSUserInterfaceItemIdentifier(rawValue: node.isDirectory && !node.isRoot ? "directory" : "note")
+    let nodeCell = outlineView.makeView(withIdentifier: identifier, owner: self) as! NodeTableCellView
+    nodeCell.prepare(node: node)
     return nodeCell
   }
   
   func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
     return NodeTableRowView()
+  }
+  
+  func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
+    return (item as! NodeModel).isRoot
   }
 }
 

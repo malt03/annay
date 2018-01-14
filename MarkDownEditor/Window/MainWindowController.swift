@@ -12,6 +12,6 @@ final class MainWindowController: NSWindowController {
   
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.backgroundColor = NSColor(named: .Background)
+    window?.backgroundColor = NSColor(named: .background)
   }
 }
