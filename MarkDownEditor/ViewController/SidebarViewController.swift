@@ -29,13 +29,19 @@ final class SidebarViewController: NSViewController {
   @IBAction private func secondaryClicked(_ sender: NSClickGestureRecognizer) {
     let location = sender.location(in: outlineView)
     secondaryClickedRow = outlineView.row(at: location)
-    if secondaryClickedRow >= 0 && !outlineView.selectedRowIndexes.contains(secondaryClickedRow) {
-      outlineView.selectRowIndexes(IndexSet(integer: secondaryClickedRow), byExtendingSelection: false)
+    if secondaryClickedRow >= 0 {
+      if !outlineView.selectedRowIndexes.contains(secondaryClickedRow) {
+        outlineView.selectRowIndexes(IndexSet(integer: secondaryClickedRow), byExtendingSelection: false)
+      }
+    } else {
+      outlineView.deselectAll(nil)
     }
+    let selected = outlineView.selectedRowIndexes.count > 0
     let menu = NSMenu()
-    menu.addItem(NSMenuItem(title: Localized("New Directory"), action: #selector(createDirectory), keyEquivalent: ""))
-    menu.addItem(NSMenuItem(title: Localized("New Note"), action: #selector(createNote), keyEquivalent: ""))
-    menu.addItem(NSMenuItem(title: Localized("Delete"), action: #selector(delete), keyEquivalent: ""))
+    menu.addItem(NSMenuItem(title: Localized("New Directory"), action: selected ? #selector(createDirectory) : nil, keyEquivalent: ""))
+    menu.addItem(NSMenuItem(title: Localized("New Note"), action: selected ? #selector(createNote) : nil, keyEquivalent: "n"))
+    menu.addItem(NSMenuItem(title: Localized("New Group"), action: #selector(createGroup), keyEquivalent: ""))
+    menu.addItem(NSMenuItem(title: Localized("Delete"), action: selected ? #selector(delete) : nil, keyEquivalent: ""))
     menu.popUp(positioning: nil, at: location, in: outlineView)
   }
 
@@ -52,13 +58,18 @@ final class SidebarViewController: NSViewController {
 
   @objc private func createDirectory() {
     let insertedNode = NodeModel.createDirectory(parent: selectedParent)
-    insertInSelectedParent(node: insertedNode)
+    insert(node: insertedNode, in: selectedParent)
   }
   
   @objc private func createNote() {
     guard let selectedParent = selectedParent else { return }
     let insertedNode = NodeModel.createNote(in: selectedParent)
-    insertInSelectedParent(node: insertedNode)
+    insert(node: insertedNode, in: selectedParent)
+  }
+  
+  @objc private func createGroup() {
+    let insertedNode = NodeModel.createDirectory(name: Localized("New Group"), parent: nil)
+    outlineView.reloadData()
   }
   
   override func keyDown(with event: NSEvent) {
@@ -90,9 +101,15 @@ final class SidebarViewController: NSViewController {
     }
   }
   
-  private func insertInSelectedParent(node: NodeModel) {
-    outlineView.insertItems(at: IndexSet(integer: 0), inParent: selectedParent, withAnimation: .slideDown)
-    if let parent = selectedParent { outlineView.expandItem(parent) }
+  private func insert(node: NodeModel, in parent: NodeModel?) {
+    let index: Int
+    if let parent = parent {
+      index = parent.sortedChildren.count - 1
+    } else {
+      index = NodeModel.roots.count - 1
+    }
+    outlineView.insertItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .effectFade)
+    if let parent = parent { outlineView.expandItem(parent) }
     let row = outlineView.row(forItem: node)
     outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
     outlineView.editColumn(0, row: row, with: nil, select: true)

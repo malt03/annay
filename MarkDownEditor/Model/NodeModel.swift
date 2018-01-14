@@ -36,7 +36,7 @@ final class NodeModel: Object {
   }
   
   private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
-  var sortedChildren: Results<NodeModel> { return children.filter("isDeleted = %@", false).sorted(byKeyPath: "index", ascending: false) }
+  var sortedChildren: Results<NodeModel> { return children.filter("isDeleted = %@", false).sorted(byKeyPath: "index") }
   
   static var deleted: Results<NodeModel> { return Realm.instance.objects(NodeModel.self).filter("isDeleted = %@", true) }
 
@@ -45,7 +45,7 @@ final class NodeModel: Object {
   }
   
   static var roots: Results<NodeModel> {
-    let result = Realm.instance.objects(NodeModel.self).filter("parent = nil").sorted(byKeyPath: "index", ascending: false)
+    let result = Realm.instance.objects(NodeModel.self).filter("parent = nil").sorted(byKeyPath: "index")
     if result.count == 0 {
       createDirectory(name: Localized("Notes"), parent: nil, index: 0)
     }
@@ -75,9 +75,9 @@ extension NodeModel {
       } else {
         if let parent = parent {
           node.setParent(parent)
-          i = (parent.sortedChildren.first?.index ?? -1) + 1
+          i = (parent.sortedChildren.last?.index ?? -1) + 1
         } else {
-          i = (roots.first?.index ?? -1) + 1
+          i = (roots.last?.index ?? -1) + 1
         }
       }
       node.index = i
@@ -92,7 +92,7 @@ extension NodeModel {
       node.name = name
       node.isDirectory = false
       node.setParent(directory)
-      node.index = (directory.sortedChildren.first?.index ?? -1) + 1
+      node.index = (directory.sortedChildren.last?.index ?? -1) + 1
       realm.add(node)
     }
     return node

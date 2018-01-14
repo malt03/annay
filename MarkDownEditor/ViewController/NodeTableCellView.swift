@@ -17,7 +17,8 @@ final class NodeTableCellView: NSTableCellView {
     self.node = node
     
     textField?.textColor = NSColor(named: .text)
-    textField?.isEditable = node.isDirectory && !node.isRoot
+    textField?.isEditable = node.isDirectory
+    textField?.font = NSFont.systemFont(ofSize: 11)
     imageView?.image = NSImage(named: .folder)
     
     token = node.observe { [weak self] (change) in
