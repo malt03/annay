@@ -35,6 +35,10 @@
 		ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD02008EC2B0097996A /* NodeTableCellView.swift */; };
 		ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD22009217F0097996A /* NSEvent+Extensions.swift */; };
 		ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD42009CC0C0097996A /* KeyCode.swift */; };
+		ED841BD8200B256B0097996A /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD7200B256B0097996A /* MainWindowController.swift */; };
+		ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED841BD9200B2FD10097996A /* Colors.xcassets */; };
+		ED841BDC200B315F0097996A /* NSColorName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BDB200B315F0097996A /* NSColorName+Extensions.swift */; };
+		ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */; };
 		EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */ = {isa = PBXBuildFile; fileRef = EDCED8C42005DAD100C514B1 /* monokai-sublime.css */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
@@ -88,6 +92,10 @@
 		ED841BD02008EC2B0097996A /* NodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableCellView.swift; sourceTree = "<group>"; };
 		ED841BD22009217F0097996A /* NSEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSEvent+Extensions.swift"; sourceTree = "<group>"; };
 		ED841BD42009CC0C0097996A /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
+		ED841BD7200B256B0097996A /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		ED841BD9200B2FD10097996A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		ED841BDB200B315F0097996A /* NSColorName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColorName+Extensions.swift"; sourceTree = "<group>"; };
+		ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableRowView.swift; sourceTree = "<group>"; };
 		EDCED8C42005DAD100C514B1 /* monokai-sublime.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.css"; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
@@ -126,6 +134,7 @@
 				ED434F0220079DBD00C2357D /* LocalizedString.swift */,
 				ED841BD22009217F0097996A /* NSEvent+Extensions.swift */,
 				ED841BD42009CC0C0097996A /* KeyCode.swift */,
+				ED841BDB200B315F0097996A /* NSColorName+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -189,6 +198,7 @@
 				EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */,
 				ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */,
 				ED841BD02008EC2B0097996A /* NodeTableCellView.swift */,
+				ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -207,6 +217,14 @@
 				ED434EFD20079CB600C2357D /* Localizable.strings */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		ED841BD6200B25500097996A /* Window */ = {
+			isa = PBXGroup;
+			children = (
+				ED841BD7200B256B0097996A /* MainWindowController.swift */,
+			);
+			path = Window;
 			sourceTree = "<group>";
 		};
 		EDDED73A20051B880079F3D0 /* Frameworks */ = {
@@ -236,6 +254,7 @@
 		EDEB7A592004EDF000F8C48A /* MarkDownEditor */ = {
 			isa = PBXGroup;
 			children = (
+				ED841BD6200B25500097996A /* Window */,
 				ED434EF820079C9700C2357D /* Support */,
 				ED2E147820053BCC003D55A3 /* Framework */,
 				ED187FD82005396C002E51C0 /* WebPage */,
@@ -244,6 +263,7 @@
 				ED2E15B0200669C8003D55A3 /* Model */,
 				EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */,
 				EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */,
+				ED841BD9200B2FD10097996A /* Colors.xcassets */,
 				EDEB7A602004EDF000F8C48A /* Main.storyboard */,
 				EDEB7A632004EDF000F8C48A /* Info.plist */,
 				EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */,
@@ -331,6 +351,7 @@
 				ED2E1498200555C6003D55A3 /* markdown-it-sup.min.js in Resources */,
 				ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */,
 				ED2E159B20056622003D55A3 /* markdown.js in Resources */,
+				ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,8 +364,11 @@
 			files = (
 				EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */,
 				ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */,
+				ED841BD8200B256B0097996A /* MainWindowController.swift in Sources */,
 				EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */,
 				EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */,
+				ED841BDC200B315F0097996A /* NSColorName+Extensions.swift in Sources */,
+				ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */,
 				ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */,
 				ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */,
 				ED187FD420053206002E51C0 /* WebView.swift in Sources */,

@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <plugIn identifier="com.apple.WebKit2IBPlugin" version="13196"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -697,7 +698,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="MainWindowController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -749,14 +750,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="280" height="730"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcp-JE-IhX">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="710"/>
-                                <clipView key="contentView" id="kLv-YC-w6R">
-                                    <rect key="frame" x="1" y="1" width="278" height="708"/>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcp-JE-IhX">
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="698"/>
+                                <clipView key="contentView" drawsBackground="NO" id="kLv-YC-w6R">
+                                    <rect key="frame" x="0.0" y="0.0" width="280" height="698"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="hkY-av-AqO" id="SgN-Px-bBE">
-                                            <rect key="frame" x="0.0" y="0.0" width="278" height="708"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="282" height="698"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <gestureRecognizers>
                                                 <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="LMQ-W6-UtE">
@@ -772,10 +773,11 @@
                                                     </connections>
                                                 </clickGestureRecognizer>
                                             </gestureRecognizers>
+                                            <size key="intercellSpacing" width="2" height="3"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" width="278" minWidth="40" maxWidth="1000" id="hkY-av-AqO">
+                                                <tableColumn identifier="" width="280" minWidth="40" maxWidth="1000" id="hkY-av-AqO">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -789,15 +791,15 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="node" id="JNK-gA-qZk" customClass="NodeTableCellView" customModule="MarkDownEditor" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="278" height="17"/>
+                                                            <rect key="frame" x="1" y="1" width="280" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1TI-PZ-Ak0">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="278" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="SA0-du-ejM">
                                                                         <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="textColor" name="Text"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
@@ -820,9 +822,10 @@
                                             </connections>
                                         </outlineView>
                                     </subviews>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Gdv-iM-9Ja">
-                                    <rect key="frame" x="1" y="117" width="236.29069900512695" height="16"/>
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.5" horizontal="YES" id="Gdv-iM-9Ja">
+                                    <rect key="frame" x="0.0" y="682" width="280" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Ycd-CN-v0v">
@@ -832,7 +835,7 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Mcp-JE-IhX" firstAttribute="top" secondItem="68f-Wd-hUG" secondAttribute="top" constant="20" id="eFH-dI-oAI"/>
+                            <constraint firstItem="Mcp-JE-IhX" firstAttribute="top" secondItem="68f-Wd-hUG" secondAttribute="top" constant="32" id="eFH-dI-oAI"/>
                             <constraint firstItem="Mcp-JE-IhX" firstAttribute="leading" secondItem="68f-Wd-hUG" secondAttribute="leading" id="iRm-ZZ-rMM"/>
                             <constraint firstAttribute="bottom" secondItem="Mcp-JE-IhX" secondAttribute="bottom" id="pbe-cd-nEI"/>
                             <constraint firstAttribute="trailing" secondItem="Mcp-JE-IhX" secondAttribute="trailing" id="xfJ-lp-2xp"/>
@@ -889,6 +892,14 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S4o-MG-268">
+                                <rect key="frame" x="66" y="219" width="13" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSTrashEmpty" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="40d-dg-mvX">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="vLz-CG-xvp" secondAttribute="bottom" id="4n8-Mc-Xtz"/>
@@ -911,4 +922,10 @@
             <point key="canvasLocation" x="495" y="1382"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSTrashEmpty" width="32" height="32"/>
+        <namedColor name="Text">
+            <color red="0.66699999570846558" green="0.66699999570846558" blue="0.66699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

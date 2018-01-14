@@ -22,6 +22,8 @@ final class SidebarViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     outlineView.autosaveName = .Sidebar
+    outlineView.backgroundColor = .clear
+    outlineView.headerView = nil
   }
   
   @IBAction private func secondaryClicked(_ sender: NSClickGestureRecognizer) {
@@ -147,6 +149,10 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     guard let nodeCell = outlineView.makeView(withIdentifier: identifier, owner: self) as? NodeTableCellView else { return nil }
     nodeCell.prepare(node: item as! NodeModel)
     return nodeCell
+  }
+  
+  func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
+    return NodeTableRowView()
   }
 }
 
