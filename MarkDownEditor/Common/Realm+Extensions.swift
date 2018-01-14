@@ -17,7 +17,10 @@ extension Realm {
     Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
   }
   
-  static var instance: Realm { return try! Realm() }
+  static var instance: Realm {
+    prepare()
+    return try! Realm()
+  }
   static func transaction(_ block: (_ realm: Realm) -> Void) {
     let realm = instance
     try! realm.write { block(realm) }

@@ -32,6 +32,7 @@ final class NodeModel: Object {
   let descendants = List<NodeModel>()
   @objc dynamic var index = 0
   @objc dynamic var isDeleted = false
+  @objc dynamic var deletedAt: Date?
   
   override static func primaryKey() -> String? {
     return "id"
@@ -43,14 +44,14 @@ final class NodeModel: Object {
     return children.filter("isDeleted = %@", false).sorted(byKeyPath: "index")
   }
   
-  static var deleted: Results<NodeModel> { return Realm.instance.objects(NodeModel.self).filter("isDeleted = %@", true) }
+  static var deleted: Results<NodeModel> { return Realm.instance.objects(NodeModel.self).filter("isDeleted = %@", true).sorted(byKeyPath: "deletedAt") }
 
   static func node(for id: String) -> NodeModel? {
     return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: id)
   }
   
   static var roots: Results<NodeModel> {
-    let result = Realm.instance.objects(NodeModel.self).filter("parent = nil").sorted(byKeyPath: "index")
+    let result = Realm.instance.objects(NodeModel.self).filter("parent = nil and id != %@", trashId).sorted(byKeyPath: "index")
     if result.count == 0 {
       createDirectory(name: Localized("Notes"), parent: nil, index: 0)
     }
@@ -65,18 +66,29 @@ final class NodeModel: Object {
     return id == NodeModel.trashId
   }
   
+  private static var _trash: NodeModel?
+  
   static var trash: NodeModel {
-    let node = NodeModel()
-    node.name = Localized("Trash")
-    node.id = trashId
-    node.isDirectory = true
-    return node
+    if let trash = _trash { return trash }
+    
+    let trash: NodeModel
+    if let _trash = Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: trashId) {
+      trash = _trash
+    } else {
+      trash = NodeModel()
+      trash.name = Localized("Trash")
+      trash.id = trashId
+      trash.isDirectory = true
+      trash.save()
+    }
+    _trash = trash
+    return trash
   }
 }
 
 extension NodeModel {
   func selected() {
-    if !isDirectory {
+    if !isDirectory && !isDeleted {
       NotificationCenter.default.post(name: .NoteSelected, object: self)
     }
   }
@@ -113,6 +125,20 @@ extension NodeModel {
       realm.add(node)
     }
     return node
+  }
+  
+  func delete() -> Bool {
+    if isDeleted { return false }
+    isDeleted = true
+    deletedAt = Date()
+    return true
+  }
+  
+  func putBack() -> Bool {
+    if !isDeleted { return false }
+    isDeleted = false
+    deletedAt = nil
+    return true
   }
   
   static func emptyTrash() {

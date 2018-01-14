@@ -67,8 +67,9 @@ final class SidebarViewController: NSViewController {
     alert.addButton(withTitle: Localized("Cancel"))
     let response = alert.runModal()
     if response == .alertFirstButtonReturn {
+      let count = NodeModel.deleted.count
+      outlineView.removeItems(at: IndexSet(integersIn: 0..<count), inParent: NodeModel.trash, withAnimation: .effectFade)
       NodeModel.emptyTrash()
-      outlineView.removeItems(at: IndexSet(integersIn: 0..<NodeModel.deleted.count), inParent: NodeModel.trash, withAnimation: .effectFade)
     }
   }
 
@@ -108,13 +109,19 @@ final class SidebarViewController: NSViewController {
       guard let parent = node.parent else { return true }
       return !nodes.contains(parent)
     }
+    let beforeCount = NodeModel.deleted.count
     Realm.transaction { _ in
       for node in nodesWithoutChildren {
-        node.isDeleted = true
+        if !node.delete() { continue }
         let index = outlineView.childIndex(forItem: node)
         outlineView.removeItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .effectFade)
       }
     }
+    let afterCount = NodeModel.deleted.count
+    
+    outlineView.expandItem(NodeModel.trash)
+    let indexSet = IndexSet(integersIn: beforeCount..<afterCount)
+    outlineView.insertItems(at: indexSet, inParent: NodeModel.trash, withAnimation: NSTableView.AnimationOptions.slideDown)
   }
   
   private func insert(node: NodeModel, in parent: NodeModel?) {
@@ -168,7 +175,8 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-    return (item as! NodeModel).isDirectory
+    let node = item as! NodeModel
+    return node.isDirectory && !node.isDeleted
   }
   
   func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
