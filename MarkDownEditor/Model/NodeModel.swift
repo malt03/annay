@@ -14,6 +14,8 @@ extension NSNotification.Name {
 }
 
 final class NodeModel: Object {
+  private static var trashId: String { return "trash" }
+  
   @objc dynamic var id = UUID().uuidString
   @objc dynamic var name = ""
   @objc dynamic var isDirectory = true
@@ -36,7 +38,10 @@ final class NodeModel: Object {
   }
   
   private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
-  var sortedChildren: Results<NodeModel> { return children.filter("isDeleted = %@", false).sorted(byKeyPath: "index") }
+  var sortedChildren: Results<NodeModel> {
+    if id == NodeModel.trashId { return NodeModel.deleted }
+    return children.filter("isDeleted = %@", false).sorted(byKeyPath: "index")
+  }
   
   static var deleted: Results<NodeModel> { return Realm.instance.objects(NodeModel.self).filter("isDeleted = %@", true) }
 
@@ -54,6 +59,18 @@ final class NodeModel: Object {
   
   var isRoot: Bool {
     return parent == nil
+  }
+  
+  var isTrash: Bool {
+    return id == NodeModel.trashId
+  }
+  
+  static var trash: NodeModel {
+    let node = NodeModel()
+    node.name = Localized("Trash")
+    node.id = trashId
+    node.isDirectory = true
+    return node
   }
 }
 
@@ -96,6 +113,12 @@ extension NodeModel {
       realm.add(node)
     }
     return node
+  }
+  
+  static func emptyTrash() {
+    Realm.transaction { (realm) in
+      realm.delete(realm.objects(NodeModel.self).filter("isDeleted = %@", true))
+    }
   }
   
   private func setParent(_ parent: NodeModel) {

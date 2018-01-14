@@ -36,12 +36,16 @@ final class SidebarViewController: NSViewController {
     } else {
       outlineView.deselectAll(nil)
     }
-    let selected = outlineView.selectedRowIndexes.count > 0
     let menu = NSMenu()
-    menu.addItem(NSMenuItem(title: Localized("New Directory"), action: selected ? #selector(createDirectory) : nil, keyEquivalent: ""))
-    menu.addItem(NSMenuItem(title: Localized("New Note"), action: selected ? #selector(createNote) : nil, keyEquivalent: "n"))
-    menu.addItem(NSMenuItem(title: Localized("New Group"), action: #selector(createGroup), keyEquivalent: ""))
-    menu.addItem(NSMenuItem(title: Localized("Delete"), action: selected ? #selector(delete) : nil, keyEquivalent: ""))
+    if selectedNode?.isTrash ?? false {
+      menu.addItem(NSMenuItem(title: Localized("Empty"), action: #selector(emptyTrash), keyEquivalent: ""))
+    } else {
+      let selected = outlineView.selectedRowIndexes.count > 0
+      menu.addItem(NSMenuItem(title: Localized("New Directory"), action: selected ? #selector(createDirectory) : nil, keyEquivalent: ""))
+      menu.addItem(NSMenuItem(title: Localized("New Note"), action: selected ? #selector(createNote) : nil, keyEquivalent: "n"))
+      menu.addItem(NSMenuItem(title: Localized("New Group"), action: #selector(createGroup), keyEquivalent: ""))
+      menu.addItem(NSMenuItem(title: Localized("Delete"), action: selected ? #selector(delete) : nil, keyEquivalent: ""))
+    }
     menu.popUp(positioning: nil, at: location, in: outlineView)
   }
 
@@ -53,6 +57,18 @@ final class SidebarViewController: NSViewController {
       } else {
         outlineView.expandItem(clickedItem)
       }
+    }
+  }
+  
+  @objc private func emptyTrash() {
+    let alert = NSAlert()
+    alert.messageText = Localized("This operation cannot be undone.")
+    alert.addButton(withTitle: Localized("Empty"))
+    alert.addButton(withTitle: Localized("Cancel"))
+    let response = alert.runModal()
+    if response == .alertFirstButtonReturn {
+      NodeModel.emptyTrash()
+      outlineView.removeItems(at: IndexSet(integersIn: 0..<NodeModel.deleted.count), inParent: NodeModel.trash, withAnimation: .effectFade)
     }
   }
 
@@ -68,8 +84,8 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func createGroup() {
-    let insertedNode = NodeModel.createDirectory(name: Localized("New Group"), parent: nil)
-    outlineView.reloadData()
+    NodeModel.createDirectory(name: Localized("New Group"), parent: nil)
+    outlineView.reloadData() // アニメーション走らせると表示がバグる
   }
   
   override func keyDown(with event: NSEvent) {
@@ -147,7 +163,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-    guard let node = item as? NodeModel else { return NodeModel.roots.count }
+    guard let node = item as? NodeModel else { return NodeModel.roots.count + 1 }
     return node.sortedChildren.count
   }
   
@@ -156,7 +172,10 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-    guard let node = item as? NodeModel else { return NodeModel.roots[index] }
+    guard let node = item as? NodeModel else {
+      if index == NodeModel.roots.count { return NodeModel.trash }
+      return NodeModel.roots[index]
+    }
     return node.sortedChildren[index]
   }
 

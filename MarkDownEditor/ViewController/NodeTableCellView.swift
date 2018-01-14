@@ -20,7 +20,13 @@ final class NodeTableCellView: NSTableCellView {
     textField?.isEditable = node.isDirectory
     textField?.font = NSFont.systemFont(ofSize: 11)
     imageView?.image = NSImage(named: .folder)
-    
+    textField?.stringValue = node.name
+
+    observeNode()
+  }
+  
+  private func observeNode() {
+    if node.isTrash { return }
     token = node.observe { [weak self] (change) in
       guard let s = self else { return }
       switch change {
@@ -33,7 +39,6 @@ final class NodeTableCellView: NSTableCellView {
       default: break
       }
     }
-    textField?.stringValue = node.name
   }
   
   @IBAction func editted(_ sender: NSTextField) {
