@@ -802,7 +802,7 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                     <connections>
-                                                                        <action selector="editted:" target="JNK-gA-qZk" id="uJM-VS-cSM"/>
+                                                                        <action selector="edited:" target="JNK-gA-qZk" id="yLn-cr-XdY"/>
                                                                         <outlet property="delegate" destination="PrQ-Do-4mD" id="9JI-Eh-myx"/>
                                                                     </connections>
                                                                 </textField>
@@ -828,6 +828,9 @@
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <action selector="edited:" target="ILB-Nn-9P7" id="YO0-QW-lP7"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <connections>

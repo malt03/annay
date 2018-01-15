@@ -41,7 +41,7 @@ final class NodeTableCellView: NSTableCellView {
     }
   }
   
-  @IBAction func editted(_ sender: NSTextField) {
+  @IBAction private func edited(_ sender: NSTextField) {
     Realm.transaction { _ in
       self.node.name = sender.stringValue
     }

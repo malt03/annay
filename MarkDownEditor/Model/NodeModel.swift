@@ -143,7 +143,11 @@ extension NodeModel {
   
   static func emptyTrash() {
     Realm.transaction { (realm) in
-      realm.delete(realm.objects(NodeModel.self).filter("isDeleted = %@", true))
+      let deletedNodes = realm.objects(NodeModel.self).filter("isDeleted = %@", true)
+      for node in deletedNodes {
+        realm.delete(node.descendants)
+      }
+      realm.delete(deletedNodes)
     }
   }
   
