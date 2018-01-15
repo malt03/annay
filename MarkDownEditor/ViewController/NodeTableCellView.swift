@@ -26,6 +26,8 @@ final class NodeTableCellView: NSTableCellView {
   }
   
   private func observeNode() {
+    token?.invalidate()
+    token = nil
     if node.isTrash { return }
     token = node.observe { [weak self] (change) in
       guard let s = self else { return }

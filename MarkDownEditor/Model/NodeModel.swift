@@ -160,9 +160,19 @@ extension NodeModel {
     }
   }
   
-  private func setParent(_ parent: NodeModel) {
+  func setParent(_ parent: NodeModel?) {
+    self.parent?.removeFromDescendants(descendant: self)
+    for descendant in descendants { self.parent?.removeFromDescendants(descendant: descendant) }
     self.parent = parent
-    parent.setAsAncestor(descendant: self)
+    parent?.setAsAncestor(descendant: self)
+    for descendant in descendants { parent?.setAsAncestor(descendant: descendant) }
+  }
+  
+  private func removeFromDescendants(descendant: NodeModel) {
+    if let index = descendants.index(of: descendant) {
+      descendants.remove(at: index)
+    }
+    parent?.removeFromDescendants(descendant: descendant)
   }
   
   private func setAsAncestor(descendant: NodeModel) {

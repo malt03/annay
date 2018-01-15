@@ -242,12 +242,18 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
       let noteContains = nodes.contains(where: { !$0.isDirectory })
       return noteContains ? [] : [.move]
     }
-    if !parentNode.isDirectory { return [] }
+    if parentNode.isDirectory {
+      if parentNode.isDeleted { return [] }
+    } else {
+      return []
+    }
     guard let nodes = info.draggingPasteboard().nodes else { return [.move] }
     for node in nodes {
       if node == parentNode { return [] }
       if node.descendants.contains(parentNode) { return [] }
-      if node.parent == parentNode {
+      if node.isDeleted {
+        if parentNode.isTrash { return [] }
+      } else if node.parent == parentNode {
         let childIndex = outlineView.childIndex(forItem: node)
         if childIndex == index || childIndex + 1 == index { return [] }
       }
@@ -267,7 +273,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     
     if let ids = info.draggingPasteboard().string(forType: .nodeModel) {
       let movedNodes = ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }.removeChildren
-      fixedIndex -= movedNodes.filter { $0.parent == parent }.map { outlineView.childIndex(forItem: $0) }.filter { $0 < fixedIndex }.count
+      fixedIndex -= movedNodes.filter { !$0.isDeleted && $0.parent == parent }.map { outlineView.childIndex(forItem: $0) }.filter { $0 < fixedIndex }.count
       
       Realm.transaction { _ in
         if parent == .trash {
@@ -285,7 +291,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
           }
           for (i, node) in movedNodes.enumerated() {
             node.index = i + fixedIndex
-            node.parent = parent
+            node.setParent(parent)
             node.isDeleted = false
           }
         }
