@@ -106,6 +106,7 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func delete() {
+    NSApplication.shared.endEditing()
     let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }
     let nodesWithoutChildren = nodes.filter { (node) in
       guard let parent = node.parent else { return true }
