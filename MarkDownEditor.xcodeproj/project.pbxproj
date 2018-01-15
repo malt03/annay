@@ -40,6 +40,7 @@
 		ED841BDC200B315F0097996A /* NSColorName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BDB200B315F0097996A /* NSColorName+Extensions.swift */; };
 		ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */; };
 		EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */ = {isa = PBXBuildFile; fileRef = EDCED8C42005DAD100C514B1 /* monokai-sublime.css */; };
+		EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
 		EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */; };
@@ -97,6 +98,7 @@
 		ED841BDB200B315F0097996A /* NSColorName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColorName+Extensions.swift"; sourceTree = "<group>"; };
 		ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableRowView.swift; sourceTree = "<group>"; };
 		EDCED8C42005DAD100C514B1 /* monokai-sublime.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.css"; sourceTree = "<group>"; };
+		EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboardPasteboardType+Extensions.swift"; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
 		EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkDownEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +137,7 @@
 				ED841BD22009217F0097996A /* NSEvent+Extensions.swift */,
 				ED841BD42009CC0C0097996A /* KeyCode.swift */,
 				ED841BDB200B315F0097996A /* NSColorName+Extensions.swift */,
+				EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
 				ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */,
 				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,
+				EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */,
 				ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

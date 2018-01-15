@@ -30,6 +30,7 @@ final class NodeModel: Object {
   
   @objc dynamic var parent: NodeModel?
   let descendants = List<NodeModel>()
+  @objc dynamic var index = 0
   @objc dynamic var createdAt = Date()
   @objc dynamic var isDeleted = false
   @objc dynamic var deletedAt: Date?
@@ -41,7 +42,7 @@ final class NodeModel: Object {
   private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
   var sortedChildren: Results<NodeModel> {
     if id == NodeModel.trashId { return NodeModel.deleted }
-    return children.filter("isDeleted = %@", false).sorted(byKeyPath: "createdAt")
+    return children.filter("isDeleted = %@", false).sorted(byKeyPath: "createdAt").sorted(by: ["index", "createdAt"])
   }
   
   var ancestors: [NodeModel] {
@@ -56,11 +57,7 @@ final class NodeModel: Object {
   }
   
   static var roots: Results<NodeModel> {
-    let result = Realm.instance.objects(NodeModel.self).filter("parent = nil and id != %@", trashId).sorted(byKeyPath: "createdAt")
-    if result.count == 0 {
-      createDirectory(name: Localized("Notes"), parent: nil)
-    }
-    return result
+    return Realm.instance.objects(NodeModel.self).filter("parent = nil and id != %@", trashId).sorted(by: ["index", "createdAt"])
   }
   
   var isRoot: Bool {
@@ -98,12 +95,23 @@ extension NodeModel {
     }
   }
   
+  static func createFirstDirectoryIfNeeded() {
+    if roots.count == 0 {
+      createDirectory(name: Localized("Notes"), parent: nil)
+    }
+  }
+  
   @discardableResult
   static func createDirectory(name: String = Localized("New Directory"), parent: NodeModel?) -> NodeModel {
     let node = NodeModel()
     Realm.transaction { (realm) in
       node.name = name
-      if let parent = parent { node.setParent(parent) }
+      if let parent = parent {
+        node.index = (parent.sortedChildren.last?.index ?? -1) + 1
+        node.setParent(parent)
+      } else {
+        node.index = (roots.last?.index ?? -1) + 1
+      }
       realm.add(node)
     }
     return node
@@ -113,6 +121,7 @@ extension NodeModel {
     let node = NodeModel()
     Realm.transaction { (realm) in
       node.name = name
+      node.index = (directory.sortedChildren.last?.index ?? -1) + 1
       node.isDirectory = false
       node.setParent(directory)
       realm.add(node)
@@ -173,6 +182,30 @@ extension NodeModel {
       let ud = UserDefaults.standard
       ud.set(newValue, forKey: Key.RootId)
       ud.synchronize()
+    }
+  }
+}
+
+extension NodeModel: NSPasteboardWriting {
+  func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+    if isDirectory { return [.nodeModel] }
+    return [.nodeModel, .string]
+  }
+  
+  func writingOptions(forType type: NSPasteboard.PasteboardType, pasteboard: NSPasteboard) -> NSPasteboard.WritingOptions {
+    if type == .nodeModel {
+      if let old = pasteboard.string(forType: .nodeModel) {
+        pasteboard.setString(old + "\n" + id, forType: .nodeModel)
+      }
+    }
+    return []
+  }
+  
+  func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
+    switch type {
+    case .nodeModel: return id
+    case .string:    return body
+    default:         return nil
     }
   }
 }

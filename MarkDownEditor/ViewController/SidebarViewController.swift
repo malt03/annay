@@ -21,6 +21,8 @@ final class SidebarViewController: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    outlineView.registerForDraggedTypes([.nodeModel, .string])
+    outlineView.setDraggingSourceOperationMask([.move, .copy], forLocal: false)
     outlineView.autosaveName = .Sidebar
     outlineView.backgroundColor = .clear
     outlineView.headerView = nil
@@ -231,16 +233,38 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     let node = item as! NodeModel
     return node.isRoot && !node.isDeleted
   }
+  
+  func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
+    let node = item as! NodeModel
+    if node.isTrash { return nil }
+    return node
+  }
+  
+  func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+    guard let node = item as? NodeModel else { return [] }
+    if node.isTrash { return [] }
+    return [.move, .copy]
+  }
+  
+  func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
+//    if let ids = info.draggingPasteboard().string(forType: .nodeModel) {
+//      let movedNodes = ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }
+      print(index)
+//    }
+    return false
+  }
 }
 
 extension SidebarViewController: NSTextFieldDelegate {
   func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
     textEditing = true
+    print("begin")
     return true
   }
   
   func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
     textEditing = false
+    print("end")
     return true
   }
 }

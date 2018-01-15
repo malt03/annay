@@ -15,6 +15,7 @@ extension Realm {
     if prepared { return }
     prepared = true
     Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+    NodeModel.createFirstDirectoryIfNeeded()
   }
   
   static var instance: Realm {
