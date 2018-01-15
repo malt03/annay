@@ -241,8 +241,19 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
-    guard let node = item as? NodeModel else { return [] }
-    if !node.isDirectory { return [] }
+    guard let parentNode = item as? NodeModel else {
+      guard let nodes = info.draggingPasteboard().nodes else { return [] }
+      let noteContains = nodes.contains(where: { !$0.isDirectory })
+      return noteContains ? [] : [.move]
+    }
+    if !parentNode.isDirectory { return [] }
+    guard let nodes = info.draggingPasteboard().nodes else { return [.move] }
+    for node in nodes {
+      if node.parent == parentNode {
+        let childIndex = outlineView.childIndex(forItem: node)
+        if childIndex == index || childIndex + 1 == index { return [] }
+      }
+    }
     return [.move]
   }
   
