@@ -138,7 +138,10 @@ final class SidebarViewController: NSViewController {
       }
     }
     for node in putBackNodes {
-      guard let index = node.parent?.sortedChildren.index(of: node) else { continue }
+      guard let index = node.parent?.sortedChildren.index(of: node) else {
+        outlineView.reloadData()
+        break
+      }
       outlineView.insertItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .slideLeft)
       for ancestor in node.ancestors.reversed() {
         outlineView.expandItem(ancestor)
@@ -224,7 +227,8 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
-    return (item as! NodeModel).isRoot
+    let node = item as! NodeModel
+    return node.isRoot && !node.isDeleted
   }
 }
 
