@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -830,6 +830,7 @@
                                                                     </textFieldCell>
                                                                     <connections>
                                                                         <action selector="edited:" target="ILB-Nn-9P7" id="YO0-QW-lP7"/>
+                                                                        <outlet property="delegate" destination="PrQ-Do-4mD" id="OIM-IW-dpP"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -850,7 +851,7 @@
                                     </subviews>
                                     <nil key="backgroundColor"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.33333333333333331" horizontal="YES" id="Gdv-iM-9Ja">
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Gdv-iM-9Ja">
                                     <rect key="frame" x="0.0" y="682" width="280" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
