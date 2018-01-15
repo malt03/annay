@@ -42,7 +42,7 @@ final class NodeModel: Object {
   private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
   var sortedChildren: Results<NodeModel> {
     if id == NodeModel.trashId { return NodeModel.deleted }
-    return children.filter("isDeleted = %@", false).sorted(byKeyPath: "createdAt").sorted(by: ["index", "createdAt"])
+    return children.filter("isDeleted = %@ and index >= %@", false, 0).sorted(by: ["index", "createdAt"])
   }
   
   var ancestors: [NodeModel] {
@@ -50,14 +50,14 @@ final class NodeModel: Object {
     return [parent] + parent.ancestors
   }
   
-  static var deleted: Results<NodeModel> { return Realm.instance.objects(NodeModel.self).filter("isDeleted = %@", true).sorted(byKeyPath: "deletedAt") }
+  static var deleted: Results<NodeModel> { return Realm.instance.objects(NodeModel.self).filter("isDeleted = %@ and index >= %@", true, 0).sorted(byKeyPath: "deletedAt") }
 
   static func node(for id: String) -> NodeModel? {
     return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: id)
   }
   
   static var roots: Results<NodeModel> {
-    return Realm.instance.objects(NodeModel.self).filter("parent = nil and id != %@", trashId).sorted(by: ["index", "createdAt"])
+    return Realm.instance.objects(NodeModel.self).filter("parent = nil and id != %@ and index >= %@", trashId, 0).sorted(by: ["index", "createdAt"])
   }
   
   var isRoot: Bool {
