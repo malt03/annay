@@ -57,7 +57,7 @@ final class NodeModel: Object {
   }
   
   static var roots: Results<NodeModel> {
-    return Realm.instance.objects(NodeModel.self).filter("parent = nil and id != %@ and index >= %@", trashId, 0).sorted(by: ["index", "createdAt"])
+    return Realm.instance.objects(NodeModel.self).filter("parent = nil and id != %@ and index >= %@ and isDeleted = %@", trashId, 0, false).sorted(by: ["index", "createdAt"])
   }
   
   var isRoot: Bool {
