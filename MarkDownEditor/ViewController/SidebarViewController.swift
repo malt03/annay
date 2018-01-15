@@ -258,13 +258,11 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
 extension SidebarViewController: NSTextFieldDelegate {
   func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
     textEditing = true
-    print("begin")
     return true
   }
   
   func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
     textEditing = false
-    print("end")
     return true
   }
 }
