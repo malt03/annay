@@ -256,25 +256,38 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
-    var fixedIndex = index < 0 ? 0 : index
+    let parent = item as? NodeModel
+
+    var fixedIndex: Int
+    if index < 0 {
+      fixedIndex = parent == nil ? NodeModel.roots.count : 0
+    } else {
+      fixedIndex = index
+    }
     
     if let ids = info.draggingPasteboard().string(forType: .nodeModel) {
       let movedNodes = ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }.removeChildren
-      let parent = item as? NodeModel
       fixedIndex -= movedNodes.filter { $0.parent == parent }.map { outlineView.childIndex(forItem: $0) }.filter { $0 < fixedIndex }.count
       
       Realm.transaction { _ in
-        for node in movedNodes { node.index = -1 }
-        for (i, child) in (parent?.sortedChildren ?? NodeModel.roots).enumerated() {
-          if fixedIndex > i {
-            child.index = i
-          } else {
-            child.index = i + movedNodes.count
+        if parent == .trash {
+          for node in movedNodes {
+            node.isDeleted = true
           }
-        }
-        for (i, node) in movedNodes.enumerated() {
-          node.index = i + fixedIndex
-          node.parent = parent
+        } else {
+          for node in movedNodes { node.index = -1 }
+          for (i, child) in (parent?.sortedChildren ?? NodeModel.roots).enumerated() {
+            if fixedIndex > i {
+              child.index = i
+            } else {
+              child.index = i + movedNodes.count
+            }
+          }
+          for (i, node) in movedNodes.enumerated() {
+            node.index = i + fixedIndex
+            node.parent = parent
+            node.isDeleted = false
+          }
         }
       }
       outlineView.reloadData()
