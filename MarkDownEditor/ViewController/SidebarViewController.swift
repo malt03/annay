@@ -242,15 +242,15 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   
   func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
     guard let node = item as? NodeModel else { return [] }
-    if node.isTrash { return [] }
-    return [.move, .copy]
+    if !node.isDirectory { return [] }
+    return [.move]
   }
   
   func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
-//    if let ids = info.draggingPasteboard().string(forType: .nodeModel) {
-//      let movedNodes = ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }
-      print(index)
-//    }
+    if let ids = info.draggingPasteboard().string(forType: .nodeModel) {
+      let movedNodes = ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }
+      
+    }
     return false
   }
 }
