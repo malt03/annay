@@ -249,6 +249,8 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     if !parentNode.isDirectory { return [] }
     guard let nodes = info.draggingPasteboard().nodes else { return [.move] }
     for node in nodes {
+      if node == parentNode { return [] }
+      if node.descendants.contains(parentNode) { return [] }
       if node.parent == parentNode {
         let childIndex = outlineView.childIndex(forItem: node)
         if childIndex == index || childIndex + 1 == index { return [] }
