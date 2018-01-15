@@ -39,6 +39,8 @@ final class SidebarViewController: NSViewController {
     let menu = NSMenu()
     if selectedNode?.isTrash ?? false {
       menu.addItem(NSMenuItem(title: Localized("Empty"), action: #selector(emptyTrash), keyEquivalent: ""))
+    } else if selectedNode?.isDeleted ?? false {
+      menu.addItem(NSMenuItem(title: Localized("Put Back"), action: #selector(putBackFromTrash), keyEquivalent: ""))
     } else {
       let selected = outlineView.selectedRowIndexes.count > 0
       menu.addItem(NSMenuItem(title: Localized("New Directory"), action: selected ? #selector(createDirectory) : nil, keyEquivalent: ""))
@@ -72,7 +74,7 @@ final class SidebarViewController: NSViewController {
       NodeModel.emptyTrash()
     }
   }
-
+  
   @objc private func createDirectory() {
     let insertedNode = NodeModel.createDirectory(parent: selectedParent)
     insert(node: insertedNode, in: selectedParent)
@@ -112,16 +114,38 @@ final class SidebarViewController: NSViewController {
     let beforeCount = NodeModel.deleted.count
     Realm.transaction { _ in
       for node in nodesWithoutChildren {
-        if !node.delete() { continue }
         let index = outlineView.childIndex(forItem: node)
-        outlineView.removeItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .effectFade)
+        if !node.delete() { continue }
+        outlineView.removeItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .slideLeft)
       }
     }
     let afterCount = NodeModel.deleted.count
     
     outlineView.expandItem(NodeModel.trash)
     let indexSet = IndexSet(integersIn: beforeCount..<afterCount)
-    outlineView.insertItems(at: indexSet, inParent: NodeModel.trash, withAnimation: NSTableView.AnimationOptions.slideDown)
+    outlineView.insertItems(at: indexSet, inParent: NodeModel.trash, withAnimation: .slideLeft)
+  }
+  
+  @objc private func putBackFromTrash() {
+    let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }
+    var putBackNodes = [NodeModel]()
+    Realm.transaction { _ in
+      for node in nodes {
+        let beforeIndex = outlineView.childIndex(forItem: node)
+        if !node.putBack() { continue }
+        putBackNodes.append(node)
+        outlineView.removeItems(at: IndexSet(integer: beforeIndex), inParent: NodeModel.trash, withAnimation: .slideLeft)
+      }
+    }
+    for node in putBackNodes {
+      guard let index = node.parent?.sortedChildren.index(of: node) else { continue }
+      outlineView.insertItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .slideLeft)
+      for ancestor in node.ancestors.reversed() {
+        outlineView.expandItem(ancestor)
+      }
+    }
+    let indexes = IndexSet(putBackNodes.map { outlineView.row(forItem: $0) })
+    outlineView.selectRowIndexes(indexes, byExtendingSelection: true)
   }
   
   private func insert(node: NodeModel, in parent: NodeModel?) {

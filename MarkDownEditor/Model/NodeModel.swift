@@ -30,7 +30,7 @@ final class NodeModel: Object {
   
   @objc dynamic var parent: NodeModel?
   let descendants = List<NodeModel>()
-  @objc dynamic var index = 0
+  @objc dynamic var createdAt = Date()
   @objc dynamic var isDeleted = false
   @objc dynamic var deletedAt: Date?
   
@@ -41,7 +41,12 @@ final class NodeModel: Object {
   private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
   var sortedChildren: Results<NodeModel> {
     if id == NodeModel.trashId { return NodeModel.deleted }
-    return children.filter("isDeleted = %@", false).sorted(byKeyPath: "index")
+    return children.filter("isDeleted = %@", false).sorted(byKeyPath: "createdAt")
+  }
+  
+  var ancestors: [NodeModel] {
+    guard let parent = parent else { return [] }
+    return [parent] + parent.ancestors
   }
   
   static var deleted: Results<NodeModel> { return Realm.instance.objects(NodeModel.self).filter("isDeleted = %@", true).sorted(byKeyPath: "deletedAt") }
@@ -51,9 +56,9 @@ final class NodeModel: Object {
   }
   
   static var roots: Results<NodeModel> {
-    let result = Realm.instance.objects(NodeModel.self).filter("parent = nil and id != %@", trashId).sorted(byKeyPath: "index")
+    let result = Realm.instance.objects(NodeModel.self).filter("parent = nil and id != %@", trashId).sorted(byKeyPath: "createdAt")
     if result.count == 0 {
-      createDirectory(name: Localized("Notes"), parent: nil, index: 0)
+      createDirectory(name: Localized("Notes"), parent: nil)
     }
     return result
   }
@@ -94,22 +99,11 @@ extension NodeModel {
   }
   
   @discardableResult
-  static func createDirectory(name: String = Localized("New Directory"), parent: NodeModel?, index: Int? = nil) -> NodeModel {
+  static func createDirectory(name: String = Localized("New Directory"), parent: NodeModel?) -> NodeModel {
     let node = NodeModel()
     Realm.transaction { (realm) in
       node.name = name
-      let i: Int
-      if let index = index {
-        i = index
-      } else {
-        if let parent = parent {
-          node.setParent(parent)
-          i = (parent.sortedChildren.last?.index ?? -1) + 1
-        } else {
-          i = (roots.last?.index ?? -1) + 1
-        }
-      }
-      node.index = i
+      if let parent = parent { node.setParent(parent) }
       realm.add(node)
     }
     return node
@@ -121,7 +115,6 @@ extension NodeModel {
       node.name = name
       node.isDirectory = false
       node.setParent(directory)
-      node.index = (directory.sortedChildren.last?.index ?? -1) + 1
       realm.add(node)
     }
     return node
@@ -136,9 +129,16 @@ extension NodeModel {
   
   func putBack() -> Bool {
     if !isDeleted { return false }
+    if hasDeletedAncestor { return false }
     isDeleted = false
     deletedAt = nil
     return true
+  }
+  
+  var hasDeletedAncestor: Bool {
+    guard let parent = parent else { return false }
+    if parent.isDeleted { return true }
+    return parent.hasDeletedAncestor
   }
   
   static func emptyTrash() {
