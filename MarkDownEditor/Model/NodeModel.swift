@@ -39,26 +39,32 @@ final class NodeModel: Object {
     return "id"
   }
   
+  override class func ignoredProperties() -> [String] {
+    return ["sortedChildren"]
+  }
+  
   private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
-  var sortedChildren: Results<NodeModel> {
+  lazy var sortedChildren: Results<NodeModel> = {
     if id == NodeModel.trashId { return NodeModel.deleted }
     return children.filter("isDeleted = %@ and index >= %@", false, 0).sorted(by: ["index", "createdAt"])
-  }
+  }()
   
   var ancestors: [NodeModel] {
     guard let parent = parent else { return [] }
     return [parent] + parent.ancestors
   }
   
-  static var deleted: Results<NodeModel> { return Realm.instance.objects(NodeModel.self).filter("isDeleted = %@ and index >= %@", true, 0).sorted(byKeyPath: "deletedAt") }
+  static let deleted = Realm.instance.objects(NodeModel.self)
+    .filter("isDeleted = %@ and index >= %@", true, 0)
+    .sorted(byKeyPath: "deletedAt")
 
   static func node(for id: String) -> NodeModel? {
     return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: id)
   }
   
-  static var roots: Results<NodeModel> {
-    return Realm.instance.objects(NodeModel.self).filter("parent = nil and id != %@ and index >= %@ and isDeleted = %@", trashId, 0, false).sorted(by: ["index", "createdAt"])
-  }
+  static let roots = Realm.instance.objects(NodeModel.self)
+    .filter("parent = nil and id != %@ and index >= %@ and isDeleted = %@", trashId, 0, false)
+    .sorted(by: ["index", "createdAt"])
   
   var isRoot: Bool {
     return parent == nil
@@ -96,7 +102,7 @@ extension NodeModel {
   }
   
   static func createFirstDirectoryIfNeeded() {
-    if roots.count == 0 {
+    if Realm.instance.objects(NodeModel.self).count == 0 {
       createDirectory(name: Localized("Notes"), parent: nil)
     }
   }
