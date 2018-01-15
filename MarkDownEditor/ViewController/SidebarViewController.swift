@@ -296,7 +296,9 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
           }
         }
       }
-      outlineView.reloadData()
+      DispatchQueue.main.async { // 謎のクラッシュ解消。多分Realmの反映タイミングとかの問題な気がしている
+        outlineView.reloadData()
+      }
       return true
     }
     return false
