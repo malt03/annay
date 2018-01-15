@@ -109,14 +109,10 @@ final class SidebarViewController: NSViewController {
   
   @objc private func delete() {
     NSApplication.shared.endEditing()
-    let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }
-    let nodesWithoutChildren = nodes.filter { (node) in
-      guard let parent = node.parent else { return true }
-      return !nodes.contains(parent)
-    }
+    let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }.removeChildren
     let beforeCount = NodeModel.deleted.count
     Realm.transaction { _ in
-      for node in nodesWithoutChildren {
+      for node in nodes {
         let index = outlineView.childIndex(forItem: node)
         if !node.delete() { continue }
         outlineView.removeItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .slideLeft)
@@ -261,8 +257,14 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   
   func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
     if let ids = info.draggingPasteboard().string(forType: .nodeModel) {
-      let movedNodes = ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }
-      
+      let movedNodes = ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }.removeChildren
+      Realm.transaction { _ in
+        for node in movedNodes {
+          node.parent = item as? NodeModel
+        }
+      }
+      outlineView.reloadData()
+      return true
     }
     return false
   }
