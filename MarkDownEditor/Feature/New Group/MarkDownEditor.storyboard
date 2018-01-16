@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="2eh-hH-nMr">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Mark Down Editor View Controller-->
+        <scene sceneID="Xtg-xc-JZh">
+            <objects>
+                <viewController id="2eh-hH-nMr" customClass="MarkDownEditorViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="gi5-cr-AKl">
+                        <rect key="frame" x="0.0" y="0.0" width="930" height="730"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwQ-a7-3jo">
+                                <rect key="frame" x="0.0" y="0.0" width="465" height="730"/>
+                                <clipView key="contentView" id="8HM-hc-PAg">
+                                    <rect key="frame" x="1" y="1" width="463" height="728"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" textCompletion="NO" id="PWg-u2-RO2" customClass="TextView" customModule="MarkDownEditor" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="463" height="728"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="463" height="728"/>
+                                            <size key="maxSize" width="930" height="10000000"/>
+                                            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="2eh-hH-nMr" id="2uC-FQ-TKr"/>
+                                            </connections>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="yhL-oz-Ngu">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.5" horizontal="NO" id="bdu-Ii-d4n">
+                                    <rect key="frame" x="448" y="1" width="16" height="728"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLz-CG-xvp" customClass="WebView" customModule="MarkDownEditor" customModuleProvider="target">
+                                <rect key="frame" x="465" y="0.0" width="465" height="730"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="vLz-CG-xvp" secondAttribute="bottom" id="4n8-Mc-Xtz"/>
+                            <constraint firstItem="CwQ-a7-3jo" firstAttribute="top" secondItem="gi5-cr-AKl" secondAttribute="top" id="8zI-Wm-NkZ"/>
+                            <constraint firstAttribute="trailing" secondItem="vLz-CG-xvp" secondAttribute="trailing" id="BBx-g7-Ccj"/>
+                            <constraint firstItem="CwQ-a7-3jo" firstAttribute="width" secondItem="vLz-CG-xvp" secondAttribute="width" id="F2h-QA-xJe"/>
+                            <constraint firstItem="CwQ-a7-3jo" firstAttribute="leading" secondItem="gi5-cr-AKl" secondAttribute="leading" id="ee2-JC-GIR"/>
+                            <constraint firstAttribute="bottom" secondItem="CwQ-a7-3jo" secondAttribute="bottom" id="hfK-2K-jga"/>
+                            <constraint firstItem="vLz-CG-xvp" firstAttribute="top" secondItem="gi5-cr-AKl" secondAttribute="top" id="hwO-nv-hXy"/>
+                            <constraint firstItem="vLz-CG-xvp" firstAttribute="leading" secondItem="CwQ-a7-3jo" secondAttribute="trailing" id="nqM-ux-3fS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="PWg-u2-RO2" id="Je6-iH-TaX"/>
+                        <outlet property="webView" destination="vLz-CG-xvp" id="GX8-6X-mcd"/>
+                    </connections>
+                </viewController>
+                <customObject id="v1y-hA-udR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="495" y="1382"/>
+        </scene>
+    </scenes>
+</document>

@@ -39,6 +39,9 @@
 		ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED841BD9200B2FD10097996A /* Colors.xcassets */; };
 		ED841BDC200B315F0097996A /* NSColorName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BDB200B315F0097996A /* NSColorName+Extensions.swift */; };
 		ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */; };
+		EDA736C7200E239E000BC5DA /* Preference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736C6200E239E000BC5DA /* Preference.storyboard */; };
+		EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736C8200E24F8000BC5DA /* Sidebar.storyboard */; };
+		EDA736CD200E256D000BC5DA /* MarkDownEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */; };
 		EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */ = {isa = PBXBuildFile; fileRef = EDCED8C42005DAD100C514B1 /* monokai-sublime.css */; };
 		EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */; };
 		EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */; };
@@ -99,6 +102,9 @@
 		ED841BD9200B2FD10097996A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		ED841BDB200B315F0097996A /* NSColorName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColorName+Extensions.swift"; sourceTree = "<group>"; };
 		ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableRowView.swift; sourceTree = "<group>"; };
+		EDA736C6200E239E000BC5DA /* Preference.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preference.storyboard; sourceTree = "<group>"; };
+		EDA736C9200E24F8000BC5DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MarkDownEditor/Base.lproj/Sidebar.storyboard; sourceTree = "<group>"; };
+		EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MarkDownEditor.storyboard; sourceTree = "<group>"; };
 		EDCED8C42005DAD100C514B1 /* monokai-sublime.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.css"; sourceTree = "<group>"; };
 		EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboardPasteboardType+Extensions.swift"; sourceTree = "<group>"; };
 		EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard+Extensions.swift"; sourceTree = "<group>"; };
@@ -201,15 +207,13 @@
 			path = "markdown-it";
 			sourceTree = "<group>";
 		};
-		ED2E15AF200669B8003D55A3 /* ViewController */ = {
+		ED2E15AF200669B8003D55A3 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */,
-				ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */,
-				ED841BD02008EC2B0097996A /* NodeTableCellView.swift */,
-				ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */,
+				EDA736CE200E2577000BC5DA /* MarkDownEditor */,
+				EDA736CB200E252A000BC5DA /* Sidebar */,
 			);
-			path = ViewController;
+			path = Feature;
 			sourceTree = "<group>";
 		};
 		ED2E15B0200669C8003D55A3 /* Model */ = {
@@ -234,6 +238,27 @@
 				ED841BD7200B256B0097996A /* MainWindowController.swift */,
 			);
 			path = Window;
+			sourceTree = "<group>";
+		};
+		EDA736CB200E252A000BC5DA /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				EDA736C8200E24F8000BC5DA /* Sidebar.storyboard */,
+				ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */,
+				ED841BD02008EC2B0097996A /* NodeTableCellView.swift */,
+				ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		EDA736CE200E2577000BC5DA /* MarkDownEditor */ = {
+			isa = PBXGroup;
+			children = (
+				EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */,
+				EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */,
+			);
+			name = MarkDownEditor;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		EDDED73A20051B880079F3D0 /* Frameworks */ = {
@@ -268,12 +293,13 @@
 				ED2E147820053BCC003D55A3 /* Framework */,
 				ED187FD82005396C002E51C0 /* WebPage */,
 				ED187FD72005395A002E51C0 /* Common */,
-				ED2E15AF200669B8003D55A3 /* ViewController */,
+				ED2E15AF200669B8003D55A3 /* Feature */,
 				ED2E15B0200669C8003D55A3 /* Model */,
 				EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */,
 				EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */,
 				ED841BD9200B2FD10097996A /* Colors.xcassets */,
 				EDEB7A602004EDF000F8C48A /* Main.storyboard */,
+				EDA736C6200E239E000BC5DA /* Preference.storyboard */,
 				EDEB7A632004EDF000F8C48A /* Info.plist */,
 				EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */,
 			);
@@ -349,11 +375,14 @@
 			files = (
 				ED2E149A20055650003D55A3 /* markdown-it-footnote.min.js in Resources */,
 				ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */,
+				EDA736C7200E239E000BC5DA /* Preference.storyboard in Resources */,
+				EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */,
 				EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */,
 				EDEB7A622004EDF000F8C48A /* Main.storyboard in Resources */,
 				ED2E149C2005575A003D55A3 /* markdown-it-emoji.min.js in Resources */,
 				ED2E1496200555A5003D55A3 /* markdown-it-sub.min.js in Resources */,
 				ED187FD220052D30002E51C0 /* markdown.html in Resources */,
+				EDA736CD200E256D000BC5DA /* MarkDownEditor.storyboard in Resources */,
 				EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */,
 				ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */,
 				ED434EFB20079CB600C2357D /* Localizable.strings in Resources */,
@@ -402,6 +431,14 @@
 				ED434F0120079CFA00C2357D /* ja */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		EDA736C8200E24F8000BC5DA /* Sidebar.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDA736C9200E24F8000BC5DA /* Base */,
+			);
+			name = Sidebar.storyboard;
 			sourceTree = "<group>";
 		};
 		EDEB7A602004EDF000F8C48A /* Main.storyboard */ = {
