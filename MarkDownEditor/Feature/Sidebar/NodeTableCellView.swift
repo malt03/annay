@@ -16,7 +16,7 @@ final class NodeTableCellView: NSTableCellView {
   func prepare(node: NodeModel) {
     self.node = node
     
-    textField?.textColor = NSColor(named: .text)
+    textField?.textColor = .text
     textField?.isEditable = node.isDirectory && !node.isDeleted
     textField?.font = NSFont.systemFont(ofSize: node.isRoot ? 11 : 12)
     imageView?.image = NSImage(named: .folder)
