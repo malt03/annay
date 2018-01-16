@@ -14,7 +14,7 @@ final class NodeTableRowView: NSTableRowView {
   override func draw(_ dirtyRect: NSRect) {
     if isSelected {
       NSColor.selectedRow.setFill()
-      NSBezierPath(rect: bounds).fill()
+      dirtyRect.fill()
     }
   }
 

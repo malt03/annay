@@ -734,7 +734,7 @@
                         <splitViewItem id="JEI-Vi-h8D"/>
                         <splitViewItem id="uuK-wc-rrr"/>
                     </splitViewItems>
-                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="JK3-no-fdA">
+                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="JK3-no-fdA" customClass="SplitView" customModule="MarkDownEditor" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>

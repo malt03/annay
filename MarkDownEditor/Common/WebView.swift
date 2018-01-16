@@ -12,11 +12,21 @@ import WebKit
 final class WebView: WKWebView {
   override func awakeFromNib() {
     super.awakeFromNib()
+    isHidden = true
     let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
     loadFileURL(url, allowingReadAccessTo: url)
+    navigationDelegate = self
   }
   
   func update(markdown: String) {
     evaluateJavaScript("update(\"\(markdown)\")", completionHandler: nil)
+  }
+}
+
+extension WebView: WKNavigationDelegate {
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    DispatchQueue.main.async {
+      self.isHidden = false
+    }
   }
 }

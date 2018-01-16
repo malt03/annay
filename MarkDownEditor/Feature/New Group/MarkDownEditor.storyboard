@@ -15,53 +15,76 @@
                         <rect key="frame" x="0.0" y="0.0" width="930" height="730"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwQ-a7-3jo">
-                                <rect key="frame" x="0.0" y="0.0" width="465" height="730"/>
-                                <clipView key="contentView" id="8HM-hc-PAg">
-                                    <rect key="frame" x="0.0" y="0.0" width="465" height="730"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" textCompletion="NO" id="PWg-u2-RO2" customClass="TextView" customModule="MarkDownEditor" customModuleProvider="target">
+                            <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VdG-kY-SIQ" customClass="SplitView" customModule="MarkDownEditor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="930" height="730"/>
+                                <subviews>
+                                    <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="CwQ-a7-3jo">
+                                        <rect key="frame" x="0.0" y="0.0" width="465" height="730"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <clipView key="contentView" id="8HM-hc-PAg">
                                             <rect key="frame" x="0.0" y="0.0" width="465" height="730"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="textColor" name="EditorText"/>
+                                            <subviews>
+                                                <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" textCompletion="NO" id="PWg-u2-RO2" customClass="TextView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="465" height="730"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="textColor" name="EditorText"/>
+                                                    <color key="backgroundColor" name="EditorBackground"/>
+                                                    <size key="minSize" width="465" height="730"/>
+                                                    <size key="maxSize" width="930" height="10000000"/>
+                                                    <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="2eh-hH-nMr" id="2uC-FQ-TKr"/>
+                                                    </connections>
+                                                </textView>
+                                            </subviews>
                                             <color key="backgroundColor" name="EditorBackground"/>
-                                            <size key="minSize" width="465" height="730"/>
-                                            <size key="maxSize" width="930" height="10000000"/>
-                                            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="2eh-hH-nMr" id="2uC-FQ-TKr"/>
-                                            </connections>
-                                        </textView>
-                                    </subviews>
-                                    <color key="backgroundColor" name="EditorBackground"/>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="yhL-oz-Ngu">
-                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.5" horizontal="NO" id="bdu-Ii-d4n">
-                                    <rect key="frame" x="449" y="0.0" width="16" height="730"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
-                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLz-CG-xvp" customClass="WebView" customModule="MarkDownEditor" customModuleProvider="target">
-                                <rect key="frame" x="465" y="0.0" width="465" height="730"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
+                                        </clipView>
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="yhL-oz-Ngu">
+                                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.5" horizontal="NO" id="bdu-Ii-d4n">
+                                            <rect key="frame" x="449" y="0.0" width="16" height="730"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
+                                    <customView id="odB-mf-lhf" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                        <rect key="frame" x="466" y="0.0" width="464" height="730"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <subviews>
+                                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLz-CG-xvp" customClass="WebView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="464" height="730"/>
+                                                <wkWebViewConfiguration key="configuration">
+                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                    <wkPreferences key="preferences"/>
+                                                </wkWebViewConfiguration>
+                                            </wkWebView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="vLz-CG-xvp" firstAttribute="top" secondItem="odB-mf-lhf" secondAttribute="top" id="3xT-At-FAJ"/>
+                                            <constraint firstItem="vLz-CG-xvp" firstAttribute="leading" secondItem="odB-mf-lhf" secondAttribute="leading" id="Mk6-w8-8GU"/>
+                                            <constraint firstAttribute="bottom" secondItem="vLz-CG-xvp" secondAttribute="bottom" id="a68-ac-3um"/>
+                                            <constraint firstAttribute="trailing" secondItem="vLz-CG-xvp" secondAttribute="trailing" id="e91-YR-bGR"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                <color key="value" name="EditorBackground"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </customView>
+                                </subviews>
+                                <holdingPriorities>
+                                    <real value="250"/>
+                                    <real value="250"/>
+                                </holdingPriorities>
+                            </splitView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="vLz-CG-xvp" secondAttribute="bottom" id="4n8-Mc-Xtz"/>
-                            <constraint firstItem="CwQ-a7-3jo" firstAttribute="top" secondItem="gi5-cr-AKl" secondAttribute="top" id="8zI-Wm-NkZ"/>
-                            <constraint firstAttribute="trailing" secondItem="vLz-CG-xvp" secondAttribute="trailing" id="BBx-g7-Ccj"/>
-                            <constraint firstItem="CwQ-a7-3jo" firstAttribute="width" secondItem="vLz-CG-xvp" secondAttribute="width" id="F2h-QA-xJe"/>
-                            <constraint firstItem="CwQ-a7-3jo" firstAttribute="leading" secondItem="gi5-cr-AKl" secondAttribute="leading" id="ee2-JC-GIR"/>
-                            <constraint firstAttribute="bottom" secondItem="CwQ-a7-3jo" secondAttribute="bottom" id="hfK-2K-jga"/>
-                            <constraint firstItem="vLz-CG-xvp" firstAttribute="top" secondItem="gi5-cr-AKl" secondAttribute="top" id="hwO-nv-hXy"/>
-                            <constraint firstItem="vLz-CG-xvp" firstAttribute="leading" secondItem="CwQ-a7-3jo" secondAttribute="trailing" id="nqM-ux-3fS"/>
+                            <constraint firstItem="VdG-kY-SIQ" firstAttribute="top" secondItem="gi5-cr-AKl" secondAttribute="top" id="3iY-ek-sgb"/>
+                            <constraint firstItem="VdG-kY-SIQ" firstAttribute="leading" secondItem="gi5-cr-AKl" secondAttribute="leading" id="4xD-1G-gZk"/>
+                            <constraint firstAttribute="trailing" secondItem="VdG-kY-SIQ" secondAttribute="trailing" id="Th2-1o-hgG"/>
+                            <constraint firstAttribute="bottom" secondItem="VdG-kY-SIQ" secondAttribute="bottom" id="mzN-Nc-Qnj"/>
                         </constraints>
                     </view>
                     <connections>
@@ -77,6 +100,12 @@
     <resources>
         <namedColor name="EditorBackground">
             <color red="0.22499999403953552" green="0.26199999451637268" blue="0.30000001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="EditorBackground">
+            <color red="0.22499999403953552" green="0.26199999451637268" blue="0.30000001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="EditorBackground">
+            <color red="0.22499999400000001" green="0.2619999945" blue="0.30000001189999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="EditorText">
             <color red="0.89999997615814209" green="0.94999998807907104" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
