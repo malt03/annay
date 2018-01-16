@@ -210,6 +210,7 @@
 		ED2E15AF200669B8003D55A3 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				EDA736CF200E2634000BC5DA /* Preference */,
 				EDA736CE200E2577000BC5DA /* MarkDownEditor */,
 				EDA736CB200E252A000BC5DA /* Sidebar */,
 			);
@@ -261,6 +262,14 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		EDA736CF200E2634000BC5DA /* Preference */ = {
+			isa = PBXGroup;
+			children = (
+				EDA736C6200E239E000BC5DA /* Preference.storyboard */,
+			);
+			path = Preference;
+			sourceTree = "<group>";
+		};
 		EDDED73A20051B880079F3D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,10 +305,9 @@
 				ED2E15AF200669B8003D55A3 /* Feature */,
 				ED2E15B0200669C8003D55A3 /* Model */,
 				EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */,
+				EDEB7A602004EDF000F8C48A /* Main.storyboard */,
 				EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */,
 				ED841BD9200B2FD10097996A /* Colors.xcassets */,
-				EDEB7A602004EDF000F8C48A /* Main.storyboard */,
-				EDA736C6200E239E000BC5DA /* Preference.storyboard */,
 				EDEB7A632004EDF000F8C48A /* Info.plist */,
 				EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */,
 			);
