@@ -51,10 +51,10 @@
             </objects>
             <point key="canvasLocation" x="-26" y="546"/>
         </scene>
-        <!--Workspace-->
+        <!--WorkspacePreference-->
         <scene sceneID="lFb-0S-9JU">
             <objects>
-                <controllerPlaceholder storyboardName="Workspace" id="UpR-n9-vYd" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardName="WorkspacePreference" id="UpR-n9-vYd" sceneMemberID="viewController"/>
                 <customObject id="k9n-xn-ejf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-26" y="794"/>

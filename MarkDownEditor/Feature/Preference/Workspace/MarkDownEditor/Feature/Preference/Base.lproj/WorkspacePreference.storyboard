@@ -7,10 +7,10 @@
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
-        <!--Preference Workspace View Controller-->
+        <!--Workspace Preference View Controller-->
         <scene sceneID="X54-vQ-N0D">
             <objects>
-                <viewController id="OfD-l8-cvV" customClass="PreferenceWorkspaceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OfD-l8-cvV" customClass="WorkspacePreferenceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="RiS-sR-Rfy" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="538" height="100"/>
                         <autoresizingMask key="autoresizingMask"/>

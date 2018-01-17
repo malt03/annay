@@ -34,7 +34,7 @@
 		ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED434F0220079DBD00C2357D /* LocalizedString.swift */; };
 		ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */; };
 		ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55C500200E56F10070301A /* Preference.storyboard */; };
-		ED55C506200E602F0070301A /* PreferenceWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C505200E602F0070301A /* PreferenceWorkspaceViewController.swift */; };
+		ED55C506200E602F0070301A /* WorkspacePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C505200E602F0070301A /* WorkspacePreferenceViewController.swift */; };
 		ED55C508200E628F0070301A /* WorkspaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C507200E628F0070301A /* WorkspaceManager.swift */; };
 		ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD02008EC2B0097996A /* NodeTableCellView.swift */; };
 		ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD22009217F0097996A /* NSEvent+Extensions.swift */; };
@@ -52,7 +52,7 @@
 		EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */; };
 		EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A28B200CD90C00D5E7BE /* Array+Extensions.swift */; };
 		EDD0A28E200ED29400D5E7BE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A28D200ED29400D5E7BE /* Util.swift */; };
-		EDD0A292200ED55B00D5E7BE /* Workspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDD0A290200ED55B00D5E7BE /* Workspace.storyboard */; };
+		EDD0A292200ED55B00D5E7BE /* WorkspacePreference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDD0A290200ED55B00D5E7BE /* WorkspacePreference.storyboard */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
 		EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */; };
@@ -105,7 +105,7 @@
 		ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSetableView.swift; sourceTree = "<group>"; };
 		ED55C4FF200E56F10070301A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preference.storyboard; sourceTree = "<group>"; };
 		ED55C504200E5B360070301A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Preference.strings; sourceTree = "<group>"; };
-		ED55C505200E602F0070301A /* PreferenceWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceWorkspaceViewController.swift; sourceTree = "<group>"; };
+		ED55C505200E602F0070301A /* WorkspacePreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePreferenceViewController.swift; sourceTree = "<group>"; };
 		ED55C507200E628F0070301A /* WorkspaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceManager.swift; sourceTree = "<group>"; };
 		ED841BD02008EC2B0097996A /* NodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableCellView.swift; sourceTree = "<group>"; };
 		ED841BD22009217F0097996A /* NSEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSEvent+Extensions.swift"; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 		EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard+Extensions.swift"; sourceTree = "<group>"; };
 		EDD0A28B200CD90C00D5E7BE /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		EDD0A28D200ED29400D5E7BE /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		EDD0A291200ED55B00D5E7BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MarkDownEditor/Feature/Preference/Base.lproj/Workspace.storyboard; sourceTree = "<group>"; };
+		EDD0A291200ED55B00D5E7BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MarkDownEditor/Feature/Preference/Base.lproj/WorkspacePreference.storyboard; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
 		EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkDownEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +230,7 @@
 		ED2E15AF200669B8003D55A3 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				EDD0A293200ED90E00D5E7BE /* Workspace */,
 				EDA736CF200E2634000BC5DA /* Preference */,
 				EDA736CE200E2577000BC5DA /* MarkDownEditor */,
 				EDA736CB200E252A000BC5DA /* Sidebar */,
@@ -294,8 +295,15 @@
 		EDD0A28F200ED54100D5E7BE /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
-				EDD0A290200ED55B00D5E7BE /* Workspace.storyboard */,
-				ED55C505200E602F0070301A /* PreferenceWorkspaceViewController.swift */,
+				EDD0A290200ED55B00D5E7BE /* WorkspacePreference.storyboard */,
+				ED55C505200E602F0070301A /* WorkspacePreferenceViewController.swift */,
+			);
+			path = Workspace;
+			sourceTree = "<group>";
+		};
+		EDD0A293200ED90E00D5E7BE /* Workspace */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -422,7 +430,7 @@
 				ED2E1496200555A5003D55A3 /* markdown-it-sub.min.js in Resources */,
 				ED187FD220052D30002E51C0 /* markdown.html in Resources */,
 				EDA736CD200E256D000BC5DA /* MarkDownEditor.storyboard in Resources */,
-				EDD0A292200ED55B00D5E7BE /* Workspace.storyboard in Resources */,
+				EDD0A292200ED55B00D5E7BE /* WorkspacePreference.storyboard in Resources */,
 				EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */,
 				ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */,
 				ED434EFB20079CB600C2357D /* Localizable.strings in Resources */,
@@ -452,7 +460,7 @@
 				ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */,
 				ED187FD420053206002E51C0 /* WebView.swift in Sources */,
 				EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */,
-				ED55C506200E602F0070301A /* PreferenceWorkspaceViewController.swift in Sources */,
+				ED55C506200E602F0070301A /* WorkspacePreferenceViewController.swift in Sources */,
 				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
 				EDD0A28E200ED29400D5E7BE /* Util.swift in Sources */,
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
@@ -495,12 +503,12 @@
 			name = Sidebar.storyboard;
 			sourceTree = "<group>";
 		};
-		EDD0A290200ED55B00D5E7BE /* Workspace.storyboard */ = {
+		EDD0A290200ED55B00D5E7BE /* WorkspacePreference.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				EDD0A291200ED55B00D5E7BE /* Base */,
 			);
-			name = Workspace.storyboard;
+			name = WorkspacePreference.storyboard;
 			sourceTree = "<group>";
 		};
 		EDEB7A602004EDF000F8C48A /* Main.storyboard */ = {
