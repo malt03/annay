@@ -1,5 +1,5 @@
 //
-//  PreferenceViewController.swift
+//  PreferenceWorkspaceViewController.swift
 //  MarkDownEditor
 //
 //  Created by Koji Murata on 2018/01/17.
@@ -10,7 +10,7 @@ import Cocoa
 import RxCocoa
 import RxSwift
 
-class PreferenceViewController: NSViewController {
+final class PreferenceWorkspaceViewController: NSViewController {
   private let bag = DisposeBag()
   
   @IBOutlet private weak var workspaceTextField: NSTextField!
