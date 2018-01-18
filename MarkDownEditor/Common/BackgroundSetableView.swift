@@ -9,12 +9,13 @@
 import Cocoa
 
 final class BackgroundSetableView: NSView {
+  @IBInspectable var cornerRadius: CGFloat = 0
   @IBInspectable var backgroundColor: NSColor?
 
   override func draw(_ dirtyRect: NSRect) {
     if let backgroundColor = backgroundColor {
       backgroundColor.setFill()
-      dirtyRect.fill()
+      NSBezierPath(roundedRect: dirtyRect, xRadius: cornerRadius, yRadius: cornerRadius).fill()
     }
     super.draw(dirtyRect)
   }

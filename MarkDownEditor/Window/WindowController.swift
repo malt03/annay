@@ -11,7 +11,7 @@ import Cocoa
 final class WindowController: NSWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.backgroundColor = NSColor.background
+    window?.backgroundColor = .sidebarBackground
     window?.appearance = NSAppearance(named: NSAppearance.Name.vibrantDark)
   }
 }

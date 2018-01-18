@@ -47,6 +47,11 @@
 		EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */; };
 		EDA736D3200E3BB0000BC5DA /* markdown.css in Resources */ = {isa = PBXBuildFile; fileRef = EDA736D2200E3BB0000BC5DA /* markdown.css */; };
 		EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D4200E3E6A000BC5DA /* SplitView.swift */; };
+		EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */; };
+		EDBFF25820107CBA005F3547 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBFF25720107CBA005F3547 /* Kingfisher.framework */; };
+		EDBFF25920107CBD005F3547 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBFF25720107CBA005F3547 /* Kingfisher.framework */; };
+		EDBFF25A20107CBD005F3547 /* Kingfisher.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDBFF25720107CBA005F3547 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25B2010868C005F3547 /* String+Extensions.swift */; };
 		EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */ = {isa = PBXBuildFile; fileRef = EDCED8C42005DAD100C514B1 /* monokai-sublime.css */; };
 		EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */; };
 		EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */; };
@@ -63,6 +68,7 @@
 		EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */; };
 		EDEB7A622004EDF000F8C48A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A602004EDF000F8C48A /* Main.storyboard */; };
 		EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */; };
+		EDEC26CF20109696006B9A22 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEC26CE20109696006B9A22 /* WorkspacesTableRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +82,7 @@
 				ED2E15A2200624CE003D55A3 /* RealmSwift.framework in Embed Libraries */,
 				ED2E148020053BF2003D55A3 /* RxCocoa.framework in Embed Libraries */,
 				ED2E147E20053BF2003D55A3 /* RxBlocking.framework in Embed Libraries */,
+				EDBFF25A20107CBD005F3547 /* Kingfisher.framework in Embed Libraries */,
 				ED2E148220053BF2003D55A3 /* RxSwift.framework in Embed Libraries */,
 			);
 			name = "Embed Libraries";
@@ -122,6 +129,9 @@
 		EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		EDA736D2200E3BB0000BC5DA /* markdown.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = markdown.css; sourceTree = "<group>"; };
 		EDA736D4200E3E6A000BC5DA /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
+		EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableCellView.swift; sourceTree = "<group>"; };
+		EDBFF25720107CBA005F3547 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/Mac/Kingfisher.framework; sourceTree = SOURCE_ROOT; };
+		EDBFF25B2010868C005F3547 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		EDCED8C42005DAD100C514B1 /* monokai-sublime.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.css"; sourceTree = "<group>"; };
 		EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboardPasteboardType+Extensions.swift"; sourceTree = "<group>"; };
 		EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard+Extensions.swift"; sourceTree = "<group>"; };
@@ -141,6 +151,7 @@
 		EDEB7A632004EDF000F8C48A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkDownEditor.entitlements; sourceTree = "<group>"; };
 		EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorViewController.swift; sourceTree = "<group>"; };
+		EDEC26CE20109696006B9A22 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,9 +160,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED2E159F200624CA003D55A3 /* Realm.framework in Frameworks */,
+				EDBFF25920107CBD005F3547 /* Kingfisher.framework in Frameworks */,
 				ED2E15A1200624CE003D55A3 /* RealmSwift.framework in Frameworks */,
 				ED2E147F20053BF2003D55A3 /* RxCocoa.framework in Frameworks */,
 				ED2E147D20053BF2003D55A3 /* RxBlocking.framework in Frameworks */,
+				EDBFF25820107CBA005F3547 /* Kingfisher.framework in Frameworks */,
 				ED2E148120053BF2003D55A3 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +191,7 @@
 				ED55C507200E628F0070301A /* WorkspaceManager.swift */,
 				EDD0A28D200ED29400D5E7BE /* Util.swift */,
 				EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */,
+				EDBFF25B2010868C005F3547 /* String+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -205,6 +219,7 @@
 		ED2E147920053BD6003D55A3 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				EDBFF25720107CBA005F3547 /* Kingfisher.framework */,
 				ED2E159E200624C2003D55A3 /* Realm.framework */,
 				ED2E159D200624C2003D55A3 /* RealmSwift.framework */,
 				ED2E147C20053BE9003D55A3 /* RxBlocking.framework */,
@@ -316,6 +331,8 @@
 			children = (
 				EDD0A294200ED98700D5E7BE /* Workspaces.storyboard */,
 				EDD0A2B8200F2B9E00D5E7BE /* WorkspacesViewController.swift */,
+				EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */,
+				EDEC26CE20109696006B9A22 /* WorkspacesTableRowView.swift */,
 			);
 			path = Workspaces;
 			sourceTree = "<group>";
@@ -465,13 +482,16 @@
 				EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */,
 				EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */,
 				EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */,
+				EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */,
 				ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */,
 				ED841BD8200B256B0097996A /* WindowController.swift in Sources */,
 				EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */,
+				EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */,
 				EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */,
 				ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */,
 				ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */,
 				ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */,
+				EDEC26CF20109696006B9A22 /* WorkspacesTableRowView.swift in Sources */,
 				ED187FD420053206002E51C0 /* WebView.swift in Sources */,
 				EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */,
 				ED55C506200E602F0070301A /* WorkspacePreferenceViewController.swift in Sources */,

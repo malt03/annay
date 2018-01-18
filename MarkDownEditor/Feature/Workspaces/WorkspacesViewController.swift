@@ -16,3 +16,16 @@ final class WorkspacesViewController: NSViewController {
     workspacesController.content = WorkspaceModel.spaces
   }
 }
+
+extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
+  func numberOfRows(in tableView: NSTableView) -> Int {
+    return WorkspaceModel.spaces.count
+  }
+  
+  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    let workspace = WorkspaceModel.spaces[row]
+    let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("WorkspacesTableCellView"), owner: self) as! WorkspacesTableCellView
+    cell.prepare(workspace: workspace)
+    return cell
+  }
+}

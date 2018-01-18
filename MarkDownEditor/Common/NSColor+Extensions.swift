@@ -9,7 +9,7 @@
 import Cocoa
 
 extension NSColor {
-  static let background = NSColor(named: Name("Background"))!
+  static let sidebarBackground = NSColor(named: Name("SidebarBackground"))!
   static let text = NSColor(named: Name("Text"))!
   static let selectedRow = NSColor(named: Name("SelectedRow"))!
 }
