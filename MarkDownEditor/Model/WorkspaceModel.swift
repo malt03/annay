@@ -81,7 +81,9 @@ struct WorkspaceModel {
   
   private static func createDefault() -> WorkspaceModel {
     let supportDirectory = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-    let workspaceUrl = supportDirectory.appendingPathComponent((Bundle.main.bundleIdentifier ?? "") + "workspace", isDirectory: true)
+    let workspaceUrl = supportDirectory
+      .appendingPathComponent(Bundle.main.bundleIdentifier ?? "", isDirectory: true)
+      .appendingPathComponent("workspace", isDirectory: true)
     let workspace = WorkspaceModel(name: Localized("Default"), url: workspaceUrl, imageUrl: nil)
     spaces = [workspace]
     return workspace
