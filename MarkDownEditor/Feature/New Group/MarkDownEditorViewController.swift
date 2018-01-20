@@ -8,8 +8,11 @@
 
 import Cocoa
 import RealmSwift
+import RxSwift
 
 final class MarkDownEditorViewController: NSViewController {
+  private let bag = DisposeBag()
+  
   @IBOutlet private weak var textView: TextView!
   @IBOutlet private weak var webView: WebView!
   
@@ -17,6 +20,11 @@ final class MarkDownEditorViewController: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    WorkspaceModel.selected.subscribe(onNext: { [weak self] _ in
+      self?.setSelectedNote(nil)
+    }).disposed(by: bag)
+    
     prepareTextView()
   }
   
