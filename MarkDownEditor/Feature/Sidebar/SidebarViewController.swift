@@ -17,8 +17,9 @@ extension NSTableView.AutosaveName {
 final class SidebarViewController: NSViewController {
   private let bag = DisposeBag()
   private let workspaceNameDisposable = SerialDisposable()
+  private let workspaceNameEditDisposable = SerialDisposable()
   
-  @IBOutlet private weak var workspaceNameLabel: NSTextField!
+  @IBOutlet private weak var workspaceNameTextField: NSTextField!
   @IBOutlet private weak var outlineView: NSOutlineView!
   
   private var secondaryClickedRow = -1
@@ -33,13 +34,18 @@ final class SidebarViewController: NSViewController {
     outlineView.headerView = nil
     
     reloadData()
+    
+    NSApplication.shared.endEditing()
   }
   
   private func reloadData() {
     WorkspaceModel.selected.subscribe(onNext: { [weak self] (workspace) in
       guard let s = self else { return }
-      s.workspaceNameDisposable.disposable = workspace.name.asObservable().bind(to: s.workspaceNameLabel.rx.text)
+      s.workspaceNameDisposable.disposable = workspace.name.asObservable().bind(to: s.workspaceNameTextField.rx.text)
+      s.workspaceNameEditDisposable.disposable = s.workspaceNameTextField.rx.text.map { $0 ?? "" }.bind(to: workspace.name)
       s.workspaceNameDisposable.disposed(by: s.bag)
+      s.workspaceNameEditDisposable.disposed(by: s.bag)
+      
       s.outlineView.reloadData()
     }).disposed(by: bag)
   }

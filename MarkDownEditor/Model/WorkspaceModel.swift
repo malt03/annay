@@ -22,7 +22,7 @@ final class WorkspaceModel {
     name.value = (settings["name"] as? String) ?? ""
     
     name.asObservable().subscribe(onNext: { [weak self] (name) in
-       self?.settings["name"] = name
+      self?.settings["name"] = name
     }).disposed(by: bag)
     
     try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
@@ -62,18 +62,22 @@ final class WorkspaceModel {
     static let SelectedIndex = "WorkspaceModel/SelectedIndex"
   }
   
+  private static var _spaces: [WorkspaceModel]?
   private(set) static var spaces: [WorkspaceModel] {
     get {
-      let spaces: [WorkspaceModel] = UserDefaults.standard.savableObjectArray(forKey: Key.Spaces) ?? []
+      if let _spaces = _spaces { return _spaces }
+      var spaces: [WorkspaceModel] = UserDefaults.standard.savableObjectArray(forKey: Key.Spaces) ?? []
       if spaces.count == 0 {
-        return [createDefault()]
+        spaces = [createDefault()]
       }
+      _spaces = spaces
       return spaces
     }
     set {
       let ud = UserDefaults.standard
       ud.set(newValue, forKey: Key.Spaces)
       ud.synchronize()
+      _spaces = newValue
     }
   }
   
