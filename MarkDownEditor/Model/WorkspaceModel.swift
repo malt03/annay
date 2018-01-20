@@ -29,6 +29,10 @@ final class WorkspaceModel {
     self.id = id
     self.url = Variable(url)
     
+    if !FileManager.default.fileExists(atPath: url.settings.path) {
+      try "{}".write(to: url.settings, atomically: true, encoding: .utf8)
+    }
+
     let data = try Data(contentsOf: url.settings)
     settings = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
 
@@ -83,10 +87,11 @@ final class WorkspaceModel {
     }
   }
   
-  static let selected = BehaviorSubject<WorkspaceModel>(value: spaces.value[selectedIndex])
+  static let selected = BehaviorSubject<WorkspaceModel>(value: spaces.value[safe: selectedIndex] ?? spaces.value[0])
   
   func select() {
     WorkspaceModel.selectedIndex = WorkspaceModel.spaces.value.index(of: self) ?? 0
+    NodeModel.createFirstDirectoryIfNeeded()
   }
   
   func save() {

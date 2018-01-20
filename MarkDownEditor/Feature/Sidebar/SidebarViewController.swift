@@ -11,7 +11,10 @@ import RealmSwift
 import RxSwift
 
 extension NSTableView.AutosaveName {
-  static let Sidebar = NSTableView.AutosaveName("Sidebar")
+  static var Sidebar: NSTableView.AutosaveName {
+    let id = (try! WorkspaceModel.selected.value()).id
+    return NSTableView.AutosaveName("Sidebar/\(id)")
+  }
 }
 
 final class SidebarViewController: NSViewController {
@@ -29,7 +32,6 @@ final class SidebarViewController: NSViewController {
     super.viewDidLoad()
     outlineView.registerForDraggedTypes([.nodeModel, .string])
     outlineView.setDraggingSourceOperationMask([.move, .copy], forLocal: false)
-    outlineView.autosaveName = .Sidebar
     outlineView.backgroundColor = .clear
     outlineView.headerView = nil
     
@@ -46,6 +48,8 @@ final class SidebarViewController: NSViewController {
       s.workspaceNameDisposable.disposed(by: s.bag)
       s.workspaceNameEditDisposable.disposed(by: s.bag)
       
+      NodeModel.createFirstDirectoryIfNeeded()
+      s.outlineView.autosaveName = .Sidebar
       s.outlineView.reloadData()
     }).disposed(by: bag)
   }

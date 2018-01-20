@@ -30,6 +30,10 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
     return true
   }
   
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    WorkspaceModel.spaces.value[tableView.selectedRow].select()
+  }
+  
   func numberOfRows(in tableView: NSTableView) -> Int {
     return WorkspaceModel.spaces.value.count + 1
   }

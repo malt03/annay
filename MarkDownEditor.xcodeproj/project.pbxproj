@@ -37,6 +37,7 @@
 		ED55C506200E602F0070301A /* WorkspacePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C505200E602F0070301A /* WorkspacePreferenceViewController.swift */; };
 		ED55C50C201312570070301A /* CreateWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55C50E201312570070301A /* CreateWorkspace.storyboard */; };
 		ED55C5132013146F0070301A /* CreateWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C5112013146F0070301A /* CreateWorkspaceViewController.swift */; };
+		ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */; };
 		ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD02008EC2B0097996A /* NodeTableCellView.swift */; };
 		ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD22009217F0097996A /* NSEvent+Extensions.swift */; };
 		ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD42009CC0C0097996A /* KeyCode.swift */; };
@@ -120,6 +121,7 @@
 		ED55C50D201312570070301A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CreateWorkspace.storyboard; sourceTree = "<group>"; };
 		ED55C5102013125A0070301A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CreateWorkspace.strings; sourceTree = "<group>"; };
 		ED55C5112013146F0070301A /* CreateWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceViewController.swift; sourceTree = "<group>"; };
+		ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		ED841BD02008EC2B0097996A /* NodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableCellView.swift; sourceTree = "<group>"; };
 		ED841BD22009217F0097996A /* NSEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSEvent+Extensions.swift"; sourceTree = "<group>"; };
 		ED841BD42009CC0C0097996A /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				EDD0A28D200ED29400D5E7BE /* Util.swift */,
 				EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */,
 				EDBFF25B2010868C005F3547 /* String+Extensions.swift */,
+				ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */,
 				EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */,
 				EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */,
+				ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */,
 				EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */,
 				ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */,
 				ED841BD8200B256B0097996A /* WindowController.swift in Sources */,
