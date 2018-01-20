@@ -29,6 +29,9 @@ final class WorkspaceModel {
     self.id = id
     self.url = Variable(url)
     
+    if !FileManager.default.fileExists(atPath: url.path) {
+      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+    }
     if !FileManager.default.fileExists(atPath: url.settings.path) {
       try "{}".write(to: url.settings, atomically: true, encoding: .utf8)
     }
@@ -43,10 +46,6 @@ final class WorkspaceModel {
     self.name.asObservable().subscribe(onNext: { [weak self] (name) in
       self?.settings["name"] = name
     }).disposed(by: bag)
-    
-    if !FileManager.default.fileExists(atPath: url.path) {
-      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-    }
   }
   
   convenience init(url: URL) throws {
