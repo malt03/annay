@@ -14,14 +14,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="68" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="68" horizontalPageScroll="10" verticalLineScroll="68" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Qg-gM-tQD">
-                                <rect key="frame" x="0.0" y="0.0" width="68" height="278"/>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="52" horizontalPageScroll="10" verticalLineScroll="52" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Qg-gM-tQD">
+                                <rect key="frame" x="0.0" y="0.0" width="68" height="270"/>
                                 <clipView key="contentView" drawsBackground="NO" id="neT-Er-lrP">
-                                    <rect key="frame" x="0.0" y="0.0" width="68" height="278"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="68" height="270"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="68" viewBased="YES" id="5TB-xv-gAB">
-                                            <rect key="frame" x="0.0" y="0.0" width="68" height="278"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="52" viewBased="YES" id="5TB-xv-gAB">
+                                            <rect key="frame" x="0.0" y="0.0" width="68" height="270"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -39,12 +39,48 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
+                                                        <tableCellView identifier="CreateWorkspacesTableCellView" id="Q8b-IM-2qa">
+                                                            <rect key="frame" x="0.0" y="0.0" width="68" height="52"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="4qV-6l-iYQ" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                                    <rect key="frame" x="16" y="8" width="36" height="36"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                            <color key="value" name="EditorBackground"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="4"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </customView>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6rV-3A-r8F">
+                                                                    <rect key="frame" x="22" y="10" width="24" height="39"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="+" id="CVd-oj-MK3">
+                                                                        <font key="font" metaFont="system" size="32"/>
+                                                                        <color key="textColor" name="Text"/>
+                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="4qV-6l-iYQ" firstAttribute="leading" secondItem="Q8b-IM-2qa" secondAttribute="leading" constant="16" id="00v-al-jCK"/>
+                                                                <constraint firstItem="6rV-3A-r8F" firstAttribute="centerX" secondItem="Q8b-IM-2qa" secondAttribute="centerX" id="JEs-Mp-tD6"/>
+                                                                <constraint firstItem="6rV-3A-r8F" firstAttribute="centerY" secondItem="Q8b-IM-2qa" secondAttribute="centerY" constant="-3" id="PDN-O5-7D3"/>
+                                                                <constraint firstItem="4qV-6l-iYQ" firstAttribute="top" secondItem="Q8b-IM-2qa" secondAttribute="top" constant="8" id="Vek-et-kzZ"/>
+                                                                <constraint firstAttribute="bottom" secondItem="4qV-6l-iYQ" secondAttribute="bottom" constant="8" id="azx-DZ-Z0b"/>
+                                                                <constraint firstAttribute="trailing" secondItem="4qV-6l-iYQ" secondAttribute="trailing" constant="16" id="jff-xO-uoh"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="textField" destination="6rV-3A-r8F" id="IHR-kw-toH"/>
+                                                            </connections>
+                                                        </tableCellView>
                                                         <tableCellView identifier="WorkspacesTableCellView" id="5ZL-ub-f8W" customClass="WorkspacesTableCellView" customModule="MarkDownEditor" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
+                                                            <rect key="frame" x="0.0" y="52" width="68" height="52"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ggv-hC-A4I" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
-                                                                    <rect key="frame" x="16" y="16" width="36" height="36"/>
+                                                                    <rect key="frame" x="16" y="8" width="36" height="36"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hk9-Qc-qIe">
                                                                             <rect key="frame" x="18" y="18" width="0.0" height="0.0"/>
@@ -77,49 +113,13 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="Ggv-hC-A4I" secondAttribute="trailing" constant="16" id="3UD-nx-mIl"/>
-                                                                <constraint firstAttribute="bottom" secondItem="Ggv-hC-A4I" secondAttribute="bottom" constant="16" id="E7Y-t3-bjU"/>
-                                                                <constraint firstItem="Ggv-hC-A4I" firstAttribute="top" secondItem="5ZL-ub-f8W" secondAttribute="top" constant="16" id="FMr-QP-gSu"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Ggv-hC-A4I" secondAttribute="bottom" constant="8" id="E7Y-t3-bjU"/>
+                                                                <constraint firstItem="Ggv-hC-A4I" firstAttribute="top" secondItem="5ZL-ub-f8W" secondAttribute="top" constant="8" id="FMr-QP-gSu"/>
                                                                 <constraint firstItem="Ggv-hC-A4I" firstAttribute="leading" secondItem="5ZL-ub-f8W" secondAttribute="leading" constant="16" id="oNp-eX-McV"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="imageView" destination="Hk9-Qc-qIe" id="7p7-En-61C"/>
                                                                 <outlet property="textField" destination="RQl-wX-Dsv" id="g0p-vO-5vQ"/>
-                                                            </connections>
-                                                        </tableCellView>
-                                                        <tableCellView identifier="CreateWorkspacesTableCellView" id="Q8b-IM-2qa">
-                                                            <rect key="frame" x="0.0" y="68" width="68" height="68"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="4qV-6l-iYQ" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
-                                                                    <rect key="frame" x="16" y="16" width="36" height="36"/>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                                            <color key="value" name="EditorBackground"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="4"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </customView>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6rV-3A-r8F">
-                                                                    <rect key="frame" x="22" y="18" width="24" height="39"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="+" id="CVd-oj-MK3">
-                                                                        <font key="font" metaFont="system" size="32"/>
-                                                                        <color key="textColor" name="Text"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="4qV-6l-iYQ" firstAttribute="leading" secondItem="Q8b-IM-2qa" secondAttribute="leading" constant="16" id="00v-al-jCK"/>
-                                                                <constraint firstItem="6rV-3A-r8F" firstAttribute="centerX" secondItem="Q8b-IM-2qa" secondAttribute="centerX" id="JEs-Mp-tD6"/>
-                                                                <constraint firstItem="6rV-3A-r8F" firstAttribute="centerY" secondItem="Q8b-IM-2qa" secondAttribute="centerY" constant="-3" id="PDN-O5-7D3"/>
-                                                                <constraint firstItem="4qV-6l-iYQ" firstAttribute="top" secondItem="Q8b-IM-2qa" secondAttribute="top" constant="16" id="Vek-et-kzZ"/>
-                                                                <constraint firstAttribute="bottom" secondItem="4qV-6l-iYQ" secondAttribute="bottom" constant="16" id="azx-DZ-Z0b"/>
-                                                                <constraint firstAttribute="trailing" secondItem="4qV-6l-iYQ" secondAttribute="trailing" constant="16" id="jff-xO-uoh"/>
-                                                            </constraints>
-                                                            <connections>
-                                                                <outlet property="textField" destination="6rV-3A-r8F" id="IHR-kw-toH"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -146,7 +146,7 @@
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="9Qg-gM-tQD" firstAttribute="top" secondItem="H46-uq-id9" secondAttribute="top" constant="22" id="I2W-oW-WEE"/>
+                            <constraint firstItem="9Qg-gM-tQD" firstAttribute="top" secondItem="H46-uq-id9" secondAttribute="top" constant="30" id="I2W-oW-WEE"/>
                             <constraint firstAttribute="bottom" secondItem="9Qg-gM-tQD" secondAttribute="bottom" id="ODK-Xy-R2P"/>
                             <constraint firstItem="9Qg-gM-tQD" firstAttribute="leading" secondItem="H46-uq-id9" secondAttribute="leading" id="TFs-dX-jz1"/>
                             <constraint firstAttribute="trailing" secondItem="9Qg-gM-tQD" secondAttribute="trailing" id="Wcr-eW-bdv"/>
