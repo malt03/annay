@@ -98,15 +98,15 @@ final class WorkspaceModel {
     WorkspaceModel.spaces.value.append(self)
   }
 
-  static func delete(_ space: WorkspaceModel) {
-    spaces.value.remove(object: space)
-  }
-
-  static func move(_ movingSpaces: [WorkspaceModel], to index: Int) {
+  static func move(from fromIndex: Int, to toIndex: Int) {
     var tmpSpaces = spaces.value
-    let indexes = tmpSpaces.remove(objects: movingSpaces)
-    let fixedIndex = index - indexes.filter { $0 < index }.count
-    tmpSpaces.insert(contentsOf: movingSpaces, at: fixedIndex)
+    let space = tmpSpaces[fromIndex]
+    tmpSpaces.remove(at: fromIndex)
+    var fixedToIndex = toIndex
+    if fromIndex < toIndex {
+      fixedToIndex -= 1
+    }
+    tmpSpaces.insert(space, at: fixedToIndex)
     spaces.value = tmpSpaces
   }
   

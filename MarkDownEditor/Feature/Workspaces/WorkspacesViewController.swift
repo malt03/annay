@@ -15,6 +15,8 @@ final class WorkspacesViewController: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.registerForDraggedTypes([.workspaceModel])
+    tableView.setDraggingSourceOperationMask([.move], forLocal: true)
     WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] _ in
       self?.tableView.reloadData()
     }).disposed(by: bag)
@@ -56,5 +58,26 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
     let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("WorkspacesTableCellView"), owner: self) as! WorkspacesTableCellView
     cell.prepare(workspace: workspace)
     return cell
+  }
+  
+  func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+    if row == WorkspaceModel.spaces.value.count { return nil }
+    let item = NSPasteboardItem()
+    item.setString("\(row)", forType: .workspaceModel)
+    return item
+  }
+  
+  func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+    if dropOperation == .on { return [] }
+    guard let draggingRow = Int(info.draggingPasteboard().string(forType: .workspaceModel) ?? "") else { return [] }
+    if draggingRow == row || draggingRow == row - 1 { return [] }
+    if row == WorkspaceModel.spaces.value.count + 1 { return [] }
+    return [.move]
+  }
+  
+  func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+    guard let draggingRow = Int(info.draggingPasteboard().string(forType: .workspaceModel) ?? "") else { return false }
+    WorkspaceModel.move(from: draggingRow, to: row)
+    return true
   }
 }

@@ -10,4 +10,5 @@ import Cocoa
 
 extension NSPasteboard.PasteboardType {
   static let nodeModel = NSPasteboard.PasteboardType("koji.murata.MarkDownEditor.nodeModel")
+  static let workspaceModel = NSPasteboard.PasteboardType("koji.murata.MarkDownEditor.workspaceModel")
 }
