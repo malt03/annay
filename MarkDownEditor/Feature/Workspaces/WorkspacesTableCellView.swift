@@ -13,6 +13,7 @@ import RxSwift
 final class WorkspacesTableCellView: NSTableCellView {
   private let bag = DisposeBag()
   private let textDisposable = SerialDisposable()
+  @IBOutlet private weak var backgroundView: BackgroundSetableView!
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -23,4 +24,6 @@ final class WorkspacesTableCellView: NSTableCellView {
     textDisposable.disposable = workspace.name.asObservable().map { $0.firstCharacterString }.bind(to: textField!.rx.text)
     textDisposable.disposed(by: bag)
   }
+  
+  
 }

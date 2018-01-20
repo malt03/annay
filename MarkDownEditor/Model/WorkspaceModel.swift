@@ -77,7 +77,7 @@ final class WorkspaceModel {
     return variable
   }()
   
-  private static var selectedIndex: Int {
+  static var selectedIndex: Int {
     get { return UserDefaults.standard.integer(forKey: Key.SelectedIndex) }
     set {
       let ud = UserDefaults.standard

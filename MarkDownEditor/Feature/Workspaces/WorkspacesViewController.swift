@@ -19,6 +19,11 @@ final class WorkspacesViewController: NSViewController {
       self?.tableView.reloadData()
     }).disposed(by: bag)
   }
+  
+  override func viewDidAppear() {
+    super.viewDidAppear()
+    tableView.selectRowIndexes(IndexSet(integer: WorkspaceModel.selectedIndex), byExtendingSelection: false)
+  }
 }
 
 extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
@@ -36,6 +41,10 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
   
   func numberOfRows(in tableView: NSTableView) -> Int {
     return WorkspaceModel.spaces.value.count + 1
+  }
+  
+  func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+    return WorkspacesTableRowView()
   }
   
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

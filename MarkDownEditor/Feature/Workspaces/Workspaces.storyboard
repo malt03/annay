@@ -45,6 +45,26 @@
                                                             <subviews>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ggv-hC-A4I" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
                                                                     <rect key="frame" x="16" y="16" width="36" height="36"/>
+                                                                    <subviews>
+                                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hk9-Qc-qIe">
+                                                                            <rect key="frame" x="18" y="18" width="0.0" height="0.0"/>
+                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="lKk-dA-AeF"/>
+                                                                        </imageView>
+                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQl-wX-Dsv">
+                                                                            <rect key="frame" x="16" y="10" width="4" height="17"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="krI-I8-Euu">
+                                                                                <font key="font" metaFont="system"/>
+                                                                                <color key="textColor" name="Text"/>
+                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                        </textField>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="Hk9-Qc-qIe" firstAttribute="centerX" secondItem="Ggv-hC-A4I" secondAttribute="centerX" id="KUv-2q-uJx"/>
+                                                                        <constraint firstItem="RQl-wX-Dsv" firstAttribute="centerY" secondItem="Ggv-hC-A4I" secondAttribute="centerY" id="Voh-hJ-hSf"/>
+                                                                        <constraint firstItem="Hk9-Qc-qIe" firstAttribute="centerY" secondItem="Ggv-hC-A4I" secondAttribute="centerY" id="aIf-b6-PrM"/>
+                                                                        <constraint firstItem="RQl-wX-Dsv" firstAttribute="centerX" secondItem="Ggv-hC-A4I" secondAttribute="centerX" id="ypZ-vr-zfA"/>
+                                                                    </constraints>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
                                                                             <color key="value" name="EditorBackground"/>
@@ -54,28 +74,12 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </customView>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hk9-Qc-qIe">
-                                                                    <rect key="frame" x="34" y="34" width="0.0" height="0.0"/>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="lKk-dA-AeF"/>
-                                                                </imageView>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQl-wX-Dsv">
-                                                                    <rect key="frame" x="32" y="26" width="4" height="17"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="krI-I8-Euu">
-                                                                        <font key="font" metaFont="system"/>
-                                                                        <color key="textColor" name="Text"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="Hk9-Qc-qIe" firstAttribute="centerX" secondItem="5ZL-ub-f8W" secondAttribute="centerX" id="0M8-uv-nHh"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Ggv-hC-A4I" secondAttribute="trailing" constant="16" id="3UD-nx-mIl"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Ggv-hC-A4I" secondAttribute="bottom" constant="16" id="E7Y-t3-bjU"/>
                                                                 <constraint firstItem="Ggv-hC-A4I" firstAttribute="top" secondItem="5ZL-ub-f8W" secondAttribute="top" constant="16" id="FMr-QP-gSu"/>
-                                                                <constraint firstItem="Hk9-Qc-qIe" firstAttribute="centerY" secondItem="5ZL-ub-f8W" secondAttribute="centerY" id="LsC-AM-GB2"/>
-                                                                <constraint firstItem="RQl-wX-Dsv" firstAttribute="centerX" secondItem="5ZL-ub-f8W" secondAttribute="centerX" id="ij2-Zf-y8s"/>
                                                                 <constraint firstItem="Ggv-hC-A4I" firstAttribute="leading" secondItem="5ZL-ub-f8W" secondAttribute="leading" constant="16" id="oNp-eX-McV"/>
-                                                                <constraint firstItem="RQl-wX-Dsv" firstAttribute="centerY" secondItem="5ZL-ub-f8W" secondAttribute="centerY" id="rKH-xx-rGT"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="imageView" destination="Hk9-Qc-qIe" id="7p7-En-61C"/>
