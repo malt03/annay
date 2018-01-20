@@ -25,7 +25,7 @@ final class WebView: WKWebView {
 
 extension WebView: WKNavigationDelegate {
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    DispatchQueue.main.async {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       self.isHidden = false
     }
   }
