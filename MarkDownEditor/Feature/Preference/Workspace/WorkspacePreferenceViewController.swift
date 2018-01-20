@@ -23,12 +23,12 @@ final class WorkspacePreferenceViewController: NSViewController {
     openPanel.begin { (result) in
       if result != .OK { return }
       guard let url = openPanel.url else { return }
-      WorkspaceManager.shared.updateWorkspace(url)
+//      WorkspaceManager.shared.updateWorkspace(url)
     }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    WorkspaceManager.shared.workspaceString.bind(to: workspaceTextField.rx.text).disposed(by: bag)
+//    WorkspaceManager.shared.workspaceString.bind(to: workspaceTextField.rx.text).disposed(by: bag)
   }
 }

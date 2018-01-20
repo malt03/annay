@@ -29,13 +29,14 @@ extension Realm {
   }
   
   private static var encryptionKey: Data {
-    if let encryptionKey = encryptionKeys[WorkspaceModel.selected] { return encryptionKey }
+    let workspace = try! WorkspaceModel.selected.value()
+    if let encryptionKey = encryptionKeys[workspace] { return encryptionKey }
     var savedKeyArray = [UInt8](repeating: 0, count: 32)
     var applicationKeyArray = [UInt8](repeating: 0, count: 32)
     savedKey.copyBytes(to: &savedKeyArray, count: 32)
     applicationKey.copyBytes(to: &applicationKeyArray, count: 32)
     let key = Data(bytes: savedKeyArray + applicationKeyArray)
-    encryptionKeys[WorkspaceModel.selected] = key
+    encryptionKeys[workspace] = key
     return key
   }
   
@@ -50,7 +51,6 @@ extension Realm {
     if let key = try? Data(contentsOf: fileUrl) {
       return key
     } else {
-      try! FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
       let key = createRandomKey()
       try! key.write(to: fileUrl)
       return key
@@ -66,7 +66,7 @@ extension Realm {
   }
   
   private static var directory: URL {
-    return WorkspaceModel.selected.url.value
+    return (try! WorkspaceModel.selected.value()).url.value
   }
   
   static func transaction(_ block: (_ realm: Realm) -> Void) {

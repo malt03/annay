@@ -18,7 +18,7 @@ final class NodeTableCellView: NSTableCellView {
     
     textField?.textColor = .text
     textField?.isEditable = node.isDirectory && !node.isDeleted
-    textField?.font = NSFont.systemFont(ofSize: node.isRoot ? 11 : 12)
+    textField?.font = NSFont.systemFont(ofSize: node.isRoot ? 12 : 14)
     imageView?.image = NSImage(named: .folder)
     textField?.stringValue = node.name
 

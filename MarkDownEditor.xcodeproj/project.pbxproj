@@ -35,7 +35,6 @@
 		ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */; };
 		ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55C500200E56F10070301A /* Preference.storyboard */; };
 		ED55C506200E602F0070301A /* WorkspacePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C505200E602F0070301A /* WorkspacePreferenceViewController.swift */; };
-		ED55C508200E628F0070301A /* WorkspaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C507200E628F0070301A /* WorkspaceManager.swift */; };
 		ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD02008EC2B0097996A /* NodeTableCellView.swift */; };
 		ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD22009217F0097996A /* NSEvent+Extensions.swift */; };
 		ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD42009CC0C0097996A /* KeyCode.swift */; };
@@ -117,7 +116,6 @@
 		ED55C4FF200E56F10070301A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preference.storyboard; sourceTree = "<group>"; };
 		ED55C504200E5B360070301A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Preference.strings; sourceTree = "<group>"; };
 		ED55C505200E602F0070301A /* WorkspacePreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePreferenceViewController.swift; sourceTree = "<group>"; };
-		ED55C507200E628F0070301A /* WorkspaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceManager.swift; sourceTree = "<group>"; };
 		ED841BD02008EC2B0097996A /* NodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableCellView.swift; sourceTree = "<group>"; };
 		ED841BD22009217F0097996A /* NSEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSEvent+Extensions.swift"; sourceTree = "<group>"; };
 		ED841BD42009CC0C0097996A /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 				EDD0A28B200CD90C00D5E7BE /* Array+Extensions.swift */,
 				EDA736D4200E3E6A000BC5DA /* SplitView.swift */,
 				ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */,
-				ED55C507200E628F0070301A /* WorkspaceManager.swift */,
 				EDD0A28D200ED29400D5E7BE /* Util.swift */,
 				EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */,
 				EDBFF25B2010868C005F3547 /* String+Extensions.swift */,
@@ -501,7 +498,6 @@
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
 				ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */,
 				EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */,
-				ED55C508200E628F0070301A /* WorkspaceManager.swift in Sources */,
 				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,
 				EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */,
 				ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */,

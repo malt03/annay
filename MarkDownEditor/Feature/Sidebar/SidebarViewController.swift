@@ -8,12 +8,17 @@
 
 import Cocoa
 import RealmSwift
+import RxSwift
 
 extension NSTableView.AutosaveName {
   static let Sidebar = NSTableView.AutosaveName("Sidebar")
 }
 
 final class SidebarViewController: NSViewController {
+  private let bag = DisposeBag()
+  private let workspaceNameDisposable = SerialDisposable()
+  
+  @IBOutlet private weak var workspaceNameLabel: NSTextField!
   @IBOutlet private weak var outlineView: NSOutlineView!
   
   private var secondaryClickedRow = -1
@@ -26,6 +31,17 @@ final class SidebarViewController: NSViewController {
     outlineView.autosaveName = .Sidebar
     outlineView.backgroundColor = .clear
     outlineView.headerView = nil
+    
+    reloadData()
+  }
+  
+  private func reloadData() {
+    WorkspaceModel.selected.subscribe(onNext: { [weak self] (workspace) in
+      guard let s = self else { return }
+      s.workspaceNameDisposable.disposable = workspace.name.asObservable().bind(to: s.workspaceNameLabel.rx.text)
+      s.workspaceNameDisposable.disposed(by: s.bag)
+      s.outlineView.reloadData()
+    }).disposed(by: bag)
   }
   
   @IBAction private func secondaryClicked(_ sender: NSClickGestureRecognizer) {

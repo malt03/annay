@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gIM-Og-53C">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gIM-Og-53C">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -54,10 +54,9 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </customView>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hk9-Qc-qIe">
-                                                                    <rect key="frame" x="3" y="51" width="17" height="17"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="lKk-dA-AeF"/>
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hk9-Qc-qIe">
+                                                                    <rect key="frame" x="34" y="34" width="0.0" height="0.0"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="lKk-dA-AeF"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQl-wX-Dsv">
                                                                     <rect key="frame" x="32" y="26" width="4" height="17"/>
@@ -69,9 +68,11 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
+                                                                <constraint firstItem="Hk9-Qc-qIe" firstAttribute="centerX" secondItem="5ZL-ub-f8W" secondAttribute="centerX" id="0M8-uv-nHh"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Ggv-hC-A4I" secondAttribute="trailing" constant="16" id="3UD-nx-mIl"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Ggv-hC-A4I" secondAttribute="bottom" constant="16" id="E7Y-t3-bjU"/>
                                                                 <constraint firstItem="Ggv-hC-A4I" firstAttribute="top" secondItem="5ZL-ub-f8W" secondAttribute="top" constant="16" id="FMr-QP-gSu"/>
+                                                                <constraint firstItem="Hk9-Qc-qIe" firstAttribute="centerY" secondItem="5ZL-ub-f8W" secondAttribute="centerY" id="LsC-AM-GB2"/>
                                                                 <constraint firstItem="RQl-wX-Dsv" firstAttribute="centerX" secondItem="5ZL-ub-f8W" secondAttribute="centerX" id="ij2-Zf-y8s"/>
                                                                 <constraint firstItem="Ggv-hC-A4I" firstAttribute="leading" secondItem="5ZL-ub-f8W" secondAttribute="leading" constant="16" id="oNp-eX-McV"/>
                                                                 <constraint firstItem="RQl-wX-Dsv" firstAttribute="centerY" secondItem="5ZL-ub-f8W" secondAttribute="centerY" id="rKH-xx-rGT"/>
@@ -127,7 +128,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSActionTemplate" width="14" height="14"/>
         <namedColor name="EditorBackground">
             <color red="0.22499999400000001" green="0.2619999945" blue="0.30000001189999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

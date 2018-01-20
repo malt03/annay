@@ -9,21 +9,52 @@
 import RxSwift
 import Cocoa
 
-struct WorkspaceModel {
+final class WorkspaceModel {
+  private let bag = DisposeBag()
+  
   let id: String
-  var name: Variable<String>
-  var url: Variable<URL>
-  var imageUrl: Variable<URL?>
+  let url: Variable<URL>
+  let name = Variable<String>("")
 
-  private init(id: String, name: String, url: URL, imageUrl: URL?) {
+  private init(id: String, url: URL) {
     self.id = id
-    self.name = Variable(name)
     self.url = Variable(url)
-    self.imageUrl = Variable(imageUrl)
+    name.value = (settings["name"] as? String) ?? ""
+    
+    name.asObservable().subscribe(onNext: { [weak self] (name) in
+       self?.settings["name"] = name
+    }).disposed(by: bag)
+    
+    try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
   }
   
-  init(name: String, url: URL, imageUrl: URL?) {
-    self.init(id: UUID().uuidString, name: name, url: url, imageUrl: imageUrl)
+  convenience init(url: URL) {
+    self.init(id: UUID().uuidString, url: url)
+  }
+  
+  private var _settings: [String: Any]?
+  
+  private var settings: [String: Any] {
+    get {
+      if let _settings = _settings { return _settings }
+      guard
+        let data = try? Data(contentsOf: settingFileUrl),
+        let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any]
+        else { return [:] }
+      _settings = json
+      return json
+    }
+    set {
+      do {
+        let data = try JSONSerialization.data(withJSONObject: newValue, options: [])
+        try data.write(to: settingFileUrl)
+        _settings = newValue
+      } catch {}
+    }
+  }
+  
+  private var settingFileUrl: URL {
+    return url.value.appendingPathComponent("settings.json")
   }
   
   private struct Key {
@@ -52,12 +83,11 @@ struct WorkspaceModel {
       let ud = UserDefaults.standard
       ud.set(newValue, forKey: Key.SelectedIndex)
       ud.synchronize()
+      selected.onNext(spaces[newValue])
     }
   }
   
-  static var selected: WorkspaceModel {
-    return spaces[selectedIndex]
-  }
+  static let selected = BehaviorSubject<WorkspaceModel>(value: spaces[selectedIndex])
   
   func select() {
     WorkspaceModel.selectedIndex = WorkspaceModel.spaces.index(of: self) ?? 0
@@ -84,7 +114,8 @@ struct WorkspaceModel {
     let workspaceUrl = supportDirectory
       .appendingPathComponent(Bundle.main.bundleIdentifier ?? "", isDirectory: true)
       .appendingPathComponent("workspace", isDirectory: true)
-    let workspace = WorkspaceModel(name: Localized("Default"), url: workspaceUrl, imageUrl: nil)
+    let workspace = WorkspaceModel(url: workspaceUrl)
+    workspace.name.value = Localized("Default Workspace")
     spaces = [workspace]
     return workspace
   }
@@ -92,26 +123,19 @@ struct WorkspaceModel {
 
 extension WorkspaceModel: SavableInUserDefaults {
   var dictionary: [String : Any] {
-    var dict = [
+    return [
       "id": id,
-      "name": name.value,
       "url": url.value.absoluteString,
     ]
-    if let imageUrl = imageUrl.value {
-      dict["imageUrl"] = imageUrl.absoluteString
-    }
-    return dict
   }
   
-  init?(dictionary: [String : Any]) {
+  convenience init?(dictionary: [String : Any]) {
     guard
       let id = dictionary["id"] as? String,
-      let name = dictionary["name"] as? String,
       let urlString = dictionary["url"] as? String,
       let url = URL(string: urlString)
       else { return nil }
-    let imageUrl = URL(string: dictionary["imageUrl"] as? String ?? "")
-    self.init(id: id, name: name, url: url, imageUrl: imageUrl)
+    self.init(id: id, url: url)
   }
 }
 

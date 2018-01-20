@@ -12,7 +12,6 @@ import RxSwift
 
 final class WorkspacesTableCellView: NSTableCellView {
   private let bag = DisposeBag()
-  private let imageDisposable = SerialDisposable()
   private let textDisposable = SerialDisposable()
   
   override func awakeFromNib() {
@@ -21,12 +20,8 @@ final class WorkspacesTableCellView: NSTableCellView {
   }
   
   func prepare(workspace: WorkspaceModel) {
-    imageDisposable.disposable = workspace.imageUrl.asObservable().subscribe(onNext: { [weak self] (url) in
-      self?.imageView?.kf.setImage(with: url)
-    })
     textDisposable.disposable = workspace.name.asObservable().map { $0.firstCharacterString }.bind(to: textField!.rx.text)
 
-    imageDisposable.disposed(by: bag)
     textDisposable.disposed(by: bag)
   }
 }
