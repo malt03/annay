@@ -19,6 +19,9 @@ final class WorkspacesViewController: NSViewController {
     tableView.setDraggingSourceOperationMask([.move], forLocal: true)
     WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] _ in
       self?.tableView.reloadData()
+      DispatchQueue.main.async {
+        self?.tableView.selectRowIndexes(IndexSet(integer: WorkspaceModel.selectedIndex), byExtendingSelection: false)
+      }
     }).disposed(by: bag)
   }
   

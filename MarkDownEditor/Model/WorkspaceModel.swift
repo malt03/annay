@@ -108,6 +108,7 @@ final class WorkspaceModel {
     }
     tmpSpaces.insert(space, at: fixedToIndex)
     spaces.value = tmpSpaces
+    space.select()
   }
   
   private static func createDefault() throws -> WorkspaceModel {
