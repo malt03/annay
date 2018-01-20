@@ -7,23 +7,39 @@
 //
 
 import Cocoa
+import RxSwift
 
 final class WorkspacesViewController: NSViewController {
-  @IBOutlet var workspacesController: NSArrayController!
+  private let bag = DisposeBag()
+  @IBOutlet private weak var tableView: NSTableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    workspacesController.content = WorkspaceModel.spaces
+    WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] _ in
+      self?.tableView.reloadData()
+    }).disposed(by: bag)
   }
 }
 
 extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
+  func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+    if row == WorkspaceModel.spaces.value.count {
+      performSegue(withIdentifier: .init(rawValue: "createWorkspace"), sender: nil)
+      return false
+    }
+    return true
+  }
+  
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return WorkspaceModel.spaces.count
+    return WorkspaceModel.spaces.value.count + 1
   }
   
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    let workspace = WorkspaceModel.spaces[row]
+    if row == WorkspaceModel.spaces.value.count {
+      let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("CreateWorkspacesTableCellView"), owner: self)
+      return cell
+    }
+    let workspace = WorkspaceModel.spaces.value[row]
     let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("WorkspacesTableCellView"), owner: self) as! WorkspacesTableCellView
     cell.prepare(workspace: workspace)
     return cell

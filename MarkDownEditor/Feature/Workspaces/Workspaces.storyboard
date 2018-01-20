@@ -82,6 +82,42 @@
                                                                 <outlet property="textField" destination="RQl-wX-Dsv" id="g0p-vO-5vQ"/>
                                                             </connections>
                                                         </tableCellView>
+                                                        <tableCellView identifier="CreateWorkspacesTableCellView" id="Q8b-IM-2qa">
+                                                            <rect key="frame" x="0.0" y="68" width="68" height="68"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="4qV-6l-iYQ" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                                    <rect key="frame" x="16" y="16" width="36" height="36"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                            <color key="value" name="EditorBackground"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="4"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </customView>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6rV-3A-r8F">
+                                                                    <rect key="frame" x="22" y="18" width="24" height="39"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="+" id="CVd-oj-MK3">
+                                                                        <font key="font" metaFont="system" size="32"/>
+                                                                        <color key="textColor" name="Text"/>
+                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="4qV-6l-iYQ" firstAttribute="leading" secondItem="Q8b-IM-2qa" secondAttribute="leading" constant="16" id="00v-al-jCK"/>
+                                                                <constraint firstItem="6rV-3A-r8F" firstAttribute="centerX" secondItem="Q8b-IM-2qa" secondAttribute="centerX" id="JEs-Mp-tD6"/>
+                                                                <constraint firstItem="6rV-3A-r8F" firstAttribute="centerY" secondItem="Q8b-IM-2qa" secondAttribute="centerY" constant="-3" id="PDN-O5-7D3"/>
+                                                                <constraint firstItem="4qV-6l-iYQ" firstAttribute="top" secondItem="Q8b-IM-2qa" secondAttribute="top" constant="16" id="Vek-et-kzZ"/>
+                                                                <constraint firstAttribute="bottom" secondItem="4qV-6l-iYQ" secondAttribute="bottom" constant="16" id="azx-DZ-Z0b"/>
+                                                                <constraint firstAttribute="trailing" secondItem="4qV-6l-iYQ" secondAttribute="trailing" constant="16" id="jff-xO-uoh"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="textField" destination="6rV-3A-r8F" id="IHR-kw-toH"/>
+                                                            </connections>
+                                                        </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
@@ -118,13 +154,21 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
-                        <outlet property="workspacesController" destination="ZkK-ak-GXq" id="aVN-7o-EvP"/>
+                        <outlet property="tableView" destination="5TB-xv-gAB" id="MBw-1T-Mln"/>
+                        <segue destination="hq4-NC-f6R" kind="sheet" identifier="createWorkspace" id="nG7-5l-gRl"/>
                     </connections>
                 </viewController>
                 <customObject id="kd4-G0-xj2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController id="ZkK-ak-GXq"/>
             </objects>
             <point key="canvasLocation" x="103" y="-61"/>
+        </scene>
+        <!--CreateWorkspace-->
+        <scene sceneID="hNu-mu-6tw">
+            <objects>
+                <controllerPlaceholder storyboardName="CreateWorkspace" id="hq4-NC-f6R" sceneMemberID="viewController"/>
+                <customObject id="2CP-nR-5iM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="104" y="206"/>
         </scene>
     </scenes>
     <resources>

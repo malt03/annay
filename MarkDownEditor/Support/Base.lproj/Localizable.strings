@@ -18,3 +18,5 @@
 "This operation cannot be undone." = "This operation cannot be undone.";
 "Put Back" = "Put Back";
 "Default Workspace" = "Default Workspace";
+"Directory not found." = "Directory not found.";
+"Directory not empty." = "Directory not empty.";

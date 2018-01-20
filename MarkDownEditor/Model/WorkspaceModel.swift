@@ -14,47 +14,39 @@ final class WorkspaceModel {
   
   let id: String
   let url: Variable<URL>
-  let name = Variable<String>("")
+  let name: Variable<String>
 
-  private init(id: String, url: URL) {
-    self.id = id
-    self.url = Variable(url)
-    name.value = (settings["name"] as? String) ?? ""
-    
-    name.asObservable().subscribe(onNext: { [weak self] (name) in
-      self?.settings["name"] = name
-    }).disposed(by: bag)
-    
-    try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-  }
-  
-  convenience init(url: URL) {
-    self.init(id: UUID().uuidString, url: url)
-  }
-  
-  private var _settings: [String: Any]?
-  
   private var settings: [String: Any] {
-    get {
-      if let _settings = _settings { return _settings }
-      guard
-        let data = try? Data(contentsOf: settingFileUrl),
-        let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any]
-        else { return [:] }
-      _settings = json
-      return json
-    }
-    set {
+    didSet {
       do {
-        let data = try JSONSerialization.data(withJSONObject: newValue, options: [])
-        try data.write(to: settingFileUrl)
-        _settings = newValue
+        let data = try JSONSerialization.data(withJSONObject: settings, options: [])
+        try data.write(to: url.value.settings)
       } catch {}
     }
   }
+
+  private init(id: String, url: URL) throws {
+    self.id = id
+    self.url = Variable(url)
+    
+    let data = try Data(contentsOf: url.settings)
+    settings = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
+
+    var name = settings["name"] as? String ?? ""
+    if name == "" { name = url.deletingLastPathComponent().lastPathComponent }
+    self.name = Variable(name)
+
+    self.name.asObservable().subscribe(onNext: { [weak self] (name) in
+      self?.settings["name"] = name
+    }).disposed(by: bag)
+    
+    if !FileManager.default.fileExists(atPath: url.path) {
+      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+    }
+  }
   
-  private var settingFileUrl: URL {
-    return url.value.appendingPathComponent("settings.json")
+  convenience init(url: URL) throws {
+    try self.init(id: UUID().uuidString, url: url)
   }
   
   private struct Key {
@@ -62,24 +54,24 @@ final class WorkspaceModel {
     static let SelectedIndex = "WorkspaceModel/SelectedIndex"
   }
   
-  private static var _spaces: [WorkspaceModel]?
-  private(set) static var spaces: [WorkspaceModel] {
-    get {
-      if let _spaces = _spaces { return _spaces }
-      var spaces: [WorkspaceModel] = UserDefaults.standard.savableObjectArray(forKey: Key.Spaces) ?? []
-      if spaces.count == 0 {
-        spaces = [createDefault()]
-      }
-      _spaces = spaces
-      return spaces
-    }
-    set {
+  private(set) static var spaces: Variable<[WorkspaceModel]> = {
+    var spaces: [WorkspaceModel] = UserDefaults.standard.savableObjectArray(forKey: Key.Spaces) ?? []
+    let variable = Variable(spaces)
+    _ = variable.asObservable().subscribe(onNext: { (workspaces) in
       let ud = UserDefaults.standard
-      ud.set(newValue, forKey: Key.Spaces)
+      ud.set(workspaces, forKey: Key.Spaces)
       ud.synchronize()
-      _spaces = newValue
+    })
+    
+    if spaces.count == 0 {
+      do {
+        variable.value = [try createDefault()]
+      } catch {
+        NSAlert(error: error).runModal()
+      }
     }
-  }
+    return variable
+  }()
   
   private static var selectedIndex: Int {
     get { return UserDefaults.standard.integer(forKey: Key.SelectedIndex) }
@@ -87,40 +79,39 @@ final class WorkspaceModel {
       let ud = UserDefaults.standard
       ud.set(newValue, forKey: Key.SelectedIndex)
       ud.synchronize()
-      selected.onNext(spaces[newValue])
+      selected.onNext(spaces.value[newValue])
     }
   }
   
-  static let selected = BehaviorSubject<WorkspaceModel>(value: spaces[selectedIndex])
+  static let selected = BehaviorSubject<WorkspaceModel>(value: spaces.value[selectedIndex])
   
   func select() {
-    WorkspaceModel.selectedIndex = WorkspaceModel.spaces.index(of: self) ?? 0
+    WorkspaceModel.selectedIndex = WorkspaceModel.spaces.value.index(of: self) ?? 0
   }
   
   func save() {
-    WorkspaceModel.spaces.append(self)
+    WorkspaceModel.spaces.value.append(self)
   }
 
   static func delete(_ space: WorkspaceModel) {
-    spaces.remove(object: space)
+    spaces.value.remove(object: space)
   }
 
   static func move(_ movingSpaces: [WorkspaceModel], to index: Int) {
-    var tmpSpaces = spaces
+    var tmpSpaces = spaces.value
     let indexes = tmpSpaces.remove(objects: movingSpaces)
     let fixedIndex = index - indexes.filter { $0 < index }.count
     tmpSpaces.insert(contentsOf: movingSpaces, at: fixedIndex)
-    spaces = tmpSpaces
+    spaces.value = tmpSpaces
   }
   
-  private static func createDefault() -> WorkspaceModel {
+  private static func createDefault() throws -> WorkspaceModel {
     let supportDirectory = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
     let workspaceUrl = supportDirectory
       .appendingPathComponent(Bundle.main.bundleIdentifier ?? "", isDirectory: true)
       .appendingPathComponent("workspace", isDirectory: true)
-    let workspace = WorkspaceModel(url: workspaceUrl)
+    let workspace = try WorkspaceModel(url: workspaceUrl)
     workspace.name.value = Localized("Default Workspace")
-    spaces = [workspace]
     return workspace
   }
 }
@@ -139,7 +130,12 @@ extension WorkspaceModel: SavableInUserDefaults {
       let urlString = dictionary["url"] as? String,
       let url = URL(string: urlString)
       else { return nil }
-    self.init(id: id, url: url)
+    do {
+      try self.init(id: id, url: url)
+    } catch {
+      NSAlert(error: error).runModal()
+      return nil
+    }
   }
 }
 
@@ -151,4 +147,10 @@ extension WorkspaceModel: Equatable {
 
 extension WorkspaceModel: Hashable {
   var hashValue: Int { return id.hashValue }
+}
+
+extension URL {
+  fileprivate var settings: URL {
+    return appendingPathComponent("settings.json")
+  }
 }
