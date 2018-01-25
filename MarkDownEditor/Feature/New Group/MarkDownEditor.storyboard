@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="2eh-hH-nMr">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="13196"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,24 +48,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <customView id="odB-mf-lhf" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                    <customView fixedFrame="YES" id="odB-mf-lhf" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
                                         <rect key="frame" x="466" y="0.0" width="464" height="730"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <subviews>
-                                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLz-CG-xvp" customClass="WebView" customModule="MarkDownEditor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="464" height="730"/>
-                                                <wkWebViewConfiguration key="configuration">
-                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                    <wkPreferences key="preferences"/>
-                                                </wkWebViewConfiguration>
-                                            </wkWebView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="vLz-CG-xvp" firstAttribute="top" secondItem="odB-mf-lhf" secondAttribute="top" id="3xT-At-FAJ"/>
-                                            <constraint firstItem="vLz-CG-xvp" firstAttribute="leading" secondItem="odB-mf-lhf" secondAttribute="leading" id="Mk6-w8-8GU"/>
-                                            <constraint firstAttribute="bottom" secondItem="vLz-CG-xvp" secondAttribute="bottom" id="a68-ac-3um"/>
-                                            <constraint firstAttribute="trailing" secondItem="vLz-CG-xvp" secondAttribute="trailing" id="e91-YR-bGR"/>
-                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
                                                 <color key="value" name="EditorBackground"/>
@@ -89,7 +73,7 @@
                     </view>
                     <connections>
                         <outlet property="textView" destination="PWg-u2-RO2" id="Je6-iH-TaX"/>
-                        <outlet property="webView" destination="vLz-CG-xvp" id="GX8-6X-mcd"/>
+                        <outlet property="webParentView" destination="odB-mf-lhf" id="TeT-6H-yCS"/>
                     </connections>
                 </viewController>
                 <customObject id="v1y-hA-udR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

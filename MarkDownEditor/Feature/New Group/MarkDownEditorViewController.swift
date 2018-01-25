@@ -9,18 +9,29 @@
 import Cocoa
 import RealmSwift
 import RxSwift
+import WebKit
 
 final class MarkDownEditorViewController: NSViewController {
   private let bag = DisposeBag()
   
   @IBOutlet private weak var textView: TextView!
-  @IBOutlet private weak var webView: WebView!
-  
+  @IBOutlet private weak var webParentView: NSView!
+  private var webView: WebView!
+
   private var selectedNote: NodeModel?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let userController = WKUserContentController()
+    userController.add(self, name: "checkboxChanged")
+    let webConfiguration = WKWebViewConfiguration()
+    webConfiguration.userContentController = userController
+    
+    webView = WebView(frame: webParentView.bounds, configuration: webConfiguration)
+    webParentView.addSubview(webView)
+    webView.prepare()
+
     WorkspaceModel.selected.subscribe(onNext: { [weak self] _ in
       self?.setSelectedNote(nil)
     }).disposed(by: bag)
@@ -78,5 +89,16 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
       }
     }
     updateWebView()
+  }
+}
+
+extension MarkDownEditorViewController: WKScriptMessageHandler {
+  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    guard
+      let dict = message.body as? [String: Any],
+      let id = dict["id"] as? String,
+      let isChecked = dict["isChecked"] as? Int
+      else { return }
+    print(id, isChecked)
   }
 }

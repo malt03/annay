@@ -43,6 +43,7 @@
 		ED840D23201A2A7700EF2C42 /* MoveWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED840D25201A2A7700EF2C42 /* MoveWorkspace.storyboard */; };
 		ED840D29201A2AC000EF2C42 /* MoveWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED840D28201A2AC000EF2C42 /* MoveWorkspaceViewController.swift */; };
 		ED840D2B201A2DF400EF2C42 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED840D2A201A2DF400EF2C42 /* URL+Extensions.swift */; };
+		ED840D2D201A364600EF2C42 /* jquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED840D2C201A364600EF2C42 /* jquery.min.js */; };
 		ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD02008EC2B0097996A /* NodeTableCellView.swift */; };
 		ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD22009217F0097996A /* NSEvent+Extensions.swift */; };
 		ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD42009CC0C0097996A /* KeyCode.swift */; };
@@ -133,6 +134,7 @@
 		ED840D27201A2A7900EF2C42 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MoveWorkspace.strings; sourceTree = "<group>"; };
 		ED840D28201A2AC000EF2C42 /* MoveWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveWorkspaceViewController.swift; sourceTree = "<group>"; };
 		ED840D2A201A2DF400EF2C42 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		ED840D2C201A364600EF2C42 /* jquery.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
 		ED841BD02008EC2B0097996A /* NodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableCellView.swift; sourceTree = "<group>"; };
 		ED841BD22009217F0097996A /* NSEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSEvent+Extensions.swift"; sourceTree = "<group>"; };
 		ED841BD42009CC0C0097996A /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				ED2E149E20055B87003D55A3 /* highlight */,
 				ED2E159C2005662A003D55A3 /* markdown-it */,
+				ED840D2C201A364600EF2C42 /* jquery.min.js */,
 				ED2E159A20056621003D55A3 /* markdown.js */,
 				ED187FD120052D30002E51C0 /* markdown.html */,
 				EDA736D2200E3BB0000BC5DA /* markdown.css */,
@@ -503,6 +506,7 @@
 				ED434EFB20079CB600C2357D /* Localizable.strings in Resources */,
 				ED840D23201A2A7700EF2C42 /* MoveWorkspace.storyboard in Resources */,
 				ED2E1498200555C6003D55A3 /* markdown-it-sup.min.js in Resources */,
+				ED840D2D201A364600EF2C42 /* jquery.min.js in Resources */,
 				ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */,
 				ED2E159B20056622003D55A3 /* markdown.js in Resources */,
 				ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */,

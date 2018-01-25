@@ -10,8 +10,7 @@ import Cocoa
 import WebKit
 
 final class WebView: WKWebView {
-  override func awakeFromNib() {
-    super.awakeFromNib()
+  func prepare() {
     isHidden = true
     let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
     loadFileURL(url, allowingReadAccessTo: url)
@@ -28,5 +27,11 @@ extension WebView: WKNavigationDelegate {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       self.isHidden = false
     }
+  }
+}
+
+extension WebView: WKScriptMessageHandler {
+  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    print(message)
   }
 }

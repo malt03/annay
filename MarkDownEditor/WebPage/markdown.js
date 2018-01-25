@@ -18,5 +18,14 @@ function update(markdown) {
         .use(window.markdownitEmoji);
     var html = md.render(markdown);
     document.getElementById("render").innerHTML = html;
-    return html
+  
+    $("input:checkbox").on('change', function(event) {
+        var json = {
+            id: event.target.id,
+            isChecked: event.target.checked
+        };
+        window.webkit.messageHandlers.checkboxChanged.postMessage(json);
+    });
+ 
+    return html;
 }
