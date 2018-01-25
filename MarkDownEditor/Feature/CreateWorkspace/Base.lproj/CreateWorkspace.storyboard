@@ -91,7 +91,7 @@
                                 </userDefinedRuntimeAttributes>
                             </customView>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lbk-Ha-b97">
-                                <rect key="frame" x="364" y="20" width="159" height="21"/>
+                                <rect key="frame" x="372" y="20" width="151" height="21"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="usa-B8-FqB">
                                         <rect key="frame" x="-6" y="-7" width="82" height="32"/>
@@ -107,8 +107,8 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xx0-lH-lRd">
-                                        <rect key="frame" x="84" y="-7" width="81" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Create" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QxE-F1-D72">
+                                        <rect key="frame" x="84" y="-7" width="73" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QxE-F1-D72">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -130,8 +130,8 @@ Gw
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7aY-Ee-01m">
-                                <rect key="frame" x="18" y="161" width="114" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Create workspace" id="BPW-Jv-e3M">
+                                <rect key="frame" x="18" y="161" width="177" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Create or Open a workspace" id="BPW-Jv-e3M">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="Text"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

@@ -37,13 +37,6 @@ final class CreateWorkspaceViewController: NSViewController {
       return
     }
     do {
-      let contents = try FileManager.default.contentsOfDirectory(atPath: path)
-      if contents.count > 0 {
-        let alert = NSAlert()
-        alert.messageText = Localized("Directory not empty.")
-        alert.runModal()
-        return
-      }
       let url = URL(fileURLWithPath: path, isDirectory: true)
       try WorkspaceModel(url: url).save()
       view.window?.close()

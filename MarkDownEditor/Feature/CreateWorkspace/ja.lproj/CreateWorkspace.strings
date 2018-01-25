@@ -3,7 +3,7 @@
 "EEg-Z9-tZx.title" = "変更...";
 
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "QxE-F1-D72"; */
-"QxE-F1-D72.title" = "作成";
+"QxE-F1-D72.title" = "開く";
 
 /* Class = "NSTextFieldCell"; title = "Directory:"; ObjectID = "esB-Hc-9FC"; */
 "esB-Hc-9FC.title" = "ディレクトリ:";
@@ -11,4 +11,4 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "jRZ-6Q-YR6"; */
 "jRZ-6Q-YR6.title" = "キャンセル";
 
-"BPW-Jv-e3M.title" = "ワークスペース作成";
+"BPW-Jv-e3M.title" = "ワークスペースを開く、または作成する";
