@@ -77,7 +77,11 @@ final class WorkspaceModel {
   }()
   
   static var selectedIndex: Int {
-    get { return UserDefaults.standard.integer(forKey: Key.SelectedIndex) }
+    get {
+      let index = UserDefaults.standard.integer(forKey: Key.SelectedIndex)
+      if spaces.value.count <= index { return 0 }
+      return index
+    }
     set {
       let ud = UserDefaults.standard
       ud.set(newValue, forKey: Key.SelectedIndex)
