@@ -160,11 +160,20 @@
                     <connections>
                         <outlet property="tableView" destination="5TB-xv-gAB" id="MBw-1T-Mln"/>
                         <segue destination="hq4-NC-f6R" kind="sheet" identifier="createWorkspace" id="nG7-5l-gRl"/>
+                        <segue destination="2Zz-rt-Hmg" kind="sheet" identifier="moveWorkspace" id="l1I-lM-d9f"/>
                     </connections>
                 </viewController>
                 <customObject id="kd4-G0-xj2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="103" y="-61"/>
+        </scene>
+        <!--MoveWorkspace-->
+        <scene sceneID="D2M-mX-Ap0">
+            <objects>
+                <controllerPlaceholder storyboardName="MoveWorkspace" id="2Zz-rt-Hmg" sceneMemberID="viewController"/>
+                <customObject id="h1a-Pm-tRa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="215" y="267"/>
         </scene>
         <!--CreateWorkspace-->
         <scene sceneID="hNu-mu-6tw">
@@ -172,7 +181,7 @@
                 <controllerPlaceholder storyboardName="CreateWorkspace" id="hq4-NC-f6R" sceneMemberID="viewController"/>
                 <customObject id="2CP-nR-5iM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="104" y="206"/>
+            <point key="canvasLocation" x="-4" y="267"/>
         </scene>
     </scenes>
     <resources>

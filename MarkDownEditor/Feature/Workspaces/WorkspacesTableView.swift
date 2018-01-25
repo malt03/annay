@@ -9,6 +9,12 @@
 import Cocoa
 
 final class WorkspacesTableView: NSTableView {
+  private var moveAction: (() -> Void)!
+  
+  func prepare(moveAction: @escaping (() -> Void)) {
+    self.moveAction = moveAction
+  }
+  
   override func mouseDown(with event: NSEvent) {
     let location = convert(event.locationInWindow, to: nil)
     if event.modifierFlags.contains(.control) {
@@ -27,11 +33,17 @@ final class WorkspacesTableView: NSTableView {
     selectRowIndexes(IndexSet(integer: clickedRow), byExtendingSelection: false)
     let menu = NSMenu()
     menu.addItem(NSMenuItem(title: Localized("Delete"), action: #selector(delete), keyEquivalent: ""))
+    menu.addItem(NSMenuItem(title: Localized("Move the source directory"), action: #selector(move), keyEquivalent: ""))
     menu.popUp(positioning: nil, at: location, in: self)
   }
   
   @objc private func delete() {
     if selectedRow == -1 { return }
     WorkspaceModel.spaces.value.remove(at: selectedRow)
+  }
+
+  @objc private func move() {
+    if selectedRow == -1 { return }
+    moveAction()
   }
 }

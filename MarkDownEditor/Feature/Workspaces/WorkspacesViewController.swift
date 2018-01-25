@@ -11,10 +11,14 @@ import RxSwift
 
 final class WorkspacesViewController: NSViewController {
   private let bag = DisposeBag()
-  @IBOutlet private weak var tableView: NSTableView!
+  @IBOutlet private weak var tableView: WorkspacesTableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.prepare(moveAction: { [weak self] in
+      self?.performSegue(withIdentifier: .init(rawValue: "moveWorkspace"), sender: nil)
+    })
+    
     tableView.registerForDraggedTypes([.workspaceModel])
     tableView.setDraggingSourceOperationMask([.move], forLocal: true)
     WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] _ in
@@ -28,6 +32,19 @@ final class WorkspacesViewController: NSViewController {
   override func viewDidAppear() {
     super.viewDidAppear()
     tableView.selectRowIndexes(IndexSet(integer: WorkspaceModel.selectedIndex), byExtendingSelection: false)
+  }
+  
+  override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+    switch segue.destinationController {
+    case let wc as WindowController:
+      switch wc.contentViewController {
+      case let vc as MoveWorkspaceViewController:
+        vc.prepare(workspace: WorkspaceModel.spaces.value[tableView.selectedRow])
+      default: break
+      }
+    default: break
+    }
+    super.prepare(for: segue, sender: sender)
   }
 }
 

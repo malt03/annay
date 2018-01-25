@@ -98,7 +98,11 @@ final class WorkspaceModel {
   }
   
   func save() {
-    WorkspaceModel.spaces.value.append(self)
+    if let index = WorkspaceModel.spaces.value.index(of: self) {
+      WorkspaceModel.spaces.value[index] = self
+    } else {
+      WorkspaceModel.spaces.value.append(self)
+    }
   }
 
   static func move(from fromIndex: Int, to toIndex: Int) {
