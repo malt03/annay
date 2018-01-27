@@ -13,4 +13,19 @@ extension String {
     guard let character = first else { return nil }
     return String(character)
   }
+  
+  func ranges(of string: String) -> [Range<String.Index>] {
+    var ranges = [Range<String.Index>]()
+    var searchStartIndex = self.startIndex
+    
+    while searchStartIndex < self.endIndex,
+      let range = self.range(of: string, range: searchStartIndex..<self.endIndex),
+      !range.isEmpty
+    {
+      ranges.append(range)
+      searchStartIndex = range.upperBound
+    }
+    
+    return ranges
+  }
 }

@@ -28,6 +28,16 @@ final class NodeModel: Object {
     name = markdownName.replacingOccurrences(of: "^#+ ", with: "", options: .regularExpression)
   }
   
+  func updateCheckbox(content: String, index: Int, isChecked: Bool) {
+    if isDirectory { return }
+    guard let body = body, let range = body.ranges(of: content)[safe: index] else { return }
+    let from = isChecked ? "[ ]" : "[x]"
+    let to = isChecked ? "[x]" : "[ ]"
+    Realm.transaction { _ in
+      self.setBody(body.replacingOccurrences(of: from, with: to, options: [], range: range))
+    }
+  }
+  
   @objc dynamic var parent: NodeModel?
   let descendants = List<NodeModel>()
   @objc dynamic var index = 0

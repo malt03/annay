@@ -29,7 +29,7 @@ final class MarkDownEditorViewController: NSViewController {
     webConfiguration.userContentController = userController
     
     webView = WebView(frame: webParentView.bounds, configuration: webConfiguration)
-    webParentView.addSubview(webView)
+    webParentView.addSubviewWithFillConstraints(webView)
     webView.prepare()
 
     WorkspaceModel.selected.subscribe(onNext: { [weak self] _ in
@@ -76,7 +76,9 @@ final class MarkDownEditorViewController: NSViewController {
   }
   
   private func updateWebView() {
-    let markDown = (selectedNote?.body ?? "").replacingOccurrences(of: "\n", with: "\\n")
+    let markDown = (selectedNote?.body ?? "")
+      .replacingOccurrences(of: "\\", with: "\\\\")
+      .replacingOccurrences(of: "\n", with: "\\n")
     webView.update(markdown: markDown)
   }
 }
@@ -95,10 +97,13 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
 extension MarkDownEditorViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
     guard
+      let note = selectedNote,
       let dict = message.body as? [String: Any],
-      let id = dict["id"] as? String,
+      let content = dict["content"] as? String,
+      let index = dict["index"] as? Int,
       let isChecked = dict["isChecked"] as? Int
       else { return }
-    print(id, isChecked)
+    note.updateCheckbox(content: content, index: index, isChecked: isChecked == 1)
+    setSelectedNote(note)
   }
 }

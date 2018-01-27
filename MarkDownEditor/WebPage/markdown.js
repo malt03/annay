@@ -16,12 +16,31 @@ function update(markdown) {
         .use(window.markdownitSup)
         .use(window.markdownitFootnote)
         .use(window.markdownitEmoji);
+  
+    var tokens = md.parse(markdown, {});
+    var map = new Map();
+    var indexMap = new Map();
+    tokens.filter(function(element, index, array) {
+        return element.type === "inline" &&
+        element.children.length > 0 &&
+        element.children[0].type === "checkbox_input"
+    }).forEach(function(element, index, array) {
+        var key = element.children[0].attrs[1][1];
+        var value = element.content;
+        var index = indexMap.get(value)
+        index = index == null ? 0 : index + 1
+        map.set(key, [value, index]);
+        indexMap.set(value, index);
+    });
+  
     var html = md.render(markdown);
     document.getElementById("render").innerHTML = html;
   
     $("input:checkbox").on('change', function(event) {
+        var values = map.get(event.target.id);
         var json = {
-            id: event.target.id,
+            content: values[0],
+            index: values[1],
             isChecked: event.target.checked
         };
         window.webkit.messageHandlers.checkboxChanged.postMessage(json);
