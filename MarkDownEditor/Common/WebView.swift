@@ -26,9 +26,15 @@ extension WebView: WKNavigationDelegate {
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
     switch navigationAction.navigationType {
     case .linkActivated:
-      defer { decisionHandler(.cancel) }
-      guard let url = navigationAction.request.url else { return }
-      NSWorkspace.shared.open(url)
+      defer {  }
+      if let url = navigationAction.request.url, let openingUrl = webView.url {
+        if url.path == openingUrl.path {
+          decisionHandler(.allow)
+          return
+        }
+        NSWorkspace.shared.open(url)
+      }
+      decisionHandler(.cancel)
     default:
       decisionHandler(.allow)
     }
