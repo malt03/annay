@@ -23,15 +23,20 @@ final class WebView: WKWebView {
 }
 
 extension WebView: WKNavigationDelegate {
+  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    switch navigationAction.navigationType {
+    case .linkActivated:
+      defer { decisionHandler(.cancel) }
+      guard let url = navigationAction.request.url else { return }
+      NSWorkspace.shared.open(url)
+    default:
+      decisionHandler(.allow)
+    }
+  }
+  
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       self.isHidden = false
     }
-  }
-}
-
-extension WebView: WKScriptMessageHandler {
-  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    print(message)
   }
 }
