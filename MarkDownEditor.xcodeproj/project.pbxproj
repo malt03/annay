@@ -32,6 +32,7 @@
 		ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15AD200666B1003D55A3 /* NodeModel.swift */; };
 		ED434EFB20079CB600C2357D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED434EFD20079CB600C2357D /* Localizable.strings */; };
 		ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED434F0220079DBD00C2357D /* LocalizedString.swift */; };
+		ED4EB9D2201C814100B4CBE7 /* swiss.css in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D1201C803800B4CBE7 /* swiss.css */; };
 		ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */; };
 		ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55C500200E56F10070301A /* Preference.storyboard */; };
 		ED55C506200E602F0070301A /* WorkspacePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C505200E602F0070301A /* WorkspacePreferenceViewController.swift */; };
@@ -54,7 +55,6 @@
 		EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736C8200E24F8000BC5DA /* Sidebar.storyboard */; };
 		EDA736CD200E256D000BC5DA /* MarkDownEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */; };
 		EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */; };
-		EDA736D3200E3BB0000BC5DA /* markdown.css in Resources */ = {isa = PBXBuildFile; fileRef = EDA736D2200E3BB0000BC5DA /* markdown.css */; };
 		EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D4200E3E6A000BC5DA /* SplitView.swift */; };
 		EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */; };
 		EDBFF25820107CBA005F3547 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBFF25720107CBA005F3547 /* Kingfisher.framework */; };
@@ -121,6 +121,7 @@
 		ED434F0020079CD100C2357D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED434F0120079CFA00C2357D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED434F0220079DBD00C2357D /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		ED4EB9D1201C803800B4CBE7 /* swiss.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = swiss.css; sourceTree = "<group>"; };
 		ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSetableView.swift; sourceTree = "<group>"; };
 		ED55C4FF200E56F10070301A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preference.storyboard; sourceTree = "<group>"; };
 		ED55C504200E5B360070301A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Preference.strings; sourceTree = "<group>"; };
@@ -146,7 +147,6 @@
 		EDA736C9200E24F8000BC5DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MarkDownEditor/Base.lproj/Sidebar.storyboard; sourceTree = "<group>"; };
 		EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MarkDownEditor.storyboard; sourceTree = "<group>"; };
 		EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
-		EDA736D2200E3BB0000BC5DA /* markdown.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = markdown.css; sourceTree = "<group>"; };
 		EDA736D4200E3E6A000BC5DA /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
 		EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableCellView.swift; sourceTree = "<group>"; };
 		EDBFF25720107CBA005F3547 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/Mac/Kingfisher.framework; sourceTree = SOURCE_ROOT; };
@@ -224,7 +224,7 @@
 				ED840D2C201A364600EF2C42 /* jquery.min.js */,
 				ED2E159A20056621003D55A3 /* markdown.js */,
 				ED187FD120052D30002E51C0 /* markdown.html */,
-				EDA736D2200E3BB0000BC5DA /* markdown.css */,
+				ED4EB9D1201C803800B4CBE7 /* swiss.css */,
 			);
 			path = WebPage;
 			sourceTree = "<group>";
@@ -494,7 +494,6 @@
 				ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */,
 				ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */,
 				EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */,
-				EDA736D3200E3BB0000BC5DA /* markdown.css in Resources */,
 				EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */,
 				EDD0A295200ED98700D5E7BE /* Workspaces.storyboard in Resources */,
 				EDEB7A622004EDF000F8C48A /* Main.storyboard in Resources */,
@@ -506,6 +505,7 @@
 				EDD0A292200ED55B00D5E7BE /* WorkspacePreference.storyboard in Resources */,
 				EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */,
 				ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */,
+				ED4EB9D2201C814100B4CBE7 /* swiss.css in Resources */,
 				ED434EFB20079CB600C2357D /* Localizable.strings in Resources */,
 				ED840D23201A2A7700EF2C42 /* MoveWorkspace.storyboard in Resources */,
 				ED2E1498200555C6003D55A3 /* markdown-it-sup.min.js in Resources */,
