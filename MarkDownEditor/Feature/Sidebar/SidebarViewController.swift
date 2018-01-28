@@ -40,6 +40,26 @@ final class SidebarViewController: NSViewController {
     NSApplication.shared.endEditing()
   }
   
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    NotificationCenter.default.addObserver(self, selector: #selector(noteSelected(_:)), name: .NoteSelected, object: nil)
+  }
+  
+  override func viewWillDisappear() {
+    NotificationCenter.default.removeObserver(self)
+    super.viewWillDisappear()
+  }
+  
+  @objc private func noteSelected(_ notification: Notification) {
+    guard let node = notification.object as? NodeModel else { return }
+    let row = outlineView.row(forItem: node)
+    if row == -1 {
+      outlineView.deselectAll(nil)
+      return
+    }
+    outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+  }
+  
   private func reloadData() {
     WorkspaceModel.selected.subscribe(onNext: { [weak self] (workspace) in
       guard let s = self else { return }

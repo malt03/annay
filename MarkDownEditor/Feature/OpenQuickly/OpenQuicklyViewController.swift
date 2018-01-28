@@ -41,15 +41,19 @@ final class OpenQuicklyViewController: NSViewController {
   }
 
   override func mouseMoved(with event: NSEvent) {
-    print(event.locationInWindow)
-//    let location = tableView.convert(event.locationInWindow, from: nil)
-//    let row = tableView.row(at: location)
-//    if row == -1 { return }
-//    tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+    let location = tableView.convert(event.locationInWindow, from: nil)
+    let row = tableView.row(at: location)
+    if row == -1 { return }
+    tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
   }
   
   override func mouseDown(with event: NSEvent) {
-    print(event.locationInWindow)
+    let location = tableView.convert(event.locationInWindow, from: nil)
+    let row = tableView.row(at: location)
+    if row == -1 { return }
+    guard let node = result.value[safe: row] else { return }
+    node.selected()
+    OpenQuicklyWindowController.hide()
   }
 }
 
@@ -87,6 +91,9 @@ extension OpenQuicklyViewController: NSTextFieldDelegate {
       }
       return true
     case #selector(textView.insertNewline(_:)):
+      guard let node = result.value[safe: tableView.selectedRow] else { return true }
+      node.selected()
+      OpenQuicklyWindowController.hide()
       return true
     case #selector(textView.cancelOperation(_:)):
       OpenQuicklyWindowController.hide()
