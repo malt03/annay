@@ -29,6 +29,27 @@ final class WorkspacesViewController: NSViewController {
     }).disposed(by: bag)
   }
   
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    NotificationCenter.default.addObserver(self, selector: #selector(selectNextWorkspace), name: .SelectNextWorkspace, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(selectPreviousWorkspace), name: .SelectPreviousWorkspace, object: nil)
+  }
+  
+  override func viewWillDisappear() {
+    super.viewWillDisappear()
+    NotificationCenter.default.removeObserver(self)
+  }
+  
+  @objc private func selectNextWorkspace() {
+    let row = tableView.selectedRow == WorkspaceModel.spaces.value.count - 1 ? 0 : tableView.selectedRow + 1
+    tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+  }
+  
+  @objc private func selectPreviousWorkspace() {
+    let row = tableView.selectedRow == 0 ? WorkspaceModel.spaces.value.count - 1 : tableView.selectedRow - 1
+    tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+  }
+  
   override func viewDidAppear() {
     super.viewDidAppear()
     tableView.selectRowIndexes(IndexSet(integer: WorkspaceModel.selectedIndex), byExtendingSelection: false)

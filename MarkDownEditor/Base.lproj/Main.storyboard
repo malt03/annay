@@ -332,6 +332,25 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
+                                        <menuItem title="Select Next Workspace" id="wb3-gr-hRL">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CQ
+</string>
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                            <connections>
+                                                <action selector="selectNextWorkspace:" target="Voe-Tx-rLC" id="EZT-SM-3wQ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Select Previous Workspace" id="bSU-aq-7Kt">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+GQ
+</string>
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES"/>
+                                            <connections>
+                                                <action selector="selectPreviousWorkspace:" target="Voe-Tx-rLC" id="gZW-OC-o0Y"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Jfh-yL-wjp"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
