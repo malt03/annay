@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ED099FFF201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */; };
+		ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09A000201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift */; };
 		ED187FD220052D30002E51C0 /* markdown.html in Resources */ = {isa = PBXBuildFile; fileRef = ED187FD120052D30002E51C0 /* markdown.html */; };
 		ED187FD420053206002E51C0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED187FD320053206002E51C0 /* WebView.swift */; };
 		ED2E147D20053BF2003D55A3 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E147C20053BE9003D55A3 /* RxBlocking.framework */; };
@@ -107,6 +108,7 @@
 
 /* Begin PBXFileReference section */
 		ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableCellView.swift; sourceTree = "<group>"; };
+		ED09A000201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableRowView.swift; sourceTree = "<group>"; };
 		ED187FD120052D30002E51C0 /* markdown.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = markdown.html; sourceTree = "<group>"; };
 		ED187FD320053206002E51C0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ED2E147A20053BE9003D55A3 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = SOURCE_ROOT; };
@@ -327,6 +329,7 @@
 				ED4EB9DF201DA76000B4CBE7 /* OpenQuicklyTextField.swift */,
 				ED4EB9E1201DAA1700B4CBE7 /* OpenQuicklyViewController.swift */,
 				ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */,
+				ED09A000201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift */,
 			);
 			path = OpenQuickly;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */,
 				ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */,
 				ED4EB9E6201DB71B00B4CBE7 /* Results+Extensions.swift in Sources */,
+				ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */,
 				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,
 				ED4EB9E0201DA76000B4CBE7 /* OpenQuicklyTextField.swift in Sources */,
 				EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */,

@@ -34,11 +34,22 @@ final class OpenQuicklyViewController: NSViewController {
       s.separatorHeightConstraint.constant = resultCount == 0 ? 0 : 1
       s.tableViewHeightConstraint.constant = CGFloat(resultCount) * s.tableCellHeightCount
       s.tableView.reloadData()
+      if resultCount > 0 {
+        s.tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+      }
     }).disposed(by: bag)
   }
+
+  override func mouseMoved(with event: NSEvent) {
+    print(event.locationInWindow)
+//    let location = tableView.convert(event.locationInWindow, from: nil)
+//    let row = tableView.row(at: location)
+//    if row == -1 { return }
+//    tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+  }
   
-  override func keyDown(with event: NSEvent) {
-    print(event.keyCode)
+  override func mouseDown(with event: NSEvent) {
+    print(event.locationInWindow)
   }
 }
 
@@ -52,12 +63,28 @@ extension OpenQuicklyViewController: NSTableViewDataSource, NSTableViewDelegate 
     cell.prepare(node: result.value[row])
     return cell
   }
+  
+  func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+    return OpenQuicklyNodeTableRowView()
+  }
 }
 
 extension OpenQuicklyViewController: NSTextFieldDelegate {
   func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
     switch commandSelector {
-    case #selector(textView.moveUp(_:)), #selector(textView.moveDown(_:)):
+    case #selector(textView.moveUp(_:)):
+      if tableView.selectedRow > 0 {
+        let index = tableView.selectedRow - 1
+        tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
+        tableView.scrollRowToVisible(index)
+      }
+      return true
+    case #selector(textView.moveDown(_:)):
+      if tableView.selectedRow < result.value.count - 1 {
+        let index = tableView.selectedRow + 1
+        tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
+        tableView.scrollRowToVisible(index)
+      }
       return true
     case #selector(textView.insertNewline(_:)):
       return true

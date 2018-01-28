@@ -29,6 +29,7 @@ final class OpenQuicklyWindowController: WindowController {
     if windowShowing { return false }
     windowShowing = true
     showWindow(nil)
+    window?.acceptsMouseMovedEvents = true
     return true
   }
   
@@ -36,10 +37,12 @@ final class OpenQuicklyWindowController: WindowController {
     if showWindowIfNeeded() { return }
     window?.orderFront(nil)
     window?.makeKey()
+    window?.acceptsMouseMovedEvents = true
   }
   
   private func hide() {
     window?.orderOut(nil)
+    window?.acceptsMouseMovedEvents = false
   }
   
   private func toggle() {
