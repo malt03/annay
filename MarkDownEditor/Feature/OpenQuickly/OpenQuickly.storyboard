@@ -58,6 +58,9 @@
                                                     <color key="textColor" name="Text"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Jhu-lC-NZR" id="35F-Qb-HD1"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -110,7 +113,7 @@
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
-                                                                <tableCellView id="SXr-3g-D0q">
+                                                                <tableCellView identifier="OpenQuicklyNodeTableCellView" id="SXr-3g-D0q" customClass="OpenQuicklyNodeTableCellView" customModule="MarkDownEditor" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="458" height="44"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
@@ -129,6 +132,7 @@
                                                                         <constraint firstItem="HUh-XU-ZtI" firstAttribute="centerY" secondItem="SXr-3g-D0q" secondAttribute="centerY" id="yqJ-fx-TVk"/>
                                                                     </constraints>
                                                                     <connections>
+                                                                        <outlet property="nodeNameLabel" destination="HUh-XU-ZtI" id="PsO-0v-G4F"/>
                                                                         <outlet property="textField" destination="HUh-XU-ZtI" id="7g8-vv-uTa"/>
                                                                     </connections>
                                                                 </tableCellView>
@@ -137,6 +141,7 @@
                                                     </tableColumns>
                                                     <connections>
                                                         <outlet property="dataSource" destination="Jhu-lC-NZR" id="jfN-96-s8g"/>
+                                                        <outlet property="delegate" destination="Jhu-lC-NZR" id="h2K-qS-JJR"/>
                                                     </connections>
                                                 </tableView>
                                             </subviews>
@@ -183,6 +188,7 @@
                         <outlet property="imageView" destination="fhK-Vv-Wuy" id="dAI-Wx-xq4"/>
                         <outlet property="searchTextField" destination="lMD-18-zcG" id="9hv-fM-qDA"/>
                         <outlet property="separatorHeightConstraint" destination="1iV-2Y-BuE" id="WaD-7z-SEl"/>
+                        <outlet property="tableView" destination="gZb-F5-ico" id="yTm-8f-q1h"/>
                         <outlet property="tableViewHeightConstraint" destination="xpb-IP-Ca7" id="CzI-S6-SSx"/>
                     </connections>
                 </viewController>

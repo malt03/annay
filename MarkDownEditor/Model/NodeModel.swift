@@ -82,7 +82,7 @@ final class NodeModel: Object {
     let result = Realm.instance.objects(NodeModel.self)
     guard let query = query else { return result.empty }
     if query == "" { return result.empty }
-    return result.filter("isDirectory = false and name contains[c] %@", query)
+    return result.filter("isDirectory = false and name contains[c] %@", query).sorted(byKeyPath: "name")
   }
   
   var isRoot: Bool {
