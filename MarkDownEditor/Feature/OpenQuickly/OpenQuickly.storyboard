@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ltM-Gp-cXE">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="ljw-n8-Mfq">
+            <objects>
+                <windowController id="ltM-Gp-cXE" customClass="OpenQuicklyWindowController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="feU-Uh-aww">
+                        <windowStyleMask key="styleMask" titled="YES" fullSizeContentView="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <connections>
+                            <outlet property="delegate" destination="ltM-Gp-cXE" id="03p-q2-1zy"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="Jhu-lC-NZR" kind="relationship" relationship="window.shadowedContentViewController" id="75z-Jz-1Tf"/>
+                    </connections>
+                </windowController>
+                <customObject id="Vng-yg-CQj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-176" y="214"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ooE-ZF-dDi">
+            <objects>
+                <viewController id="Jhu-lC-NZR" sceneMemberID="viewController">
+                    <view key="view" id="3rW-5G-ypx" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="47"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fhK-Vv-Wuy">
+                                <rect key="frame" x="0.0" y="-1" width="48" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Search" id="6IT-CQ-LeE"/>
+                            </imageView>
+                        </subviews>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </viewController>
+                <customObject id="MPM-5B-qdv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="531" y="189"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Search" width="20" height="20"/>
+    </resources>
+</document>

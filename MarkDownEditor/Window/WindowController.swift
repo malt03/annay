@@ -8,7 +8,7 @@
 
 import Cocoa
 
-final class WindowController: NSWindowController {
+class WindowController: NSWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
     window?.backgroundColor = .sidebarBackground
