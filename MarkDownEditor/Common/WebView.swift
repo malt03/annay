@@ -10,15 +10,28 @@ import Cocoa
 import WebKit
 
 final class WebView: WKWebView {
-  func prepare() {
+  private var finishHandler: (() -> Void)!
+  private var firstNavigation = true
+  
+  func prepare(finishHandler: @escaping (() -> Void)) {
+    firstNavigation = true
+    self.finishHandler = finishHandler
     isHidden = true
     let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
     loadFileURL(url, allowingReadAccessTo: url)
     navigationDelegate = self
   }
   
+  private var lastMarkdown: String?
+  
   func update(markdown: String) {
+    lastMarkdown = markdown
     evaluateJavaScript("update(\"\(markdown)\")", completionHandler: nil)
+  }
+  
+  private func updateRetry() {
+    guard let lastMarkdown = lastMarkdown else { return }
+    update(markdown: lastMarkdown)
   }
 }
 
@@ -41,8 +54,12 @@ extension WebView: WKNavigationDelegate {
   }
   
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+    if !firstNavigation { return }
+    firstNavigation = false
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
       self.isHidden = false
+      self.updateRetry()
+      self.finishHandler()
     }
   }
 }

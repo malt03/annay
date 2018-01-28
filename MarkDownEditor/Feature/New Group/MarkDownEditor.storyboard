@@ -48,9 +48,18 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <customView fixedFrame="YES" id="odB-mf-lhf" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                    <customView id="odB-mf-lhf" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
                                         <rect key="frame" x="466" y="0.0" width="464" height="730"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <subviews>
+                                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="wta-Cg-c3J">
+                                                <rect key="frame" x="216" y="349" width="32" height="32"/>
+                                            </progressIndicator>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="wta-Cg-c3J" firstAttribute="centerX" secondItem="odB-mf-lhf" secondAttribute="centerX" id="CHK-QK-xrj"/>
+                                            <constraint firstItem="wta-Cg-c3J" firstAttribute="centerY" secondItem="odB-mf-lhf" secondAttribute="centerY" id="nzd-PQ-k1W"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
                                                 <color key="value" name="EditorBackground"/>
@@ -72,6 +81,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="progressIndicator" destination="wta-Cg-c3J" id="Qy9-k3-M24"/>
                         <outlet property="textView" destination="PWg-u2-RO2" id="Je6-iH-TaX"/>
                         <outlet property="webParentView" destination="odB-mf-lhf" id="TeT-6H-yCS"/>
                     </connections>

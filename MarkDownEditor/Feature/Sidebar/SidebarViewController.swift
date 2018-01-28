@@ -51,6 +51,16 @@ final class SidebarViewController: NSViewController {
     super.viewWillDisappear()
   }
   
+  override func viewDidAppear() {
+    super.viewDidAppear()
+    if let node = NodeModel.selectedNode {
+      let row = outlineView.row(forItem: node)
+      if row != -1 {
+        outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+      }
+    }
+  }
+  
   @objc private func revealInSidebar() {
     guard let selected = NodeModel.selectedNode else { return }
     for node in selected.ancestors.reversed() {

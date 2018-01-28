@@ -16,12 +16,15 @@ final class MarkDownEditorViewController: NSViewController {
   
   @IBOutlet private weak var textView: TextView!
   @IBOutlet private weak var webParentView: NSView!
+  @IBOutlet private weak var progressIndicator: NSProgressIndicator!
   private var webView: WebView!
 
   private var selectedNote: NodeModel?
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    progressIndicator.startAnimation(nil)
     
     let userController = WKUserContentController()
     userController.add(self, name: "checkboxChanged")
@@ -30,7 +33,9 @@ final class MarkDownEditorViewController: NSViewController {
     
     webView = WebView(frame: webParentView.bounds, configuration: webConfiguration)
     webParentView.addSubviewWithFillConstraints(webView)
-    webView.prepare()
+    webView.prepare { [weak self] in
+      self?.progressIndicator.stopAnimation(nil)
+    }
 
     WorkspaceModel.selected.subscribe(onNext: { [weak self] _ in
       self?.setSelectedNote(nil)
