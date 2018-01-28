@@ -737,8 +737,8 @@
             <objects>
                 <splitViewController id="xTu-VI-k9j" sceneMemberID="viewController">
                     <splitViewItems>
-                        <splitViewItem id="fcn-RF-KbD"/>
-                        <splitViewItem id="Rrt-sU-YBm"/>
+                        <splitViewItem holdingPriority="251" id="fcn-RF-KbD"/>
+                        <splitViewItem holdingPriority="251" id="Rrt-sU-YBm"/>
                         <splitViewItem id="NkM-lN-7qU"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="JK3-no-fdA" customClass="SplitView" customModule="MarkDownEditor" customModuleProvider="target">
