@@ -78,6 +78,13 @@ final class NodeModel: Object {
       .sorted(by: ["index", "createdAt"])
   }
   
+  static func search(query: String?) -> Results<NodeModel> {
+    let result = Realm.instance.objects(NodeModel.self)
+    guard let query = query else { return result.empty }
+    if query == "" { return result.empty }
+    return result.filter("isDirectory = false and name contains[c] %@", query)
+  }
+  
   var isRoot: Bool {
     return parent == nil
   }
