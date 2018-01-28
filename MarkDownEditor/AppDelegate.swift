@@ -11,6 +11,10 @@ import RealmSwift
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+  @IBAction private func openQuickly(_ sender: NSMenuItem) {
+    OpenQuicklyWindowController.toggle()
+  }
+  
   @IBAction private func resetRealm(_ sender: NSMenuItem) {
     Realm.transaction { (realm) in
       realm.deleteAll()

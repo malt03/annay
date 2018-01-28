@@ -35,6 +35,9 @@
 		ED4EB9D2201C814100B4CBE7 /* swiss.css in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D1201C803800B4CBE7 /* swiss.css */; };
 		ED4EB9D7201D61E200B4CBE7 /* OpenQuickly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */; };
 		ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */; };
+		ED4EB9E0201DA76000B4CBE7 /* OpenQuicklyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9DF201DA76000B4CBE7 /* OpenQuicklyTextField.swift */; };
+		ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9E1201DAA1700B4CBE7 /* OpenQuicklyViewController.swift */; };
+		ED4EB9E4201DAADD00B4CBE7 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9E3201DAADD00B4CBE7 /* NSImage+Extensions.swift */; };
 		ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */; };
 		ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55C500200E56F10070301A /* Preference.storyboard */; };
 		ED55C506200E602F0070301A /* WorkspacePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C505200E602F0070301A /* WorkspacePreferenceViewController.swift */; };
@@ -126,6 +129,9 @@
 		ED4EB9D1201C803800B4CBE7 /* swiss.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = swiss.css; sourceTree = "<group>"; };
 		ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenQuickly.storyboard; sourceTree = "<group>"; };
 		ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyWindowController.swift; sourceTree = "<group>"; };
+		ED4EB9DF201DA76000B4CBE7 /* OpenQuicklyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyTextField.swift; sourceTree = "<group>"; };
+		ED4EB9E1201DAA1700B4CBE7 /* OpenQuicklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyViewController.swift; sourceTree = "<group>"; };
+		ED4EB9E3201DAADD00B4CBE7 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSetableView.swift; sourceTree = "<group>"; };
 		ED55C4FF200E56F10070301A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preference.storyboard; sourceTree = "<group>"; };
 		ED55C504200E5B360070301A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Preference.strings; sourceTree = "<group>"; };
@@ -216,6 +222,7 @@
 				ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */,
 				ED840D2A201A2DF400EF2C42 /* URL+Extensions.swift */,
 				ED840D2E201C5AB600EF2C42 /* NSView+Extensions.swift */,
+				ED4EB9E3201DAADD00B4CBE7 /* NSImage+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -312,6 +319,8 @@
 			children = (
 				ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */,
 				ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */,
+				ED4EB9DF201DA76000B4CBE7 /* OpenQuicklyTextField.swift */,
+				ED4EB9E1201DAA1700B4CBE7 /* OpenQuicklyViewController.swift */,
 			);
 			path = OpenQuickly;
 			sourceTree = "<group>";
@@ -556,9 +565,11 @@
 				ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */,
 				ED187FD420053206002E51C0 /* WebView.swift in Sources */,
 				EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */,
+				ED4EB9E4201DAADD00B4CBE7 /* NSImage+Extensions.swift in Sources */,
 				ED55C506200E602F0070301A /* WorkspacePreferenceViewController.swift in Sources */,
 				ED840D2F201C5AB600EF2C42 /* NSView+Extensions.swift in Sources */,
 				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
+				ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */,
 				EDD0A28E200ED29400D5E7BE /* Util.swift in Sources */,
 				EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */,
 				ED840D2B201A2DF400EF2C42 /* URL+Extensions.swift in Sources */,
@@ -568,6 +579,7 @@
 				ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */,
 				ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */,
 				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,
+				ED4EB9E0201DA76000B4CBE7 /* OpenQuicklyTextField.swift in Sources */,
 				EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */,
 				ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */,
 				ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */,

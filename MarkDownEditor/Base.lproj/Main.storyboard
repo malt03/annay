@@ -89,7 +89,7 @@
                                         <menuItem title="Open Quickly..." keyEquivalent="O" id="GYs-FS-78G">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>
-                                                <segue destination="nQh-nE-1Be" kind="show" id="RHo-GF-B3e"/>
+                                                <action selector="openQuickly:" target="Voe-Tx-rLC" id="hf2-Tc-Sc4"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
@@ -723,14 +723,6 @@
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
-        </scene>
-        <!--OpenQuickly-->
-        <scene sceneID="Uye-Jo-8Or">
-            <objects>
-                <controllerPlaceholder storyboardName="OpenQuickly" id="nQh-nE-1Be" sceneMemberID="viewController"/>
-                <customObject id="4e6-bj-iLp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="615" y="-175"/>
         </scene>
         <!--Preference-->
         <scene sceneID="n3P-D6-GZ9">

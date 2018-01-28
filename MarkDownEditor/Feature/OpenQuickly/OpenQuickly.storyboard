@@ -2,7 +2,10 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ltM-Gp-cXE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Window Controller-->
@@ -26,26 +29,42 @@
             </objects>
             <point key="canvasLocation" x="-176" y="214"/>
         </scene>
-        <!--View Controller-->
+        <!--Open Quickly View Controller-->
         <scene sceneID="ooE-ZF-dDi">
             <objects>
-                <viewController id="Jhu-lC-NZR" sceneMemberID="viewController">
-                    <view key="view" id="3rW-5G-ypx" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                <viewController id="Jhu-lC-NZR" customClass="OpenQuicklyViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="3rW-5G-ypx">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="47"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fhK-Vv-Wuy">
-                                <rect key="frame" x="0.0" y="-1" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fhK-Vv-Wuy">
+                                <rect key="frame" x="0.0" y="0.0" width="47" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fhK-Vv-Wuy" secondAttribute="height" multiplier="1:1" id="2ne-MZ-yY7"/>
+                                </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Search" id="6IT-CQ-LeE"/>
                             </imageView>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lMD-18-zcG" customClass="OpenQuicklyTextField" customModule="MarkDownEditor" customModuleProvider="target">
+                                <rect key="frame" x="45" y="12" width="407" height="24"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="ncJ-DJ-mg2">
+                                    <font key="font" metaFont="systemThin" size="20"/>
+                                    <color key="textColor" name="Text"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="20"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
+                        <constraints>
+                            <constraint firstItem="fhK-Vv-Wuy" firstAttribute="leading" secondItem="3rW-5G-ypx" secondAttribute="leading" id="1cF-qf-DcE"/>
+                            <constraint firstItem="fhK-Vv-Wuy" firstAttribute="top" secondItem="3rW-5G-ypx" secondAttribute="top" id="9Vg-JF-F6l"/>
+                            <constraint firstAttribute="bottom" secondItem="fhK-Vv-Wuy" secondAttribute="bottom" id="GJJ-n5-Z8u"/>
+                            <constraint firstItem="lMD-18-zcG" firstAttribute="leading" secondItem="fhK-Vv-Wuy" secondAttribute="trailing" id="HQM-Jb-qfz"/>
+                            <constraint firstAttribute="trailing" secondItem="lMD-18-zcG" secondAttribute="trailing" id="bq8-4t-W1Q"/>
+                            <constraint firstItem="lMD-18-zcG" firstAttribute="centerY" secondItem="3rW-5G-ypx" secondAttribute="centerY" id="obY-1K-7kh"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="fhK-Vv-Wuy" id="dAI-Wx-xq4"/>
+                    </connections>
                 </viewController>
                 <customObject id="MPM-5B-qdv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -54,5 +73,8 @@
     </scenes>
     <resources>
         <image name="Search" width="20" height="20"/>
+        <namedColor name="Text">
+            <color red="0.94900000095367432" green="0.97600001096725464" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
