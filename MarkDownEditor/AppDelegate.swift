@@ -15,9 +15,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     OpenQuicklyWindowController.toggle()
   }
   
-  @IBAction private func resetRealm(_ sender: NSMenuItem) {
-    Realm.transaction { (realm) in
-      realm.deleteAll()
-    }
+  @IBAction private func revealInSidebar(_ sender: NSMenuItem) {
+    NotificationCenter.default.post(name: .RevealInSidebar, object: nil)
   }
+}
+
+extension Notification.Name {
+  static let RevealInSidebar = Notification.Name(rawValue: "AppDelegate/RevealInSidebar")
 }

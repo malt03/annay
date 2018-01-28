@@ -16,6 +16,15 @@ extension NSNotification.Name {
 final class NodeModel: Object {
   private static var trashId: String { return "trash" }
   
+  static var selectedNode: NodeModel? = {
+    guard let selectedId = selectedId else { return nil }
+    return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: selectedId)
+    }() {
+    didSet {
+      selectedId = selectedNode?.id
+    }
+  }
+  
   @objc dynamic var id = UUID().uuidString
   @objc dynamic var name = ""
   @objc dynamic var isDirectory = true
@@ -120,6 +129,7 @@ final class NodeModel: Object {
 extension NodeModel {
   func selected() {
     if !isDirectory && !isDeleted {
+      NodeModel.selectedNode = self
       NotificationCenter.default.post(name: .NoteSelected, object: self)
     }
   }
@@ -212,14 +222,14 @@ extension NodeModel {
 
 extension NodeModel {
   private struct Key {
-    static let RootId = "NodeModel/RootId"
+    static let SelectedId = "NodeModel/SelectedId"
   }
   
-  private static var rootId: String? {
-    get { return UserDefaults.standard.string(forKey: Key.RootId) }
+  private static var selectedId: String? {
+    get { return UserDefaults.standard.string(forKey: Key.SelectedId) }
     set {
       let ud = UserDefaults.standard
-      ud.set(newValue, forKey: Key.RootId)
+      ud.set(newValue, forKey: Key.SelectedId)
       ud.synchronize()
     }
   }
