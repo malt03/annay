@@ -26,6 +26,10 @@ final class OpenQuicklyViewController: NSViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     imageView.image = #imageLiteral(resourceName: "Search").tinted(.text)
+    searchTextField.placeholderAttributedString = NSAttributedString(
+      string: "Open Quickly",
+      attributes: [.foregroundColor: NSColor.placeholder, .font: NSFont.systemFont(ofSize: 20, weight: .thin)]
+    )
     
     searchTextField.rx.text.map { NodeModel.search(query: $0) }.bind(to: result).disposed(by: bag)
     result.asObservable().subscribe(onNext: { [weak self] (result) in

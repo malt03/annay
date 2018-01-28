@@ -49,6 +49,10 @@ final class NodeModel: Object {
     return "id"
   }
   
+  var path: String {
+    return ancestors.reversed().map { $0.name }.joined(separator: "/")
+  }
+  
   override class func ignoredProperties() -> [String] {
     return ["sortedChildren"]
   }

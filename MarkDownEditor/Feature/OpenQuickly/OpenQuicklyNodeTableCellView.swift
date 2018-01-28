@@ -10,8 +10,10 @@ import Cocoa
 
 final class OpenQuicklyNodeTableCellView: NSTableCellView {
   @IBOutlet private weak var nodeNameLabel: NSTextField!
-
+  @IBOutlet private weak var pathLabel: NSTextField!
+  
   func prepare(node: NodeModel) {
     nodeNameLabel.stringValue = node.name
+    pathLabel.stringValue = node.path
   }
 }
