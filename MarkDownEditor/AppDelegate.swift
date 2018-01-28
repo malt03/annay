@@ -26,10 +26,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @IBAction private func selectPreviousWorkspace(_ sender: NSMenuItem) {
     NotificationCenter.default.post(name: .SelectPreviousWorkspace, object: nil)
   }
+  
+  @IBAction private func moveFocusToSidebar(_ sender: NSMenuItem) {
+    NotificationCenter.default.post(name: .MoveFocusToSidebar, object: nil)
+  }
+  
+  @IBAction private func moveFocusToEditor(_ sender: NSMenuItem) {
+    NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
+  }
 }
 
 extension Notification.Name {
   static let RevealInSidebar = Notification.Name(rawValue: "AppDelegate/RevealInSidebar")
   static let SelectNextWorkspace = Notification.Name(rawValue: "AppDelegate/SelectNextWorkspace")
   static let SelectPreviousWorkspace = Notification.Name(rawValue: "AppDelegate/SelectPreviousWorkspace")
+  static let MoveFocusToSidebar = Notification.Name(rawValue: "AppDelegate/MoveFocusToSidebar")
+  static let MoveFocusToEditor = Notification.Name(rawValue: "AppDelegate/MoveFocusToEditor")
 }

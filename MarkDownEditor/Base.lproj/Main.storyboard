@@ -313,6 +313,17 @@
                                                 <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="dU3-MA-1Rq"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="fC0-np-zd0"/>
+                                        <menuItem title="Move Focus to Sidebar" keyEquivalent="1" id="FM8-a0-dLY">
+                                            <connections>
+                                                <action selector="moveFocusToSidebar:" target="Voe-Tx-rLC" id="Lep-M4-7Ug"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move Focus to Editor" keyEquivalent="2" id="TMX-GJ-Mle">
+                                            <connections>
+                                                <action selector="moveFocusToEditor:" target="Voe-Tx-rLC" id="mtu-Ka-D6L"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

@@ -44,6 +44,7 @@ final class SidebarViewController: NSViewController {
     super.viewWillAppear()
     NotificationCenter.default.addObserver(self, selector: #selector(noteSelected(_:)), name: .NoteSelected, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar), name: .RevealInSidebar, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar), name: .MoveFocusToSidebar, object: nil)
   }
   
   override func viewWillDisappear() {
@@ -79,6 +80,10 @@ final class SidebarViewController: NSViewController {
       return
     }
     outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+  }
+  
+  @objc private func moveFocusToSidebar() {
+    view.window?.makeFirstResponder(outlineView)
   }
   
   private func reloadData() {

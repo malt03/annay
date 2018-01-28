@@ -47,6 +47,7 @@ final class MarkDownEditorViewController: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     NotificationCenter.default.addObserver(self, selector: #selector(noteSelected(_:)), name: .NoteSelected, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToEditor), name: .MoveFocusToEditor, object: nil)
   }
   
   override func viewWillDisappear() {
@@ -56,6 +57,10 @@ final class MarkDownEditorViewController: NSViewController {
   
   @objc private func noteSelected(_ notification: Notification) {
     setSelectedNote(notification.object as? NodeModel)
+  }
+  
+  @objc private func moveFocusToEditor() {
+    view.window?.makeFirstResponder(textView)
   }
   
   private func setSelectedNote(_ note: NodeModel?) {
