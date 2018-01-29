@@ -34,6 +34,8 @@
 		ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15AD200666B1003D55A3 /* NodeModel.swift */; };
 		ED434EFB20079CB600C2357D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED434EFD20079CB600C2357D /* Localizable.strings */; };
 		ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED434F0220079DBD00C2357D /* LocalizedString.swift */; };
+		ED47CC83201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED47CC82201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard */; };
+		ED47CC85201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */; };
 		ED4EB9D2201C814100B4CBE7 /* swiss.css in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D1201C803800B4CBE7 /* swiss.css */; };
 		ED4EB9D7201D61E200B4CBE7 /* OpenQuickly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */; };
 		ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */; };
@@ -131,6 +133,8 @@
 		ED434F0020079CD100C2357D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED434F0120079CFA00C2357D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED434F0220079DBD00C2357D /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		ED47CC82201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateOrOpenWorkspace.storyboard; sourceTree = "<group>"; };
+		ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrOpenWorkspaceTabViewController.swift; sourceTree = "<group>"; };
 		ED4EB9D1201C803800B4CBE7 /* swiss.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = swiss.css; sourceTree = "<group>"; };
 		ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenQuickly.storyboard; sourceTree = "<group>"; };
 		ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyWindowController.swift; sourceTree = "<group>"; };
@@ -295,7 +299,7 @@
 			children = (
 				ED4EB9D3201D61B400B4CBE7 /* OpenQuickly */,
 				ED840D20201A2A0E00EF2C42 /* MoveWorkspace */,
-				ED55C50920130B180070301A /* CreateWorkspace */,
+				ED47CC81201ECEEF0052D6EF /* CreateOrOpenWorkspace */,
 				EDD0A293200ED90E00D5E7BE /* Workspaces */,
 				EDA736CF200E2634000BC5DA /* Preference */,
 				EDA736CE200E2577000BC5DA /* MarkDownEditor */,
@@ -319,6 +323,16 @@
 				ED434EFD20079CB600C2357D /* Localizable.strings */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		ED47CC81201ECEEF0052D6EF /* CreateOrOpenWorkspace */ = {
+			isa = PBXGroup;
+			children = (
+				ED55C50920130B180070301A /* CreateWorkspace */,
+				ED47CC82201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard */,
+				ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */,
+			);
+			path = CreateOrOpenWorkspace;
 			sourceTree = "<group>";
 		};
 		ED4EB9D3201D61B400B4CBE7 /* OpenQuickly */ = {
@@ -539,6 +553,7 @@
 				ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */,
 				ED4EB9D2201C814100B4CBE7 /* swiss.css in Resources */,
 				ED434EFB20079CB600C2357D /* Localizable.strings in Resources */,
+				ED47CC83201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard in Resources */,
 				ED4EB9D7201D61E200B4CBE7 /* OpenQuickly.storyboard in Resources */,
 				ED840D23201A2A7700EF2C42 /* MoveWorkspace.storyboard in Resources */,
 				ED2E1498200555C6003D55A3 /* markdown-it-sup.min.js in Resources */,
@@ -557,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDD0A2B9200F2B9E00D5E7BE /* WorkspacesViewController.swift in Sources */,
+				ED47CC85201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift in Sources */,
 				EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */,
 				EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */,
 				ED840D29201A2AC000EF2C42 /* MoveWorkspaceViewController.swift in Sources */,

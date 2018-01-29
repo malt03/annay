@@ -9,9 +9,11 @@
 import Cocoa
 
 class WindowController: NSWindowController {
+  @IBInspectable var backgroundColor: NSColor = .sidebarBackground
+  
   override func windowDidLoad() {
     super.windowDidLoad()
-    window?.backgroundColor = .sidebarBackground
+    window?.backgroundColor = backgroundColor
     window?.appearance = NSAppearance(named: NSAppearance.Name.vibrantDark)
   }
 }

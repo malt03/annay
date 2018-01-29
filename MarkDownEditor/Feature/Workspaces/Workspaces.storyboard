@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gIM-Og-53C">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gIM-Og-53C">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -175,10 +175,10 @@
             </objects>
             <point key="canvasLocation" x="215" y="267"/>
         </scene>
-        <!--CreateWorkspace-->
+        <!--CreateOrOpenWorkspace-->
         <scene sceneID="hNu-mu-6tw">
             <objects>
-                <controllerPlaceholder storyboardName="CreateWorkspace" id="hq4-NC-f6R" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardName="CreateOrOpenWorkspace" id="hq4-NC-f6R" sceneMemberID="viewController"/>
                 <customObject id="2CP-nR-5iM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4" y="267"/>
