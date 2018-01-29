@@ -29,7 +29,7 @@ extension Realm {
   }
   
   private static var encryptionKey: Data {
-    let workspace = try! WorkspaceModel.selected.value()
+    let workspace = WorkspaceModel.selected.value
     if let encryptionKey = encryptionKeys[workspace] { return encryptionKey }
     var savedKeyArray = [UInt8](repeating: 0, count: 32)
     var applicationKeyArray = [UInt8](repeating: 0, count: 32)
@@ -66,7 +66,7 @@ extension Realm {
   }
   
   private static var directory: URL {
-    return (try! WorkspaceModel.selected.value()).url.value
+    return WorkspaceModel.selected.value.url.value
   }
   
   static func transaction(_ block: (_ realm: Realm) -> Void) {

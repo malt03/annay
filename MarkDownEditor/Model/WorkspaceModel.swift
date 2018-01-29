@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import RealmSwift
 import Cocoa
 
 final class WorkspaceModel {
@@ -44,6 +45,19 @@ final class WorkspaceModel {
       if oldUrl == newUrl { return }
       self?.save()
     }).disposed(by: bag)
+    
+    // WorkspaceModelでRealmを管理しているので、initializerでRealmは使っちゃいけない
+    DispatchQueue.main.async {
+      if let selectedId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self)) {
+        self.selectedNode.value = Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: selectedId)
+      }
+      self.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
+        guard let s = self else { return }
+        let ud = UserDefaults.standard
+        ud.set(node?.id, forKey: Key.SelectedNodeId(for: s))
+        ud.synchronize()
+      }).disposed(by: self.bag)
+    }
   }
   
   convenience init(name: String, parentDirectoryUrl: URL) throws {
@@ -62,9 +76,12 @@ final class WorkspaceModel {
   private struct Key {
     static let Spaces = "WorkspaceModel/Spaces"
     static let SelectedIndex = "WorkspaceModel/SelectedIndex"
+    static func SelectedNodeId(for workspace: WorkspaceModel) -> String {
+      return "WorkspaceModel/SelectedId/\(workspace.id)"
+    }
   }
   
-  private(set) static var spaces: Variable<[WorkspaceModel]> = {
+  static var spaces: Variable<[WorkspaceModel]> = {
     var spaces: [WorkspaceModel] = UserDefaults.standard.savableObjectArray(forKey: Key.Spaces) ?? []
     let variable = Variable(spaces)
     _ = variable.asObservable().subscribe(onNext: { (workspaces) in
@@ -93,11 +110,11 @@ final class WorkspaceModel {
       let ud = UserDefaults.standard
       ud.set(newValue, forKey: Key.SelectedIndex)
       ud.synchronize()
-      selected.onNext(spaces.value[newValue])
+      selected.value = spaces.value[newValue]
     }
   }
   
-  static let selected = BehaviorSubject<WorkspaceModel>(value: spaces.value[safe: selectedIndex] ?? spaces.value[0])
+  static let selected = Variable<WorkspaceModel>(spaces.value[safe: selectedIndex] ?? spaces.value[0])
   
   func select() {
     WorkspaceModel.selectedIndex = WorkspaceModel.spaces.value.index(of: self) ?? 0
@@ -130,6 +147,8 @@ final class WorkspaceModel {
     let workspaceUrl = supportDirectory.appendingPathComponent(Bundle.main.bundleIdentifier ?? "", isDirectory: true)
     return try WorkspaceModel(name: Localized("Default Workspace"), parentDirectoryUrl: workspaceUrl)
   }
+  
+  let selectedNode = Variable<NodeModel?>(nil)
 }
 
 extension WorkspaceModel: SavableInUserDefaults {
