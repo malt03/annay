@@ -52,6 +52,8 @@
 		ED55C50C201312570070301A /* CreateWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55C50E201312570070301A /* CreateWorkspace.storyboard */; };
 		ED55C5132013146F0070301A /* CreateWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C5112013146F0070301A /* CreateWorkspaceViewController.swift */; };
 		ED598C39201F03E200072D8A /* NSAlert+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED598C38201F03E200072D8A /* NSAlert+Extensions.swift */; };
+		ED598C57201F20D500072D8A /* WorkspaceDirectoryWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED598C56201F20D500072D8A /* WorkspaceDirectoryWatcher.swift */; };
+		ED598C59201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */; };
 		ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */; };
 		ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */; };
 		ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED840D1E201A217300EF2C42 /* WorkspacesTableView.swift */; };
@@ -157,6 +159,8 @@
 		ED55C5102013125A0070301A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CreateWorkspace.strings; sourceTree = "<group>"; };
 		ED55C5112013146F0070301A /* CreateWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceViewController.swift; sourceTree = "<group>"; };
 		ED598C38201F03E200072D8A /* NSAlert+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAlert+Extensions.swift"; sourceTree = "<group>"; };
+		ED598C56201F20D500072D8A /* WorkspaceDirectoryWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDirectoryWatcher.swift; sourceTree = "<group>"; };
+		ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDirectoryWatcherManager.swift; sourceTree = "<group>"; };
 		ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
 		ED840D1E201A217300EF2C42 /* WorkspacesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableView.swift; sourceTree = "<group>"; };
@@ -325,6 +329,8 @@
 			children = (
 				ED2E15AD200666B1003D55A3 /* NodeModel.swift */,
 				EDD0A296200EF75300D5E7BE /* WorkspaceModel.swift */,
+				ED598C56201F20D500072D8A /* WorkspaceDirectoryWatcher.swift */,
+				ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -593,9 +599,11 @@
 				ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */,
 				EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */,
 				ED47CC8D201EFBED0052D6EF /* WorkspaceNameFormatter.swift in Sources */,
+				ED598C57201F20D500072D8A /* WorkspaceDirectoryWatcher.swift in Sources */,
 				ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */,
 				ED841BD8200B256B0097996A /* WindowController.swift in Sources */,
 				EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */,
+				ED598C59201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift in Sources */,
 				ED099FFF201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift in Sources */,
 				ED55C5132013146F0070301A /* CreateWorkspaceViewController.swift in Sources */,
 				EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */,

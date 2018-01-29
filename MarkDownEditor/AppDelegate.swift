@@ -11,6 +11,10 @@ import RealmSwift
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+  func applicationWillFinishLaunching(_ notification: Notification) {
+    WorkspaceDirectoryWatcherManager.shared.prepare()
+  }
+  
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
     if let index = WorkspaceModel.spaces.value.map({ $0.url.value.path }).index(of: filename) {
       WorkspaceModel.spaces.value[index].select()
