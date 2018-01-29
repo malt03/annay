@@ -63,8 +63,7 @@ final class SidebarViewController: NSViewController {
         if row != -1 && row != s.outlineView.selectedRow {
           s.outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
         }
-        NotificationCenter.default.post(name: .NoteSelected, object: node
-        )
+        NotificationCenter.default.post(name: .NoteSelected, object: node)
       })
       s.selectedNodeDisposable.disposable = disposable
       disposable.disposed(by: s.bag)
