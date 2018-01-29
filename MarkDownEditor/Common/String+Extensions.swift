@@ -28,4 +28,14 @@ extension String {
     
     return ranges
   }
+  
+  var replacingHomePathToTilde: String {
+    let homePath = FileManager.default.homeDirectoryForCurrentUser.path
+    return replacingOccurrences(of: "^\(homePath)", with: "~", options: .regularExpression)
+  }
+  
+  var replacingTildeToHomePath: String {
+    let homePath = FileManager.default.homeDirectoryForCurrentUser.path
+    return replacingOccurrences(of: "^~", with: homePath, options: .regularExpression)
+  }
 }

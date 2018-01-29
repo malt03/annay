@@ -10,7 +10,6 @@ import Foundation
 
 extension URL {
   var replacingHomePath: String {
-    let homePath = FileManager.default.homeDirectoryForCurrentUser.path
-    return path.replacingOccurrences(of: "^\(homePath)", with: "~", options: .regularExpression)
+    return path.replacingHomePathToTilde
   }
 }

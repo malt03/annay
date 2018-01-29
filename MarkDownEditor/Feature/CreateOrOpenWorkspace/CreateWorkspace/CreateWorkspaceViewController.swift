@@ -14,11 +14,29 @@ final class CreateWorkspaceViewController: NSViewController {
   
   @IBOutlet private weak var workspaceDirectoryTextField: NSTextField!
   @IBOutlet private weak var workspaceNameTextField: NSTextField!
+  @IBOutlet private weak var createButton: NSButton!
+  
+  private let setDirectory = PublishSubject<String?>()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    
+    setDirectory.subscribe(onNext: { [weak self] (path) in
+      guard let s = self else { return }
+      s.workspaceDirectoryTextField.stringValue = path ?? ""
+      s.view.window?.makeFirstResponder(s.workspaceDirectoryTextField)
+    }).disposed(by: bag)
+
+    let directoryValidate = Observable.merge(workspaceDirectoryTextField.rx.text.asObservable(), setDirectory).map { (directory) -> Bool in
+      guard let directory = directory else { return false }
+      if directory == "" { return false }
+      var isDirectory = ObjCBool(booleanLiteral: false)
+      let exists = FileManager.default.fileExists(atPath: directory.replacingTildeToHomePath, isDirectory: &isDirectory)
+      if !exists { return false }
+      return isDirectory.boolValue
+    }
+    let nameValidate = workspaceNameTextField.rx.text.map { $0 != nil && $0 != "" }
+    Observable.combineLatest(directoryValidate, nameValidate, resultSelector: { $0 && $1 }).bind(to: createButton.rx.isEnabled).disposed(by: bag)
   }
   
   @IBAction private func selectWorkspace(_ sender: NSButton) {
@@ -32,24 +50,15 @@ final class CreateWorkspaceViewController: NSViewController {
       guard let s = self else { return }
       if result != .OK { return }
       guard let url = openPanel.url else { return }
-      let homePath = FileManager.default.homeDirectoryForCurrentUser.path
-      s.workspaceDirectoryTextField.stringValue = url.path.replacingOccurrences(of: "^\(homePath)", with: "~", options: .regularExpression)
+      s.setDirectory.onNext(url.replacingHomePath)
     }
   }
   
   @IBAction func createWorkspace(_ sender: NSButton) {
-    let homePath = FileManager.default.homeDirectoryForCurrentUser.path
-    let path = workspaceDirectoryTextField.stringValue.replacingOccurrences(of: "^~", with: homePath, options: .regularExpression)
-    var isDirectory = ObjCBool(booleanLiteral: true)
-    if !FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory) || !isDirectory.boolValue {
-      let alert = NSAlert()
-      alert.messageText = Localized("Directory not found.")
-      alert.runModal()
-      return
-    }
+    let path = workspaceDirectoryTextField.stringValue.replacingTildeToHomePath
     do {
       let url = URL(fileURLWithPath: path, isDirectory: true)
-      try WorkspaceModel(url: url).save()
+      try WorkspaceModel(name: workspaceNameTextField.stringValue, parentDirectoryUrl: url).save()
       view.window?.close()
     } catch {
       let alert = NSAlert(error: error)

@@ -10,6 +10,8 @@ import RxSwift
 import Cocoa
 
 final class WorkspaceModel {
+  private static var fileExtension: String { return "mdworkspace" }
+  
   private let bag = DisposeBag()
   
   let id: String
@@ -46,6 +48,15 @@ final class WorkspaceModel {
     self.name.asObservable().subscribe(onNext: { [weak self] (name) in
       self?.settings["name"] = name
     }).disposed(by: bag)
+  }
+  
+  convenience init(name: String, parentDirectoryUrl: URL) throws {
+    let url = parentDirectoryUrl.appendingPathComponent(name).appendingPathExtension(WorkspaceModel.fileExtension)
+    if FileManager.default.fileExists(atPath: url.path) {
+      throw MarkDownEditorError.fileExists
+    }
+    try self.init(id: UUID().uuidString, url: url)
+    self.name.value = name
   }
   
   convenience init(url: URL) throws {

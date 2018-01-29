@@ -36,6 +36,7 @@
 		ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED434F0220079DBD00C2357D /* LocalizedString.swift */; };
 		ED47CC83201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED47CC82201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard */; };
 		ED47CC85201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */; };
+		ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */; };
 		ED4EB9D2201C814100B4CBE7 /* swiss.css in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D1201C803800B4CBE7 /* swiss.css */; };
 		ED4EB9D7201D61E200B4CBE7 /* OpenQuickly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */; };
 		ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */; };
@@ -135,6 +136,7 @@
 		ED434F0220079DBD00C2357D /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		ED47CC82201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateOrOpenWorkspace.storyboard; sourceTree = "<group>"; };
 		ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrOpenWorkspaceTabViewController.swift; sourceTree = "<group>"; };
+		ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorError.swift; sourceTree = "<group>"; };
 		ED4EB9D1201C803800B4CBE7 /* swiss.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = swiss.css; sourceTree = "<group>"; };
 		ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenQuickly.storyboard; sourceTree = "<group>"; };
 		ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyWindowController.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				ED840D2E201C5AB600EF2C42 /* NSView+Extensions.swift */,
 				ED4EB9E3201DAADD00B4CBE7 /* NSImage+Extensions.swift */,
 				ED4EB9E5201DB71B00B4CBE7 /* Results+Extensions.swift */,
+				ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				EDD0A2B9200F2B9E00D5E7BE /* WorkspacesViewController.swift in Sources */,
 				ED47CC85201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift in Sources */,
 				EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */,
+				ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */,
 				EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */,
 				ED840D29201A2AC000EF2C42 /* MoveWorkspaceViewController.swift in Sources */,
 				EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */,

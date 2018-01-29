@@ -175,6 +175,7 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="createButton" destination="Xx0-lH-lRd" id="o5M-87-cf2"/>
                         <outlet property="workspaceDirectoryTextField" destination="vxA-eL-tlj" id="R3M-en-2dq"/>
                         <outlet property="workspaceNameTextField" destination="raD-YY-mhS" id="gZR-1k-okv"/>
                     </connections>
