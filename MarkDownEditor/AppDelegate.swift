@@ -11,6 +11,14 @@ import RealmSwift
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+  func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+    print(WorkspaceModel.spaces.value.map { $0.url.value.path })
+    print(WorkspaceModel.spaces.value.map { $0.url.value.path }.index(of: filename))
+    return true
+  }
+}
+
+extension AppDelegate {
   @IBAction private func openQuickly(_ sender: NSMenuItem) {
     OpenQuicklyWindowController.toggle()
   }

@@ -387,4 +387,6 @@ extension SidebarViewController: NSTextFieldDelegate {
     textEditing = false
     return true
   }
+  
+  
 }

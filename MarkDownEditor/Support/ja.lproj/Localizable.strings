@@ -22,3 +22,6 @@
 "Move the source directory" = "ソースディレクトリを移動";
 "File already exists." = "ファイルが既に存在します。";
 "Show in Finder" = "Finderで開く";
+"Invalid character." = "不正な文字です。";
+"Workspace name is too long." = "ワークスペース名が長すぎます。";
+"Workspace name cannot be blank." = "ワークスペース名を空には出来ません。";

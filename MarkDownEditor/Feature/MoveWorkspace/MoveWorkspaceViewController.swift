@@ -54,7 +54,6 @@ final class MoveWorkspaceViewController: NSViewController {
       try FileManager.default.removeItem(at: url)
       try FileManager.default.moveItem(at: workspace.url.value, to: url)
       workspace.url.value = url
-      workspace.save()
       view.window?.close()
     } catch {
       let alert = NSAlert(error: error)

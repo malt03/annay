@@ -37,6 +37,8 @@
 		ED47CC83201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED47CC82201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard */; };
 		ED47CC85201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */; };
 		ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */; };
+		ED47CC8B201EF9590052D6EF /* ObservableType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC8A201EF9590052D6EF /* ObservableType+Extensions.swift */; };
+		ED47CC8D201EFBED0052D6EF /* WorkspaceNameFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC8C201EFBED0052D6EF /* WorkspaceNameFormatter.swift */; };
 		ED4EB9D2201C814100B4CBE7 /* swiss.css in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D1201C803800B4CBE7 /* swiss.css */; };
 		ED4EB9D7201D61E200B4CBE7 /* OpenQuickly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */; };
 		ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */; };
@@ -49,6 +51,7 @@
 		ED55C506200E602F0070301A /* WorkspacePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C505200E602F0070301A /* WorkspacePreferenceViewController.swift */; };
 		ED55C50C201312570070301A /* CreateWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55C50E201312570070301A /* CreateWorkspace.storyboard */; };
 		ED55C5132013146F0070301A /* CreateWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C5112013146F0070301A /* CreateWorkspaceViewController.swift */; };
+		ED598C39201F03E200072D8A /* NSAlert+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED598C38201F03E200072D8A /* NSAlert+Extensions.swift */; };
 		ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */; };
 		ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */; };
 		ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED840D1E201A217300EF2C42 /* WorkspacesTableView.swift */; };
@@ -137,6 +140,8 @@
 		ED47CC82201ECF170052D6EF /* CreateOrOpenWorkspace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateOrOpenWorkspace.storyboard; sourceTree = "<group>"; };
 		ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrOpenWorkspaceTabViewController.swift; sourceTree = "<group>"; };
 		ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorError.swift; sourceTree = "<group>"; };
+		ED47CC8A201EF9590052D6EF /* ObservableType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extensions.swift"; sourceTree = "<group>"; };
+		ED47CC8C201EFBED0052D6EF /* WorkspaceNameFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceNameFormatter.swift; sourceTree = "<group>"; };
 		ED4EB9D1201C803800B4CBE7 /* swiss.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = swiss.css; sourceTree = "<group>"; };
 		ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenQuickly.storyboard; sourceTree = "<group>"; };
 		ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyWindowController.swift; sourceTree = "<group>"; };
@@ -151,6 +156,7 @@
 		ED55C50D201312570070301A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CreateWorkspace.storyboard; sourceTree = "<group>"; };
 		ED55C5102013125A0070301A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CreateWorkspace.strings; sourceTree = "<group>"; };
 		ED55C5112013146F0070301A /* CreateWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceViewController.swift; sourceTree = "<group>"; };
+		ED598C38201F03E200072D8A /* NSAlert+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAlert+Extensions.swift"; sourceTree = "<group>"; };
 		ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
 		ED840D1E201A217300EF2C42 /* WorkspacesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableView.swift; sourceTree = "<group>"; };
@@ -237,6 +243,9 @@
 				ED4EB9E3201DAADD00B4CBE7 /* NSImage+Extensions.swift */,
 				ED4EB9E5201DB71B00B4CBE7 /* Results+Extensions.swift */,
 				ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */,
+				ED47CC8A201EF9590052D6EF /* ObservableType+Extensions.swift */,
+				ED47CC8C201EFBED0052D6EF /* WorkspaceNameFormatter.swift */,
+				ED598C38201F03E200072D8A /* NSAlert+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -583,6 +592,7 @@
 				EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */,
 				ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */,
 				EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */,
+				ED47CC8D201EFBED0052D6EF /* WorkspaceNameFormatter.swift in Sources */,
 				ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */,
 				ED841BD8200B256B0097996A /* WindowController.swift in Sources */,
 				EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */,
@@ -602,6 +612,7 @@
 				ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */,
 				EDD0A28E200ED29400D5E7BE /* Util.swift in Sources */,
 				EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */,
+				ED598C39201F03E200072D8A /* NSAlert+Extensions.swift in Sources */,
 				ED840D2B201A2DF400EF2C42 /* URL+Extensions.swift in Sources */,
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
 				ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */,
@@ -612,6 +623,7 @@
 				ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */,
 				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,
 				ED4EB9E0201DA76000B4CBE7 /* OpenQuicklyTextField.swift in Sources */,
+				ED47CC8B201EF9590052D6EF /* ObservableType+Extensions.swift in Sources */,
 				EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */,
 				ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */,
 				ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */,
@@ -813,7 +825,7 @@
 					"$(PROJECT_DIR)/MarkDownEditor",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dena.MarkDownEditor;
+				PRODUCT_BUNDLE_IDENTIFIER = koji.murata.MarkDownEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -839,7 +851,7 @@
 					"$(PROJECT_DIR)/MarkDownEditor",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dena.MarkDownEditor;
+				PRODUCT_BUNDLE_IDENTIFIER = koji.murata.MarkDownEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;

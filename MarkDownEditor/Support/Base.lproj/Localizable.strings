@@ -23,3 +23,6 @@
 "Move the source directory" = "Move the source directory";
 "File already exists." = "File already exists.";
 "Show in Finder" = "Show in Finder";
+"Invalid character." = "Invalid character.";
+"Workspace name is too long." = "Workspace name is too long.";
+"Workspace name cannot be blank." = "Workspace name cannot be blank.";

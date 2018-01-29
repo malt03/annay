@@ -18,15 +18,6 @@ final class WorkspaceModel {
   let url: Variable<URL>
   let name: Variable<String>
 
-  private var settings: [String: Any] {
-    didSet {
-      do {
-        let data = try JSONSerialization.data(withJSONObject: settings, options: [])
-        try data.write(to: url.value.settings)
-      } catch {}
-    }
-  }
-
   private init(id: String, url: URL) throws {
     self.id = id
     self.url = Variable(url)
@@ -34,19 +25,24 @@ final class WorkspaceModel {
     if !FileManager.default.fileExists(atPath: url.path) {
       try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
     }
-    if !FileManager.default.fileExists(atPath: url.settings.path) {
-      try "{}".write(to: url.settings, atomically: true, encoding: .utf8)
-    }
 
-    let data = try Data(contentsOf: url.settings)
-    settings = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] ?? [:]
+    name = Variable(url.deletingPathExtension().lastPathComponent)
 
-    var name = settings["name"] as? String ?? ""
-    if name == "" { name = url.deletingLastPathComponent().lastPathComponent }
-    self.name = Variable(name)
-
-    self.name.asObservable().subscribe(onNext: { [weak self] (name) in
-      self?.settings["name"] = name
+    name.asObservable().pairwised.subscribe(onNext: { [weak self] (oldName, newName) in
+      if oldName == newName { return }
+      guard let s = self else { return }
+      let newUrl = s.url.value
+        .deletingPathExtension()
+        .deletingLastPathComponent()
+        .appendingPathComponent(newName)
+        .appendingPathExtension(WorkspaceModel.fileExtension)
+      try! FileManager.default.moveItem(at: s.url.value, to: newUrl)
+      s.url.value = newUrl
+    }).disposed(by: bag)
+    
+    self.url.asObservable().pairwised.subscribe(onNext: { [weak self] (oldUrl, newUrl) in
+      if oldUrl == newUrl { return }
+      self?.save()
     }).disposed(by: bag)
   }
   
@@ -131,12 +127,8 @@ final class WorkspaceModel {
   
   private static func createDefault() throws -> WorkspaceModel {
     let supportDirectory = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-    let workspaceUrl = supportDirectory
-      .appendingPathComponent(Bundle.main.bundleIdentifier ?? "", isDirectory: true)
-      .appendingPathComponent("workspace", isDirectory: true)
-    let workspace = try WorkspaceModel(url: workspaceUrl)
-    workspace.name.value = Localized("Default Workspace")
-    return workspace
+    let workspaceUrl = supportDirectory.appendingPathComponent(Bundle.main.bundleIdentifier ?? "", isDirectory: true)
+    return try WorkspaceModel(name: Localized("Default Workspace"), parentDirectoryUrl: workspaceUrl)
   }
 }
 
@@ -171,10 +163,4 @@ extension WorkspaceModel: Equatable {
 
 extension WorkspaceModel: Hashable {
   var hashValue: Int { return id.hashValue }
-}
-
-extension URL {
-  fileprivate var settings: URL {
-    return appendingPathComponent("settings.json")
-  }
 }

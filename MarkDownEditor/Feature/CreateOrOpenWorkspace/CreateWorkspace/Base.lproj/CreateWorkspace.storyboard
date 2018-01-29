@@ -35,6 +35,11 @@
                                                     <constraint firstAttribute="width" constant="300" id="7PI-af-uue"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" id="WnY-eB-R7Q">
+                                                    <customFormatter key="formatter" id="Eir-Qx-dJn" customClass="WorkspaceNameFormatter" customModule="MarkDownEditor" customModuleProvider="target">
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="allowEmpty" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </customFormatter>
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="Text"/>
                                                     <color key="backgroundColor" name="EditorBackground"/>
