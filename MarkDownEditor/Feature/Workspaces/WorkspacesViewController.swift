@@ -21,6 +21,7 @@ final class WorkspacesViewController: NSViewController {
     
     tableView.registerForDraggedTypes([.workspaceModel])
     tableView.setDraggingSourceOperationMask([.move], forLocal: true)
+    
     WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] _ in
       self?.tableView.reloadData()
       DispatchQueue.main.async {
@@ -52,7 +53,12 @@ final class WorkspacesViewController: NSViewController {
   
   override func viewDidAppear() {
     super.viewDidAppear()
-    tableView.selectRowIndexes(IndexSet(integer: WorkspaceModel.selectedIndex), byExtendingSelection: false)
+
+    WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] _ in
+      guard let s = self else { return }
+      if s.tableView.selectedRow == WorkspaceModel.selectedIndex { return }
+      self?.tableView.selectRowIndexes(IndexSet(integer: WorkspaceModel.selectedIndex), byExtendingSelection: false)
+    }).disposed(by: bag)
   }
   
   override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
