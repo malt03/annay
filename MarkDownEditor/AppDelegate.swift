@@ -12,8 +12,16 @@ import RealmSwift
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-    print(WorkspaceModel.spaces.value.map { $0.url.value.path })
-    print(WorkspaceModel.spaces.value.map { $0.url.value.path }.index(of: filename))
+    if let index = WorkspaceModel.spaces.value.map({ $0.url.value.path }).index(of: filename) {
+      WorkspaceModel.spaces.value[index].select()
+    } else {
+      do {
+        try WorkspaceModel(url: URL(fileURLWithPath: filename)).save()
+      } catch {
+        NSAlert(error: error).runModal()
+        return false
+      }
+    }
     return true
   }
 }
