@@ -120,7 +120,7 @@ final class NodeModel: Object {
 extension NodeModel {
   func selected() {
     if !isDirectory && !isDeleted {
-      try! WorkspaceModel.selected.value().selectedNode = self
+      WorkspaceModel.selected.value.selectedNode.value = self
       NotificationCenter.default.post(name: .NoteSelected, object: self)
     }
   }

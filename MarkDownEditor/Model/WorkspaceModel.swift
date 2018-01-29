@@ -46,8 +46,17 @@ final class WorkspaceModel {
       self?.save()
     }).disposed(by: bag)
     
-    if let selectedId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self)) {
-      selectedNode = Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: selectedId)
+    // WorkspaceModelでRealmを管理しているので、initializerでRealmは使っちゃいけない
+    DispatchQueue.main.async {
+      if let selectedId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self)) {
+        self.selectedNode.value = Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: selectedId)
+      }
+      self.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
+        guard let s = self else { return }
+        let ud = UserDefaults.standard
+        ud.set(node?.id, forKey: Key.SelectedNodeId(for: s))
+        ud.synchronize()
+      }).disposed(by: self.bag)
     }
   }
   
@@ -72,7 +81,7 @@ final class WorkspaceModel {
     }
   }
   
-  private(set) static var spaces: Variable<[WorkspaceModel]> = {
+  static var spaces: Variable<[WorkspaceModel]> = {
     var spaces: [WorkspaceModel] = UserDefaults.standard.savableObjectArray(forKey: Key.Spaces) ?? []
     let variable = Variable(spaces)
     _ = variable.asObservable().subscribe(onNext: { (workspaces) in
@@ -101,11 +110,11 @@ final class WorkspaceModel {
       let ud = UserDefaults.standard
       ud.set(newValue, forKey: Key.SelectedIndex)
       ud.synchronize()
-      selected.onNext(spaces.value[newValue])
+      selected.value = spaces.value[newValue]
     }
   }
   
-  static let selected = BehaviorSubject<WorkspaceModel>(value: spaces.value[safe: selectedIndex] ?? spaces.value[0])
+  static let selected = Variable<WorkspaceModel>(spaces.value[safe: selectedIndex] ?? spaces.value[0])
   
   func select() {
     WorkspaceModel.selectedIndex = WorkspaceModel.spaces.value.index(of: self) ?? 0
@@ -139,13 +148,7 @@ final class WorkspaceModel {
     return try WorkspaceModel(name: Localized("Default Workspace"), parentDirectoryUrl: workspaceUrl)
   }
   
-  var selectedNode: NodeModel? {
-    didSet {
-      let ud = UserDefaults.standard
-      ud.set(selectedNode?.id, forKey: Key.SelectedNodeId(for: self))
-      ud.synchronize()
-    }
-  }
+  let selectedNode = Variable<NodeModel?>(nil)
 }
 
 extension WorkspaceModel: SavableInUserDefaults {

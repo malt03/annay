@@ -12,13 +12,14 @@ import RxSwift
 
 extension NSTableView.AutosaveName {
   static var Sidebar: NSTableView.AutosaveName {
-    let id = (try! WorkspaceModel.selected.value()).id
+    let id = WorkspaceModel.selected.value.id
     return NSTableView.AutosaveName("Sidebar/\(id)")
   }
 }
 
 final class SidebarViewController: NSViewController {
   private let bag = DisposeBag()
+  private let selectedNodeDisposable = SerialDisposable()
   private let workspaceNameDisposable = SerialDisposable()
   private let workspaceNameEditDisposable = SerialDisposable()
   
@@ -54,16 +55,24 @@ final class SidebarViewController: NSViewController {
   
   override func viewDidAppear() {
     super.viewDidAppear()
-    if let node = NodeModel.selectedNode {
-      let row = outlineView.row(forItem: node)
-      if row != -1 {
-        outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-      }
-    }
+    WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] (workspace) in
+      guard let s = self else { return }
+      let disposable = workspace.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
+        guard let s = self, let node = node else { return }
+        let row = s.outlineView.row(forItem: node)
+        if row != -1 && row != s.outlineView.selectedRow {
+          s.outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+        }
+        NotificationCenter.default.post(name: .NoteSelected, object: node
+        )
+      })
+      s.selectedNodeDisposable.disposable = disposable
+      disposable.disposed(by: s.bag)
+    }).disposed(by: bag)
   }
   
   @objc private func revealInSidebar() {
-    guard let selected = NodeModel.selectedNode else { return }
+    guard let selected = WorkspaceModel.selected.value.selectedNode.value else { return }
     for node in selected.ancestors.reversed() {
       outlineView.expandItem(node)
     }
@@ -87,7 +96,7 @@ final class SidebarViewController: NSViewController {
   }
   
   private func reloadData() {
-    WorkspaceModel.selected.subscribe(onNext: { [weak self] (workspace) in
+    WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] (workspace) in
       guard let s = self else { return }
       s.workspaceNameDisposable.disposable = workspace.name.asObservable().bind(to: s.workspaceNameTextField.rx.text)
       s.workspaceNameEditDisposable.disposable = s.workspaceNameTextField.rx.text.map { $0 ?? "" }.bind(to: workspace.name)

@@ -37,7 +37,7 @@ final class MarkDownEditorViewController: NSViewController {
       self?.progressIndicator.stopAnimation(nil)
     }
 
-    WorkspaceModel.selected.subscribe(onNext: { [weak self] _ in
+    WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] _ in
       self?.setSelectedNote(nil)
     }).disposed(by: bag)
     
