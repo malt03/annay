@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import RealmSwift
 import Cocoa
 
 final class WorkspaceModel {
@@ -44,6 +45,10 @@ final class WorkspaceModel {
       if oldUrl == newUrl { return }
       self?.save()
     }).disposed(by: bag)
+    
+    if let selectedId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self)) {
+      selectedNode = Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: selectedId)
+    }
   }
   
   convenience init(name: String, parentDirectoryUrl: URL) throws {
@@ -62,6 +67,9 @@ final class WorkspaceModel {
   private struct Key {
     static let Spaces = "WorkspaceModel/Spaces"
     static let SelectedIndex = "WorkspaceModel/SelectedIndex"
+    static func SelectedNodeId(for workspace: WorkspaceModel) -> String {
+      return "WorkspaceModel/SelectedId/\(workspace.id)"
+    }
   }
   
   private(set) static var spaces: Variable<[WorkspaceModel]> = {
@@ -129,6 +137,14 @@ final class WorkspaceModel {
     let supportDirectory = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
     let workspaceUrl = supportDirectory.appendingPathComponent(Bundle.main.bundleIdentifier ?? "", isDirectory: true)
     return try WorkspaceModel(name: Localized("Default Workspace"), parentDirectoryUrl: workspaceUrl)
+  }
+  
+  var selectedNode: NodeModel? {
+    didSet {
+      let ud = UserDefaults.standard
+      ud.set(selectedNode?.id, forKey: Key.SelectedNodeId(for: self))
+      ud.synchronize()
+    }
   }
 }
 
