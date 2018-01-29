@@ -79,7 +79,7 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
   }
   
   func tableViewSelectionDidChange(_ notification: Notification) {
-    WorkspaceModel.spaces.value[tableView.selectedRow].select()
+    WorkspaceModel.spaces.value[safe: tableView.selectedRow]?.select()
   }
   
   func numberOfRows(in tableView: NSTableView) -> Int {

@@ -28,10 +28,12 @@ final class WorkspacesTableView: NSTableView {
   override func rightMouseDown(with event: NSEvent) {
     let location = convert(event.locationInWindow, to: nil)
     let clickedRow = row(at: location)
-    if clickedRow == -1 { return }
+    if clickedRow == -1 || clickedRow >= WorkspaceModel.spaces.value.count { return }
 
     selectRowIndexes(IndexSet(integer: clickedRow), byExtendingSelection: false)
     let menu = NSMenu()
+    menu.addItem(NSMenuItem(title: Localized("Show in Finder"), action: #selector(showInFinder), keyEquivalent: ""))
+    menu.addItem(NSMenuItem.separator())
     menu.addItem(NSMenuItem(title: Localized("Delete"), action: #selector(delete), keyEquivalent: ""))
     menu.addItem(NSMenuItem(title: Localized("Move the source directory"), action: #selector(move), keyEquivalent: ""))
     menu.popUp(positioning: nil, at: location, in: self)
@@ -45,5 +47,11 @@ final class WorkspacesTableView: NSTableView {
   @objc private func move() {
     if selectedRow == -1 { return }
     moveAction()
+  }
+  
+  @objc private func showInFinder() {
+    if selectedRow == -1 { return }
+    let url = WorkspaceModel.spaces.value[selectedRow].url.value
+    NSWorkspace.shared.selectFile(url.path, inFileViewerRootedAtPath: url.deletingLastPathComponent().path)
   }
 }
