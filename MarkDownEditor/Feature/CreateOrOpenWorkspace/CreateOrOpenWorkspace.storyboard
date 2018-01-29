@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="z4v-1m-AKb">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="z4v-1m-AKb">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,42 +12,10 @@
                 <viewController id="Qom-ax-Vdu" customClass="CreateOrOpenWorkspaceTabViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ioS-Yw-jz8">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tabView type="noTabsBezelBorder" translatesAutoresizingMaskIntoConstraints="NO" id="kak-Y6-vib">
-                                <rect key="frame" x="12" y="12" width="426" height="237"/>
-                                <font key="font" metaFont="system"/>
-                                <tabViewItems>
-                                    <tabViewItem label="Tab" identifier="" id="Tt1-Nq-Tfc">
-                                        <view key="view" id="L6d-gp-lr6">
-                                            <rect key="frame" x="10" y="7" width="406" height="217"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="K7u-bL-UYa">
-                                                    <rect key="frame" x="0.0" y="0.0" width="406" height="217"/>
-                                                    <connections>
-                                                        <segue destination="2XM-Vc-4hs" kind="embed" id="o6b-oG-GbO"/>
-                                                    </connections>
-                                                </containerView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="K7u-bL-UYa" firstAttribute="top" secondItem="L6d-gp-lr6" secondAttribute="top" id="Won-2H-9Af"/>
-                                                <constraint firstAttribute="bottom" secondItem="K7u-bL-UYa" secondAttribute="bottom" id="Yc7-5w-mip"/>
-                                                <constraint firstItem="K7u-bL-UYa" firstAttribute="leading" secondItem="L6d-gp-lr6" secondAttribute="leading" id="iWX-tC-6sN"/>
-                                                <constraint firstAttribute="trailing" secondItem="K7u-bL-UYa" secondAttribute="trailing" id="rPJ-qU-C8V"/>
-                                            </constraints>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="View" identifier="" id="M0u-zN-59U">
-                                        <view key="view" id="PQD-GO-Koj">
-                                            <rect key="frame" x="10" y="33" width="157" height="78"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                </tabViewItems>
-                            </tabView>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rG0-xG-O2R">
-                                <rect key="frame" x="160" y="261" width="130" height="24"/>
+                                <rect key="frame" x="161" y="261" width="129" height="24"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="wWt-Bk-Pdw">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -55,32 +23,38 @@
                                         <segment label="Open" tag="1"/>
                                     </segments>
                                 </segmentedCell>
+                                <connections>
+                                    <action selector="changeSegment:" target="Qom-ax-Vdu" id="aD6-g9-TND"/>
+                                </connections>
                             </segmentedControl>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="1T6-4u-zY1" customClass="ContainerView" customModule="MarkDownEditor" customModuleProvider="target">
+                                <rect key="frame" x="16" y="16" width="418" height="231"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" name="EditorBackground"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="kak-Y6-vib" secondAttribute="bottom" constant="16" id="4Wz-dg-4pl"/>
-                            <constraint firstAttribute="trailing" secondItem="kak-Y6-vib" secondAttribute="trailing" constant="16" id="705-mU-HGR"/>
-                            <constraint firstItem="kak-Y6-vib" firstAttribute="top" secondItem="rG0-xG-O2R" secondAttribute="bottom" constant="16" id="MbR-9Y-io5"/>
-                            <constraint firstItem="kak-Y6-vib" firstAttribute="leading" secondItem="ioS-Yw-jz8" secondAttribute="leading" constant="16" id="Upi-UC-3wz"/>
+                            <constraint firstItem="1T6-4u-zY1" firstAttribute="top" secondItem="rG0-xG-O2R" secondAttribute="bottom" constant="16" id="Yr9-Hw-zR9"/>
                             <constraint firstItem="rG0-xG-O2R" firstAttribute="centerX" secondItem="ioS-Yw-jz8" secondAttribute="centerX" id="b9P-Wn-k8P"/>
                             <constraint firstItem="rG0-xG-O2R" firstAttribute="top" secondItem="ioS-Yw-jz8" secondAttribute="top" constant="16" id="d5e-Qf-iDo"/>
+                            <constraint firstItem="1T6-4u-zY1" firstAttribute="leading" secondItem="ioS-Yw-jz8" secondAttribute="leading" constant="16" id="kA3-Ma-ywO"/>
+                            <constraint firstAttribute="trailing" secondItem="1T6-4u-zY1" secondAttribute="trailing" constant="16" id="p02-hg-6RJ"/>
+                            <constraint firstAttribute="bottom" secondItem="1T6-4u-zY1" secondAttribute="bottom" constant="16" id="r1p-q4-eBc"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tabView" destination="kak-Y6-vib" id="5ll-LV-pyV"/>
+                        <outlet property="parentView" destination="1T6-4u-zY1" id="O45-Hk-TVI"/>
                     </connections>
                 </viewController>
                 <customObject id="WrZ-Ng-8Uf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-36" y="1474"/>
-        </scene>
-        <!--CreateWorkspace-->
-        <scene sceneID="6ju-Uw-0t3">
-            <objects>
-                <controllerPlaceholder storyboardName="CreateWorkspace" id="2XM-Vc-4hs" sceneMemberID="viewController"/>
-                <customObject id="NFY-OX-ZuD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="388" y="1474"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="w5P-CP-Vmv">
@@ -95,13 +69,8 @@
                             <outlet property="delegate" destination="z4v-1m-AKb" id="hCG-Z2-9D6"/>
                         </connections>
                     </window>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                            <color key="value" name="EditorBackground"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="Qom-ax-Vdu" kind="relationship" relationship="window.shadowedContentViewController" id="LEC-Z5-mOZ"/>
+                        <segue destination="Qom-ax-Vdu" kind="relationship" relationship="window.shadowedContentViewController" id="mZ3-Y0-pHl"/>
                     </connections>
                 </windowController>
                 <customObject id="Vv5-DX-3St" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

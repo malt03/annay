@@ -12,4 +12,16 @@ extension URL {
   var replacingHomePath: String {
     return path.replacingHomePathToTilde
   }
+  
+  var isDirectory: Bool {
+    var isDirectory = ObjCBool(booleanLiteral: false)
+    if !FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory) { return false }
+    return isDirectory.boolValue
+  }
+  
+  var isWorkspace: Bool {
+    if !isDirectory { return false }
+    let uti = (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
+    return uti == "koji.murata.markdowneditor.workspace"
+  }
 }

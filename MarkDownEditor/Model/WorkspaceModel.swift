@@ -11,13 +11,27 @@ import RealmSwift
 import Cocoa
 
 final class WorkspaceModel {
-  private static var fileExtension: String { return "mdworkspace" }
+  static var fileExtension: String { return "mdworkspace" }
   
   private let bag = DisposeBag()
   
   let id: String
   let url: Variable<URL>
   let name: Variable<String>
+  
+  static func open(url: URL) -> Bool {
+    if let index = WorkspaceModel.spaces.value.map({ $0.url.value.appendingPathComponent("x") }).index(of: url.appendingPathComponent("x")) {
+      WorkspaceModel.spaces.value[index].select()
+    } else {
+      do {
+        try WorkspaceModel(url: url).save()
+      } catch {
+        NSAlert(error: error).runModal()
+        return false
+      }
+    }
+    return true
+  }
 
   private init(id: String, url: URL) throws {
     self.id = id

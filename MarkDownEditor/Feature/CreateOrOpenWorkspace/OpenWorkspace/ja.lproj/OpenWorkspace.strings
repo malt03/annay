@@ -1,0 +1,15 @@
+
+/* Class = "NSButtonCell"; title = "Open"; ObjectID = "AbE-fs-Ceq"; */
+"AbE-fs-Ceq.title" = "開く";
+
+/* Class = "NSButtonCell"; title = "Change..."; ObjectID = "HXs-nV-TVF"; */
+"HXs-nV-TVF.title" = "変更...";
+
+/* Class = "NSTextFieldCell"; title = "Open a workspace"; ObjectID = "Ra1-em-6NJ"; */
+"Ra1-em-6NJ.title" = "ワークスペースを開く";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "mia-Fc-mYr"; */
+"mia-Fc-mYr.title" = "キャンセル";
+
+/* Class = "NSTextFieldCell"; title = "Workspace:"; ObjectID = "syB-E1-cG5"; */
+"syB-E1-cG5.title" = "ワークスペース:";

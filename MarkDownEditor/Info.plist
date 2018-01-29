@@ -15,7 +15,7 @@
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>koji.murata.markdowneditor</string>
+				<string>koji.murata.markdowneditor.workspace</string>
 			</array>
 		</dict>
 	</array>
@@ -53,7 +53,7 @@
 			<key>UTTypeDescription</key>
 			<string>MarkDownEditor Package</string>
 			<key>UTTypeIdentifier</key>
-			<string>koji.murata.markdowneditor</string>
+			<string>koji.murata.markdowneditor.workspace</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-final class BackgroundSetableView: NSView {
+class BackgroundSetableView: NSView {
   @IBInspectable var cornerRadius: CGFloat = 0
   @IBInspectable var backgroundColor: NSColor?
 

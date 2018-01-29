@@ -18,6 +18,11 @@ final class CreateWorkspaceViewController: NSViewController {
   
   private let setDirectory = PublishSubject<String?>()
   
+  override func becomeFirstResponder() -> Bool {
+    workspaceNameTextField.becomeFirstResponder()
+    return true
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     

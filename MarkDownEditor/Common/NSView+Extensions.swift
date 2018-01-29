@@ -9,7 +9,8 @@
 import Cocoa
 
 extension NSView {
-  func addSubviewWithFillConstraints(_ view: NSView) {
+  @discardableResult
+  func addSubviewWithFillConstraints(_ view: NSView) -> [NSLayoutConstraint] {
     view.frame = bounds
     addSubview(view)
     
@@ -24,5 +25,6 @@ extension NSView {
     constraints += NSLayoutConstraint.constraints(withVisualFormat: vFormat, options: [], metrics: nil, views: views)
     
     addConstraints(constraints)
+    return constraints
   }
 }

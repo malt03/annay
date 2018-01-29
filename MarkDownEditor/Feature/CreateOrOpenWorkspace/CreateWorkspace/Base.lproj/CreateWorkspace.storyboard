@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="IGo-9e-meJ">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="IGo-9e-meJ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -12,14 +12,14 @@
             <objects>
                 <viewController id="IGo-9e-meJ" customClass="CreateWorkspaceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="VZU-gM-xyd">
-                        <rect key="frame" x="0.0" y="0.0" width="577" height="176"/>
+                        <rect key="frame" x="0.0" y="0.0" width="577" height="187"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6p7-RF-2V2">
-                                <rect key="frame" x="32" y="63" width="513" height="54"/>
+                                <rect key="frame" x="32" y="69" width="513" height="53"/>
                                 <subviews>
                                     <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tq8-uR-vo9">
-                                        <rect key="frame" x="0.0" y="32" width="418" height="22"/>
+                                        <rect key="frame" x="0.0" y="31" width="418" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="quF-a8-9Gm">
                                                 <rect key="frame" x="-2" y="3" width="114" height="17"/>
@@ -59,10 +59,10 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4kS-UV-83f">
-                                        <rect key="frame" x="0.0" y="0.0" width="513" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="513" height="21"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="irs-iI-b2K">
-                                                <rect key="frame" x="-2" y="3" width="114" height="17"/>
+                                                <rect key="frame" x="-2" y="2" width="114" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Directory:" id="esB-Hc-9FC">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="Text"/>
@@ -70,7 +70,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vxA-eL-tlj">
-                                                <rect key="frame" x="118" y="0.0" width="300" height="22"/>
+                                                <rect key="frame" x="118" y="0.0" width="300" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="300" id="cbP-sS-nbf"/>
                                                 </constraints>
@@ -81,7 +81,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gRL-vO-1KS">
-                                                <rect key="frame" x="420" y="-7" width="99" height="33"/>
+                                                <rect key="frame" x="420" y="-7" width="99" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Change..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EEg-Z9-tZx">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -120,7 +120,7 @@
                                 </customSpacing>
                             </stackView>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lbk-Ha-b97">
-                                <rect key="frame" x="408" y="10" width="159" height="21"/>
+                                <rect key="frame" x="402" y="16" width="159" height="21"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="usa-B8-FqB">
                                         <rect key="frame" x="-6" y="-7" width="82" height="32"/>
@@ -159,7 +159,7 @@ Gw
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7aY-Ee-01m">
-                                <rect key="frame" x="8" y="149" width="124" height="17"/>
+                                <rect key="frame" x="14" y="154" width="124" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Create a workspace" id="BPW-Jv-e3M">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="Text"/>
@@ -169,13 +169,13 @@ Gw
                         </subviews>
                         <constraints>
                             <constraint firstItem="6p7-RF-2V2" firstAttribute="top" secondItem="7aY-Ee-01m" secondAttribute="bottom" constant="32" id="1aN-zP-d6M"/>
-                            <constraint firstItem="7aY-Ee-01m" firstAttribute="leading" secondItem="VZU-gM-xyd" secondAttribute="leading" constant="10" id="83P-vE-cRK"/>
+                            <constraint firstItem="7aY-Ee-01m" firstAttribute="leading" secondItem="VZU-gM-xyd" secondAttribute="leading" constant="16" id="83P-vE-cRK"/>
                             <constraint firstItem="6p7-RF-2V2" firstAttribute="leading" secondItem="VZU-gM-xyd" secondAttribute="leading" constant="32" id="8KZ-Xh-bbs"/>
                             <constraint firstItem="lbk-Ha-b97" firstAttribute="top" secondItem="6p7-RF-2V2" secondAttribute="bottom" constant="32" id="8LV-dq-eTZ"/>
                             <constraint firstAttribute="trailing" secondItem="6p7-RF-2V2" secondAttribute="trailing" constant="32" id="LGx-3k-UWy"/>
-                            <constraint firstItem="7aY-Ee-01m" firstAttribute="top" secondItem="VZU-gM-xyd" secondAttribute="top" constant="10" id="eoD-3P-md3"/>
-                            <constraint firstAttribute="bottom" secondItem="lbk-Ha-b97" secondAttribute="bottom" constant="10" id="hDx-ue-3KQ"/>
-                            <constraint firstAttribute="trailing" secondItem="lbk-Ha-b97" secondAttribute="trailing" constant="10" id="ipO-TM-MhS"/>
+                            <constraint firstItem="7aY-Ee-01m" firstAttribute="top" secondItem="VZU-gM-xyd" secondAttribute="top" constant="16" id="eoD-3P-md3"/>
+                            <constraint firstAttribute="bottom" secondItem="lbk-Ha-b97" secondAttribute="bottom" constant="16" id="hDx-ue-3KQ"/>
+                            <constraint firstAttribute="trailing" secondItem="lbk-Ha-b97" secondAttribute="trailing" constant="16" id="ipO-TM-MhS"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7aY-Ee-01m" secondAttribute="trailing" constant="20" symbolic="YES" id="ubt-M6-Wv6"/>
                         </constraints>
                     </view>

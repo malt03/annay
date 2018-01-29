@@ -16,17 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
   
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-    if let index = WorkspaceModel.spaces.value.map({ $0.url.value.path }).index(of: filename) {
-      WorkspaceModel.spaces.value[index].select()
-    } else {
-      do {
-        try WorkspaceModel(url: URL(fileURLWithPath: filename)).save()
-      } catch {
-        NSAlert(error: error).runModal()
-        return false
-      }
-    }
-    return true
+    return WorkspaceModel.open(url: URL(fileURLWithPath: filename))
   }
 }
 
