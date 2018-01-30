@@ -30,6 +30,7 @@ final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
   }
   
   var presentedItemURL: URL? {
+    // workspace.urlだと上手く検知できないっぽい
     return workspace.url.deletingLastPathComponent()
   }
   
