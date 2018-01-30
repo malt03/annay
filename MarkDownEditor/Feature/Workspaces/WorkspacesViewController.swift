@@ -35,6 +35,7 @@ final class WorkspacesViewController: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     NotificationCenter.default.addObserver(self, selector: #selector(openWorkspace), name: .OpenWorkspace, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createWorkspace), name: .CreateWorkspace, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(selectNextWorkspace), name: .SelectNextWorkspace, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(selectPreviousWorkspace), name: .SelectPreviousWorkspace, object: nil)
   }
