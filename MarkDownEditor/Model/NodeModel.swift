@@ -10,10 +10,6 @@ import RealmSwift
 import Cocoa
 import RxSwift
 
-extension NSNotification.Name {
-  static let NoteSelected = NSNotification.Name(rawValue: "NodeModel/NoteSelected")
-}
-
 final class NodeModel: Object {
   private static var trashId: String { return "trash" }
   
@@ -133,7 +129,6 @@ extension NodeModel {
   func selected() {
     if !isDirectory && !isDeleted {
       NodeModel.selectedNode.value = self
-      NotificationCenter.default.post(name: .NoteSelected, object: self)
     }
   }
   

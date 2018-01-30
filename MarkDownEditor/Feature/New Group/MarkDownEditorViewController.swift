@@ -19,8 +19,6 @@ final class MarkDownEditorViewController: NSViewController {
   @IBOutlet private weak var progressIndicator: NSProgressIndicator!
   private var webView: WebView!
 
-  private var selectedNote: NodeModel?
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -37,8 +35,8 @@ final class MarkDownEditorViewController: NSViewController {
       self?.progressIndicator.stopAnimation(nil)
     }
 
-    WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] _ in
-      self?.setSelectedNote(nil)
+    NodeModel.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
+      self?.updateNote(note: node)
     }).disposed(by: bag)
     
     prepareTextView()
@@ -46,7 +44,6 @@ final class MarkDownEditorViewController: NSViewController {
   
   override func viewWillAppear() {
     super.viewWillAppear()
-    NotificationCenter.default.addObserver(self, selector: #selector(noteSelected(_:)), name: .NoteSelected, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToEditor), name: .MoveFocusToEditor, object: nil)
   }
   
@@ -55,19 +52,8 @@ final class MarkDownEditorViewController: NSViewController {
     super.viewWillDisappear()
   }
   
-  @objc private func noteSelected(_ notification: Notification) {
-    setSelectedNote(notification.object as? NodeModel)
-  }
-  
   @objc private func moveFocusToEditor() {
     view.window?.makeFirstResponder(textView)
-  }
-  
-  private func setSelectedNote(_ note: NodeModel?) {
-    selectedNote = note
-    textView.isEditable = selectedNote != nil
-    textView.string = note?.body ?? ""
-    updateWebView()
   }
   
   override func cancelOperation(_ sender: Any?) {
@@ -85,8 +71,14 @@ final class MarkDownEditorViewController: NSViewController {
     textView.isGrammarCheckingEnabled = false
   }
   
-  private func updateWebView() {
-    let markDown = (selectedNote?.body ?? "")
+  private func updateNote(note: NodeModel? = NodeModel.selectedNode.value) {
+    textView.isEditable = note != nil
+    textView.string = note?.body ?? ""
+    updateWebView(note: note)
+  }
+  
+  private func updateWebView(note: NodeModel? = NodeModel.selectedNode.value) {
+    let markDown = (note?.body ?? "")
       .replacingOccurrences(of: "\\", with: "\\\\")
       .replacingOccurrences(of: "\n", with: "\\n")
     webView.update(markdown: markDown)
@@ -95,7 +87,7 @@ final class MarkDownEditorViewController: NSViewController {
 
 extension MarkDownEditorViewController: NSTextViewDelegate {
   func textDidChange(_ notification: Notification) {
-    if let note = selectedNote {
+    if let note = NodeModel.selectedNode.value {
       Realm.transaction { _ in
         note.setBody(textView.string)
       }
@@ -107,13 +99,13 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
 extension MarkDownEditorViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
     guard
-      let note = selectedNote,
+      let note = NodeModel.selectedNode.value,
       let dict = message.body as? [String: Any],
       let content = dict["content"] as? String,
       let index = dict["index"] as? Int,
       let isChecked = dict["isChecked"] as? Int
       else { return }
     note.updateCheckbox(content: content, index: index, isChecked: isChecked == 1)
-    setSelectedNote(note)
+    updateNote(note: note)
   }
 }

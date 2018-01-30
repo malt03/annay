@@ -60,7 +60,6 @@ final class SidebarViewController: NSViewController {
       if row != -1 && !s.outlineView.selectedRowIndexes.contains(row) {
         s.outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
       }
-      NotificationCenter.default.post(name: .NoteSelected, object: node)
     }).disposed(by: bag)
   }
   
