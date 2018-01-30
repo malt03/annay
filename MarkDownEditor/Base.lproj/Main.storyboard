@@ -68,13 +68,18 @@
                                                 <action selector="openWorkspace:" target="Voe-Tx-rLC" id="r7u-54-fIv"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Create Workspace..." keyEquivalent="N" id="O6a-Cm-4FV">
+                                        <menuItem title="New Workspace..." keyEquivalent="N" id="O6a-Cm-4FV">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>
                                                 <action selector="createWorkspace:" target="Voe-Tx-rLC" id="9f9-I7-up8"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Mph-iz-9dP"/>
+                                        <menuItem title="New Note..." keyEquivalent="n" id="KyX-YP-jO0">
+                                            <connections>
+                                                <action selector="createNote:" target="Voe-Tx-rLC" id="3Uo-nv-khC"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Open Quickly..." keyEquivalent="O" id="pT4-6r-lB5">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>

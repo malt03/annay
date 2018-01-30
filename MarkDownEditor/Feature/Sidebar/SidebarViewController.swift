@@ -43,6 +43,7 @@ final class SidebarViewController: NSViewController {
   
   override func viewWillAppear() {
     super.viewWillAppear()
+    NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutSecondaryClick), name: .CreateNote, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(noteSelected(_:)), name: .NoteSelected, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar), name: .RevealInSidebar, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar), name: .MoveFocusToSidebar, object: nil)
@@ -160,6 +161,11 @@ final class SidebarViewController: NSViewController {
   @objc private func createDirectory() {
     let insertedNode = NodeModel.createDirectory(parent: selectedParent)
     insert(node: insertedNode, in: selectedParent)
+  }
+  
+  @objc private func createNoteWithoutSecondaryClick() {
+    secondaryClickedRow = outlineView.selectedRow
+    createNote()
   }
   
   @objc private func createNote() {

@@ -28,6 +28,10 @@ extension AppDelegate {
   @IBAction private func createWorkspace(_ sender: NSMenuItem) {
     NotificationCenter.default.post(name: .CreateWorkspace, object: nil)
   }
+  
+  @IBAction private func createNote(_ sender: NSMenuItem) {
+    NotificationCenter.default.post(name: .CreateNote, object: nil)
+  }
 
   @IBAction private func openQuickly(_ sender: NSMenuItem) {
     OpenQuicklyWindowController.toggle()
@@ -58,6 +62,7 @@ extension Notification.Name {
   static let OpenWorkspace = Notification.Name(rawValue: "AppDelegate/OpenWorkspace")
   static let CreateWorkspace = Notification.Name(rawValue: "AppDelegate/CreateWorkspace")
   static let RevealInSidebar = Notification.Name(rawValue: "AppDelegate/RevealInSidebar")
+  static let CreateNote = Notification.Name(rawValue: "AppDelegate/CreateNote")
   static let SelectNextWorkspace = Notification.Name(rawValue: "AppDelegate/SelectNextWorkspace")
   static let SelectPreviousWorkspace = Notification.Name(rawValue: "AppDelegate/SelectPreviousWorkspace")
   static let MoveFocusToSidebar = Notification.Name(rawValue: "AppDelegate/MoveFocusToSidebar")
