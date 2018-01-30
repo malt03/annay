@@ -395,5 +395,12 @@ extension SidebarViewController: NSTextFieldDelegate {
     return true
   }
   
-  
+  func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+    switch commandSelector {
+    case #selector(textView.insertNewline(_:)), #selector(textView.cancelOperation(_:)):
+      NSApplication.shared.endEditing()
+      return true
+    default: return false
+    }
+  }
 }
