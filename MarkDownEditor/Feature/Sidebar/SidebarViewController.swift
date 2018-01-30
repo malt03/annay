@@ -44,7 +44,6 @@ final class SidebarViewController: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutSecondaryClick), name: .CreateNote, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(noteSelected(_:)), name: .NoteSelected, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar), name: .RevealInSidebar, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar), name: .MoveFocusToSidebar, object: nil)
   }
@@ -61,7 +60,7 @@ final class SidebarViewController: NSViewController {
       let disposable = workspace.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
         guard let s = self, let node = node else { return }
         let row = s.outlineView.row(forItem: node)
-        if row != -1 && row != s.outlineView.selectedRow {
+        if row != -1 && !s.outlineView.selectedRowIndexes.contains(row) {
           s.outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
         }
         NotificationCenter.default.post(name: .NoteSelected, object: node)
@@ -78,16 +77,6 @@ final class SidebarViewController: NSViewController {
     }
     let row = outlineView.row(forItem: selected)
     if row == -1 { return }
-    outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-  }
-  
-  @objc private func noteSelected(_ notification: Notification) {
-    guard let node = notification.object as? NodeModel else { return }
-    let row = outlineView.row(forItem: node)
-    if row == -1 {
-      outlineView.deselectAll(nil)
-      return
-    }
     outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
   }
   
