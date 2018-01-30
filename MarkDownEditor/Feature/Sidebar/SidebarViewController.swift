@@ -19,7 +19,6 @@ extension NSTableView.AutosaveName {
 
 final class SidebarViewController: NSViewController {
   private let bag = DisposeBag()
-  private let selectedNodeDisposable = SerialDisposable()
   private let workspaceNameDisposable = SerialDisposable()
   private let workspaceNameEditDisposable = SerialDisposable()
   
@@ -55,23 +54,18 @@ final class SidebarViewController: NSViewController {
   
   override func viewDidAppear() {
     super.viewDidAppear()
-    WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] (workspace) in
-      guard let s = self else { return }
-      let disposable = workspace.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
-        guard let s = self, let node = node else { return }
-        let row = s.outlineView.row(forItem: node)
-        if row != -1 && !s.outlineView.selectedRowIndexes.contains(row) {
-          s.outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-        }
-        NotificationCenter.default.post(name: .NoteSelected, object: node)
-      })
-      s.selectedNodeDisposable.disposable = disposable
-      disposable.disposed(by: s.bag)
+    NodeModel.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
+      guard let s = self, let node = node else { return }
+      let row = s.outlineView.row(forItem: node)
+      if row != -1 && !s.outlineView.selectedRowIndexes.contains(row) {
+        s.outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+      }
+      NotificationCenter.default.post(name: .NoteSelected, object: node)
     }).disposed(by: bag)
   }
   
   @objc private func revealInSidebar() {
-    guard let selected = WorkspaceModel.selected.value.selectedNode.value else { return }
+    guard let selected = NodeModel.selectedNode.value else { return }
     for node in selected.ancestors.reversed() {
       outlineView.expandItem(node)
     }

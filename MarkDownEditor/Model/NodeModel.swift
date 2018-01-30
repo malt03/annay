@@ -8,6 +8,7 @@
 
 import RealmSwift
 import Cocoa
+import RxSwift
 
 extension NSNotification.Name {
   static let NoteSelected = NSNotification.Name(rawValue: "NodeModel/NoteSelected")
@@ -89,6 +90,17 @@ final class NodeModel: Object {
     return result.filter("isDirectory = false and name contains[c] %@", query).sorted(byKeyPath: "name")
   }
   
+  static var selectedNode: Variable<NodeModel?> = {
+    let selectedNode = Variable<NodeModel?>(nil)
+    _ = WorkspaceModel.selected.asObservable().subscribe(onNext: { (workspace) in
+      selectedNode.value = Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: workspace.selectedNodeId)
+    })
+    _ = selectedNode.asObservable().subscribe(onNext: { (node) in
+      WorkspaceModel.selected.value.selectedNodeId = node?.id
+    })
+    return selectedNode
+  }()
+  
   var isRoot: Bool {
     return parent == nil
   }
@@ -120,7 +132,7 @@ final class NodeModel: Object {
 extension NodeModel {
   func selected() {
     if !isDirectory && !isDeleted {
-      WorkspaceModel.selected.value.selectedNode.value = self
+      NodeModel.selectedNode.value = self
       NotificationCenter.default.post(name: .NoteSelected, object: self)
     }
   }

@@ -60,18 +60,7 @@ final class WorkspaceModel {
       self?.save()
     }).disposed(by: bag)
     
-    // WorkspaceModelでRealmを管理しているので、initializerでRealmは使っちゃいけない
-    DispatchQueue.main.async {
-      if let selectedId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self)) {
-        self.selectedNode.value = Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: selectedId)
-      }
-      self.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
-        guard let s = self else { return }
-        let ud = UserDefaults.standard
-        ud.set(node?.id, forKey: Key.SelectedNodeId(for: s))
-        ud.synchronize()
-      }).disposed(by: self.bag)
-    }
+    selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
   }
   
   convenience init(name: String, parentDirectoryUrl: URL) throws {
@@ -91,7 +80,7 @@ final class WorkspaceModel {
     static let Spaces = "WorkspaceModel/Spaces"
     static let SelectedIndex = "WorkspaceModel/SelectedIndex"
     static func SelectedNodeId(for workspace: WorkspaceModel) -> String {
-      return "WorkspaceModel/SelectedId/\(workspace.id)"
+      return "WorkspaceModel/\(workspace.id)/SelectedNodeId"
     }
   }
   
@@ -162,7 +151,13 @@ final class WorkspaceModel {
     return try WorkspaceModel(name: Localized("Default Workspace"), parentDirectoryUrl: workspaceUrl)
   }
   
-  let selectedNode = Variable<NodeModel?>(nil)
+  var selectedNodeId: String? {
+    didSet {
+      let ud = UserDefaults.standard
+      ud.set(selectedNodeId, forKey: Key.SelectedNodeId(for: self))
+      ud.synchronize()
+    }
+  }
 }
 
 extension WorkspaceModel: SavableInUserDefaults {
