@@ -88,9 +88,10 @@ final class NodeModel: Object {
   
   static var selectedNode: Variable<NodeModel?> = {
     let selectedNode = Variable<NodeModel?>(nil)
-    _ = WorkspaceModel.selected.asObservable().subscribe(onNext: { (workspace) in
-      selectedNode.value = Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: workspace.selectedNodeId)
-    })
+    _ = WorkspaceModel.selected.asObservable().map { (workspace) -> NodeModel? in
+      guard let id = workspace.selectedNodeId else { return nil }
+      return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: id)
+    }.bind(to: selectedNode)
     _ = selectedNode.asObservable().subscribe(onNext: { (node) in
       WorkspaceModel.selected.value.selectedNodeId = node?.id
     })

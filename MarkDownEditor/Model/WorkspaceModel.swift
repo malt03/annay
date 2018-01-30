@@ -16,11 +16,35 @@ final class WorkspaceModel {
   private let bag = DisposeBag()
   
   let id: String
-  let url: Variable<URL>
-  let name: Variable<String>
+  private let _url: Variable<URL>
+  private let _name: Variable<String>
+  
+  var urlObservable: Observable<URL> { return _url.asObservable() }
+  var url: URL { return _url.value }
+  var nameObservable: Observable<String> { return _name.asObservable() }
+  var name: String { return _name.value }
+  
+  func setUrl(_ newUrl: URL) throws {
+    if url == newUrl { return }
+    if FileManager.default.fileExists(atPath: newUrl.path) { throw MarkDownEditorError.fileExists(oldUrl: url) }
+    try FileManager.default.moveItem(at: url, to: newUrl)
+    _url.value = newUrl
+    save()
+  }
+  
+  func setName(_ newName: String) throws {
+    if name == newName { return }
+    let newUrl = url
+      .deletingPathExtension()
+      .deletingLastPathComponent()
+      .appendingPathComponent(newName)
+      .appendingPathExtension(WorkspaceModel.fileExtension)
+    try setUrl(newUrl)
+    _name.value = newName
+  }
   
   static func open(url: URL) -> Bool {
-    if let index = WorkspaceModel.spaces.value.map({ $0.url.value.appendingPathComponent("x") }).index(of: url.appendingPathComponent("x")) {
+    if let index = WorkspaceModel.spaces.value.map({ $0.url.appendingPathComponent("x") }).index(of: url.appendingPathComponent("x")) {
       WorkspaceModel.spaces.value[index].select()
     } else {
       do {
@@ -35,30 +59,13 @@ final class WorkspaceModel {
 
   private init(id: String, url: URL) throws {
     self.id = id
-    self.url = Variable(url)
+    _url = Variable(url)
     
     if !FileManager.default.fileExists(atPath: url.path) {
       try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
     }
 
-    name = Variable(url.deletingPathExtension().lastPathComponent)
-
-    name.asObservable().pairwised.subscribe(onNext: { [weak self] (oldName, newName) in
-      if oldName == newName { return }
-      guard let s = self else { return }
-      let newUrl = s.url.value
-        .deletingPathExtension()
-        .deletingLastPathComponent()
-        .appendingPathComponent(newName)
-        .appendingPathExtension(WorkspaceModel.fileExtension)
-      try! FileManager.default.moveItem(at: s.url.value, to: newUrl)
-      s.url.value = newUrl
-    }).disposed(by: bag)
-    
-    self.url.asObservable().pairwised.subscribe(onNext: { [weak self] (oldUrl, newUrl) in
-      if oldUrl == newUrl { return }
-      self?.save()
-    }).disposed(by: bag)
+    _name = Variable(url.name)
     
     selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
   }
@@ -66,10 +73,10 @@ final class WorkspaceModel {
   convenience init(name: String, parentDirectoryUrl: URL) throws {
     let url = parentDirectoryUrl.appendingPathComponent(name).appendingPathExtension(WorkspaceModel.fileExtension)
     if FileManager.default.fileExists(atPath: url.path) {
-      throw MarkDownEditorError.fileExists
+      throw MarkDownEditorError.fileExists(oldUrl: nil)
     }
     try self.init(id: UUID().uuidString, url: url)
-    self.name.value = name
+    _name.value = name
   }
   
   convenience init(url: URL) throws {
@@ -164,7 +171,7 @@ extension WorkspaceModel: SavableInUserDefaults {
   var dictionary: [String : Any] {
     return [
       "id": id,
-      "url": url.value.absoluteString,
+      "url": url.absoluteString,
     ]
   }
   

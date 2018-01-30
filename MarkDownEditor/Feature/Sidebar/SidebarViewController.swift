@@ -80,8 +80,19 @@ final class SidebarViewController: NSViewController {
   private func reloadData() {
     WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] (workspace) in
       guard let s = self else { return }
-      s.workspaceNameDisposable.disposable = workspace.name.asObservable().bind(to: s.workspaceNameTextField.rx.text)
-      s.workspaceNameEditDisposable.disposable = s.workspaceNameTextField.rx.text.map { $0 ?? "" }.bind(to: workspace.name)
+      s.workspaceNameDisposable.disposable = workspace.nameObservable.bind(to: s.workspaceNameTextField.rx.text)
+      s.workspaceNameEditDisposable.disposable = s.workspaceNameTextField.rx.text.map { $0 ?? "" }.subscribe(onNext: { [weak self] (name) in
+        do {
+          try workspace.setName(name)
+        } catch {
+          switch error {
+          case MarkDownEditorError.fileExists(oldUrl: let oldUrl):
+            self?.workspaceNameTextField.stringValue = oldUrl?.name ?? ""
+          default: break
+          }
+          NSAlert(error: error).runModal()
+        }
+      })
       s.workspaceNameDisposable.disposed(by: s.bag)
       s.workspaceNameEditDisposable.disposed(by: s.bag)
       

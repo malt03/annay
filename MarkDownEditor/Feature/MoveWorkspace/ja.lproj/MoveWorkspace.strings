@@ -3,7 +3,7 @@
 "Jwg-xY-JIO.title" = "移動";
 
 /* Class = "NSTextFieldCell"; title = "Move the workspace"; ObjectID = "N2i-0a-ePG"; */
-"N2i-0a-ePG.title" = "ワークスペースの移動";
+"N2i-0a-ePG.title" = "ワークスペースファイルの移動";
 
 /* Class = "NSButtonCell"; title = "Change..."; ObjectID = "T7b-Px-hJW"; */
 "T7b-Px-hJW.title" = "変更...";

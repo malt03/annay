@@ -21,9 +21,7 @@ final class WorkspacesTableCellView: NSTableCellView {
   }
   
   func prepare(workspace: WorkspaceModel) {
-    textDisposable.disposable = workspace.name.asObservable().map { $0.firstCharacterString }.bind(to: textField!.rx.text)
+    textDisposable.disposable = workspace.nameObservable.map { $0.firstCharacterString }.bind(to: textField!.rx.text)
     textDisposable.disposed(by: bag)
   }
-  
-  
 }

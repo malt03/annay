@@ -18,7 +18,7 @@ final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
     self.workspace = workspace
     super.init()
     
-    workspace.url.asObservable().subscribe(onNext: { [weak self] _ in
+    workspace.urlObservable.subscribe(onNext: { [weak self] _ in
       guard let s = self else { return }
       NSFileCoordinator.removeFilePresenter(s)
       NSFileCoordinator.addFilePresenter(s)
@@ -30,13 +30,13 @@ final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
   }
   
   var presentedItemURL: URL? {
-    return workspace.url.value.deletingLastPathComponent()
+    return workspace.url.deletingLastPathComponent()
   }
   
   let presentedItemOperationQueue = OperationQueue()
   
   func presentedSubitemDidChange(at url: URL) {
-    if url.appendingPathComponent("x") != workspace.url.value.appendingPathComponent("x") { return }
+    if !url.isEqualIgnoringLastSlash(workspace.url) { return }
     if FileManager.default.fileExists(atPath: url.path) { return }
     DispatchQueue.main.async {
       WorkspaceModel.spaces.value.remove(object: self.workspace)

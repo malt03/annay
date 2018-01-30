@@ -9,7 +9,7 @@
 import Foundation
 
 enum MarkDownEditorError: LocalizedError {
-  case fileExists
+  case fileExists(oldUrl: URL?)
   
   var errorDescription: String? {
     switch self {

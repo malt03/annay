@@ -24,4 +24,12 @@ extension URL {
     let uti = (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
     return uti == "koji.murata.markdowneditor.workspace"
   }
+  
+  func isEqualIgnoringLastSlash(_ url: URL) -> Bool {
+    return appendingPathComponent("x") == url.appendingPathComponent("x")
+  }
+  
+  var name: String {
+    return deletingPathExtension().lastPathComponent
+  }
 }

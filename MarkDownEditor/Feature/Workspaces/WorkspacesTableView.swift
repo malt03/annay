@@ -35,7 +35,7 @@ final class WorkspacesTableView: NSTableView {
     menu.addItem(NSMenuItem(title: Localized("Show in Finder"), action: #selector(showInFinder), keyEquivalent: ""))
     menu.addItem(NSMenuItem.separator())
     menu.addItem(NSMenuItem(title: Localized("Delete"), action: #selector(delete), keyEquivalent: ""))
-    menu.addItem(NSMenuItem(title: Localized("Move the source directory"), action: #selector(move), keyEquivalent: ""))
+    menu.addItem(NSMenuItem(title: Localized("Move the workspace file"), action: #selector(move), keyEquivalent: ""))
     menu.popUp(positioning: nil, at: location, in: self)
   }
   
@@ -51,7 +51,7 @@ final class WorkspacesTableView: NSTableView {
   
   @objc private func showInFinder() {
     if selectedRow == -1 { return }
-    let url = WorkspaceModel.spaces.value[selectedRow].url.value
+    let url = WorkspaceModel.spaces.value[selectedRow].url
     NSWorkspace.shared.selectFile(url.path, inFileViewerRootedAtPath: url.deletingLastPathComponent().path)
   }
 }
