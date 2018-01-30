@@ -159,7 +159,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="5TB-xv-gAB" id="MBw-1T-Mln"/>
-                        <segue destination="hq4-NC-f6R" kind="sheet" identifier="createWorkspace" id="nG7-5l-gRl"/>
+                        <segue destination="hq4-NC-f6R" kind="sheet" identifier="createOrOpenWorkspace" id="nG7-5l-gRl"/>
                         <segue destination="2Zz-rt-Hmg" kind="sheet" identifier="moveWorkspace" id="l1I-lM-d9f"/>
                     </connections>
                 </viewController>

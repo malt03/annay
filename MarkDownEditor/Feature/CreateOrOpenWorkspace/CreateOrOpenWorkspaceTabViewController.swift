@@ -10,24 +10,35 @@ import Cocoa
 
 final class CreateOrOpenWorkspaceTabViewController: NSViewController {
   @IBOutlet private weak var parentView: ContainerView!
+  @IBOutlet private weak var segmentedControl: NSSegmentedControl!
   
   enum Segment: Int {
     case create
     case open
   }
   
+  func prepare(segment: Segment) {
+    self.segment = segment
+  }
+  
+  private var segment = Segment.create {
+    didSet { reloadSegment() }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     parentView.parentViewController = self
-    updateSegment(.create)
+    reloadSegment()
   }
   
   @IBAction private func changeSegment(_ sender: NSSegmentedControl) {
     guard let segment = Segment(rawValue: sender.selectedSegment) else { return }
-    updateSegment(segment)
+    self.segment = segment
   }
   
-  private func updateSegment(_ segment: Segment) {
+  private func reloadSegment() {
+    if !isViewLoaded { return }
+    segmentedControl.selectedSegment = segment.rawValue
     let vc = viewController(for: segment)
     parentView.present(viewController: vc)
     view.window?.makeFirstResponder(vc)
@@ -42,7 +53,6 @@ final class CreateOrOpenWorkspaceTabViewController: NSViewController {
   
   private lazy var openWorkspaceViewController: OpenWorkspaceViewController = {
     return NSStoryboard(name: .init(rawValue: "OpenWorkspace"), bundle: .main).instantiateInitialController() as! OpenWorkspaceViewController
-    
   }()
   
   private lazy var createWorkspaceViewController: CreateWorkspaceViewController = {

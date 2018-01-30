@@ -21,6 +21,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 extension AppDelegate {
+  @IBAction private func open(_ sender: NSMenuItem) {
+    NotificationCenter.default.post(name: .OpenWorkspace, object: nil)
+  }
+
   @IBAction private func openQuickly(_ sender: NSMenuItem) {
     OpenQuicklyWindowController.toggle()
   }
@@ -47,6 +51,7 @@ extension AppDelegate {
 }
 
 extension Notification.Name {
+  static let OpenWorkspace = Notification.Name(rawValue: "AppDelegate/OpenWorkspace")
   static let RevealInSidebar = Notification.Name(rawValue: "AppDelegate/RevealInSidebar")
   static let SelectNextWorkspace = Notification.Name(rawValue: "AppDelegate/SelectNextWorkspace")
   static let SelectPreviousWorkspace = Notification.Name(rawValue: "AppDelegate/SelectPreviousWorkspace")

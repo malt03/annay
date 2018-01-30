@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -63,10 +63,15 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="Open Quickly..." keyEquivalent="O" id="GYs-FS-78G">
+                                        <menuItem title="Open..." keyEquivalent="o" id="GYs-FS-78G">
+                                            <connections>
+                                                <action selector="open:" target="Voe-Tx-rLC" id="8MB-tF-xO2"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Open Quickly..." keyEquivalent="O" id="pT4-6r-lB5">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>
-                                                <action selector="openQuickly:" target="Voe-Tx-rLC" id="hf2-Tc-Sc4"/>
+                                                <action selector="openQuickly:" target="Voe-Tx-rLC" id="egM-gh-TtT"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Reveal in Sidebar" keyEquivalent="J" id="dho-Lx-BAg">
