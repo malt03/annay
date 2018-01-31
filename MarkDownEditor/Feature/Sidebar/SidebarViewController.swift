@@ -214,6 +214,7 @@ final class SidebarViewController: NSViewController {
     outlineView.reloadData() // アニメーション走らせると表示がバグる
     let row = outlineView.row(forItem: group)
     if row >= 0 {
+      outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
       outlineView.editColumn(0, row: row, with: nil, select: true)
     }
   }
@@ -234,6 +235,7 @@ final class SidebarViewController: NSViewController {
   
   @objc private func delete() {
     NSApplication.shared.endEditing()
+    outlineView.expandItem(NodeModel.trash)
     let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }.removeChildren
     let beforeCount = NodeModel.deleted.count
     Realm.transaction { _ in
@@ -245,7 +247,6 @@ final class SidebarViewController: NSViewController {
     }
     let afterCount = NodeModel.deleted.count
     
-    outlineView.expandItem(NodeModel.trash)
     let indexSet = IndexSet(integersIn: beforeCount..<afterCount)
     outlineView.insertItems(at: indexSet, inParent: NodeModel.trash, withAnimation: .slideLeft)
   }
