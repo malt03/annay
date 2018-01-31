@@ -132,6 +132,10 @@ final class SidebarViewController: NSViewController {
     }).disposed(by: bag)
   }
   
+  @IBAction private func finishSearch(_ sender: NSButton) {
+    isSearching.value = false
+  }
+  
   @IBAction private func secondaryClicked(_ sender: NSClickGestureRecognizer) {
     let location = sender.location(in: outlineView)
     secondaryClickedRow = outlineView.row(at: location)

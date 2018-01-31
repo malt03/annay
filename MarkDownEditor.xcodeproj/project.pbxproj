@@ -120,6 +120,7 @@
 /* Begin PBXFileReference section */
 		ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableCellView.swift; sourceTree = "<group>"; };
 		ED09A000201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableRowView.swift; sourceTree = "<group>"; };
+		ED0C373B2021609E00D1CC20 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = MarkDownEditor/ja.lproj/Sidebar.strings; sourceTree = "<group>"; };
 		ED187FD120052D30002E51C0 /* markdown.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = markdown.html; sourceTree = "<group>"; };
 		ED187FD320053206002E51C0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ED19084A201F6EC0009497EE /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -713,6 +714,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				EDA736C9200E24F8000BC5DA /* Base */,
+				ED0C373B2021609E00D1CC20 /* ja */,
 			);
 			name = Sidebar.storyboard;
 			sourceTree = "<group>";
