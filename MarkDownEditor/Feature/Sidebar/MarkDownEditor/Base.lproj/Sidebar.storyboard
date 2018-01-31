@@ -15,14 +15,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="280" height="730"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Xsw-qJ-WBe" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="700" width="280" height="30"/>
+                                <subviews>
+                                    <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITs-ya-jKc">
+                                        <rect key="frame" x="8" y="6" width="264" height="19"/>
+                                        <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="J8c-Wg-B5i">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                    </searchField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="1" id="Pdx-aw-bKk"/>
+                                    <constraint firstItem="ITs-ya-jKc" firstAttribute="leading" secondItem="Xsw-qJ-WBe" secondAttribute="leading" constant="8" id="WfW-TF-Qn5"/>
+                                    <constraint firstAttribute="bottom" secondItem="ITs-ya-jKc" secondAttribute="bottom" constant="6" id="gGF-JH-bqI"/>
+                                    <constraint firstAttribute="height" priority="999" constant="30" id="jYN-qe-rIC"/>
+                                    <constraint firstAttribute="trailing" secondItem="ITs-ya-jKc" secondAttribute="trailing" constant="8" id="q4k-JL-cNp"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" red="0.058823529411764705" green="0.058823529411764705" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </customView>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Mcp-JE-IhX">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="682"/>
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="652"/>
                                 <clipView key="contentView" drawsBackground="NO" id="kLv-YC-w6R">
-                                    <rect key="frame" x="0.0" y="0.0" width="280" height="682"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="280" height="652"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveColumns="NO" rowHeight="24" viewBased="YES" floatsGroupRows="NO" indentationPerLevel="14" autosaveExpandedItems="YES" outlineTableColumn="hkY-av-AqO" id="SgN-Px-bBE">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="682"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="652"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <gestureRecognizers>
                                                 <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="LMQ-W6-UtE">
@@ -139,7 +164,7 @@
                                 </scroller>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Pz3-O6-rZ8">
-                                <rect key="frame" x="0.0" y="682" width="280" height="48"/>
+                                <rect key="frame" x="0.0" y="652" width="280" height="48"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ggo-HV-esS">
                                         <rect key="frame" x="16" y="12" width="248" height="19"/>
@@ -163,17 +188,23 @@
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Pz3-O6-rZ8" firstAttribute="top" secondItem="68f-Wd-hUG" secondAttribute="top" id="H7g-oO-0Hd"/>
                             <constraint firstItem="Mcp-JE-IhX" firstAttribute="top" secondItem="Pz3-O6-rZ8" secondAttribute="bottom" id="IzG-Lw-iwv"/>
+                            <constraint firstItem="Pz3-O6-rZ8" firstAttribute="top" secondItem="Xsw-qJ-WBe" secondAttribute="bottom" id="MEi-By-xZW"/>
                             <constraint firstItem="Pz3-O6-rZ8" firstAttribute="leading" secondItem="68f-Wd-hUG" secondAttribute="leading" id="apA-ih-u2f"/>
                             <constraint firstItem="Mcp-JE-IhX" firstAttribute="leading" secondItem="68f-Wd-hUG" secondAttribute="leading" id="iRm-ZZ-rMM"/>
                             <constraint firstAttribute="bottom" secondItem="Mcp-JE-IhX" secondAttribute="bottom" id="pbe-cd-nEI"/>
+                            <constraint firstItem="Xsw-qJ-WBe" firstAttribute="top" secondItem="68f-Wd-hUG" secondAttribute="top" id="qCa-eA-YNm"/>
                             <constraint firstAttribute="trailing" secondItem="Pz3-O6-rZ8" secondAttribute="trailing" id="rOY-1d-MEC"/>
+                            <constraint firstItem="Xsw-qJ-WBe" firstAttribute="leading" secondItem="68f-Wd-hUG" secondAttribute="leading" id="swc-VZ-nLg"/>
                             <constraint firstAttribute="trailing" secondItem="Mcp-JE-IhX" secondAttribute="trailing" id="xfJ-lp-2xp"/>
+                            <constraint firstAttribute="trailing" secondItem="Xsw-qJ-WBe" secondAttribute="trailing" id="zxN-u8-tDz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="outlineView" destination="SgN-Px-bBE" id="0qa-0v-86C"/>
+                        <outlet property="searchField" destination="ITs-ya-jKc" id="fj4-mw-xc6"/>
+                        <outlet property="searchFieldHiddenConstraint" destination="Pdx-aw-bKk" id="wOq-a5-cJi"/>
+                        <outlet property="searchFieldPresentConstraint" destination="jYN-qe-rIC" id="ynm-hB-hEb"/>
                         <outlet property="workspaceNameTextField" destination="Ggo-HV-esS" id="1E3-rV-rHF"/>
                     </connections>
                 </viewController>

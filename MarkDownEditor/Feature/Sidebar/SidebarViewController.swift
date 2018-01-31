@@ -22,8 +22,14 @@ final class SidebarViewController: NSViewController {
   private let workspaceNameDisposable = SerialDisposable()
   private let workspaceNameEditDisposable = SerialDisposable()
   
+  @IBOutlet private weak var searchFieldHiddenConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var searchFieldPresentConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var searchField: NSSearchField!
   @IBOutlet private weak var workspaceNameTextField: NSTextField!
   @IBOutlet private weak var outlineView: NSOutlineView!
+  
+  private let isSearching = Variable<Bool>(false)
+  private let searchText = Variable<String?>(nil)
   
   private var secondaryClickedRow = -1
   private var textEditing = false
@@ -36,6 +42,22 @@ final class SidebarViewController: NSViewController {
     outlineView.headerView = nil
     
     reloadData()
+    
+    Observable.combineLatest(isSearching.asObservable(), searchField.rx.text) { (isSearching, searchText) -> String? in
+      if !isSearching { return nil }
+      if searchText == "" { return nil }
+      return searchText
+    }.bind(to: searchText).disposed(by: bag)
+    
+    isSearching.asObservable().subscribe(onNext: { [weak self] (isSearching) in
+      guard let s = self else { return }
+      s.searchFieldPresentConstraint.priority = isSearching ? .required : .defaultLow
+      s.searchFieldHiddenConstraint.priority = isSearching ? .defaultLow : .required
+    }).disposed(by: bag)
+    
+    searchText.asObservable().subscribe(onNext: { [weak self] _ in
+      self?.outlineView.reloadData()
+    }).disposed(by: bag)
     
     NSApplication.shared.endEditing()
   }
@@ -258,6 +280,7 @@ extension SidebarViewController: NSGestureRecognizerDelegate {
   func gestureRecognizer(_ gestureRecognizer: NSGestureRecognizer, shouldAttemptToRecognizeWith event: NSEvent) -> Bool {
     return event.modifierFlags.contains(NSEvent.ModifierFlags.control)
   }
+  
 }
 
 extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
