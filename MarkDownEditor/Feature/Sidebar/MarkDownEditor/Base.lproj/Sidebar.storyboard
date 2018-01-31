@@ -25,6 +25,9 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="PrQ-Do-4mD" id="63Z-lh-Dnp"/>
+                                        </connections>
                                     </searchField>
                                 </subviews>
                                 <constraints>
