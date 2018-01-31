@@ -25,8 +25,10 @@ final class NodeModel: Object {
   @objc dynamic var createdAt = Date()
   @objc dynamic var isDeleted = false
   @objc dynamic var deletedAt: Date?
+  @objc dynamic var updatedAt = Date()
   
   func setBody(_ body: String?) {
+    updatedAt = Date()
     self.body = body
     let markdownName = body?.components(separatedBy: CharacterSet.newlines)[0] ?? Localized("New Note")
     name = markdownName.replacingOccurrences(of: "^#+ ", with: "", options: .regularExpression)
@@ -92,6 +94,19 @@ final class NodeModel: Object {
     guard let query = query else { return result.empty }
     if query == "" { return result.empty }
     return result.filter("isDirectory = false and name contains[c] %@", query).sorted(byKeyPath: "name")
+  }
+  
+  static var updatedAt: Observable<Date> {
+    return Observable<Date>.create { (observer) -> Disposable in
+      let result = Realm.instance.objects(NodeModel.self).sorted(byKeyPath: "updatedAt", ascending: false)
+      let updatedAtToken = result.observe { _ in
+        let updatedAt = Realm.instance.objects(NodeModel.self).sorted(byKeyPath: "updatedAt", ascending: false).first?.updatedAt
+        observer.onNext(updatedAt ?? Date(timeIntervalSince1970: 0))
+      }
+      return Disposables.create {
+        updatedAtToken.invalidate()
+      }
+    }
   }
   
   static var selectedNode: Variable<NodeModel?> = {

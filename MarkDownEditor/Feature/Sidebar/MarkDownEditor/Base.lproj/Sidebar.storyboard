@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="PrQ-Do-4mD">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="PrQ-Do-4mD">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -68,13 +68,13 @@
                                 </userDefinedRuntimeAttributes>
                             </customView>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Mcp-JE-IhX">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="652"/>
+                                <rect key="frame" x="0.0" y="50" width="280" height="602"/>
                                 <clipView key="contentView" drawsBackground="NO" id="kLv-YC-w6R">
-                                    <rect key="frame" x="0.0" y="0.0" width="280" height="652"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="280" height="602"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveColumns="NO" rowHeight="24" viewBased="YES" floatsGroupRows="NO" indentationPerLevel="14" autosaveExpandedItems="YES" outlineTableColumn="hkY-av-AqO" id="SgN-Px-bBE">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="652"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="602"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <gestureRecognizers>
                                                 <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="LMQ-W6-UtE">
@@ -197,7 +197,7 @@
                                 <rect key="frame" x="0.0" y="652" width="280" height="48"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ggo-HV-esS">
-                                        <rect key="frame" x="16" y="12" width="248" height="19"/>
+                                        <rect key="frame" x="14" y="13" width="252" height="19"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="NkE-8o-Pfx">
                                             <customFormatter key="formatter" id="SMd-Qy-PpH" customClass="WorkspaceNameFormatter" customModule="MarkDownEditor" customModuleProvider="target"/>
                                             <font key="font" metaFont="system" size="16"/>
@@ -210,23 +210,54 @@
                                     </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Ggo-HV-esS" secondAttribute="trailing" constant="18" id="FAb-Xs-z04"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ggo-HV-esS" secondAttribute="trailing" constant="16" id="FAb-Xs-z04"/>
                                     <constraint firstAttribute="height" constant="48" id="SgN-xY-J6f"/>
-                                    <constraint firstItem="Ggo-HV-esS" firstAttribute="centerY" secondItem="Pz3-O6-rZ8" secondAttribute="centerY" constant="3" id="lZD-5V-fjW"/>
-                                    <constraint firstItem="Ggo-HV-esS" firstAttribute="leading" secondItem="Pz3-O6-rZ8" secondAttribute="leading" constant="18" id="wce-f4-KdL"/>
+                                    <constraint firstItem="Ggo-HV-esS" firstAttribute="top" secondItem="Pz3-O6-rZ8" secondAttribute="top" constant="16" id="TNr-dk-pL8"/>
+                                    <constraint firstItem="Ggo-HV-esS" firstAttribute="leading" secondItem="Pz3-O6-rZ8" secondAttribute="leading" constant="16" id="wce-f4-KdL"/>
                                 </constraints>
                             </customView>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zOJ-K0-MKD">
+                                <rect key="frame" x="152" y="16" width="112" height="18"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Vv-oh-MzE">
+                                        <rect key="frame" x="-2" y="0.0" width="80" height="18"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Updated at " id="7Qa-W5-Vib">
+                                            <font key="font" metaFont="system" size="14"/>
+                                            <color key="textColor" name="Placeholder"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nkn-dX-xPZ">
+                                        <rect key="frame" x="74" y="0.0" width="40" height="18"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="izq-5O-gdY">
+                                            <font key="font" metaFont="system" size="14"/>
+                                            <color key="textColor" name="Placeholder"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Mcp-JE-IhX" firstAttribute="top" secondItem="Pz3-O6-rZ8" secondAttribute="bottom" id="IzG-Lw-iwv"/>
                             <constraint firstItem="Pz3-O6-rZ8" firstAttribute="top" secondItem="Xsw-qJ-WBe" secondAttribute="bottom" id="MEi-By-xZW"/>
+                            <constraint firstItem="zOJ-K0-MKD" firstAttribute="top" secondItem="Mcp-JE-IhX" secondAttribute="bottom" constant="16" id="aPv-QX-pki"/>
                             <constraint firstItem="Pz3-O6-rZ8" firstAttribute="leading" secondItem="68f-Wd-hUG" secondAttribute="leading" id="apA-ih-u2f"/>
+                            <constraint firstAttribute="trailing" secondItem="zOJ-K0-MKD" secondAttribute="trailing" constant="16" id="gcX-S3-WzR"/>
                             <constraint firstItem="Mcp-JE-IhX" firstAttribute="leading" secondItem="68f-Wd-hUG" secondAttribute="leading" id="iRm-ZZ-rMM"/>
-                            <constraint firstAttribute="bottom" secondItem="Mcp-JE-IhX" secondAttribute="bottom" id="pbe-cd-nEI"/>
                             <constraint firstItem="Xsw-qJ-WBe" firstAttribute="top" secondItem="68f-Wd-hUG" secondAttribute="top" id="qCa-eA-YNm"/>
                             <constraint firstAttribute="trailing" secondItem="Pz3-O6-rZ8" secondAttribute="trailing" id="rOY-1d-MEC"/>
                             <constraint firstItem="Xsw-qJ-WBe" firstAttribute="leading" secondItem="68f-Wd-hUG" secondAttribute="leading" id="swc-VZ-nLg"/>
                             <constraint firstAttribute="trailing" secondItem="Mcp-JE-IhX" secondAttribute="trailing" id="xfJ-lp-2xp"/>
+                            <constraint firstAttribute="bottom" secondItem="zOJ-K0-MKD" secondAttribute="bottom" constant="16" id="yaH-SR-kgb"/>
                             <constraint firstAttribute="trailing" secondItem="Xsw-qJ-WBe" secondAttribute="trailing" id="zxN-u8-tDz"/>
                         </constraints>
                     </view>
@@ -235,6 +266,7 @@
                         <outlet property="searchField" destination="ITs-ya-jKc" id="fj4-mw-xc6"/>
                         <outlet property="searchFieldHiddenConstraint" destination="Pdx-aw-bKk" id="wOq-a5-cJi"/>
                         <outlet property="searchFieldPresentConstraint" destination="jYN-qe-rIC" id="ynm-hB-hEb"/>
+                        <outlet property="updatedAtLabel" destination="Nkn-dX-xPZ" id="E73-sA-reV"/>
                         <outlet property="workspaceNameTextField" destination="Ggo-HV-esS" id="1E3-rV-rHF"/>
                     </connections>
                 </viewController>
@@ -244,6 +276,9 @@
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <namedColor name="Placeholder">
+            <color red="0.47499999403953552" green="0.48800000548362732" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Text">
             <color red="0.94900000095367432" green="0.97600001096725464" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

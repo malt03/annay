@@ -27,6 +27,7 @@ final class SidebarViewController: NSViewController {
   @IBOutlet private weak var searchField: NSSearchField!
   @IBOutlet private weak var workspaceNameTextField: NSTextField!
   @IBOutlet private weak var outlineView: NSOutlineView!
+  @IBOutlet private weak var updatedAtLabel: NSTextField!
   
   private let isSearching = Variable<Bool>(false)
   private let queryText = Variable<String?>(nil)
@@ -61,6 +62,13 @@ final class SidebarViewController: NSViewController {
     queryText.asObservable().subscribe(onNext: { [weak self] _ in
       self?.outlineView.reloadData()
     }).disposed(by: bag)
+    
+    NodeModel.updatedAt.map {
+      let formatter = DateFormatter()
+      formatter.dateStyle = .short
+      formatter.timeStyle = .short
+      return formatter.string(from: $0)
+    }.bind(to: updatedAtLabel.rx.text).disposed(by: bag)
     
     NSApplication.shared.endEditing()
   }
