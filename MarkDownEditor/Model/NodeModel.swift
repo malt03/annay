@@ -9,6 +9,7 @@
 import RealmSwift
 import Cocoa
 import RxSwift
+import CoreSpotlight
 
 final class NodeModel: Object {
   private static var trashId: String { return "trash" }
@@ -32,6 +33,8 @@ final class NodeModel: Object {
     self.body = body
     let markdownName = body?.components(separatedBy: CharacterSet.newlines)[0] ?? Localized("New Note")
     name = markdownName.replacingOccurrences(of: "^#+ ", with: "", options: .regularExpression)
+    
+    updateSpotlight()
   }
   
   func updateCheckbox(content: String, index: Int, isChecked: Bool) {
@@ -263,5 +266,17 @@ extension NodeModel: NSPasteboardWriting {
     case .string:    return body
     default:         return nil
     }
+  }
+}
+
+// スポットライト
+extension NodeModel {
+  private func updateSpotlight() {
+    if isDirectory { return }
+    let attribute = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+    attribute.title = name
+    attribute.textContent = body
+    let item = CSSearchableItem(uniqueIdentifier: id, domainIdentifier: nil, attributeSet: attribute)
+    CSSearchableIndex.default().indexSearchableItems([item], completionHandler: nil)
   }
 }
