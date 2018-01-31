@@ -21,44 +21,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 extension AppDelegate {
-  @IBAction private func openWorkspace(_ sender: NSMenuItem) {
-    NotificationCenter.default.post(name: .OpenWorkspace, object: nil)
-  }
-
-  @IBAction private func createWorkspace(_ sender: NSMenuItem) {
-    NotificationCenter.default.post(name: .CreateWorkspace, object: nil)
-  }
+  @IBAction private func findInWorkspace(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .FindInWorkspace, object: nil) }
+  @IBAction private func openWorkspace(_ sender: NSMenuItem)            { NotificationCenter.default.post(name: .OpenWorkspace, object: nil) }
+  @IBAction private func createWorkspace(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .CreateWorkspace, object: nil) }
+  @IBAction private func createNote(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .CreateNote, object: nil) }
+  @IBAction private func revealInSidebar(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .RevealInSidebar, object: nil) }
+  @IBAction private func selectNextWorkspace(_ sender: NSMenuItem)      { NotificationCenter.default.post(name: .SelectNextWorkspace, object: nil) }
+  @IBAction private func selectPreviousWorkspace(_ sender: NSMenuItem)  { NotificationCenter.default.post(name: .SelectPreviousWorkspace, object: nil) }
+  @IBAction private func moveFocusToSidebar(_ sender: NSMenuItem)       { NotificationCenter.default.post(name: .MoveFocusToSidebar, object: nil) }
+  @IBAction private func moveFocusToEditor(_ sender: NSMenuItem)        { NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil) }
   
-  @IBAction private func createNote(_ sender: NSMenuItem) {
-    NotificationCenter.default.post(name: .CreateNote, object: nil)
-  }
-
   @IBAction private func openQuickly(_ sender: NSMenuItem) {
     OpenQuicklyWindowController.toggle()
-  }
-  
-  @IBAction private func revealInSidebar(_ sender: NSMenuItem) {
-    NotificationCenter.default.post(name: .RevealInSidebar, object: nil)
-  }
-  
-  @IBAction private func selectNextWorkspace(_ sender: NSMenuItem) {
-    NotificationCenter.default.post(name: .SelectNextWorkspace, object: nil)
-  }
-  
-  @IBAction private func selectPreviousWorkspace(_ sender: NSMenuItem) {
-    NotificationCenter.default.post(name: .SelectPreviousWorkspace, object: nil)
-  }
-  
-  @IBAction private func moveFocusToSidebar(_ sender: NSMenuItem) {
-    NotificationCenter.default.post(name: .MoveFocusToSidebar, object: nil)
-  }
-  
-  @IBAction private func moveFocusToEditor(_ sender: NSMenuItem) {
-    NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
   }
 }
 
 extension Notification.Name {
+  static let FindInWorkspace = Notification.Name(rawValue: "AppDelegate/FindInWorkspace")
   static let OpenWorkspace = Notification.Name(rawValue: "AppDelegate/OpenWorkspace")
   static let CreateWorkspace = Notification.Name(rawValue: "AppDelegate/CreateWorkspace")
   static let RevealInSidebar = Notification.Name(rawValue: "AppDelegate/RevealInSidebar")

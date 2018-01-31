@@ -28,7 +28,7 @@ final class SidebarViewController: NSViewController {
   @IBOutlet private weak var workspaceNameTextField: NSTextField!
   @IBOutlet private weak var outlineView: NSOutlineView!
   
-  private let isSearching = Variable<Bool>(true)
+  private let isSearching = Variable<Bool>(false)
   private let queryText = Variable<String?>(nil)
   
   private var secondaryClickedRow = -1
@@ -51,8 +51,11 @@ final class SidebarViewController: NSViewController {
     
     isSearching.asObservable().subscribe(onNext: { [weak self] (isSearching) in
       guard let s = self else { return }
-      s.searchFieldPresentConstraint.priority = isSearching ? .required : .defaultLow
-      s.searchFieldHiddenConstraint.priority = isSearching ? .defaultLow : .required
+      s.searchFieldPresentConstraint.priority = isSearching ? .defaultHigh : .defaultLow
+      s.searchFieldHiddenConstraint.priority = isSearching ? .defaultLow : .defaultHigh
+      if isSearching {
+        s.view.window?.makeFirstResponder(s.searchField)
+      }
     }).disposed(by: bag)
     
     queryText.asObservable().subscribe(onNext: { [weak self] _ in
@@ -64,9 +67,10 @@ final class SidebarViewController: NSViewController {
   
   override func viewWillAppear() {
     super.viewWillAppear()
-    NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutSecondaryClick), name: .CreateNote, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar), name: .RevealInSidebar, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar), name: .MoveFocusToSidebar, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(findInWorkspace),                 name: .FindInWorkspace,    object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutSecondaryClick), name: .CreateNote,         object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar),                 name: .RevealInSidebar,    object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar),              name: .MoveFocusToSidebar, object: nil)
   }
   
   override func viewWillDisappear() {
@@ -83,6 +87,10 @@ final class SidebarViewController: NSViewController {
         s.outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
       }
     }).disposed(by: bag)
+  }
+  
+  @objc private func findInWorkspace() {
+    isSearching.value = true
   }
   
   @objc private func revealInSidebar() {
@@ -429,6 +437,7 @@ extension SidebarViewController: NSTextFieldDelegate {
     switch commandSelector {
     case #selector(textView.insertNewline(_:)), #selector(textView.cancelOperation(_:)):
       NSApplication.shared.endEditing()
+      isSearching.value = false
       return true
     default: return false
     }
