@@ -31,7 +31,9 @@ final class NodeModel: Object {
   func setBody(_ body: String?) {
     updatedAt = Date()
     self.body = body
-    let markdownName = body?.components(separatedBy: CharacterSet.newlines)[0] ?? Localized("New Note")
+    let nameFromBody = body?.components(separatedBy: CharacterSet.newlines)[safe: 0]?.trimmingCharacters(in: .whitespacesAndNewlines)
+    var markdownName = nameFromBody ?? Localized("New Note")
+    if markdownName == "" { markdownName = Localized("New Note") }
     name = markdownName.replacingOccurrences(of: "^#+ ", with: "", options: .regularExpression)
     
     updateSpotlight()
