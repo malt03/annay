@@ -11,9 +11,12 @@ import Cocoa
 final class TextView: NSTextView {
   override func awakeFromNib() {
     super.awakeFromNib()
-    font = NSFont(name: "Osaka-Mono", size: 16)
+    font = NSFont(name: "Osaka-Mono", size: 14)
     textColor = .text
     textContainerInset = NSSize(width: 10, height: 10)
     insertionPointColor = .text
+    let style = NSMutableParagraphStyle()
+    style.lineSpacing = 4
+    defaultParagraphStyle = style
   }
 }
