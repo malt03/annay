@@ -19,6 +19,13 @@ final class NodeModel: Object {
   
   @objc dynamic var body: String?
   
+  @objc dynamic var parent: NodeModel?
+  let descendants = List<NodeModel>()
+  @objc dynamic var index = 0
+  @objc dynamic var createdAt = Date()
+  @objc dynamic var isDeleted = false
+  @objc dynamic var deletedAt: Date?
+  
   func setBody(_ body: String?) {
     self.body = body
     let markdownName = body?.components(separatedBy: CharacterSet.newlines)[0] ?? Localized("New Note")
@@ -35,13 +42,6 @@ final class NodeModel: Object {
     }
   }
   
-  @objc dynamic var parent: NodeModel?
-  let descendants = List<NodeModel>()
-  @objc dynamic var index = 0
-  @objc dynamic var createdAt = Date()
-  @objc dynamic var isDeleted = false
-  @objc dynamic var deletedAt: Date?
-  
   override static func primaryKey() -> String? {
     return "id"
   }
@@ -55,10 +55,14 @@ final class NodeModel: Object {
   }
   
   private let children = LinkingObjects(fromType: NodeModel.self, property: "parent")
-  lazy var sortedChildren: Results<NodeModel> = {
+  func sortedChildren(query: String?) -> Results<NodeModel> {
     if id == NodeModel.trashId { return NodeModel.deleted }
-    return children.filter("isDeleted = %@ and index >= %@", false, 0).sorted(by: ["index", "createdAt"])
-  }()
+    let result = children.filter("isDeleted = %@ and index >= %@", false, 0).sorted(by: ["index", "createdAt"])
+    if let query = query {
+      return result.filter("body contains %@ or any descendants.body contains %@", query, query)
+    }
+    return result
+  }
   
   var ancestors: [NodeModel] {
     guard let parent = parent else { return [] }
@@ -73,10 +77,14 @@ final class NodeModel: Object {
     return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: id)
   }
   
-  static var roots: Results<NodeModel> {
-    return Realm.instance.objects(NodeModel.self)
+  static func roots(query: String?) -> Results<NodeModel> {
+    let result = Realm.instance.objects(NodeModel.self)
       .filter("parent = nil and id != %@ and index >= %@ and isDeleted = %@", trashId, 0, false)
       .sorted(by: ["index", "createdAt"])
+    if let query = query {
+      return result.filter("any descendants.body contains %@", query)
+    }
+    return result
   }
   
   static func search(query: String?) -> Results<NodeModel> {
@@ -145,10 +153,10 @@ extension NodeModel {
     Realm.transaction { (realm) in
       node.name = name
       if let parent = parent {
-        node.index = (parent.sortedChildren.last?.index ?? -1) + 1
+        node.index = (parent.sortedChildren(query: nil).last?.index ?? -1) + 1
         node.setParent(parent)
       } else {
-        node.index = (roots.last?.index ?? -1) + 1
+        node.index = (roots(query: nil).last?.index ?? -1) + 1
       }
       realm.add(node)
     }
@@ -159,7 +167,7 @@ extension NodeModel {
     let node = NodeModel()
     Realm.transaction { (realm) in
       node.name = name
-      node.index = (directory.sortedChildren.last?.index ?? -1) + 1
+      node.index = (directory.sortedChildren(query: nil).last?.index ?? -1) + 1
       node.isDirectory = false
       node.setParent(directory)
       realm.add(node)

@@ -28,8 +28,8 @@ final class SidebarViewController: NSViewController {
   @IBOutlet private weak var workspaceNameTextField: NSTextField!
   @IBOutlet private weak var outlineView: NSOutlineView!
   
-  private let isSearching = Variable<Bool>(false)
-  private let searchText = Variable<String?>(nil)
+  private let isSearching = Variable<Bool>(true)
+  private let queryText = Variable<String?>(nil)
   
   private var secondaryClickedRow = -1
   private var textEditing = false
@@ -47,7 +47,7 @@ final class SidebarViewController: NSViewController {
       if !isSearching { return nil }
       if searchText == "" { return nil }
       return searchText
-    }.bind(to: searchText).disposed(by: bag)
+    }.bind(to: queryText).disposed(by: bag)
     
     isSearching.asObservable().subscribe(onNext: { [weak self] (isSearching) in
       guard let s = self else { return }
@@ -55,7 +55,7 @@ final class SidebarViewController: NSViewController {
       s.searchFieldHiddenConstraint.priority = isSearching ? .defaultLow : .required
     }).disposed(by: bag)
     
-    searchText.asObservable().subscribe(onNext: { [weak self] _ in
+    queryText.asObservable().subscribe(onNext: { [weak self] _ in
       self?.outlineView.reloadData()
     }).disposed(by: bag)
     
@@ -238,7 +238,7 @@ final class SidebarViewController: NSViewController {
       }
     }
     for node in putBackNodes {
-      guard let index = node.parent?.sortedChildren.index(of: node) else {
+      guard let index = node.parent?.sortedChildren(query: queryText.value).index(of: node) else {
         outlineView.reloadData()
         break
       }
@@ -254,9 +254,9 @@ final class SidebarViewController: NSViewController {
   private func insert(node: NodeModel, in parent: NodeModel?) {
     let index: Int
     if let parent = parent {
-      index = parent.sortedChildren.count - 1
+      index = parent.sortedChildren(query: queryText.value).count - 1
     } else {
-      index = NodeModel.roots.count - 1
+      index = NodeModel.roots(query: queryText.value).count - 1
     }
     outlineView.insertItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .effectFade)
     if let parent = parent { outlineView.expandItem(parent) }
@@ -298,8 +298,15 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-    guard let node = item as? NodeModel else { return NodeModel.roots.count + 1 }
-    return node.sortedChildren.count
+    guard let node = item as? NodeModel else {
+      let rootCount = NodeModel.roots(query: queryText.value).count
+      if queryText.value == nil {
+        return rootCount + 1
+      } else {
+        return rootCount
+      }
+    }
+    return node.sortedChildren(query: queryText.value).count
   }
   
   func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
@@ -309,10 +316,10 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   
   func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
     guard let node = item as? NodeModel else {
-      if index == NodeModel.roots.count { return NodeModel.trash }
-      return NodeModel.roots[index]
+      if index == NodeModel.roots(query: queryText.value).count { return NodeModel.trash }
+      return NodeModel.roots(query: queryText.value)[index]
     }
-    return node.sortedChildren[index]
+    return node.sortedChildren(query: queryText.value)[index]
   }
 
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
@@ -368,7 +375,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
 
     var fixedIndex: Int
     if index < 0 {
-      fixedIndex = parent == nil ? NodeModel.roots.count : 0
+      fixedIndex = parent == nil ? NodeModel.roots(query: queryText.value).count : 0
     } else {
       fixedIndex = index
     }
@@ -384,7 +391,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
           }
         } else {
           for node in movedNodes { node.index = -1 }
-          for (i, child) in (parent?.sortedChildren ?? NodeModel.roots).enumerated() {
+          for (i, child) in (parent?.sortedChildren(query: queryText.value) ?? NodeModel.roots(query: queryText.value)).enumerated() {
             if fixedIndex > i {
               child.index = i
             } else {
