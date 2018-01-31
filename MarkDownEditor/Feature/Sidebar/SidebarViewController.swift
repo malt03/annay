@@ -210,8 +210,12 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func createGroup() {
-    NodeModel.createDirectory(name: Localized("New Group"), parent: nil)
+    let group = NodeModel.createDirectory(name: Localized("New Group"), parent: nil)
     outlineView.reloadData() // アニメーション走らせると表示がバグる
+    let row = outlineView.row(forItem: group)
+    if row >= 0 {
+      outlineView.editColumn(0, row: row, with: nil, select: true)
+    }
   }
   
   override func keyDown(with event: NSEvent) {
@@ -448,7 +452,13 @@ extension SidebarViewController: NSTextFieldDelegate {
   func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
     switch commandSelector {
     case #selector(textView.insertNewline(_:)), #selector(textView.cancelOperation(_:)):
-      NSApplication.shared.endEditing()
+      let selectedRow = outlineView.selectedRow
+      view.window?.makeFirstResponder(outlineView)
+      if selectedRow >= 0 {
+        DispatchQueue.main.async {
+          self.outlineView.selectRowIndexes(IndexSet(integer: selectedRow), byExtendingSelection: false)
+        }
+      }
       isSearching.value = false
       return true
     default: return false
