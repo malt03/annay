@@ -281,7 +281,6 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func delete() {
-    NSApplication.shared.endEditing()
     outlineView.expandItem(NodeModel.trash)
     let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }.removeChildren
     let beforeCount = NodeModel.deleted.count
@@ -294,8 +293,14 @@ final class SidebarViewController: NSViewController {
     }
     let afterCount = NodeModel.deleted.count
     
-    let indexSet = IndexSet(integersIn: beforeCount..<afterCount)
-    outlineView.insertItems(at: indexSet, inParent: NodeModel.trash, withAnimation: .slideLeft)
+    let insertIndexSet = IndexSet(integersIn: beforeCount..<afterCount)
+    outlineView.insertItems(at: insertIndexSet, inParent: NodeModel.trash, withAnimation: .slideLeft)
+    let trashRow = outlineView.row(forItem: NodeModel.trash)
+    var selectIndexSet = IndexSet()
+    for insertIndex in insertIndexSet {
+      selectIndexSet.insert(trashRow + insertIndex + 1)
+    }
+    outlineView.selectRowIndexes(selectIndexSet, byExtendingSelection: false)
   }
   
   @objc private func putBackFromTrash() {
