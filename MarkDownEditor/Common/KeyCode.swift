@@ -125,4 +125,6 @@ enum KeyCode: UInt16 {
   case keypad7        = 0x59
   case keypad8        = 0x5B
   case keypad9        = 0x5C
+  
+  case none           = 0xFFFF
 }

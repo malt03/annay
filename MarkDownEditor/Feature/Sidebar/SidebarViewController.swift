@@ -229,8 +229,20 @@ final class SidebarViewController: NSViewController {
   override func keyUp(with event: NSEvent) {
     super.keyUp(with: event)
     
-    if !textEditing && event.isPushed(.delete) {
-      delete()
+    if !textEditing {
+      switch KeyCode(rawValue: event.keyCode) ?? .none {
+      case .returnKey: moveFocusToEditor()
+      case .delete:    delete()
+      default: break
+      }
+    }
+  }
+  
+  private func moveFocusToEditor() {
+    if outlineView.selectedRowIndexes.count == 1 {
+      if let node = outlineView.item(atRow: outlineView.selectedRow) as? NodeModel, !node.isDirectory {
+        NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
+      }
     }
   }
   
@@ -306,7 +318,6 @@ extension SidebarViewController: NSGestureRecognizerDelegate {
   func gestureRecognizer(_ gestureRecognizer: NSGestureRecognizer, shouldAttemptToRecognizeWith event: NSEvent) -> Bool {
     return event.modifierFlags.contains(NSEvent.ModifierFlags.control)
   }
-  
 }
 
 extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
