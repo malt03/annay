@@ -296,12 +296,17 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="fC0-np-zd0"/>
-                                        <menuItem title="Move Focus to Sidebar" keyEquivalent="1" id="FM8-a0-dLY">
+                                        <menuItem title="Move Focus to Workspaces" keyEquivalent="1" id="FM8-a0-dLY">
                                             <connections>
-                                                <action selector="moveFocusToSidebar:" target="Voe-Tx-rLC" id="Lep-M4-7Ug"/>
+                                                <action selector="moveFocusToWorkspaces:" target="Voe-Tx-rLC" id="rMS-d9-osx"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Move Focus to Editor" keyEquivalent="2" id="TMX-GJ-Mle">
+                                        <menuItem title="Move Focus to Sidebar" keyEquivalent="2" id="9TX-yL-o4q">
+                                            <connections>
+                                                <action selector="moveFocusToSidebar:" target="Voe-Tx-rLC" id="8EP-bZ-9Lo"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move Focus to Editor" keyEquivalent="3" id="TMX-GJ-Mle">
                                             <connections>
                                                 <action selector="moveFocusToEditor:" target="Voe-Tx-rLC" id="mtu-Ka-D6L"/>
                                             </connections>

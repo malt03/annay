@@ -34,6 +34,7 @@ final class WorkspacesViewController: NSViewController {
   
   override func viewWillAppear() {
     super.viewWillAppear()
+    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToWorkspaces), name: .MoveFocusToWorkspaces, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(openWorkspace), name: .OpenWorkspace, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(createWorkspace), name: .CreateWorkspace, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(selectNextWorkspace), name: .SelectNextWorkspace, object: nil)
@@ -43,6 +44,10 @@ final class WorkspacesViewController: NSViewController {
   override func viewWillDisappear() {
     super.viewWillDisappear()
     NotificationCenter.default.removeObserver(self)
+  }
+  
+  @objc private func moveFocusToWorkspaces() {
+    view.window?.makeFirstResponder(tableView)
   }
   
   @objc private func openWorkspace() {
