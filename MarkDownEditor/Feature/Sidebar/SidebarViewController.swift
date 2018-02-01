@@ -109,6 +109,7 @@ final class SidebarViewController: NSViewController {
     let row = outlineView.row(forItem: selected)
     if row == -1 { return }
     outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+    moveFocusToSidebar()
   }
   
   @objc private func moveFocusToSidebar() {
