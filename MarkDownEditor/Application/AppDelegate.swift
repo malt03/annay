@@ -18,14 +18,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
     return WorkspaceModel.open(url: URL(fileURLWithPath: filename))
   }
-
 }
 
 extension AppDelegate {
   @IBAction private func findInWorkspace(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .FindInWorkspace, object: nil) }
   @IBAction private func openWorkspace(_ sender: NSMenuItem)            { NotificationCenter.default.post(name: .OpenWorkspace, object: nil) }
-  @IBAction private func createWorkspace(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .CreateWorkspace, object: nil) }
   @IBAction private func createNote(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .CreateNote, object: nil) }
+  @IBAction private func createDirectory(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .CreateDirectory, object: nil) }
+  @IBAction private func createGroup(_ sender: NSMenuItem)              { NotificationCenter.default.post(name: .CreateGroup, object: nil) }
+  @IBAction private func createWorkspace(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .CreateWorkspace, object: nil) }
   @IBAction private func revealInSidebar(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .RevealInSidebar, object: nil) }
   @IBAction private func selectNextNote(_ sender: NSMenuItem)           { NotificationCenter.default.post(name: .SelectNextNote, object: nil) }
   @IBAction private func selectPreviousNote(_ sender: NSMenuItem)       { NotificationCenter.default.post(name: .SelectPreviousNote, object: nil) }
@@ -43,9 +44,11 @@ extension AppDelegate {
 extension Notification.Name {
   static let FindInWorkspace = Notification.Name(rawValue: "AppDelegate/FindInWorkspace")
   static let OpenWorkspace = Notification.Name(rawValue: "AppDelegate/OpenWorkspace")
-  static let CreateWorkspace = Notification.Name(rawValue: "AppDelegate/CreateWorkspace")
   static let RevealInSidebar = Notification.Name(rawValue: "AppDelegate/RevealInSidebar")
   static let CreateNote = Notification.Name(rawValue: "AppDelegate/CreateNote")
+  static let CreateDirectory = Notification.Name(rawValue: "AppDelegate/CreateDirectory")
+  static let CreateGroup = Notification.Name(rawValue: "AppDelegate/CreateGroup")
+  static let CreateWorkspace = Notification.Name(rawValue: "AppDelegate/CreateWorkspace")
   static let SelectNextNote = Notification.Name(rawValue: "AppDelegate/SelectNextNote")
   static let SelectPreviousNote = Notification.Name(rawValue: "AppDelegate/SelectPreviousNote")
   static let SelectNextWorkspace = Notification.Name(rawValue: "AppDelegate/SelectNextWorkspace")

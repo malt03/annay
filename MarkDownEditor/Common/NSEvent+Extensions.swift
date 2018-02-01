@@ -12,4 +12,8 @@ extension NSEvent {
   func isPushed(_ keyCode: KeyCode) -> Bool {
     return self.keyCode == keyCode.rawValue
   }
+  
+  func isPressModifierFlags(only flag: NSEvent.ModifierFlags) -> Bool {
+    return modifierFlags.intersection(.deviceIndependentFlagsMask) == .command
+  }
 }

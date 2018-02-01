@@ -75,12 +75,14 @@ final class SidebarViewController: NSViewController {
   
   override func viewWillAppear() {
     super.viewWillAppear()
-    NotificationCenter.default.addObserver(self, selector: #selector(selectNextNote),                  name: .SelectNextNote,     object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(selectPreviousNote),              name: .SelectPreviousNote, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(findInWorkspace),                 name: .FindInWorkspace,    object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutSecondaryClick), name: .CreateNote,         object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar),                 name: .RevealInSidebar,    object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar),              name: .MoveFocusToSidebar, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(selectNextNote),                       name: .SelectNextNote,     object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(selectPreviousNote),                   name: .SelectPreviousNote, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(findInWorkspace),                      name: .FindInWorkspace,    object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutSecondaryClick),      name: .CreateNote,         object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createDirectoryWithoutSecondaryClick), name: .CreateDirectory,    object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createGroup),                          name: .CreateGroup,        object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar),                      name: .RevealInSidebar,    object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar),                   name: .MoveFocusToSidebar, object: nil)
   }
   
   override func viewWillDisappear() {
@@ -228,7 +230,13 @@ final class SidebarViewController: NSViewController {
     }
   }
   
+  @objc private func createDirectoryWithoutSecondaryClick() {
+    secondaryClickedRow = outlineView.selectedRow
+    createDirectory()
+  }
+  
   @objc private func createDirectory() {
+    guard let selectedParent = selectedParent else { return }
     let insertedNode = NodeModel.createDirectory(parent: selectedParent)
     insert(node: insertedNode, in: selectedParent)
   }

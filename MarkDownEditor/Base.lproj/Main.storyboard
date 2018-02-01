@@ -8,7 +8,7 @@
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
-                <application id="hnw-xV-0zn" sceneMemberID="viewController">
+                <application id="hnw-xV-0zn" customClass="Application" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
                             <menuItem title="MarkDownEditor" id="1Xt-HY-uBw">
@@ -63,21 +63,44 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
+                                        <menuItem title="New" id="JMo-Dl-a5G">
+                                            <menu key="submenu" title="File" id="G3u-f0-Dhr">
+                                                <items>
+                                                    <menuItem title="New Workspace... [⌘N W]" id="O6a-Cm-4FV">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="createWorkspace:" target="Voe-Tx-rLC" id="9f9-I7-up8"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem isSeparatorItem="YES" id="Mph-iz-9dP"/>
+                                                    <menuItem title="New Note... [⌘N N]" id="KyX-YP-jO0">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="createNote:" target="Voe-Tx-rLC" id="3Uo-nv-khC"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="New Directory... [⌘N D]" id="erI-B1-GO4">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="createDirectory:" target="Voe-Tx-rLC" id="oQF-hz-uTI"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="New Group... [⌘N G]" id="aIz-cv-gDu">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="createGroup:" target="Voe-Tx-rLC" id="yPM-O3-qtB"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                            <connections>
+                                                <action selector="openWorkspace:" target="Voe-Tx-rLC" id="qGz-eb-nqX"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="lch-Ip-u2g"/>
                                         <menuItem title="Open Workspace..." keyEquivalent="o" id="GYs-FS-78G">
                                             <connections>
                                                 <action selector="openWorkspace:" target="Voe-Tx-rLC" id="r7u-54-fIv"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="New Workspace..." keyEquivalent="N" id="O6a-Cm-4FV">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="createWorkspace:" target="Voe-Tx-rLC" id="9f9-I7-up8"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="Mph-iz-9dP"/>
-                                        <menuItem title="New Note..." keyEquivalent="n" id="KyX-YP-jO0">
-                                            <connections>
-                                                <action selector="createNote:" target="Voe-Tx-rLC" id="3Uo-nv-khC"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open Quickly..." keyEquivalent="O" id="pT4-6r-lB5">

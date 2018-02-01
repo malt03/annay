@@ -42,7 +42,7 @@
 	<key>NSMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<string>MarkDownEditor.Application</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
