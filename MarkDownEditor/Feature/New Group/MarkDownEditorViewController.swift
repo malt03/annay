@@ -62,8 +62,7 @@ final class MarkDownEditorViewController: NSViewController {
   }
   
   override func cancelOperation(_ sender: Any?) {
-    NSApplication.shared.endEditing()
-    webView.isHidden = false
+    NotificationCenter.default.post(name: .MoveFocusToSidebar, object: nil)
   }
 
   private func prepareTextView() {
