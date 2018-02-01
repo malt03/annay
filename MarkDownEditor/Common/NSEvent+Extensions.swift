@@ -14,6 +14,6 @@ extension NSEvent {
   }
   
   func isPressModifierFlags(only flag: NSEvent.ModifierFlags) -> Bool {
-    return modifierFlags.intersection(.deviceIndependentFlagsMask) == .command
+    return modifierFlags.intersection(.deviceIndependentFlagsMask) == flag
   }
 }

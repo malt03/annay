@@ -73,19 +73,18 @@
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem isSeparatorItem="YES" id="Mph-iz-9dP"/>
-                                                    <menuItem title="New Note... [⌘N N]" id="KyX-YP-jO0">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <menuItem title="New Note..." keyEquivalent="n" id="KyX-YP-jO0">
                                                         <connections>
                                                             <action selector="createNote:" target="Voe-Tx-rLC" id="3Uo-nv-khC"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="New Directory... [⌘N D]" id="erI-B1-GO4">
+                                                    <menuItem title="New Directory... [⌥N D]" id="erI-B1-GO4">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="createDirectory:" target="Voe-Tx-rLC" id="oQF-hz-uTI"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="New Group... [⌘N G]" id="aIz-cv-gDu">
+                                                    <menuItem title="New Group... [⌥N G]" id="aIz-cv-gDu">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
                                                             <action selector="createGroup:" target="Voe-Tx-rLC" id="yPM-O3-qtB"/>

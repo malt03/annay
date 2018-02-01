@@ -16,9 +16,6 @@ final class Application: NSApplication {
       if commandNFlag {
         commandNFlag = false
         switch KeyCode(rawValue: event.keyCode) ?? .none {
-        case .n:
-          NotificationCenter.default.post(name: .CreateNote, object: nil)
-          return
         case .d:
           NotificationCenter.default.post(name: .CreateDirectory, object: nil)
           return
@@ -31,7 +28,7 @@ final class Application: NSApplication {
         default: break
         }
       } else {
-        if event.isPressModifierFlags(only: .command) && event.isPushed(.n) {
+        if event.isPressModifierFlags(only: .option) && event.isPushed(.n) {
           commandNFlag = true
           return
         }
