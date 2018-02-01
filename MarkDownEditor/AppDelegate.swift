@@ -18,6 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
     return WorkspaceModel.open(url: URL(fileURLWithPath: filename))
   }
+
 }
 
 extension AppDelegate {
@@ -26,6 +27,8 @@ extension AppDelegate {
   @IBAction private func createWorkspace(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .CreateWorkspace, object: nil) }
   @IBAction private func createNote(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .CreateNote, object: nil) }
   @IBAction private func revealInSidebar(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .RevealInSidebar, object: nil) }
+  @IBAction private func selectNextNote(_ sender: NSMenuItem)           { NotificationCenter.default.post(name: .SelectNextNote, object: nil) }
+  @IBAction private func selectPreviousNote(_ sender: NSMenuItem)       { NotificationCenter.default.post(name: .SelectPreviousNote, object: nil) }
   @IBAction private func selectNextWorkspace(_ sender: NSMenuItem)      { NotificationCenter.default.post(name: .SelectNextWorkspace, object: nil) }
   @IBAction private func selectPreviousWorkspace(_ sender: NSMenuItem)  { NotificationCenter.default.post(name: .SelectPreviousWorkspace, object: nil) }
   @IBAction private func moveFocusToWorkspaces(_ sender: NSMenuItem)    { NotificationCenter.default.post(name: .MoveFocusToWorkspaces, object: nil) }
@@ -43,6 +46,8 @@ extension Notification.Name {
   static let CreateWorkspace = Notification.Name(rawValue: "AppDelegate/CreateWorkspace")
   static let RevealInSidebar = Notification.Name(rawValue: "AppDelegate/RevealInSidebar")
   static let CreateNote = Notification.Name(rawValue: "AppDelegate/CreateNote")
+  static let SelectNextNote = Notification.Name(rawValue: "AppDelegate/SelectNextNote")
+  static let SelectPreviousNote = Notification.Name(rawValue: "AppDelegate/SelectPreviousNote")
   static let SelectNextWorkspace = Notification.Name(rawValue: "AppDelegate/SelectNextWorkspace")
   static let SelectPreviousWorkspace = Notification.Name(rawValue: "AppDelegate/SelectPreviousWorkspace")
   static let MoveFocusToWorkspaces = Notification.Name(rawValue: "AppDelegate/MoveFocusToWorkspaces")

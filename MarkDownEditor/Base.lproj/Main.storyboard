@@ -86,12 +86,6 @@
                                                 <action selector="openQuickly:" target="Voe-Tx-rLC" id="egM-gh-TtT"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Reveal in Sidebar" keyEquivalent="J" id="dho-Lx-BAg">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="revealInSidebar:" target="Voe-Tx-rLC" id="0Wh-EA-ZNo"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                                         <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
                                             <connections>
@@ -285,35 +279,6 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="View" id="H8h-7b-M4v">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="View" id="HyV-fh-RgO">
-                                    <items>
-                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="dU3-MA-1Rq"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="fC0-np-zd0"/>
-                                        <menuItem title="Move Focus to Workspaces" keyEquivalent="1" id="FM8-a0-dLY">
-                                            <connections>
-                                                <action selector="moveFocusToWorkspaces:" target="Voe-Tx-rLC" id="rMS-d9-osx"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Move Focus to Sidebar" keyEquivalent="2" id="9TX-yL-o4q">
-                                            <connections>
-                                                <action selector="moveFocusToSidebar:" target="Voe-Tx-rLC" id="8EP-bZ-9Lo"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Move Focus to Editor" keyEquivalent="3" id="TMX-GJ-Mle">
-                                            <connections>
-                                                <action selector="moveFocusToEditor:" target="Voe-Tx-rLC" id="mtu-Ka-D6L"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
                             <menuItem title="Find" id="u7w-er-oAN">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Find" id="1b7-l0-nxx">
@@ -359,22 +324,29 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Window" id="aUF-d1-5bR">
+                            <menuItem title="Navigate" id="Jb9-sc-0Pu">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
+                                <menu key="submenu" title="Navigate" id="3St-bZ-rvp">
                                     <items>
-                                        <menuItem title="Minimize" keyEquivalent="m" id="OY7-WF-poV">
+                                        <menuItem title="Reveal in Sidebar" keyEquivalent="J" id="dho-Lx-BAg">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>
-                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="VwT-WD-YPe"/>
+                                                <action selector="revealInSidebar:" target="Voe-Tx-rLC" id="0Wh-EA-ZNo"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Zoom" id="R4o-n2-Eq4">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Select Next Note" keyEquivalent="" id="qZu-Kj-0QA">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                                             <connections>
-                                                <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
+                                                <action selector="selectNextNote:" target="Voe-Tx-rLC" id="WMA-SC-VWC"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
+                                        <menuItem title="Select Previous Note" keyEquivalent="" id="jf4-HL-MBM">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                            <connections>
+                                                <action selector="selectPreviousNote:" target="Voe-Tx-rLC" id="ta7-tz-lN9"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Jfh-yL-wjp"/>
                                         <menuItem title="Select Next Workspace" id="wb3-gr-hRL">
                                             <string key="keyEquivalent" base64-UTF8="YES">
 CQ
@@ -393,7 +365,47 @@ GQ
                                                 <action selector="selectPreviousWorkspace:" target="Voe-Tx-rLC" id="gZW-OC-o0Y"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="Jfh-yL-wjp"/>
+                                        <menuItem isSeparatorItem="YES" id="fC0-np-zd0"/>
+                                        <menuItem title="Move Focus to Workspaces" keyEquivalent="1" id="FM8-a0-dLY">
+                                            <connections>
+                                                <action selector="moveFocusToWorkspaces:" target="Voe-Tx-rLC" id="rMS-d9-osx"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move Focus to Sidebar" keyEquivalent="2" id="9TX-yL-o4q">
+                                            <connections>
+                                                <action selector="moveFocusToSidebar:" target="Voe-Tx-rLC" id="8EP-bZ-9Lo"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Move Focus to Editor" keyEquivalent="3" id="TMX-GJ-Mle">
+                                            <connections>
+                                                <action selector="moveFocusToEditor:" target="Voe-Tx-rLC" id="mtu-Ka-D6L"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Window" id="aUF-d1-5bR">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
+                                    <items>
+                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="4J7-dP-txa">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="toggleFullScreen:" target="Ady-hI-5gd" id="dU3-MA-1Rq"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Minimize" keyEquivalent="m" id="OY7-WF-poV">
+                                            <connections>
+                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="VwT-WD-YPe"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" id="R4o-n2-Eq4">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>

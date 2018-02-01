@@ -75,6 +75,8 @@ final class SidebarViewController: NSViewController {
   
   override func viewWillAppear() {
     super.viewWillAppear()
+    NotificationCenter.default.addObserver(self, selector: #selector(selectNextNote),                  name: .SelectNextNote,     object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(selectPreviousNote),              name: .SelectPreviousNote, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(findInWorkspace),                 name: .FindInWorkspace,    object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutSecondaryClick), name: .CreateNote,         object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar),                 name: .RevealInSidebar,    object: nil)
@@ -95,6 +97,38 @@ final class SidebarViewController: NSViewController {
         s.outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
       }
     }).disposed(by: bag)
+  }
+  
+  @objc private func selectNextNote() {
+    updateSelectedNode(rowDiff: 1)
+  }
+  
+  @objc private func selectPreviousNote() {
+    updateSelectedNode(rowDiff: -1)
+  }
+  
+  private func updateSelectedNode(rowDiff: Int) {
+    guard let node = NodeModel.selectedNode.value else { return }
+    let row = outlineView.row(forItem: node)
+    if row == -1 { return }
+    guard let selectRow = searchNoteRow(row: row, diff: rowDiff) else { return }
+    outlineView.selectRowIndexes(IndexSet(integer: selectRow), byExtendingSelection: false)
+  }
+  
+  private func searchNoteRow(row: Int, diff: Int) -> Int? {
+    var nextRow = row + diff
+    guard let nextNode = outlineView.item(atRow: nextRow) as? NodeModel else { return nil }
+    if nextNode.isDirectory {
+      if !outlineView.isItemExpanded(nextNode) {
+        let node = diff < 0 ? outlineView.item(atRow: row) : nil
+        outlineView.expandItem(nextNode)
+        if let node = node {
+          nextRow = outlineView.row(forItem: node)
+        }
+      }
+      return searchNoteRow(row: nextRow, diff: diff)
+    }
+    return nextRow
   }
   
   @objc private func findInWorkspace() {
