@@ -10,7 +10,9 @@ import Cocoa
 
 class BackgroundSetableView: NSView {
   @IBInspectable var cornerRadius: CGFloat = 0
-  @IBInspectable var backgroundColor: NSColor?
+  @IBInspectable var backgroundColor: NSColor? {
+    didSet { needsDisplay = true }
+  }
 
   override func draw(_ dirtyRect: NSRect) {
     if let backgroundColor = backgroundColor {

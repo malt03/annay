@@ -118,6 +118,7 @@
                                                                 <constraint firstItem="Ggv-hC-A4I" firstAttribute="leading" secondItem="5ZL-ub-f8W" secondAttribute="leading" constant="16" id="oNp-eX-McV"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="backgroundView" destination="Ggv-hC-A4I" id="Jyn-YK-JZL"/>
                                                                 <outlet property="imageView" destination="Hk9-Qc-qIe" id="7p7-En-61C"/>
                                                                 <outlet property="textField" destination="RQl-wX-Dsv" id="g0p-vO-5vQ"/>
                                                             </connections>

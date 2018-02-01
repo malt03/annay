@@ -24,4 +24,12 @@ final class WorkspacesTableCellView: NSTableCellView {
     textDisposable.disposable = workspace.nameObservable.map { $0.firstCharacterString }.bind(to: textField!.rx.text)
     textDisposable.disposed(by: bag)
   }
+  
+  override var backgroundStyle: NSView.BackgroundStyle {
+    get { return super.backgroundStyle }
+    set {
+      super.backgroundStyle = newValue
+      backgroundView.backgroundColor = backgroundStyle == .dark ? .focus : .editorBackground
+    }
+  }
 }

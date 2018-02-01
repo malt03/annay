@@ -13,7 +13,11 @@ final class NodeTableRowView: NSTableRowView {
   
   override func draw(_ dirtyRect: NSRect) {
     if isSelected {
-      NSColor.selectedRow.setFill()
+      if isEmphasized {
+        NSColor.focus.setFill()
+      } else {
+        NSColor.selectedRow.setFill()
+      }
       dirtyRect.fill()
     }
   }
