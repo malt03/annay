@@ -236,7 +236,7 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func createDirectory() {
-    guard let selectedParent = selectedParent else { return }
+    guard let selectedParent = selectedParent, !selectedParent.isDeleted else { return }
     let insertedNode = NodeModel.createDirectory(parent: selectedParent)
     insert(node: insertedNode, in: selectedParent)
   }
@@ -247,7 +247,7 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func createNote() {
-    guard let selectedParent = selectedParent else { return }
+    guard let selectedParent = selectedParent, !selectedParent.isDeleted else { return }
     let insertedNode = NodeModel.createNote(in: selectedParent)
     insert(node: insertedNode, in: selectedParent)
   }
