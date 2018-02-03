@@ -63,7 +63,7 @@ final class CreateWorkspaceViewController: NSViewController {
     let path = workspaceDirectoryTextField.stringValue.replacingTildeToHomePath
     do {
       let url = URL(fileURLWithPath: path, isDirectory: true)
-      try WorkspaceModel(name: workspaceNameTextField.stringValue, parentDirectoryUrl: url).save()
+      try WorkspaceModel(name: workspaceNameTextField.stringValue, parentDirectoryUrl: url).saveToUserDefaults()
       view.window?.close()
     } catch {
       let alert = NSAlert(error: error)

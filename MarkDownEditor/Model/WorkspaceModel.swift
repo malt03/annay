@@ -33,7 +33,7 @@ final class WorkspaceModel {
     if FileManager.default.fileExists(atPath: newUrl.path) { throw MarkDownEditorError.fileExists(oldUrl: url) }
     if FileManager.default.fileExists(atPath: url.path) { try FileManager.default.moveItem(at: url, to: newUrl) }
     _url.value = newUrl
-    save()
+    saveToUserDefaults()
   }
   
   func setName(_ newName: String) throws {
@@ -52,7 +52,7 @@ final class WorkspaceModel {
       WorkspaceModel.spaces.value[index].select()
     } else {
       do {
-        try WorkspaceModel(url: url).save()
+        try WorkspaceModel(url: url).saveToUserDefaults()
       } catch {
         NSAlert(error: error).runModal()
         return false
@@ -137,6 +137,18 @@ final class WorkspaceModel {
   }
   
   func save() {
+    do {
+      let urls = [
+        tmpDirectory.realmFile,
+        tmpDirectory.secretKeyFile,
+      ]
+      try Zip.zipFiles(paths: urls, zipFilePath: url, password: nil, compression: .BestSpeed, progress: nil)
+    } catch {
+      NSAlert(error: error).runModal()
+    }
+  }
+  
+  func saveToUserDefaults() {
     if let index = WorkspaceModel.spaces.value.index(of: self) {
       WorkspaceModel.spaces.value[index] = self
     } else {

@@ -96,9 +96,9 @@
 		EDFE82C020256AEC00702C85 /* RxCocoa.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B020256AE400702C85 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EDFE82C120256AEC00702C85 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B420256AE500702C85 /* RxSwift.framework */; };
 		EDFE82C220256AEC00702C85 /* RxSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B420256AE500702C85 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EDFE82C320256AEC00702C85 /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B620256AE500702C85 /* Zip.framework */; };
-		EDFE82C420256AEC00702C85 /* Zip.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B620256AE500702C85 /* Zip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EDFE82C620256BE700702C85 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE82C520256BE700702C85 /* FileManager+Extensions.swift */; };
+		EDFE82CE202583DF00702C85 /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82CD202583DD00702C85 /* Zip.framework */; };
+		EDFE82CF202583DF00702C85 /* Zip.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82CD202583DD00702C85 /* Zip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -113,7 +113,7 @@
 				EDFE82C220256AEC00702C85 /* RxSwift.framework in Embed Libraries */,
 				EDFE82BC20256AEC00702C85 /* RealmSwift.framework in Embed Libraries */,
 				EDFE82C020256AEC00702C85 /* RxCocoa.framework in Embed Libraries */,
-				EDFE82C420256AEC00702C85 /* Zip.framework in Embed Libraries */,
+				EDFE82CF202583DF00702C85 /* Zip.framework in Embed Libraries */,
 				EDFE82BE20256AEC00702C85 /* RxBlocking.framework in Embed Libraries */,
 			);
 			name = "Embed Libraries";
@@ -215,8 +215,8 @@
 		EDFE82B320256AE500702C85 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
 		EDFE82B420256AE500702C85 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
 		EDFE82B520256AE500702C85 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
-		EDFE82B620256AE500702C85 /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = Carthage/Build/Mac/Zip.framework; sourceTree = "<group>"; };
 		EDFE82C520256BE700702C85 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
+		EDFE82CD202583DD00702C85 /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = Carthage/Build/Mac/Zip.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,7 +229,7 @@
 				EDFE82C120256AEC00702C85 /* RxSwift.framework in Frameworks */,
 				EDFE82BB20256AEC00702C85 /* RealmSwift.framework in Frameworks */,
 				EDFE82BF20256AEC00702C85 /* RxCocoa.framework in Frameworks */,
-				EDFE82C320256AEC00702C85 /* Zip.framework in Frameworks */,
+				EDFE82CE202583DF00702C85 /* Zip.framework in Frameworks */,
 				EDFE82BD20256AEC00702C85 /* RxBlocking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,13 +505,13 @@
 		EDFE82AF20256AD900702C85 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				EDFE82CD202583DD00702C85 /* Zip.framework */,
 				EDFE82B220256AE400702C85 /* Kingfisher.framework */,
 				EDFE82B320256AE500702C85 /* Realm.framework */,
 				EDFE82B520256AE500702C85 /* RealmSwift.framework */,
 				EDFE82B120256AE400702C85 /* RxBlocking.framework */,
 				EDFE82B020256AE400702C85 /* RxCocoa.framework */,
 				EDFE82B420256AE500702C85 /* RxSwift.framework */,
-				EDFE82B620256AE500702C85 /* Zip.framework */,
 			);
 			name = Carthage;
 			sourceTree = "<group>";

@@ -24,7 +24,7 @@ extension Realm {
   }
   
   private static var configuration: Realm.Configuration {
-    let fileUrl = directory.appendingPathComponent("default.realm")
+    let fileUrl = directory.realmFile
     return Realm.Configuration(fileURL: fileUrl, encryptionKey: encryptionKey, deleteRealmIfMigrationNeeded: true)
   }
   
@@ -47,7 +47,7 @@ extension Realm {
   }
   
   private static var savedKey: Data {
-    let fileUrl = directory.appendingPathComponent("secretKey")
+    let fileUrl = directory.secretKeyFile
     if let key = try? Data(contentsOf: fileUrl) {
       return key
     } else {

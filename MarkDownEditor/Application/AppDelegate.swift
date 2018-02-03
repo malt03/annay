@@ -39,6 +39,10 @@ extension AppDelegate {
   @IBAction private func openQuickly(_ sender: NSMenuItem) {
     OpenQuicklyWindowController.toggle()
   }
+
+  @IBAction private func saveWorkspace(_ sender: NSMenuItem) {
+    WorkspaceModel.selected.value.save()
+  }
 }
 
 extension Notification.Name {

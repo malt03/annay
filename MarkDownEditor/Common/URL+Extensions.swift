@@ -32,4 +32,12 @@ extension URL {
   var name: String {
     return deletingPathExtension().lastPathComponent
   }
+  
+  var realmFile: URL {
+    return appendingPathComponent("default.realm")
+  }
+  
+  var secretKeyFile: URL {
+    return appendingPathComponent("secretKey")
+  }
 }
