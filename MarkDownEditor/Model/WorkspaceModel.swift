@@ -47,6 +47,10 @@ final class WorkspaceModel {
     return FileManager.default.applicationWorkspace.appendingPathComponent(id, isDirectory: true)
   }
   
+  static func conflictMessage(for name: String) -> String {
+    return String(format: Localized("File update for '%s' was detected. Which one should take priority?"), name)
+  }
+  
   var workspaceDirectory: URL {
     return WorkspaceModel.workspaceDirectory(for: id)
   }
@@ -89,18 +93,40 @@ final class WorkspaceModel {
     _url = Variable(url)
     _name = Variable(url.name)
     
-    let tmpDirectory = WorkspaceModel.workspaceDirectory(for: id)
+    let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: id)
     
     let fileManager = FileManager.default
     if fileManager.fileExists(atPath: url.path) {
       Zip.addCustomFileExtension(WorkspaceModel.fileExtension)
-      try Zip.unzipFile(url, destination: tmpDirectory, overwrite: true, password: nil)
+      
+      if fileManager.fileExists(atPath: workspaceDirectory.path) {
+        let tmpDirectory = fileManager.applicationTmp.appendingPathComponent(id)
+        try Zip.unzipFile(url, destination: tmpDirectory, overwrite: true, password: nil)
+        let savedUpdateId = lastSavedUpdateId ?? workspaceDirectory.updateId ?? ""
+        if tmpDirectory.updateId != savedUpdateId {
+          if workspaceDirectory.updateId == savedUpdateId {
+            try fileManager.removeItem(at: workspaceDirectory)
+            try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
+          } else {
+            let alert = NSAlert()
+            alert.messageText = WorkspaceModel.conflictMessage(for: url.name)
+            alert.addButton(withTitle: Localized("File"))
+            alert.addButton(withTitle: Localized("Editing Data"))
+            if alert.runModal() == .alertFirstButtonReturn {
+              try fileManager.removeItem(at: workspaceDirectory)
+              try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
+            }
+          }
+        }
+      } else {
+        try Zip.unzipFile(url, destination: workspaceDirectory, overwrite: true, password: nil)
+      }
     } else {
-      try fileManager.createDirectoryIfNeeded(url: tmpDirectory)
+      try fileManager.createDirectoryIfNeeded(url: workspaceDirectory)
     }
 
-    if fileManager.fileExists(atPath: tmpDirectory.infoFile.path) {
-      let infoData = try Data(contentsOf: tmpDirectory.infoFile)
+    if fileManager.fileExists(atPath: workspaceDirectory.infoFile.path) {
+      let infoData = try Data(contentsOf: workspaceDirectory.infoFile)
       info = try JSONSerialization.jsonObject(with: infoData, options: []) as? [String: Any] ?? [:]
     } else {
       info = [:]
@@ -288,5 +314,9 @@ extension URL {
 extension FileManager {
   fileprivate var applicationWorkspace: URL {
     return applicationSupport.appendingPathComponent("workspace", isDirectory: true)
+  }
+
+  fileprivate var applicationTmp: URL {
+    return applicationSupport.appendingPathComponent("tmp", isDirectory: true)
   }
 }
