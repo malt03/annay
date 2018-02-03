@@ -60,6 +60,8 @@
 		ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED841BD9200B2FD10097996A /* Colors.xcassets */; };
 		ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */; };
 		ED9CCA6D2025927600EB2F7C /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CCA6C2025927600EB2F7C /* DateFormatter+Extensions.swift */; };
+		ED9CCA732026189B00EB2F7C /* BeforeOfAllWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CCA722026189B00EB2F7C /* BeforeOfAllWindowController.swift */; };
+		ED9CCA7520261C3800EB2F7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED9CCA7420261C3800EB2F7C /* Main.storyboard */; };
 		ED9EEEE2201F639B00C96CC1 /* OpenWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED9EEEE4201F639B00C96CC1 /* OpenWorkspace.storyboard */; };
 		ED9EEEE8201F63E200C96CC1 /* OpenWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9EEEE7201F63E200C96CC1 /* OpenWorkspaceViewController.swift */; };
 		EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736C8200E24F8000BC5DA /* Sidebar.storyboard */; };
@@ -83,7 +85,7 @@
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
 		EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */; };
 		EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */; };
-		EDEB7A622004EDF000F8C48A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A602004EDF000F8C48A /* Main.storyboard */; };
+		EDEB7A622004EDF000F8C48A /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A602004EDF000F8C48A /* Launch.storyboard */; };
 		EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */; };
 		EDFE82B720256AEC00702C85 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B220256AE400702C85 /* Kingfisher.framework */; };
 		EDFE82B820256AEC00702C85 /* Kingfisher.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B220256AE400702C85 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -140,7 +142,6 @@
 		ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Extensions.swift"; sourceTree = "<group>"; };
 		ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		ED2E15AD200666B1003D55A3 /* NodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeModel.swift; sourceTree = "<group>"; };
-		ED434EF120079BF600C2357D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		ED434F0020079CD100C2357D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED434F0120079CFA00C2357D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ED434F0220079DBD00C2357D /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
@@ -182,6 +183,8 @@
 		ED841BD9200B2FD10097996A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableRowView.swift; sourceTree = "<group>"; };
 		ED9CCA6C2025927600EB2F7C /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		ED9CCA722026189B00EB2F7C /* BeforeOfAllWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeforeOfAllWindowController.swift; sourceTree = "<group>"; };
+		ED9CCA7420261C3800EB2F7C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		ED9EEEE3201F639B00C96CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OpenWorkspace.storyboard; sourceTree = "<group>"; };
 		ED9EEEE6201F639D00C96CC1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OpenWorkspace.strings; sourceTree = "<group>"; };
 		ED9EEEE7201F63E200C96CC1 /* OpenWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWorkspaceViewController.swift; sourceTree = "<group>"; };
@@ -207,7 +210,7 @@
 		EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkDownEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EDEB7A612004EDF000F8C48A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EDEB7A612004EDF000F8C48A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Launch.storyboard; sourceTree = "<group>"; };
 		EDEB7A632004EDF000F8C48A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkDownEditor.entitlements; sourceTree = "<group>"; };
 		EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorViewController.swift; sourceTree = "<group>"; };
@@ -434,8 +437,11 @@
 		EDB601472022C05800EDF59C /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				ED9CCA7420261C3800EB2F7C /* Main.storyboard */,
+				EDEB7A602004EDF000F8C48A /* Launch.storyboard */,
 				EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */,
 				EDB601482022C06A00EDF59C /* Application.swift */,
+				ED9CCA722026189B00EB2F7C /* BeforeOfAllWindowController.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -496,7 +502,6 @@
 				ED2E15AF200669B8003D55A3 /* Feature */,
 				ED2E15B0200669C8003D55A3 /* Model */,
 				EDB601472022C05800EDF59C /* Application */,
-				EDEB7A602004EDF000F8C48A /* Main.storyboard */,
 				EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */,
 				ED841BD9200B2FD10097996A /* Colors.xcassets */,
 				EDEB7A632004EDF000F8C48A /* Info.plist */,
@@ -592,7 +597,8 @@
 				EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */,
 				EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */,
 				EDD0A295200ED98700D5E7BE /* Workspaces.storyboard in Resources */,
-				EDEB7A622004EDF000F8C48A /* Main.storyboard in Resources */,
+				ED9CCA7520261C3800EB2F7C /* Main.storyboard in Resources */,
+				EDEB7A622004EDF000F8C48A /* Launch.storyboard in Resources */,
 				ED55C50C201312570070301A /* CreateWorkspace.storyboard in Resources */,
 				ED2E149C2005575A003D55A3 /* markdown-it-emoji.min.js in Resources */,
 				ED2E1496200555A5003D55A3 /* markdown-it-sub.min.js in Resources */,
@@ -675,6 +681,7 @@
 				ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */,
 				EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */,
 				ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */,
+				ED9CCA732026189B00EB2F7C /* BeforeOfAllWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,13 +750,12 @@
 			name = WorkspacePreference.storyboard;
 			sourceTree = "<group>";
 		};
-		EDEB7A602004EDF000F8C48A /* Main.storyboard */ = {
+		EDEB7A602004EDF000F8C48A /* Launch.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				EDEB7A612004EDF000F8C48A /* Base */,
-				ED434EF120079BF600C2357D /* ja */,
 			);
-			name = Main.storyboard;
+			name = Launch.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

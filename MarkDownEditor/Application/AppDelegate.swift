@@ -11,10 +11,6 @@ import RealmSwift
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-  func applicationWillFinishLaunching(_ notification: Notification) {
-    WorkspaceDirectoryWatcherManager.shared.prepare()
-  }
-  
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
     return WorkspaceModel.open(url: URL(fileURLWithPath: filename))
   }
