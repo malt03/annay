@@ -29,7 +29,7 @@ final class WorkspaceModel {
     didSet {
       do {
         let data = try JSONSerialization.data(withJSONObject: info, options: [])
-        try data.write(to: tmpDirectory.infoFile)
+        try data.write(to: workspaceDirectory.infoFile)
       } catch {}
     }
   }
@@ -43,12 +43,12 @@ final class WorkspaceModel {
     return Observable.combineLatest(updateId.asObservable(), lastSavedUpdateId.asObservable(), resultSelector: { $0 == $1 })
   }
   
-  static func tmpDirectory(for id: String) -> URL {
-    return FileManager.default.applicationTmp.appendingPathComponent(id, isDirectory: true)
+  static func workspaceDirectory(for id: String) -> URL {
+    return FileManager.default.applicationWorkspace.appendingPathComponent(id, isDirectory: true)
   }
   
-  var tmpDirectory: URL {
-    return WorkspaceModel.tmpDirectory(for: id)
+  var workspaceDirectory: URL {
+    return WorkspaceModel.workspaceDirectory(for: id)
   }
   
   func setUrl(_ newUrl: URL) throws {
@@ -89,7 +89,7 @@ final class WorkspaceModel {
     _url = Variable(url)
     _name = Variable(url.name)
     
-    let tmpDirectory = WorkspaceModel.tmpDirectory(for: id)
+    let tmpDirectory = WorkspaceModel.workspaceDirectory(for: id)
     
     let fileManager = FileManager.default
     if fileManager.fileExists(atPath: url.path) {
@@ -178,9 +178,9 @@ final class WorkspaceModel {
   func save() {
     do {
       let urls = [
-        tmpDirectory.realmFile,
-        tmpDirectory.secretKeyFile,
-        tmpDirectory.infoFile,
+        workspaceDirectory.realmFile,
+        workspaceDirectory.secretKeyFile,
+        workspaceDirectory.infoFile,
       ]
       try Zip.zipFiles(paths: urls, zipFilePath: url, password: nil, compression: .BestSpeed, progress: nil)
     } catch {
@@ -282,5 +282,11 @@ extension URL {
   fileprivate func getInfoData() throws -> [String: Any] {
     let infoData = try Data(contentsOf: infoFile)
     return try JSONSerialization.jsonObject(with: infoData, options: []) as? [String: Any] ?? [:]
+  }
+}
+
+extension FileManager {
+  fileprivate var applicationWorkspace: URL {
+    return applicationSupport.appendingPathComponent("workspace", isDirectory: true)
   }
 }

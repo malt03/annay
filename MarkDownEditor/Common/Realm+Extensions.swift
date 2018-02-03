@@ -66,7 +66,7 @@ extension Realm {
   }
   
   private static var directory: URL {
-    return WorkspaceModel.selected.value.tmpDirectory
+    return WorkspaceModel.selected.value.workspaceDirectory
   }
   
   static func transaction(_ block: (_ realm: Realm) -> Void) {

@@ -14,10 +14,6 @@ extension FileManager {
     return supportDirectory.appendingPathComponent(Bundle.main.bundleIdentifier!, isDirectory: true)
   }
   
-  var applicationTmp: URL {
-    return applicationSupport.appendingPathComponent("tmp", isDirectory: true)
-  }
-  
   func createDirectoryIfNeeded(url: URL) throws {
     if !fileExists(atPath: url.path) {
       try createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
