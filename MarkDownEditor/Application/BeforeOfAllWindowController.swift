@@ -15,6 +15,7 @@ final class BeforeOfAllWindowController: NSWindowController {
     DispatchQueue.main.async {
       WorkspaceDirectoryWatcherManager.shared.prepare()
       NodeModel.createFirstDirectoryIfNeeded()
+      for workspace in WorkspaceModel.spaces.value { workspace.saveToUserDefaults() }
       let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: .main)
       (storyboard.instantiateInitialController() as! NSWindowController).showWindow(nil)
       self.close()

@@ -95,6 +95,8 @@ final class WorkspaceModel {
     
     let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: id)
     
+    var tmpLastSavedUpdateId = lastSavedUpdateId
+    
     let fileManager = FileManager.default
     if fileManager.fileExists(atPath: url.path) {
       Zip.addCustomFileExtension(WorkspaceModel.fileExtension)
@@ -102,9 +104,9 @@ final class WorkspaceModel {
       if fileManager.fileExists(atPath: workspaceDirectory.path) {
         let tmpDirectory = fileManager.applicationTmp.appendingPathComponent(id)
         try Zip.unzipFile(url, destination: tmpDirectory, overwrite: true, password: nil)
-        let savedUpdateId = lastSavedUpdateId ?? workspaceDirectory.updateId ?? ""
-        if tmpDirectory.updateId != savedUpdateId {
-          if workspaceDirectory.updateId == savedUpdateId {
+        tmpLastSavedUpdateId = tmpLastSavedUpdateId ?? workspaceDirectory.updateId ?? ""
+        if tmpDirectory.updateId != tmpLastSavedUpdateId {
+          if workspaceDirectory.updateId == tmpLastSavedUpdateId {
             try fileManager.removeItem(at: workspaceDirectory)
             try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
           } else {
@@ -113,6 +115,7 @@ final class WorkspaceModel {
             alert.addButton(withTitle: Localized("File"))
             alert.addButton(withTitle: Localized("Editing Data"))
             if alert.runModal() == .alertFirstButtonReturn {
+              tmpLastSavedUpdateId = workspaceDirectory.updateId
               try fileManager.removeItem(at: workspaceDirectory)
               try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
             }
@@ -135,7 +138,7 @@ final class WorkspaceModel {
     _updatedAt = Variable<Date>(updatedAtFormatter.date(from: info[WorkspaceModel.updatedAtKey] as? String ?? "") ?? Date())
     let updateId = info[WorkspaceModel.updateIdKey] as? String ?? ""
     self.updateId = Variable(updateId)
-    self.lastSavedUpdateId = Variable(lastSavedUpdateId ?? updateId)
+    self.lastSavedUpdateId = Variable(tmpLastSavedUpdateId ?? updateId)
 
     selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
   }
