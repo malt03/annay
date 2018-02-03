@@ -10,16 +10,7 @@ import RealmSwift
 import Foundation
 
 extension Realm {
-  private static var prepared = false
-  
-  static func prepare() {
-    if prepared { return }
-    prepared = true
-    NodeModel.createFirstDirectoryIfNeeded()
-  }
-  
   static var instance: Realm {
-    prepare()
     return try! Realm(configuration: configuration)
   }
   

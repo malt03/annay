@@ -209,7 +209,7 @@
                                         </connections>
                                     </textField>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="FwV-rs-jxT" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
-                                        <rect key="frame" x="256" y="20" width="8" height="8"/>
+                                        <rect key="frame" x="256" y="19" width="8" height="8"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="8" id="Kcf-DZ-gAR"/>
                                             <constraint firstAttribute="width" constant="8" id="Yd8-H2-wUE"/>
@@ -228,8 +228,8 @@
                                     <constraint firstItem="FwV-rs-jxT" firstAttribute="leading" secondItem="Ggo-HV-esS" secondAttribute="trailing" constant="16" id="6iX-8s-L9n"/>
                                     <constraint firstAttribute="height" constant="48" id="SgN-xY-J6f"/>
                                     <constraint firstItem="Ggo-HV-esS" firstAttribute="top" secondItem="Pz3-O6-rZ8" secondAttribute="top" constant="16" id="TNr-dk-pL8"/>
+                                    <constraint firstItem="Ggo-HV-esS" firstAttribute="centerY" secondItem="FwV-rs-jxT" secondAttribute="centerY" id="ZA6-4f-Jef"/>
                                     <constraint firstAttribute="trailing" secondItem="FwV-rs-jxT" secondAttribute="trailing" constant="16" id="eIJ-Mc-3dd"/>
-                                    <constraint firstItem="FwV-rs-jxT" firstAttribute="centerY" secondItem="Pz3-O6-rZ8" secondAttribute="centerY" id="ndf-oE-xOU"/>
                                     <constraint firstItem="Ggo-HV-esS" firstAttribute="leading" secondItem="Pz3-O6-rZ8" secondAttribute="leading" constant="16" id="wce-f4-KdL"/>
                                 </constraints>
                             </customView>
