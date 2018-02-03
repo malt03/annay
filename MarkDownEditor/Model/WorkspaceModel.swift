@@ -19,10 +19,12 @@ final class WorkspaceModel {
   private let _url: Variable<URL>
   private let _name: Variable<String>
   private let _updatedAt: Variable<Date>
-  private let _saved: Variable<Bool>
-  private let updatedAtKey = "updatedAt"
   private let updatedAtFormatter = DateFormatter(dateStyle: .short, timeStyle: .short)
-  
+  private let updateId: Variable<String>
+  private let lastSavedUpdateId: Variable<String>
+
+  private static var updatedAtKey: String { return "updatedAt" }
+  fileprivate static var updateIdKey: String { return "updatedId" }
   private var info: [String: Any] {
     didSet {
       do {
@@ -37,7 +39,9 @@ final class WorkspaceModel {
   var nameObservable: Observable<String> { return _name.asObservable() }
   var name: String { return _name.value }
   var updatedAtObservable: Observable<Date> { return _updatedAt.asObservable() }
-  var savedObservable: Observable<Bool> { return _saved.asObservable() }
+  var savedObservable: Observable<Bool> {
+    return Observable.combineLatest(updateId.asObservable(), lastSavedUpdateId.asObservable(), resultSelector: { $0 == $1 })
+  }
   
   static func tmpDirectory(for id: String) -> URL {
     return FileManager.default.applicationTmp.appendingPathComponent(id, isDirectory: true)
@@ -80,11 +84,10 @@ final class WorkspaceModel {
     return true
   }
 
-  private init(id: String, url: URL, saved: Bool) throws {
+  private init(id: String, url: URL, lastSavedUpdateId: String?) throws {
     self.id = id
     _url = Variable(url)
     _name = Variable(url.name)
-    _saved = Variable(saved)
     
     let tmpDirectory = WorkspaceModel.tmpDirectory(for: id)
     
@@ -103,12 +106,10 @@ final class WorkspaceModel {
       info = [:]
     }
     
-    _updatedAt = Variable<Date>(updatedAtFormatter.date(from: info[updatedAtKey] as? String ?? "") ?? Date())
-    _updatedAt.asObservable().pairwised.subscribe(onNext: { [weak self] (oldDate, date) in
-      if oldDate == date { return }
-      guard let s = self else { return }
-      s.info[s.updatedAtKey] = s.updatedAtFormatter.string(from: date)
-    }).disposed(by: bag)
+    _updatedAt = Variable<Date>(updatedAtFormatter.date(from: info[WorkspaceModel.updatedAtKey] as? String ?? "") ?? Date())
+    let updateId = info[WorkspaceModel.updateIdKey] as? String ?? ""
+    self.updateId = Variable(updateId)
+    self.lastSavedUpdateId = Variable(lastSavedUpdateId ?? updateId)
 
     selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
   }
@@ -118,12 +119,12 @@ final class WorkspaceModel {
     if FileManager.default.fileExists(atPath: url.path) {
       throw MarkDownEditorError.fileExists(oldUrl: nil)
     }
-    try self.init(id: UUID().uuidString, url: url, saved: true)
+    try self.init(id: UUID().uuidString, url: url, lastSavedUpdateId: nil)
     _name.value = name
   }
   
   convenience init(url: URL) throws {
-    try self.init(id: UUID().uuidString, url: url, saved: true)
+    try self.init(id: UUID().uuidString, url: url, lastSavedUpdateId: nil)
   }
   
   private struct Key {
@@ -185,12 +186,18 @@ final class WorkspaceModel {
     } catch {
       NSAlert(error: error).runModal()
     }
-    _saved.value = true
+    lastSavedUpdateId.value = updateId.value
+    saveToUserDefaults()
   }
   
   func update() {
     _updatedAt.value = Date()
-    _saved.value = false
+    updateId.value = UUID().uuidString
+    info = [
+      WorkspaceModel.updateIdKey: updateId.value,
+      WorkspaceModel.updatedAtKey: updatedAtFormatter.string(from: _updatedAt.value),
+    ]
+    saveToUserDefaults()
   }
   
   func saveToUserDefaults() {
@@ -232,7 +239,7 @@ extension WorkspaceModel: SavableInUserDefaults {
     return [
       "id": id,
       "url": url.absoluteString,
-      "saved": _saved.value,
+      "lastSavedUpdateId": lastSavedUpdateId.value,
     ]
   }
   
@@ -241,10 +248,10 @@ extension WorkspaceModel: SavableInUserDefaults {
       let id = dictionary["id"] as? String,
       let urlString = dictionary["url"] as? String,
       let url = URL(string: urlString),
-      let saved = dictionary["saved"] as? Bool
+      let lastSavedUpdateId = dictionary["lastSavedUpdateId"] as? String
       else { return nil }
     do {
-      try self.init(id: id, url: url, saved: saved)
+      try self.init(id: id, url: url, lastSavedUpdateId: lastSavedUpdateId)
     } catch {
       NSAlert(error: error).runModal()
       return nil
@@ -265,5 +272,15 @@ extension WorkspaceModel: Hashable {
 extension URL {
   fileprivate var infoFile: URL {
     return appendingPathComponent("info.json")
+  }
+  
+  fileprivate var updateId: String? {
+    guard let info = try? getInfoData() else { return nil }
+    return info[WorkspaceModel.updateIdKey] as? String
+  }
+  
+  fileprivate func getInfoData() throws -> [String: Any] {
+    let infoData = try Data(contentsOf: infoFile)
+    return try JSONSerialization.jsonObject(with: infoData, options: []) as? [String: Any] ?? [:]
   }
 }
