@@ -31,7 +31,7 @@ final class WorkspaceModel {
   func setUrl(_ newUrl: URL) throws {
     if url == newUrl { return }
     if FileManager.default.fileExists(atPath: newUrl.path) { throw MarkDownEditorError.fileExists(oldUrl: url) }
-    try FileManager.default.moveItem(at: url, to: newUrl)
+    if FileManager.default.fileExists(atPath: url.path) { try FileManager.default.moveItem(at: url, to: newUrl) }
     _url.value = newUrl
     save()
   }
