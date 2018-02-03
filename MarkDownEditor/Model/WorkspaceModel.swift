@@ -67,9 +67,12 @@ final class WorkspaceModel {
     _name = Variable(url.name)
     
     let fileManager = FileManager.default
-    try fileManager.createDirectoryIfNeeded(url: tmpDirectory)
+
     if fileManager.fileExists(atPath: url.path) {
-      try Zip.unzipFile(url, destination: fileManager.applicationTmp, overwrite: true, password: nil)
+      Zip.addCustomFileExtension(WorkspaceModel.fileExtension)
+      try Zip.unzipFile(url, destination: tmpDirectory, overwrite: true, password: nil)
+    } else {
+      try fileManager.createDirectoryIfNeeded(url: tmpDirectory)
     }
     
     selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
