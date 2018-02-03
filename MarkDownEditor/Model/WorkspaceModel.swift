@@ -48,7 +48,7 @@ final class WorkspaceModel {
   }
   
   static func conflictMessage(for name: String) -> String {
-    return String(format: Localized("File update for '%s' was detected. Which one should take priority?"), name)
+    return String(format: Localized("File update for '%@' was detected.\nWhich one should take priority?"), name)
   }
   
   var workspaceDirectory: URL {
