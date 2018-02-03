@@ -18,14 +18,33 @@ final class WorkspaceModel {
   let id: String
   private let _url: Variable<URL>
   private let _name: Variable<String>
+  private let _updatedAt: Variable<Date>
+  private let _saved: Variable<Bool>
+  private let updatedAtKey = "updatedAt"
+  private let updatedAtFormatter = DateFormatter(dateStyle: .short, timeStyle: .short)
+  
+  private var info: [String: Any] {
+    didSet {
+      do {
+        let data = try JSONSerialization.data(withJSONObject: info, options: [])
+        try data.write(to: tmpDirectory.infoFile)
+      } catch {}
+    }
+  }
   
   var urlObservable: Observable<URL> { return _url.asObservable() }
   var url: URL { return _url.value }
   var nameObservable: Observable<String> { return _name.asObservable() }
   var name: String { return _name.value }
+  var updatedAtObservable: Observable<Date> { return _updatedAt.asObservable() }
+  var savedObservable: Observable<Bool> { return _saved.asObservable() }
+  
+  static func tmpDirectory(for id: String) -> URL {
+    return FileManager.default.applicationTmp.appendingPathComponent(id, isDirectory: true)
+  }
   
   var tmpDirectory: URL {
-    return FileManager.default.applicationTmp.appendingPathComponent(id, isDirectory: true)
+    return WorkspaceModel.tmpDirectory(for: id)
   }
   
   func setUrl(_ newUrl: URL) throws {
@@ -61,20 +80,36 @@ final class WorkspaceModel {
     return true
   }
 
-  private init(id: String, url: URL) throws {
+  private init(id: String, url: URL, saved: Bool) throws {
     self.id = id
     _url = Variable(url)
     _name = Variable(url.name)
+    _saved = Variable(saved)
+    
+    let tmpDirectory = WorkspaceModel.tmpDirectory(for: id)
     
     let fileManager = FileManager.default
-
     if fileManager.fileExists(atPath: url.path) {
       Zip.addCustomFileExtension(WorkspaceModel.fileExtension)
       try Zip.unzipFile(url, destination: tmpDirectory, overwrite: true, password: nil)
     } else {
       try fileManager.createDirectoryIfNeeded(url: tmpDirectory)
     }
+
+    if fileManager.fileExists(atPath: tmpDirectory.infoFile.path) {
+      let infoData = try Data(contentsOf: tmpDirectory.infoFile)
+      info = try JSONSerialization.jsonObject(with: infoData, options: []) as? [String: Any] ?? [:]
+    } else {
+      info = [:]
+    }
     
+    _updatedAt = Variable<Date>(updatedAtFormatter.date(from: info[updatedAtKey] as? String ?? "") ?? Date())
+    _updatedAt.asObservable().pairwised.subscribe(onNext: { [weak self] (oldDate, date) in
+      if oldDate == date { return }
+      guard let s = self else { return }
+      s.info[s.updatedAtKey] = s.updatedAtFormatter.string(from: date)
+    }).disposed(by: bag)
+
     selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
   }
   
@@ -83,12 +118,12 @@ final class WorkspaceModel {
     if FileManager.default.fileExists(atPath: url.path) {
       throw MarkDownEditorError.fileExists(oldUrl: nil)
     }
-    try self.init(id: UUID().uuidString, url: url)
+    try self.init(id: UUID().uuidString, url: url, saved: true)
     _name.value = name
   }
   
   convenience init(url: URL) throws {
-    try self.init(id: UUID().uuidString, url: url)
+    try self.init(id: UUID().uuidString, url: url, saved: true)
   }
   
   private struct Key {
@@ -144,11 +179,18 @@ final class WorkspaceModel {
       let urls = [
         tmpDirectory.realmFile,
         tmpDirectory.secretKeyFile,
+        tmpDirectory.infoFile,
       ]
       try Zip.zipFiles(paths: urls, zipFilePath: url, password: nil, compression: .BestSpeed, progress: nil)
     } catch {
       NSAlert(error: error).runModal()
     }
+    _saved.value = true
+  }
+  
+  func update() {
+    _updatedAt.value = Date()
+    _saved.value = false
   }
   
   func saveToUserDefaults() {
@@ -190,6 +232,7 @@ extension WorkspaceModel: SavableInUserDefaults {
     return [
       "id": id,
       "url": url.absoluteString,
+      "saved": _saved.value,
     ]
   }
   
@@ -197,10 +240,11 @@ extension WorkspaceModel: SavableInUserDefaults {
     guard
       let id = dictionary["id"] as? String,
       let urlString = dictionary["url"] as? String,
-      let url = URL(string: urlString)
+      let url = URL(string: urlString),
+      let saved = dictionary["saved"] as? Bool
       else { return nil }
     do {
-      try self.init(id: id, url: url)
+      try self.init(id: id, url: url, saved: saved)
     } catch {
       NSAlert(error: error).runModal()
       return nil
@@ -216,4 +260,10 @@ extension WorkspaceModel: Equatable {
 
 extension WorkspaceModel: Hashable {
   var hashValue: Int { return id.hashValue }
+}
+
+extension URL {
+  fileprivate var infoFile: URL {
+    return appendingPathComponent("info.json")
+  }
 }

@@ -21,7 +21,10 @@ final class SidebarViewController: NSViewController {
   private let bag = DisposeBag()
   private let workspaceNameDisposable = SerialDisposable()
   private let workspaceNameEditDisposable = SerialDisposable()
+  private let workspaceEditedDisposable = SerialDisposable()
+  private let workspaceUpdatedAtDisposable = SerialDisposable()
   
+  @IBOutlet private weak var editedView: BackgroundSetableView!
   @IBOutlet private weak var searchFieldHiddenConstraint: NSLayoutConstraint!
   @IBOutlet private weak var searchFieldPresentConstraint: NSLayoutConstraint!
   @IBOutlet private weak var searchField: NSSearchField!
@@ -62,13 +65,6 @@ final class SidebarViewController: NSViewController {
     queryText.asObservable().subscribe(onNext: { [weak self] _ in
       self?.outlineView.reloadData()
     }).disposed(by: bag)
-    
-    NodeModel.updatedAt.map {
-      let formatter = DateFormatter()
-      formatter.dateStyle = .short
-      formatter.timeStyle = .short
-      return formatter.string(from: $0)
-    }.bind(to: updatedAtLabel.rx.text).disposed(by: bag)
     
     NSApplication.shared.endEditing()
   }
@@ -168,8 +164,18 @@ final class SidebarViewController: NSViewController {
           NSAlert(error: error).runModal()
         }
       })
+      s.workspaceEditedDisposable.disposable = workspace.savedObservable.bind(to: s.editedView.rx.isHidden)
+      s.workspaceUpdatedAtDisposable.disposable = WorkspaceModel.selected.value.updatedAtObservable.map {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter.string(from: $0)
+      }.bind(to: s.updatedAtLabel.rx.text)
+
       s.workspaceNameDisposable.disposed(by: s.bag)
       s.workspaceNameEditDisposable.disposed(by: s.bag)
+      s.workspaceEditedDisposable.disposed(by: s.bag)
+      s.workspaceUpdatedAtDisposable.disposed(by: s.bag)
       
       NodeModel.createFirstDirectoryIfNeeded()
       s.outlineView.autosaveName = .Sidebar

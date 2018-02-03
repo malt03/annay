@@ -59,6 +59,7 @@
 		ED841BD8200B256B0097996A /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD7200B256B0097996A /* WindowController.swift */; };
 		ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED841BD9200B2FD10097996A /* Colors.xcassets */; };
 		ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */; };
+		ED9CCA6D2025927600EB2F7C /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CCA6C2025927600EB2F7C /* DateFormatter+Extensions.swift */; };
 		ED9EEEE2201F639B00C96CC1 /* OpenWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED9EEEE4201F639B00C96CC1 /* OpenWorkspace.storyboard */; };
 		ED9EEEE8201F63E200C96CC1 /* OpenWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9EEEE7201F63E200C96CC1 /* OpenWorkspaceViewController.swift */; };
 		EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736C8200E24F8000BC5DA /* Sidebar.storyboard */; };
@@ -180,6 +181,7 @@
 		ED841BD7200B256B0097996A /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		ED841BD9200B2FD10097996A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableRowView.swift; sourceTree = "<group>"; };
+		ED9CCA6C2025927600EB2F7C /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		ED9EEEE3201F639B00C96CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OpenWorkspace.storyboard; sourceTree = "<group>"; };
 		ED9EEEE6201F639D00C96CC1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OpenWorkspace.strings; sourceTree = "<group>"; };
 		ED9EEEE7201F63E200C96CC1 /* OpenWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWorkspaceViewController.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				ED598C38201F03E200072D8A /* NSAlert+Extensions.swift */,
 				ED19084A201F6EC0009497EE /* ContainerView.swift */,
 				EDFE82C520256BE700702C85 /* FileManager+Extensions.swift */,
+				ED9CCA6C2025927600EB2F7C /* DateFormatter+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -649,6 +652,7 @@
 				ED840D2F201C5AB600EF2C42 /* NSView+Extensions.swift in Sources */,
 				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
 				EDFE82C620256BE700702C85 /* FileManager+Extensions.swift in Sources */,
+				ED9CCA6D2025927600EB2F7C /* DateFormatter+Extensions.swift in Sources */,
 				ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */,
 				EDD0A28E200ED29400D5E7BE /* Util.swift in Sources */,
 				EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */,

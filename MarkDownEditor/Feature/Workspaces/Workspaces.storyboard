@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gIM-Og-53C">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gIM-Og-53C">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -110,15 +111,52 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </customView>
+                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="uSX-Cf-e47" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                                    <rect key="frame" x="44" y="36" width="16" height="16"/>
+                                                                    <subviews>
+                                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Zue-SP-MB3" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                                            <rect key="frame" x="4" y="4" width="8" height="8"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="8" id="n6q-jS-hqg"/>
+                                                                                <constraint firstAttribute="width" constant="8" id="oJe-GI-5cA"/>
+                                                                            </constraints>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                    <real key="value" value="4"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                                    <color key="value" name="Focus"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
+                                                                        </customView>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="16" id="7Zd-9l-hG9"/>
+                                                                        <constraint firstItem="Zue-SP-MB3" firstAttribute="centerY" secondItem="uSX-Cf-e47" secondAttribute="centerY" id="g79-v8-CUb"/>
+                                                                        <constraint firstItem="Zue-SP-MB3" firstAttribute="centerX" secondItem="uSX-Cf-e47" secondAttribute="centerX" id="jYL-rm-afj"/>
+                                                                        <constraint firstAttribute="height" constant="16" id="na8-7Q-VyG"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="8"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                            <color key="value" name="WorkspacesBackground"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </customView>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="Ggv-hC-A4I" secondAttribute="trailing" constant="16" id="3UD-nx-mIl"/>
+                                                                <constraint firstItem="uSX-Cf-e47" firstAttribute="centerY" secondItem="Ggv-hC-A4I" secondAttribute="top" id="7w1-An-bOj"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Ggv-hC-A4I" secondAttribute="bottom" constant="8" id="E7Y-t3-bjU"/>
                                                                 <constraint firstItem="Ggv-hC-A4I" firstAttribute="top" secondItem="5ZL-ub-f8W" secondAttribute="top" constant="8" id="FMr-QP-gSu"/>
+                                                                <constraint firstItem="uSX-Cf-e47" firstAttribute="centerX" secondItem="Ggv-hC-A4I" secondAttribute="trailing" id="Osd-h7-PaP"/>
                                                                 <constraint firstItem="Ggv-hC-A4I" firstAttribute="leading" secondItem="5ZL-ub-f8W" secondAttribute="leading" constant="16" id="oNp-eX-McV"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="backgroundView" destination="Ggv-hC-A4I" id="Jyn-YK-JZL"/>
+                                                                <outlet property="editedView" destination="uSX-Cf-e47" id="mbA-nD-y66"/>
                                                                 <outlet property="imageView" destination="Hk9-Qc-qIe" id="7p7-En-61C"/>
                                                                 <outlet property="textField" destination="RQl-wX-Dsv" id="g0p-vO-5vQ"/>
                                                             </connections>
@@ -189,8 +227,14 @@
         <namedColor name="EditorBackground">
             <color red="0.22499999400000001" green="0.2619999945" blue="0.30000001189999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Focus">
+            <color red="0.25" green="0.375" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Text">
-            <color red="0.94900000095367432" green="0.97600001096725464" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94900000095367432" green="0.97500002384185791" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="WorkspacesBackground">
+            <color red="0.075000002979999994" green="0.087999999519999997" blue="0.1000000015" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="WorkspacesBackground">
             <color red="0.075000002979999994" green="0.087999999519999997" blue="0.1000000015" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

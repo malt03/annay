@@ -72,6 +72,7 @@ extension Realm {
   static func transaction(_ block: (_ realm: Realm) -> Void) {
     let realm = instance
     try! realm.write { block(realm) }
+    WorkspaceModel.selected.value.update()
   }
   
   static func add(_ object: Object, update: Bool = false) {

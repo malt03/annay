@@ -13,7 +13,9 @@ import RxSwift
 final class WorkspacesTableCellView: NSTableCellView {
   private let bag = DisposeBag()
   private let textDisposable = SerialDisposable()
+  private let editedDisposable = SerialDisposable()
   @IBOutlet private weak var backgroundView: BackgroundSetableView!
+  @IBOutlet private weak var editedView: BackgroundSetableView!
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -22,7 +24,9 @@ final class WorkspacesTableCellView: NSTableCellView {
   
   func prepare(workspace: WorkspaceModel) {
     textDisposable.disposable = workspace.nameObservable.map { $0.firstCharacterString }.bind(to: textField!.rx.text)
+    editedDisposable.disposable = workspace.savedObservable.bind(to: editedView.rx.isHidden)
     textDisposable.disposed(by: bag)
+    editedDisposable.disposed(by: bag)
   }
   
   override var backgroundStyle: NSView.BackgroundStyle {
