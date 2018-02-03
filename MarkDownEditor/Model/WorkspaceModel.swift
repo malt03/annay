@@ -7,8 +7,8 @@
 //
 
 import RxSwift
-import RealmSwift
 import Cocoa
+import Zip
 
 final class WorkspaceModel {
   static var fileExtension: String { return "mdworkspace" }
@@ -23,6 +23,10 @@ final class WorkspaceModel {
   var url: URL { return _url.value }
   var nameObservable: Observable<String> { return _name.asObservable() }
   var name: String { return _name.value }
+  
+  var tmpDirectory: URL {
+    return FileManager.default.applicationTmp.appendingPathComponent(id, isDirectory: true)
+  }
   
   func setUrl(_ newUrl: URL) throws {
     if url == newUrl { return }
@@ -60,12 +64,13 @@ final class WorkspaceModel {
   private init(id: String, url: URL) throws {
     self.id = id
     _url = Variable(url)
-    
-    if !FileManager.default.fileExists(atPath: url.path) {
-      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-    }
-
     _name = Variable(url.name)
+    
+    let fileManager = FileManager.default
+    try fileManager.createDirectoryIfNeeded(url: tmpDirectory)
+    if fileManager.fileExists(atPath: url.path) {
+      try Zip.unzipFile(url, destination: fileManager.applicationTmp, overwrite: true, password: nil)
+    }
     
     selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
   }
@@ -153,9 +158,7 @@ final class WorkspaceModel {
   }
   
   private static func createDefault() throws -> WorkspaceModel {
-    let supportDirectory = FileManager().urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-    let workspaceUrl = supportDirectory.appendingPathComponent(Bundle.main.bundleIdentifier ?? "", isDirectory: true)
-    return try WorkspaceModel(name: Localized("Default Workspace"), parentDirectoryUrl: workspaceUrl)
+    return try WorkspaceModel(name: Localized("Default Workspace"), parentDirectoryUrl: FileManager.default.applicationSupport)
   }
   
   var selectedNodeId: String? {
