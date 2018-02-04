@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import RealmSwift
 import Cocoa
 import Zip
 
@@ -16,6 +17,7 @@ final class WorkspaceModel {
   private let bag = DisposeBag()
   
   let id: String
+  private var workspaceDirectoryName: String
   private let _url: Variable<URL>
   private let _name: Variable<String>
   private let _updatedAt: Variable<Date>
@@ -45,8 +47,8 @@ final class WorkspaceModel {
   }
   var detectChange: Observable<Void> { return _detectChange }
   
-  static func workspaceDirectory(for id: String) -> URL {
-    return FileManager.default.applicationWorkspace.appendingPathComponent(id, isDirectory: true)
+  private static func workspaceDirectory(for name: String) -> URL {
+    return FileManager.default.applicationWorkspace.appendingPathComponent(name, isDirectory: true)
   }
   
   static func conflictMessage(for name: String) -> String {
@@ -54,7 +56,7 @@ final class WorkspaceModel {
   }
   
   var workspaceDirectory: URL {
-    return WorkspaceModel.workspaceDirectory(for: id)
+    return WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
   }
   
   func setUrl(_ newUrl: URL) throws {
@@ -90,15 +92,19 @@ final class WorkspaceModel {
     return true
   }
 
-  private init(id: String, url: URL, lastSavedUpdateId: String?) throws {
+  private init(id: String, url: URL, lastSavedUpdateId: String?, workspaceDirectoryName: String) throws {
     self.id = id
     _url = Variable(url)
     _name = Variable(url.name)
+    self.workspaceDirectoryName = workspaceDirectoryName
     
-    let tmpLastSavedUpdateId = try WorkspaceModel.changeDetected(at: url, workspaceId: id, lastSavedUpdateId: lastSavedUpdateId)
-
+    let tmpLastSavedUpdateId = try WorkspaceModel.changeDetected(
+      at: url,
+      workspaceDirectoryName: workspaceDirectoryName,
+      lastSavedUpdateId: lastSavedUpdateId
+    )
     
-    let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: id)
+    let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
     info = try workspaceDirectory.getInfoData()
     
     _updatedAt = Variable<Date>(Date())
@@ -115,12 +121,12 @@ final class WorkspaceModel {
     if FileManager.default.fileExists(atPath: url.path) {
       throw MarkDownEditorError.fileExists(oldUrl: nil)
     }
-    try self.init(id: UUID().uuidString, url: url, lastSavedUpdateId: nil)
+    try self.init(id: UUID().uuidString, url: url, lastSavedUpdateId: nil, workspaceDirectoryName: UUID().uuidString)
     _name.value = name
   }
   
   convenience init(url: URL) throws {
-    try self.init(id: UUID().uuidString, url: url, lastSavedUpdateId: nil)
+    try self.init(id: UUID().uuidString, url: url, lastSavedUpdateId: nil, workspaceDirectoryName: UUID().uuidString)
   }
   
   private func reloadInfo(lastSavedUpdateId: String?) {
@@ -185,22 +191,28 @@ final class WorkspaceModel {
       detectedChangeForSave = true
       return
     }
+    workspaceDirectoryName = UUID().uuidString
     do {
-      if let lastSavedUpdateId = try WorkspaceModel.changeDetected(at: url, workspaceId: id, lastSavedUpdateId: lastSavedUpdateId.value) {
+      if let lastSavedUpdateId = try WorkspaceModel.changeDetected(
+        at: url,
+        workspaceDirectoryName: workspaceDirectoryName,
+        lastSavedUpdateId: lastSavedUpdateId.value
+      ) {
         self.lastSavedUpdateId.value = lastSavedUpdateId
       }
-      
     } catch {
       NSAlert(error: error).runModal()
     }
-    saveToUserDefaults()
-    reloadInfo(lastSavedUpdateId: nil)
-    _detectChange.onNext(())
+    Realm.refreshInstance(for: self)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+      self.saveToUserDefaults()
+      self.reloadInfo(lastSavedUpdateId: nil)
+    }
   }
   
   @discardableResult
-  static func changeDetected(at url: URL, workspaceId: String, lastSavedUpdateId: String?) throws -> String? {
-    let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceId)
+  static func changeDetected(at url: URL, workspaceDirectoryName: String, lastSavedUpdateId: String?) throws -> String? {
+    let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
     
     var tmpLastSavedUpdateId = lastSavedUpdateId
 
@@ -209,7 +221,7 @@ final class WorkspaceModel {
       Zip.addCustomFileExtension(WorkspaceModel.fileExtension)
       
       if fileManager.fileExists(atPath: workspaceDirectory.path) {
-        let tmpDirectory = fileManager.applicationTmp.appendingPathComponent(workspaceId)
+        let tmpDirectory = fileManager.applicationTmp.appendingPathComponent(workspaceDirectoryName)
         try Zip.unzipFile(url, destination: tmpDirectory, overwrite: true, password: nil)
         tmpLastSavedUpdateId = tmpLastSavedUpdateId ?? workspaceDirectory.updateId ?? ""
         if tmpDirectory.updateId != tmpLastSavedUpdateId {
@@ -246,11 +258,8 @@ final class WorkspaceModel {
         workspaceDirectory.secretKeyFile,
         workspaceDirectory.infoFile,
       ]
-      let fileManager = FileManager.default
-      let tmp = fileManager.applicationTmp.appendingPathComponent(id).appendingPathExtension(WorkspaceModel.fileExtension)
-      try Zip.zipFiles(paths: urls, zipFilePath: tmp, password: nil, compression: .BestSpeed, progress: nil)
-      if fileManager.fileExists(atPath: url.path) { try fileManager.removeItem(at: url) }
-      try FileManager.default.moveItem(at: tmp, to: url)
+      try FileManager.default.createDirectoryIfNeeded(url: url.deletingLastPathComponent())
+      try Zip.zipFiles(paths: urls, zipFilePath: url, password: nil, compression: .BestSpeed, progress: nil)
     } catch {
       NSAlert(error: error).runModal()
     }
@@ -308,6 +317,7 @@ extension WorkspaceModel: SavableInUserDefaults {
       "id": id,
       "url": url.absoluteString,
       "lastSavedUpdateId": lastSavedUpdateId.value,
+      "workspaceDirectoryName": workspaceDirectoryName,
     ]
   }
   
@@ -316,10 +326,11 @@ extension WorkspaceModel: SavableInUserDefaults {
       let id = dictionary["id"] as? String,
       let urlString = dictionary["url"] as? String,
       let url = URL(string: urlString),
-      let lastSavedUpdateId = dictionary["lastSavedUpdateId"] as? String
+      let lastSavedUpdateId = dictionary["lastSavedUpdateId"] as? String,
+      let workspaceDirectoryName = dictionary["workspaceDirectoryName"] as? String
       else { return nil }
     do {
-      try self.init(id: id, url: url, lastSavedUpdateId: lastSavedUpdateId)
+      try self.init(id: id, url: url, lastSavedUpdateId: lastSavedUpdateId, workspaceDirectoryName: workspaceDirectoryName)
     } catch {
       NSAlert(error: error).runModal()
       return nil

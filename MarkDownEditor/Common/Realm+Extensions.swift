@@ -11,20 +11,25 @@ import Foundation
 
 extension Realm {
   static var instance: Realm {
-    return try! Realm(configuration: configuration)
+    return try! Realm(configuration: configuration(for: WorkspaceModel.selected.value))
   }
   
-  private static var configuration: Realm.Configuration {
-    let fileUrl = directory.realmFile
-    return Realm.Configuration(fileURL: fileUrl, encryptionKey: encryptionKey, deleteRealmIfMigrationNeeded: true)
+  static func refreshInstance(for workspace: WorkspaceModel) {
+    let realm = try! Realm(configuration: configuration(for: WorkspaceModel.selected.value))
+    realm.invalidate()
+    realm.refresh()
   }
   
-  private static var encryptionKey: Data {
-    let workspace = WorkspaceModel.selected.value
+  private static func configuration(for workspace: WorkspaceModel) -> Realm.Configuration {
+    let fileUrl = directory(for: workspace).realmFile
+    return Realm.Configuration(fileURL: fileUrl, encryptionKey: encryptionKey(for: workspace), deleteRealmIfMigrationNeeded: true)
+  }
+  
+  private static func encryptionKey(for workspace: WorkspaceModel) -> Data {
     if let encryptionKey = encryptionKeys[workspace] { return encryptionKey }
     var savedKeyArray = [UInt8](repeating: 0, count: 32)
     var applicationKeyArray = [UInt8](repeating: 0, count: 32)
-    savedKey.copyBytes(to: &savedKeyArray, count: 32)
+    savedKey(for: workspace).copyBytes(to: &savedKeyArray, count: 32)
     applicationKey.copyBytes(to: &applicationKeyArray, count: 32)
     let key = Data(bytes: savedKeyArray + applicationKeyArray)
     encryptionKeys[workspace] = key
@@ -37,8 +42,8 @@ extension Realm {
     return Data(base64Encoded: "30nUkxK0xrcWu5/PQTtynETnHuoZVGGldnxibpKUeH4=")!
   }
   
-  private static var savedKey: Data {
-    let fileUrl = directory.secretKeyFile
+  private static func savedKey(for workspace: WorkspaceModel) -> Data {
+    let fileUrl = directory(for: workspace).secretKeyFile
     if let key = try? Data(contentsOf: fileUrl) {
       return key
     } else {
@@ -56,7 +61,7 @@ extension Realm {
     return key
   }
   
-  private static var directory: URL {
+  private static func directory(for workspace: WorkspaceModel) -> URL {
     return WorkspaceModel.selected.value.workspaceDirectory
   }
   
