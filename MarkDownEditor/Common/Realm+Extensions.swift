@@ -14,12 +14,6 @@ extension Realm {
     return try! Realm(configuration: configuration(for: WorkspaceModel.selected.value))
   }
   
-  static func refreshInstance(for workspace: WorkspaceModel) {
-    let realm = try! Realm(configuration: configuration(for: WorkspaceModel.selected.value))
-    realm.invalidate()
-    realm.refresh()
-  }
-  
   private static func configuration(for workspace: WorkspaceModel) -> Realm.Configuration {
     let fileUrl = directory(for: workspace).realmFile
     return Realm.Configuration(fileURL: fileUrl, encryptionKey: encryptionKey(for: workspace), deleteRealmIfMigrationNeeded: true)

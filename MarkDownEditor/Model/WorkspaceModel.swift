@@ -100,7 +100,7 @@ final class WorkspaceModel {
     
     let tmpLastSavedUpdateId = try WorkspaceModel.changeDetected(
       at: url,
-      workspaceDirectoryName: workspaceDirectoryName,
+      workspaceDirectoryName: &self.workspaceDirectoryName,
       lastSavedUpdateId: lastSavedUpdateId
     )
     
@@ -111,7 +111,7 @@ final class WorkspaceModel {
     updateId = Variable("")
     self.lastSavedUpdateId = Variable("")
     
-    reloadInfo(lastSavedUpdateId: tmpLastSavedUpdateId)
+    reloadInfo(lastSavedUpdateId: tmpLastSavedUpdateId ?? lastSavedUpdateId)
 
     selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
   }
@@ -191,30 +191,27 @@ final class WorkspaceModel {
       detectedChangeForSave = true
       return
     }
-    workspaceDirectoryName = UUID().uuidString
     do {
       if let lastSavedUpdateId = try WorkspaceModel.changeDetected(
         at: url,
-        workspaceDirectoryName: workspaceDirectoryName,
+        workspaceDirectoryName: &workspaceDirectoryName,
         lastSavedUpdateId: lastSavedUpdateId.value
       ) {
         self.lastSavedUpdateId.value = lastSavedUpdateId
+        info = try workspaceDirectory.getInfoData()
+        saveToUserDefaults()
+        reloadInfo(lastSavedUpdateId: nil)
       }
     } catch {
       NSAlert(error: error).runModal()
     }
-    Realm.refreshInstance(for: self)
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-      self.saveToUserDefaults()
-      self.reloadInfo(lastSavedUpdateId: nil)
-    }
   }
   
   @discardableResult
-  static func changeDetected(at url: URL, workspaceDirectoryName: String, lastSavedUpdateId: String?) throws -> String? {
-    let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
+  static func changeDetected(at url: URL, workspaceDirectoryName: inout String, lastSavedUpdateId: String?) throws -> String? {
+    var workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
     
-    var tmpLastSavedUpdateId = lastSavedUpdateId
+    var tmpLastSavedUpdateId: String? = nil
 
     let fileManager = FileManager.default
     if fileManager.fileExists(atPath: url.path) {
@@ -223,21 +220,26 @@ final class WorkspaceModel {
       if fileManager.fileExists(atPath: workspaceDirectory.path) {
         let tmpDirectory = fileManager.applicationTmp.appendingPathComponent(workspaceDirectoryName)
         try Zip.unzipFile(url, destination: tmpDirectory, overwrite: true, password: nil)
-        tmpLastSavedUpdateId = tmpLastSavedUpdateId ?? workspaceDirectory.updateId ?? ""
-        if tmpDirectory.updateId != tmpLastSavedUpdateId {
-          if workspaceDirectory.updateId == tmpLastSavedUpdateId {
+        let oldLastSavedUpdatedId = lastSavedUpdateId ?? workspaceDirectory.updateId ?? ""
+        if tmpDirectory.updateId != oldLastSavedUpdatedId {
+          
+          let moveTmpToNewWorkspace = { (workspaceDirectoryName: inout String) in
             try fileManager.removeItem(at: workspaceDirectory)
+            workspaceDirectoryName = UUID().uuidString
+            workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
             try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
             tmpLastSavedUpdateId = workspaceDirectory.updateId
+          }
+          
+          if workspaceDirectory.updateId == oldLastSavedUpdatedId {
+            try moveTmpToNewWorkspace(&workspaceDirectoryName)
           } else {
             let alert = NSAlert()
             alert.messageText = WorkspaceModel.conflictMessage(for: url.name)
             alert.addButton(withTitle: Localized("File"))
             alert.addButton(withTitle: Localized("Editing Data"))
             if alert.runModal() == .alertFirstButtonReturn {
-              try fileManager.removeItem(at: workspaceDirectory)
-              try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
-              tmpLastSavedUpdateId = workspaceDirectory.updateId
+              try moveTmpToNewWorkspace(&workspaceDirectoryName)
             }
           }
         }
