@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHw-0N-ZGZ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -458,8 +459,7 @@ GQ
         <scene sceneID="cIi-QE-cpz">
             <objects>
                 <windowController id="rHw-0N-ZGZ" customClass="BeforeOfAllWindowController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Zbh-1p-pcE">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Zbh-1p-pcE">
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="0.0" height="0.0"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
@@ -467,10 +467,25 @@ GQ
                             <outlet property="delegate" destination="rHw-0N-ZGZ" id="JVt-zd-lPc"/>
                         </connections>
                     </window>
+                    <connections>
+                        <segue destination="rzd-Xh-Mha" kind="relationship" relationship="window.shadowedContentViewController" id="Mwa-dc-x9y"/>
+                    </connections>
                 </windowController>
                 <customObject id="eNl-2A-l1W" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="60" y="-464"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4SQ-xP-MZH">
+            <objects>
+                <viewController id="rzd-Xh-Mha" sceneMemberID="viewController">
+                    <view key="view" hidden="YES" id="efG-qy-RcO">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="PiC-ZY-0Qy" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="168" y="-472"/>
         </scene>
         <!--Preference-->
         <scene sceneID="n3P-D6-GZ9">

@@ -31,10 +31,10 @@ final class OpenWorkspaceViewController: NSViewController {
       s.view.window?.makeFirstResponder(s.workspaceFileTextField)
     }).disposed(by: bag)
     
-    Observable.merge(workspaceFileTextField.rx.text.asObservable(), setFile).map { (directory) -> Bool in
-      guard let directory = directory else { return false }
-      if directory == "" { return false }
-      return URL(fileURLWithPath: directory.replacingTildeToHomePath).isWorkspace
+    Observable.merge(workspaceFileTextField.rx.text.asObservable(), setFile).map { (file) -> Bool in
+      guard let file = file else { return false }
+      if file == "" { return false }
+      return URL(fileURLWithPath: file.replacingTildeToHomePath).isWorkspace
     }.bind(to: openButton.rx.isEnabled).disposed(by: bag)
   }
   
@@ -45,7 +45,6 @@ final class OpenWorkspaceViewController: NSViewController {
     openPanel.canChooseDirectories = false
     openPanel.canCreateDirectories = false
     openPanel.canChooseFiles = true
-    openPanel.delegate = self
     
     openPanel.allowedFileTypes = [WorkspaceModel.fileExtension]
     openPanel.beginSheetModal(for: window) { [weak self] (result) in
@@ -65,13 +64,5 @@ final class OpenWorkspaceViewController: NSViewController {
   
   override func dismiss(_ sender: Any?) {
     view.window?.close()
-  }
-}
-
-extension OpenWorkspaceViewController: NSOpenSavePanelDelegate {
-  func panel(_ sender: Any, shouldEnable url: URL) -> Bool {
-    var isDirectory = ObjCBool(booleanLiteral: false)
-    if !FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory) { return false }
-    return isDirectory.boolValue
   }
 }

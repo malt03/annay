@@ -16,11 +16,13 @@ final class WorkspaceDirectoryWatcherManager {
   
   static let shared = WorkspaceDirectoryWatcherManager()
   
-  private let watchers = Variable<[WorkspaceDirectoryWatcher]>([])
+  private var watchers = [WorkspaceDirectoryWatcher]()
   
   func prepare() {
-    WorkspaceModel.spaces.asObservable().map {
-      $0.map { WorkspaceDirectoryWatcher(workspace: $0) }
-    }.bind(to: watchers).disposed(by: bag)
+    WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] (models) in
+      guard let s = self else { return }
+      for oldWatcher in s.watchers { oldWatcher.destroy() }
+      s.watchers = models.map { WorkspaceDirectoryWatcher(workspace: $0) }
+    }).disposed(by: bag)
   }
 }

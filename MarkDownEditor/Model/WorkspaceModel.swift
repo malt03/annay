@@ -22,6 +22,7 @@ final class WorkspaceModel {
   private let updatedAtFormatter = DateFormatter(dateStyle: .short, timeStyle: .short)
   private let updateId: Variable<String>
   private let lastSavedUpdateId: Variable<String>
+  private let _detectChange = PublishSubject<Void>()
 
   private static var updatedAtKey: String { return "updatedAt" }
   fileprivate static var updateIdKey: String { return "updatedId" }
@@ -42,6 +43,7 @@ final class WorkspaceModel {
   var savedObservable: Observable<Bool> {
     return Observable.combineLatest(updateId.asObservable(), lastSavedUpdateId.asObservable(), resultSelector: { $0 == $1 })
   }
+  var detectChange: Observable<Void> { return _detectChange }
   
   static func workspaceDirectory(for id: String) -> URL {
     return FileManager.default.applicationWorkspace.appendingPathComponent(id, isDirectory: true)
@@ -93,52 +95,17 @@ final class WorkspaceModel {
     _url = Variable(url)
     _name = Variable(url.name)
     
-    let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: id)
-    
-    var tmpLastSavedUpdateId = lastSavedUpdateId
-    
-    let fileManager = FileManager.default
-    if fileManager.fileExists(atPath: url.path) {
-      Zip.addCustomFileExtension(WorkspaceModel.fileExtension)
-      
-      if fileManager.fileExists(atPath: workspaceDirectory.path) {
-        let tmpDirectory = fileManager.applicationTmp.appendingPathComponent(id)
-        try Zip.unzipFile(url, destination: tmpDirectory, overwrite: true, password: nil)
-        tmpLastSavedUpdateId = tmpLastSavedUpdateId ?? workspaceDirectory.updateId ?? ""
-        if tmpDirectory.updateId != tmpLastSavedUpdateId {
-          if workspaceDirectory.updateId == tmpLastSavedUpdateId {
-            try fileManager.removeItem(at: workspaceDirectory)
-            try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
-          } else {
-            let alert = NSAlert()
-            alert.messageText = WorkspaceModel.conflictMessage(for: url.name)
-            alert.addButton(withTitle: Localized("File"))
-            alert.addButton(withTitle: Localized("Editing Data"))
-            if alert.runModal() == .alertFirstButtonReturn {
-              tmpLastSavedUpdateId = workspaceDirectory.updateId
-              try fileManager.removeItem(at: workspaceDirectory)
-              try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
-            }
-          }
-        }
-      } else {
-        try Zip.unzipFile(url, destination: workspaceDirectory, overwrite: true, password: nil)
-      }
-    } else {
-      try fileManager.createDirectoryIfNeeded(url: workspaceDirectory)
-    }
+    let tmpLastSavedUpdateId = try WorkspaceModel.changeDetected(at: url, workspaceId: id, lastSavedUpdateId: lastSavedUpdateId)
 
-    if fileManager.fileExists(atPath: workspaceDirectory.infoFile.path) {
-      let infoData = try Data(contentsOf: workspaceDirectory.infoFile)
-      info = try JSONSerialization.jsonObject(with: infoData, options: []) as? [String: Any] ?? [:]
-    } else {
-      info = [:]
-    }
     
-    _updatedAt = Variable<Date>(updatedAtFormatter.date(from: info[WorkspaceModel.updatedAtKey] as? String ?? "") ?? Date())
-    let updateId = info[WorkspaceModel.updateIdKey] as? String ?? ""
-    self.updateId = Variable(updateId)
-    self.lastSavedUpdateId = Variable(tmpLastSavedUpdateId ?? updateId)
+    let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: id)
+    info = try workspaceDirectory.getInfoData()
+    
+    _updatedAt = Variable<Date>(Date())
+    updateId = Variable("")
+    self.lastSavedUpdateId = Variable("")
+    
+    reloadInfo(lastSavedUpdateId: tmpLastSavedUpdateId)
 
     selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
   }
@@ -154,6 +121,13 @@ final class WorkspaceModel {
   
   convenience init(url: URL) throws {
     try self.init(id: UUID().uuidString, url: url, lastSavedUpdateId: nil)
+  }
+  
+  private func reloadInfo(lastSavedUpdateId: String?) {
+    _updatedAt.value = updatedAtFormatter.date(from: info[WorkspaceModel.updatedAtKey] as? String ?? "") ?? Date()
+    let updateId = info[WorkspaceModel.updateIdKey] as? String ?? ""
+    self.updateId.value = updateId
+    self.lastSavedUpdateId.value = lastSavedUpdateId ?? updateId
   }
   
   private struct Key {
@@ -204,14 +178,79 @@ final class WorkspaceModel {
     NodeModel.createFirstDirectoryIfNeeded()
   }
   
+  private var detectedChangeForSave = true
+  
+  func changeDetected() {
+    if !detectedChangeForSave {
+      detectedChangeForSave = true
+      return
+    }
+    do {
+      if let lastSavedUpdateId = try WorkspaceModel.changeDetected(at: url, workspaceId: id, lastSavedUpdateId: lastSavedUpdateId.value) {
+        self.lastSavedUpdateId.value = lastSavedUpdateId
+      }
+      
+    } catch {
+      NSAlert(error: error).runModal()
+    }
+    saveToUserDefaults()
+    reloadInfo(lastSavedUpdateId: nil)
+    _detectChange.onNext(())
+  }
+  
+  @discardableResult
+  static func changeDetected(at url: URL, workspaceId: String, lastSavedUpdateId: String?) throws -> String? {
+    let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceId)
+    
+    var tmpLastSavedUpdateId = lastSavedUpdateId
+
+    let fileManager = FileManager.default
+    if fileManager.fileExists(atPath: url.path) {
+      Zip.addCustomFileExtension(WorkspaceModel.fileExtension)
+      
+      if fileManager.fileExists(atPath: workspaceDirectory.path) {
+        let tmpDirectory = fileManager.applicationTmp.appendingPathComponent(workspaceId)
+        try Zip.unzipFile(url, destination: tmpDirectory, overwrite: true, password: nil)
+        tmpLastSavedUpdateId = tmpLastSavedUpdateId ?? workspaceDirectory.updateId ?? ""
+        if tmpDirectory.updateId != tmpLastSavedUpdateId {
+          if workspaceDirectory.updateId == tmpLastSavedUpdateId {
+            try fileManager.removeItem(at: workspaceDirectory)
+            try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
+            tmpLastSavedUpdateId = workspaceDirectory.updateId
+          } else {
+            let alert = NSAlert()
+            alert.messageText = WorkspaceModel.conflictMessage(for: url.name)
+            alert.addButton(withTitle: Localized("File"))
+            alert.addButton(withTitle: Localized("Editing Data"))
+            if alert.runModal() == .alertFirstButtonReturn {
+              try fileManager.removeItem(at: workspaceDirectory)
+              try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
+              tmpLastSavedUpdateId = workspaceDirectory.updateId
+            }
+          }
+        }
+      } else {
+        try Zip.unzipFile(url, destination: workspaceDirectory, overwrite: true, password: nil)
+      }
+    } else {
+      try fileManager.createDirectoryIfNeeded(url: workspaceDirectory)
+    }
+    return tmpLastSavedUpdateId
+  }
+  
   func save() {
+    detectedChangeForSave = false
     do {
       let urls = [
         workspaceDirectory.realmFile,
         workspaceDirectory.secretKeyFile,
         workspaceDirectory.infoFile,
       ]
-      try Zip.zipFiles(paths: urls, zipFilePath: url, password: nil, compression: .BestSpeed, progress: nil)
+      let fileManager = FileManager.default
+      let tmp = fileManager.applicationTmp.appendingPathComponent(id).appendingPathExtension(WorkspaceModel.fileExtension)
+      try Zip.zipFiles(paths: urls, zipFilePath: tmp, password: nil, compression: .BestSpeed, progress: nil)
+      if fileManager.fileExists(atPath: url.path) { try fileManager.removeItem(at: url) }
+      try FileManager.default.moveItem(at: tmp, to: url)
     } catch {
       NSAlert(error: error).runModal()
     }
@@ -309,8 +348,13 @@ extension URL {
   }
   
   fileprivate func getInfoData() throws -> [String: Any] {
-    let infoData = try Data(contentsOf: infoFile)
-    return try JSONSerialization.jsonObject(with: infoData, options: []) as? [String: Any] ?? [:]
+    let url = infoFile
+    if FileManager.default.fileExists(atPath: url.path) {
+      let infoData = try Data(contentsOf: url)
+      return try JSONSerialization.jsonObject(with: infoData, options: []) as? [String: Any] ?? [:]
+    } else {
+      return [:]
+    }
   }
 }
 
