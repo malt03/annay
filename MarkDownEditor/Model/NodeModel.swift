@@ -74,9 +74,11 @@ final class NodeModel: Object {
     return [parent] + parent.ancestors
   }
   
-  static let deleted = Realm.instance.objects(NodeModel.self)
-    .filter("isDeleted = %@ and index >= %@", true, 0)
-    .sorted(byKeyPath: "deletedAt")
+  static var deleted: Results<NodeModel> {
+    return Realm.instance.objects(NodeModel.self)
+      .filter("isDeleted = %@ and index >= %@", true, 0)
+      .sorted(byKeyPath: "deletedAt")
+  }
 
   static func node(for id: String) -> NodeModel? {
     return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: id)
@@ -205,6 +207,7 @@ extension NodeModel {
     Realm.transaction { (realm) in
       let deletedNodes = realm.objects(NodeModel.self).filter("isDeleted = %@", true)
       for node in deletedNodes {
+        if node.isInvalidated { continue }
         realm.delete(node.descendants)
       }
       realm.delete(deletedNodes)
