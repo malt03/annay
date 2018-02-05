@@ -201,6 +201,7 @@ final class WorkspaceModel {
         info = try workspaceDirectory.getInfoData()
         saveToUserDefaults()
         reloadInfo(lastSavedUpdateId: nil)
+        _detectChange.onNext(())
       }
     } catch {
       NSAlert(error: error).runModal()
