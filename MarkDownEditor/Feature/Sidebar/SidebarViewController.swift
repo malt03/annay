@@ -183,6 +183,7 @@ final class SidebarViewController: NSViewController {
       s.workspaceDetectChangeDisposable.disposed(by: s.bag)
       
       NodeModel.createFirstDirectoryIfNeeded()
+      s.outlineView.autosaveName = nil // 一度変更するとautosaveがきちんと効く。謎だけどワークアラウンド
       s.outlineView.autosaveName = .Sidebar
       s.outlineView.reloadData()
     }).disposed(by: bag)
