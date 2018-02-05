@@ -21,7 +21,11 @@ final class SidebarViewController: NSViewController {
   private let bag = DisposeBag()
   private let workspaceNameDisposable = SerialDisposable()
   private let workspaceNameEditDisposable = SerialDisposable()
+  private let workspaceEditedDisposable = SerialDisposable()
+  private let workspaceUpdatedAtDisposable = SerialDisposable()
+  private let workspaceDetectChangeDisposable = SerialDisposable()
   
+  @IBOutlet private weak var editedView: BackgroundSetableView!
   @IBOutlet private weak var searchFieldHiddenConstraint: NSLayoutConstraint!
   @IBOutlet private weak var searchFieldPresentConstraint: NSLayoutConstraint!
   @IBOutlet private weak var searchField: NSSearchField!
@@ -42,7 +46,9 @@ final class SidebarViewController: NSViewController {
     outlineView.backgroundColor = .clear
     outlineView.headerView = nil
     
-    reloadData()
+    WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] (workspace) in
+      self?.reloadWorkspace(workspace)
+    }).disposed(by: bag)
     
     Observable.combineLatest(isSearching.asObservable(), searchField.rx.text) { (isSearching, searchText) -> String? in
       if !isSearching { return nil }
@@ -62,13 +68,6 @@ final class SidebarViewController: NSViewController {
     queryText.asObservable().subscribe(onNext: { [weak self] _ in
       self?.outlineView.reloadData()
     }).disposed(by: bag)
-    
-    NodeModel.updatedAt.map {
-      let formatter = DateFormatter()
-      formatter.dateStyle = .short
-      formatter.timeStyle = .short
-      return formatter.string(from: $0)
-    }.bind(to: updatedAtLabel.rx.text).disposed(by: bag)
     
     NSApplication.shared.endEditing()
   }
@@ -152,29 +151,44 @@ final class SidebarViewController: NSViewController {
     view.window?.makeFirstResponder(outlineView)
   }
   
-  private func reloadData() {
-    WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] (workspace) in
-      guard let s = self else { return }
-      s.workspaceNameDisposable.disposable = workspace.nameObservable.bind(to: s.workspaceNameTextField.rx.text)
-      s.workspaceNameEditDisposable.disposable = s.workspaceNameTextField.rx.text.map { $0 ?? "" }.subscribe(onNext: { [weak self] (name) in
-        do {
-          try workspace.setName(name)
-        } catch {
-          switch error {
-          case MarkDownEditorError.fileExists(oldUrl: let oldUrl):
-            self?.workspaceNameTextField.stringValue = oldUrl?.name ?? ""
-          default: break
-          }
-          NSAlert(error: error).runModal()
+  private func reloadWorkspace(_ workspace: WorkspaceModel) {
+    workspaceNameDisposable.disposable = workspace.nameObservable.bind(to: workspaceNameTextField.rx.text)
+    workspaceNameEditDisposable.disposable = workspaceNameTextField.rx.text.map { $0 ?? "" }.subscribe(onNext: { [weak self] (name) in
+      do {
+        try workspace.setName(name)
+      } catch {
+        switch error {
+        case MarkDownEditorError.fileExists(oldUrl: let oldUrl):
+          self?.workspaceNameTextField.stringValue = oldUrl?.name ?? ""
+        default: break
         }
-      })
-      s.workspaceNameDisposable.disposed(by: s.bag)
-      s.workspaceNameEditDisposable.disposed(by: s.bag)
-      
-      NodeModel.createFirstDirectoryIfNeeded()
-      s.outlineView.autosaveName = .Sidebar
-      s.outlineView.reloadData()
-    }).disposed(by: bag)
+        NSAlert(error: error).runModal()
+      }
+    })
+    workspaceEditedDisposable.disposable = workspace.savedObservable.bind(to: editedView.rx.isHidden)
+    workspaceUpdatedAtDisposable.disposable = workspace.updatedAtObservable.map {
+      let formatter = DateFormatter()
+      formatter.dateStyle = .short
+      formatter.timeStyle = .short
+      return formatter.string(from: $0)
+    }.bind(to: updatedAtLabel.rx.text)
+    workspaceDetectChangeDisposable.disposable = workspace.detectChange.subscribe(onNext: { [weak self] _ in
+      guard let s = self else { return }
+      let indexes = s.outlineView.selectedRowIndexes
+      s.reloadWorkspace(workspace)
+      s.outlineView.selectRowIndexes(indexes, byExtendingSelection: false)
+    })
+    
+    workspaceNameDisposable.disposed(by: bag)
+    workspaceNameEditDisposable.disposed(by: bag)
+    workspaceEditedDisposable.disposed(by: bag)
+    workspaceUpdatedAtDisposable.disposed(by: bag)
+    workspaceDetectChangeDisposable.disposed(by: bag)
+    
+    NodeModel.createFirstDirectoryIfNeeded()
+    outlineView.autosaveName = nil // 一度変更するとautosaveがきちんと効く。謎だけどワークアラウンド
+    outlineView.autosaveName = .Sidebar
+    outlineView.reloadData()
   }
   
   @IBAction private func finishSearch(_ sender: NSButton) {

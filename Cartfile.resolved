@@ -1,3 +1,4 @@
 github "ReactiveX/RxSwift" "4.1.1"
+github "marmelroy/Zip" "1.1.0"
 github "onevcat/Kingfisher" "4.6.1"
 github "realm/realm-cocoa" "v3.1.0"

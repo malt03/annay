@@ -20,7 +20,7 @@ extension URL {
   }
   
   var isWorkspace: Bool {
-    if !isDirectory { return false }
+    if isDirectory { return false }
     let uti = (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
     return uti == "koji.murata.markdowneditor.workspace"
   }
@@ -31,5 +31,13 @@ extension URL {
   
   var name: String {
     return deletingPathExtension().lastPathComponent
+  }
+  
+  var realmFile: URL {
+    return appendingPathComponent("default.realm")
+  }
+  
+  var secretKeyFile: URL {
+    return appendingPathComponent("secretKey")
   }
 }

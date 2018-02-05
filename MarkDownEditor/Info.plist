@@ -40,7 +40,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2018年 Koji Murata. All rights reserved.</string>
 	<key>NSMainStoryboardFile</key>
-	<string>Main</string>
+	<string>Launch</string>
 	<key>NSPrincipalClass</key>
 	<string>MarkDownEditor.Application</string>
 	<key>UTExportedTypeDeclarations</key>
@@ -48,7 +48,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>com.apple.package</string>
+				<string>com.pkware.zip-archive</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>MarkDownEditor Package</string>

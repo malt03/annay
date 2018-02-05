@@ -25,7 +25,7 @@ final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
     }).disposed(by: bag)
   }
   
-  deinit {
+  func destroy() {
     NSFileCoordinator.removeFilePresenter(self)
   }
   
@@ -38,9 +38,8 @@ final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
   
   func presentedSubitemDidChange(at url: URL) {
     if !url.isEqualIgnoringLastSlash(workspace.url) { return }
-    if FileManager.default.fileExists(atPath: url.path) { return }
-    DispatchQueue.main.async {
-      WorkspaceModel.spaces.value.remove(object: self.workspace)
-    }
+    if !FileManager.default.fileExists(atPath: url.path) { return }
+    // メインスレッドで動かす
+    DispatchQueue.main.async { self.workspace.changeDetected() }
   }
 }
