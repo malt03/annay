@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHw-0N-ZGZ">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHw-0N-ZGZ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -66,8 +66,8 @@
                                         <menuItem title="New" id="JMo-Dl-a5G">
                                             <menu key="submenu" title="File" id="G3u-f0-Dhr">
                                                 <items>
-                                                    <menuItem title="New Workspace... [⌘N W]" id="O6a-Cm-4FV">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <menuItem title="New Workspace..." keyEquivalent="N" id="O6a-Cm-4FV">
+                                                        <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="createWorkspace:" target="Voe-Tx-rLC" id="9f9-I7-up8"/>
                                                         </connections>

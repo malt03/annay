@@ -22,9 +22,6 @@ final class Application: NSApplication {
         case .g:
           NotificationCenter.default.post(name: .CreateGroup, object: nil)
           return
-        case .w:
-          NotificationCenter.default.post(name: .CreateWorkspace, object: nil)
-          return
         default: break
         }
       } else {
