@@ -259,6 +259,21 @@ extension NodeModel: NSPasteboardWriting {
   }
 }
 
+extension NodeModel: NSFilePromiseProviderDelegate {
+  func filePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider, fileNameForType fileType: String) -> String {
+    return name + ".md"
+  }
+  
+  func filePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider, writePromiseTo url: URL, completionHandler: @escaping (Error?) -> Void) {
+    do {
+      try (body?.data(using: .utf8) ?? Data()).write(to: url)
+    } catch {
+      completionHandler(error)
+    }
+    completionHandler(nil)
+  }
+}
+
 // スポットライト
 extension NodeModel {
   private func updateSpotlight() {

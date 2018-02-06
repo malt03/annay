@@ -439,8 +439,9 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   
   func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
     let node = item as! NodeModel
-    if node.isTrash { return nil }
-    return node
+    return NSFilePromiseProvider(fileType: kUTTypePlainText as String, delegate: node)
+//    if node.isTrash { return nil }
+//    return node
   }
   
   func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
