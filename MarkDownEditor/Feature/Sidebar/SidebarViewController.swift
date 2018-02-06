@@ -304,7 +304,7 @@ final class SidebarViewController: NSViewController {
   
   @objc private func delete() {
     outlineView.expandItem(NodeModel.trash)
-    let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }.removeChildren
+    let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
     let beforeCount = NodeModel.deleted.count
     Realm.transaction { _ in
       for node in nodes {
@@ -436,11 +436,13 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     let node = item as! NodeModel
     return node.isRoot && !node.isDeleted
   }
-  
-  func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
-    let node = item as! NodeModel
-    if node.isTrash { return nil }
-    return node
+
+  func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
+    let nodes = items.flatMap { $0 as? NodeModel }.deletingDescendants
+    let filePromiseProviders = nodes.map { NSFilePromiseProvider(fileType: kUTTypePlainText as String, delegate: $0) }
+    let objects = (nodes as [NSPasteboardWriting]) + (filePromiseProviders as [NSPasteboardWriting])
+    pasteboard.writeObjects(objects)
+    return true
   }
   
   func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
@@ -479,7 +481,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     }
     
     if let ids = info.draggingPasteboard().string(forType: .nodeModel) {
-      let movedNodes = ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }.removeChildren
+      let movedNodes = ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }
       fixedIndex -= movedNodes.filter { !$0.isDeleted && $0.parent == parent }.map { outlineView.childIndex(forItem: $0) }.filter { $0 < fixedIndex }.count
       
       Realm.transaction { _ in

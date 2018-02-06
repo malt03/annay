@@ -259,6 +259,32 @@ extension NodeModel: NSPasteboardWriting {
   }
 }
 
+extension NodeModel: NSFilePromiseProviderDelegate {
+  func filePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider, fileNameForType fileType: String) -> String {
+    return name
+  }
+  
+  func filePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider, writePromiseTo url: URL, completionHandler: @escaping (Error?) -> Void) {
+    do {
+      try write(to: url)
+    } catch {
+      completionHandler(error)
+    }
+    completionHandler(nil)
+  }
+  
+  private func write(to url: URL) throws {
+    if isDirectory {
+      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+      for child in sortedChildren(query: nil) {
+        try child.write(to: url.appendingPathComponent(child.name))
+      }
+    } else {
+      try (body?.data(using: .utf8) ?? Data()).write(to: url.appendingPathExtension("md"))
+    }
+  }
+}
+
 // スポットライト
 extension NodeModel {
   private func updateSpotlight() {

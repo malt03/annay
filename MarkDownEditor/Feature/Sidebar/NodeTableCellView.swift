@@ -10,8 +10,13 @@ import Cocoa
 import RealmSwift
 
 final class NodeTableCellView: NSTableCellView {
-  private var token: NotificationToken?
+  override func draw(_ dirtyRect: NSRect) {
+    super.draw(dirtyRect)
+    (superview as? NodeTableRowView)?.fillColor.setFill()
+    dirtyRect.fill()
+  }
   
+  private var token: NotificationToken?
   private var node: NodeModel!
   func prepare(node: NodeModel) {
     self.node = node
