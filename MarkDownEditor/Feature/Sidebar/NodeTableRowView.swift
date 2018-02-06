@@ -12,13 +12,20 @@ final class NodeTableRowView: NSTableRowView {
   override func drawSelection(in dirtyRect: NSRect) {}
   
   override func draw(_ dirtyRect: NSRect) {
+    fillColor.setFill()
+    dirtyRect.fill()
+    for subview in subviews { subview.needsDisplay = true }
+  }
+  
+  var fillColor: NSColor {
     if isSelected {
       if isEmphasized {
-        NSColor.focus.setFill()
+        return .focus
       } else {
-        NSColor.selectedRow.setFill()
+        return .selectedRow
       }
-      dirtyRect.fill()
+    } else {
+      return .sidebarBackground
     }
   }
 
