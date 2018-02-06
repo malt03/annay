@@ -41,7 +41,7 @@ final class SidebarViewController: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    outlineView.registerForDraggedTypes([.nodeModel, .string])
+    outlineView.registerForDraggedTypes([.nodeModel, .string, .fileURL])
     outlineView.setDraggingSourceOperationMask([.move, .copy], forLocal: false)
     outlineView.backgroundColor = .clear
     outlineView.headerView = nil
@@ -446,6 +446,21 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+    let items = info.draggingPasteboard().pasteboardItems ?? []
+    let fileURLs = items.flatMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
+    if fileURLs.count > 0 {
+      let containsCopyable = fileURLs.contains { $0.isDirectory || $0.isConformsToUTI(kUTTypePlainText as String) }
+      if !containsCopyable { return [] }
+      guard let parentNode = item as? NodeModel else {
+        let containsFile = fileURLs.contains { !$0.isDirectory }
+        return containsFile ? [] : [.copy]
+      }
+      if parentNode.isTrash { return [] }
+      if parentNode.isDeleted { return [] }
+      if !parentNode.isDirectory { return [] }
+      return [.copy]
+    }
+    
     guard let parentNode = item as? NodeModel else {
       guard let nodes = info.draggingPasteboard().nodes else { return [] }
       let noteContains = nodes.contains(where: { !$0.isDirectory })
