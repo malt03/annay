@@ -39,7 +39,6 @@ extension WebView: WKNavigationDelegate {
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
     switch navigationAction.navigationType {
     case .linkActivated:
-      defer {  }
       if let url = navigationAction.request.url, let openingUrl = webView.url {
         if url.path == openingUrl.path {
           decisionHandler(.allow)
