@@ -59,9 +59,9 @@ extension Realm {
     return WorkspaceModel.selected.value.workspaceDirectory
   }
   
-  static func transaction(_ block: (_ realm: Realm) -> Void) {
+  static func transaction(_ block: (_ realm: Realm) throws -> Void) rethrows {
     let realm = instance
-    try! realm.write { block(realm) }
+    try! realm.write { try block(realm) }
     WorkspaceModel.selected.value.update()
   }
   
