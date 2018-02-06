@@ -13,24 +13,57 @@ extension NSPasteboard {
     guard let ids = string(forType: .nodeModel) else { return nil }
     return ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }
   }
- 
-  func replaceImagesToMarkdownText() -> Bool {
-    do {
-      let imagesData = gifImagesData
-      if imagesData.count > 0 { return replaceImagesDataToMarkdownText(imagesData, fileExtension: "gif") }
-    }
-    do {
-      let imagesData = pngImagesData
-      if imagesData.count > 0 { return replaceImagesDataToMarkdownText(imagesData, fileExtension: "png") }
-    }
-    do {
-      let imagesData = imagesDataRepresentationUsingPNG
-      if imagesData.count > 0 { return replaceImagesDataToMarkdownText(imagesData, fileExtension: "png") }
+  
+  func relaceLinkToMarkdown() -> Bool {
+    if replaceLinkObjectToMarkdown() { return true }
+    if replaceURLToMarkdown() { return true }
+    return false
+  }
+  
+  private func replaceURLToMarkdown() -> Bool {
+    if canReadObject(forClasses: [NSURL.self], options: nil) {
+      let urls = (readObjects(forClasses: [NSURL.self], options: nil) as? [URL]) ?? []
+      let texts = urls.map { "<\($0.absoluteString)>" }
+      clearContents()
+      writeObjects(texts as [NSPasteboardWriting])
+      return true
     }
     return false
   }
   
-  private func replaceImagesDataToMarkdownText(_ imagesData: [Data], fileExtension: String) -> Bool {
+  private func replaceLinkObjectToMarkdown() -> Bool {
+    let linkTexts = (pasteboardItems ?? []).flatMap { (item) -> String? in
+      guard
+        let name = item.string(forType: NSPasteboard.PasteboardType("public.url-name")),
+        let url = URL(string: item.string(forType: .string) ?? "")
+        else { return nil }
+      return "[\(name)](\(url.absoluteString))"
+    }
+    if linkTexts.count > 0 {
+      clearContents()
+      writeObjects(linkTexts as [NSPasteboardWriting])
+      return true
+    }
+    return false
+  }
+ 
+  func replaceImagesToMarkdown() -> Bool {
+    do {
+      let imagesData = gifImagesData
+      if imagesData.count > 0 { return replaceImagesDataToMarkdown(imagesData, fileExtension: "gif") }
+    }
+    do {
+      let imagesData = pngImagesData
+      if imagesData.count > 0 { return replaceImagesDataToMarkdown(imagesData, fileExtension: "png") }
+    }
+    do {
+      let imagesData = imagesDataRepresentationUsingPNG
+      if imagesData.count > 0 { return replaceImagesDataToMarkdown(imagesData, fileExtension: "png") }
+    }
+    return false
+  }
+  
+  private func replaceImagesDataToMarkdown(_ imagesData: [Data], fileExtension: String) -> Bool {
     let imageDirectory = WorkspaceModel.selected.value.sourceDirectory.appendingPathComponent("images", isDirectory: true)
     do {
       try FileManager.default.createDirectoryIfNeeded(url: imageDirectory)

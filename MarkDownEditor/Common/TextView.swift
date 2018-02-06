@@ -21,7 +21,11 @@ final class TextView: NSTextView {
   }
 
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-    if sender.draggingPasteboard().replaceImagesToMarkdownText() {
+    if sender.draggingPasteboard().replaceImagesToMarkdown() {
+      return super.performDragOperation(sender)
+    }
+    
+    if sender.draggingPasteboard().relaceLinkToMarkdown() {
       return super.performDragOperation(sender)
     }
 
