@@ -40,4 +40,12 @@ extension URL {
   var secretKeyFile: URL {
     return appendingPathComponent("secretKey")
   }
+  
+  var uti: CFString {
+    return ((try? resourceValues(forKeys: [.typeIdentifierKey]).typeIdentifier ?? "") ?? "") as CFString
+  }
+  
+  func isConformsToUTI(_ uti: String) -> Bool {
+    return UTTypeConformsTo(self.uti, uti as CFString)
+  }
 }

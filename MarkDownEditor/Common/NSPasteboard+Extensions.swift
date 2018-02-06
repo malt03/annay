@@ -15,8 +15,26 @@ extension NSPasteboard {
   }
   
   func relaceLinkToMarkdown() -> Bool {
+    if replaceFileURLsToMarkdown() { return true }
     if replaceLinkObjectToMarkdown() { return true }
     if replaceURLToMarkdown() { return true }
+    return false
+  }
+  
+  private func replaceFileURLsToMarkdown() -> Bool {
+    let texts = (pasteboardItems ?? []).flatMap { (item) -> String? in
+      guard let url = URL(string: item.string(forType: .fileURL) ?? "") else { return nil }
+      if url.isConformsToUTI("public.image") {
+        return "![\(url.name)](\(url.absoluteString))"
+      } else {
+        return "[\(url.name)](\(url.absoluteString))"
+      }
+    }
+    if texts.count > 0 {
+      clearContents()
+      writeObjects(texts as [NSPasteboardWriting])
+      return true
+    }
     return false
   }
   
