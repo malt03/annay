@@ -27,10 +27,12 @@ extension Array where Element: Equatable {
 }
 
 extension Array where Element == NodeModel {
-  var removeChildren: [NodeModel] {
+  var deletingDescendants: [NodeModel] {
     return filter { (node) in
-      guard let parent = node.parent else { return true }
-      return !contains(parent)
+      for ancestor in node.ancestors {
+        if contains(ancestor) { return false }
+      }
+      return true
     }
   }
 }
