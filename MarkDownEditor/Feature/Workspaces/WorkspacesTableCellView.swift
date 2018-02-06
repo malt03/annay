@@ -9,6 +9,7 @@
 import Cocoa
 import Kingfisher
 import RxSwift
+import RxCocoa
 
 final class WorkspacesTableCellView: NSTableCellView {
   private let bag = DisposeBag()

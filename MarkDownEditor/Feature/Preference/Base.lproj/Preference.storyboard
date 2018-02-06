@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="b0T-G7-odI">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="b0T-G7-odI">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Window Controller-->
         <scene sceneID="f5O-bv-GNj">
             <objects>
-                <windowController id="b0T-G7-odI" customClass="WindowController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController id="b0T-G7-odI" sceneMemberID="viewController">
                     <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="nLs-Kb-MWz">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -31,8 +32,10 @@
             <objects>
                 <tabViewController selectedTabViewItemIndex="0" tabStyle="toolbar" id="wIz-lQ-0Hg" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem label="Workspace" id="pdj-Ns-ucW"/>
+                        <tabViewItem label="Shortcut" image="Shortcut" id="IQM-9u-Oe1"/>
+                        <tabViewItem label="General" image="NSPreferencesGeneral" id="9VI-t5-Rjd"/>
                     </tabViewItems>
+                    <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="mJW-Z7-ChU">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="172"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -44,20 +47,46 @@
                     </tabView>
                     <connections>
                         <outlet property="tabView" destination="mJW-Z7-ChU" id="RfQ-YN-3Vo"/>
-                        <segue destination="UpR-n9-vYd" kind="relationship" relationship="tabItems" id="kRz-jl-9sp"/>
+                        <segue destination="D5z-A1-9ny" kind="relationship" relationship="tabItems" id="CKu-Xt-fJi"/>
+                        <segue destination="vUz-iw-k3G" kind="relationship" relationship="tabItems" id="cen-jo-3qu"/>
                     </connections>
                 </tabViewController>
                 <customObject id="mqp-vF-CGF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-26" y="546"/>
         </scene>
-        <!--WorkspacePreference-->
-        <scene sceneID="lFb-0S-9JU">
+        <!--View Controller-->
+        <scene sceneID="Sgm-sE-Fiw">
             <objects>
-                <controllerPlaceholder storyboardName="WorkspacePreference" id="UpR-n9-vYd" sceneMemberID="viewController"/>
-                <customObject id="k9n-xn-ejf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController id="vUz-iw-k3G" sceneMemberID="viewController">
+                    <view key="view" id="0u7-it-fh5" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                <color key="value" name="SidebarBackground"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </viewController>
+                <customObject id="beb-pw-zeD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="794"/>
+            <point key="canvasLocation" x="181" y="951"/>
+        </scene>
+        <!--ShortcutPreference-->
+        <scene sceneID="DO8-hG-v2P">
+            <objects>
+                <controllerPlaceholder storyboardName="ShortcutPreference" id="D5z-A1-9ny" sceneMemberID="viewController"/>
+                <customObject id="rfW-Xy-Xrz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-197" y="784"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSPreferencesGeneral" width="32" height="32"/>
+        <image name="Shortcut" width="28" height="28"/>
+        <namedColor name="SidebarBackground">
+            <color red="0.14900000390000001" green="0.17599999899999999" blue="0.20000000300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
