@@ -13,4 +13,59 @@ extension NSPasteboard {
     guard let ids = string(forType: .nodeModel) else { return nil }
     return ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }
   }
+ 
+  func replaceImagesToMarkdownText() -> Bool {
+    do {
+      let imagesData = gifImagesData
+      if imagesData.count > 0 { return replaceImagesDataToMarkdownText(imagesData, fileExtension: "gif") }
+    }
+    do {
+      let imagesData = pngImagesData
+      if imagesData.count > 0 { return replaceImagesDataToMarkdownText(imagesData, fileExtension: "png") }
+    }
+    do {
+      let imagesData = imagesDataRepresentationUsingPNG
+      if imagesData.count > 0 { return replaceImagesDataToMarkdownText(imagesData, fileExtension: "png") }
+    }
+    return false
+  }
+  
+  private func replaceImagesDataToMarkdownText(_ imagesData: [Data], fileExtension: String) -> Bool {
+    let imageDirectory = WorkspaceModel.selected.value.sourceDirectory.appendingPathComponent("images", isDirectory: true)
+    do {
+      try FileManager.default.createDirectoryIfNeeded(url: imageDirectory)
+      let imageTexts: [String] = try imagesData.flatMap { (imageData) in
+        let url = imageDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension(fileExtension)
+        try imageData.write(to: url)
+        return "![image](\(url.absoluteString))"
+      }
+      clearContents()
+      writeObjects(imageTexts as [NSPasteboardWriting])
+      return true
+    } catch {
+      NSAlert(error: error).runModal()
+      return false
+    }
+  }
+  
+  var imagesDataRepresentationUsingPNG: [Data] {
+    if !canReadObject(forClasses: [NSImage.self], options: nil) { return [] }
+    let images = (readObjects(forClasses: [NSImage.self], options: nil) as? [NSImage]) ?? []
+    return images.flatMap { (image) in
+      guard
+        let imageData = image.tiffRepresentation,
+        let imageRep = NSBitmapImageRep(data: imageData),
+        let fileData = imageRep.representation(using: .png, properties: [:])
+        else { return nil }
+      return fileData
+    }
+  }
+  
+  var pngImagesData: [Data] {
+    return pasteboardItems?.flatMap { $0.data(forType: .png) } ?? []
+  }
+  
+  var gifImagesData: [Data] {
+    return pasteboardItems?.flatMap { $0.data(forType: NSPasteboard.PasteboardType(kUTTypeGIF as String)) } ?? []
+  }
 }

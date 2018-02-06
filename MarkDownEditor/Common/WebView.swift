@@ -18,7 +18,7 @@ final class WebView: WKWebView {
     self.finishHandler = finishHandler
     isHidden = true
     let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
-    loadFileURL(url, allowingReadAccessTo: url)
+    loadFileURL(url, allowingReadAccessTo: FileManager.default.homeDirectoryForCurrentUser)
     navigationDelegate = self
   }
   

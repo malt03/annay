@@ -19,4 +19,31 @@ final class TextView: NSTextView {
     style.lineSpacing = 4
     defaultParagraphStyle = style
   }
+
+  override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
+    if sender.draggingPasteboard().replaceImagesToMarkdownText() {
+      return super.performDragOperation(sender)
+    }
+
+    return super.performDragOperation(sender)
+  }
+  
+  private func writeImages(_ imagesData: [Data], fileExtension: String, sender: NSDraggingInfo) -> Bool {
+    let pasteboard = sender.draggingPasteboard()
+    let imageDirectory = WorkspaceModel.selected.value.sourceDirectory.appendingPathComponent("images", isDirectory: true)
+    do {
+      try FileManager.default.createDirectoryIfNeeded(url: imageDirectory)
+      let imageTexts: [String] = try imagesData.flatMap { (imageData) in
+        let url = imageDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension(fileExtension)
+        try imageData.write(to: url)
+        return "![image](\(url.absoluteString))"
+      }
+      pasteboard.clearContents()
+      pasteboard.writeObjects(imageTexts as [NSPasteboardWriting])
+      return super.performDragOperation(sender)
+    } catch {
+      NSAlert(error: error).runModal()
+      return false
+    }
+  }
 }

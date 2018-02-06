@@ -59,6 +59,10 @@ final class WorkspaceModel {
     return WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
   }
   
+  var sourceDirectory: URL {
+    return workspaceDirectory.appendingPathComponent("sources", isDirectory: true)
+  }
+  
   func setUrl(_ newUrl: URL) throws {
     if url == newUrl { return }
     if FileManager.default.fileExists(atPath: newUrl.path) { throw MarkDownEditorError.fileExists(oldUrl: url) }
