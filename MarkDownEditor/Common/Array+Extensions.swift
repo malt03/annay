@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 extension Array where Element: Equatable {
   func index(of object: Element) -> Int? {
@@ -33,6 +34,40 @@ extension Array where Element == NodeModel {
         if contains(ancestor) { return false }
       }
       return true
+    }
+  }
+}
+
+extension Array where Element == URL {
+  var creatableRootNodesCount: Int {
+    return filter({ $0.isDirectory || $0.isConformsToUTI("public.plain-text") }).count
+  }
+  
+  @discardableResult
+  func createNodes(parent: NodeModel?, startIndex: Int, realm: Realm) throws -> [NodeModel] {
+    var index = startIndex
+    return try flatMap { (url) -> NodeModel? in
+      let isDirectory = url.isDirectory
+      if !isDirectory && !url.isConformsToUTI("public.plain-text") { return nil }
+      
+      let node = NodeModel()
+      node.isDirectory = url.isDirectory
+      node.parent = parent
+      node.index = index
+      index += 1
+      
+      if isDirectory {
+        node.name = url.name
+        realm.add(node)
+        try FileManager.default.contentsOfDirectory(atPath: url.path).map {
+          url.appendingPathComponent($0)
+        }.createNodes(parent: node, startIndex: 0, realm: realm)
+        return node
+      } else {
+        node.setBody(try String(contentsOfFile: url.path))
+        realm.add(node)
+        return node
+      }
     }
   }
 }

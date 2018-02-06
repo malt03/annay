@@ -41,7 +41,7 @@ final class SidebarViewController: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    outlineView.registerForDraggedTypes([.nodeModel, .string])
+    outlineView.registerForDraggedTypes([.nodeModel, .string, .fileURL])
     outlineView.setDraggingSourceOperationMask([.move, .copy], forLocal: false)
     outlineView.backgroundColor = .clear
     outlineView.headerView = nil
@@ -446,6 +446,21 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+    let items = info.draggingPasteboard().pasteboardItems ?? []
+    let fileURLs = items.flatMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
+    if fileURLs.count > 0 {
+      let containsCopyable = fileURLs.contains { $0.isDirectory || $0.isConformsToUTI(kUTTypePlainText as String) }
+      if !containsCopyable { return [] }
+      guard let parentNode = item as? NodeModel else {
+        let containsFile = fileURLs.contains { !$0.isDirectory }
+        return containsFile ? [] : [.copy]
+      }
+      if parentNode.isTrash { return [] }
+      if parentNode.isDeleted { return [] }
+      if !parentNode.isDirectory { return [] }
+      return [.copy]
+    }
+    
     guard let parentNode = item as? NodeModel else {
       guard let nodes = info.draggingPasteboard().nodes else { return [] }
       let noteContains = nodes.contains(where: { !$0.isDirectory })
@@ -471,6 +486,12 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
+    defer {
+      DispatchQueue.main.async { // 謎のクラッシュ解消。多分Realmの反映タイミングとかの問題な気がしている
+        outlineView.reloadData()
+      }
+    }
+
     let parent = item as? NodeModel
 
     var fixedIndex: Int
@@ -478,6 +499,28 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
       fixedIndex = parent == nil ? NodeModel.roots(query: queryText.value).count : 0
     } else {
       fixedIndex = index
+    }
+    
+    let items = info.draggingPasteboard().pasteboardItems ?? []
+    let fileURLs = items.flatMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
+    if fileURLs.count > 0 {
+      do {
+        try Realm.transaction { (realm) in
+          let creatableCount = fileURLs.creatableRootNodesCount
+          for (i, child) in (parent?.sortedChildren(query: queryText.value) ?? NodeModel.roots(query: queryText.value)).enumerated() {
+            if fixedIndex > i {
+              child.index = i
+            } else {
+              child.index = i + creatableCount
+            }
+          }
+          try fileURLs.createNodes(parent: parent, startIndex: fixedIndex, realm: realm)
+          outlineView.reloadData()
+        }
+      } catch {
+        NSAlert(error: error).runModal()
+      }
+      return true
     }
     
     if let ids = info.draggingPasteboard().string(forType: .nodeModel) {
@@ -504,9 +547,6 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
             node.isDeleted = false
           }
         }
-      }
-      DispatchQueue.main.async { // 謎のクラッシュ解消。多分Realmの反映タイミングとかの問題な気がしている
-        outlineView.reloadData()
       }
       return true
     }
