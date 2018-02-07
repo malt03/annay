@@ -1,28 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="7wa-Mx-I7f">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="QwI-DJ-ROh">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--New Workspace Shortcut Preference View Controller-->
         <scene sceneID="Km4-mX-HLD">
             <objects>
-                <viewController id="7wa-Mx-I7f" sceneMemberID="viewController">
+                <viewController id="7wa-Mx-I7f" customClass="NewWorkspaceShortcutPreferenceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="GnK-3f-DUR">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="294" height="116"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gdq-fB-QLk" customClass="MASShortcutView">
-                                <rect key="frame" x="144" y="102" width="163" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </customView>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E71-OM-elJ">
+                                <rect key="frame" x="32" y="32" width="230" height="52"/>
+                                <subviews>
+                                    <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NVt-ML-Tb7">
+                                        <rect key="frame" x="0.0" y="31" width="230" height="21"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="n3g-KD-UZH">
+                                                <rect key="frame" x="-2" y="2" width="76" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Key:" id="mtC-z4-tHm">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="4G5-rU-jYC" customClass="MASShortcutView">
+                                                <rect key="frame" x="80" y="0.0" width="150" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="3oL-CZ-CCW"/>
+                                                    <constraint firstAttribute="height" constant="21" id="EUV-y5-RdC"/>
+                                                </constraints>
+                                            </customView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="4G5-rU-jYC" firstAttribute="height" secondItem="NVt-ML-Tb7" secondAttribute="height" id="Qq0-Qv-aOW"/>
+                                            <constraint firstAttribute="height" constant="21" id="uLz-UG-zpQ"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                    <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w2b-xg-fpA">
+                                        <rect key="frame" x="0.0" y="0.0" width="112" height="21"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="fpm-ea-hyi">
+                                                <rect key="frame" x="-2" y="2" width="76" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Workspace:" id="2Ct-eP-fNN">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <popUpButton horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="xO8-1I-tFG">
+                                                <rect key="frame" x="78" y="-3" width="37" height="26"/>
+                                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="d4v-AN-opt">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" id="acp-iq-wff"/>
+                                                </popUpButtonCell>
+                                            </popUpButton>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="tpz-pM-pKq"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="NVt-ML-Tb7" firstAttribute="width" secondItem="E71-OM-elJ" secondAttribute="width" priority="999" id="KI5-Kx-Cat"/>
+                                    <constraint firstItem="fpm-ea-hyi" firstAttribute="width" secondItem="n3g-KD-UZH" secondAttribute="width" id="UuE-4k-Mbd"/>
+                                    <constraint firstItem="w2b-xg-fpA" firstAttribute="width" relation="lessThanOrEqual" secondItem="E71-OM-elJ" secondAttribute="width" id="ezn-VS-cBg"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="E71-OM-elJ" secondAttribute="trailing" constant="32" id="JrY-Sj-roe"/>
+                            <constraint firstItem="E71-OM-elJ" firstAttribute="top" secondItem="GnK-3f-DUR" secondAttribute="top" constant="32" id="PAh-fX-Kgq"/>
+                            <constraint firstAttribute="bottom" secondItem="E71-OM-elJ" secondAttribute="bottom" constant="32" id="l3t-UE-7j8"/>
+                            <constraint firstItem="E71-OM-elJ" firstAttribute="leading" secondItem="GnK-3f-DUR" secondAttribute="leading" constant="32" id="z3Z-4E-eXk"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="popUpButton" destination="xO8-1I-tFG" id="OBr-Du-03F"/>
+                    </connections>
                 </viewController>
                 <customObject id="y5a-aL-K1I" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="175"/>
+            <point key="canvasLocation" x="790" y="562"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xMU-rn-ZbG">
+            <objects>
+                <viewController id="QwI-DJ-ROh" sceneMemberID="viewController">
+                    <view key="view" id="bFY-ae-eYj">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="211-ns-s0x">
+                                <rect key="frame" x="6" y="3" width="438" height="285"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="New Note" identifier="" id="Avm-my-ALo">
+                                        <view key="view" id="gPL-Gc-DYn">
+                                            <rect key="frame" x="10" y="33" width="418" height="239"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="L49-7C-6dB">
+                                                    <rect key="frame" x="0.0" y="0.0" width="418" height="239"/>
+                                                    <connections>
+                                                        <segue destination="7wa-Mx-I7f" kind="embed" id="yFK-fV-uR9"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="L49-7C-6dB" firstAttribute="top" secondItem="gPL-Gc-DYn" secondAttribute="top" id="1OF-HY-TX1"/>
+                                                <constraint firstAttribute="bottom" secondItem="L49-7C-6dB" secondAttribute="bottom" id="6E9-kU-31u"/>
+                                                <constraint firstAttribute="trailing" secondItem="L49-7C-6dB" secondAttribute="trailing" id="GoU-QL-KqT"/>
+                                                <constraint firstItem="L49-7C-6dB" firstAttribute="leading" secondItem="gPL-Gc-DYn" secondAttribute="leading" id="nNV-9W-Mvl"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Open Note" identifier="" id="lDa-wM-pQo">
+                                        <view key="view" id="XVT-NU-hiV">
+                                            <rect key="frame" x="10" y="33" width="418" height="239"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="211-ns-s0x" secondAttribute="trailing" constant="13" id="1dR-nG-xgA"/>
+                            <constraint firstItem="211-ns-s0x" firstAttribute="leading" secondItem="bFY-ae-eYj" secondAttribute="leading" constant="13" id="JPm-tS-2rz"/>
+                            <constraint firstItem="211-ns-s0x" firstAttribute="top" secondItem="bFY-ae-eYj" secondAttribute="top" constant="18" id="WMg-ph-mEZ"/>
+                            <constraint firstAttribute="bottom" secondItem="211-ns-s0x" secondAttribute="bottom" constant="13" id="sfl-RN-o4o"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="RT5-Y2-nIN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-199" y="563"/>
         </scene>
     </scenes>
 </document>
