@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="QwI-DJ-ROh">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Shortcut Preference View Controller-->
+        <scene sceneID="xMU-rn-ZbG">
+            <objects>
+                <viewController id="QwI-DJ-ROh" customClass="ShortcutPreferenceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="bFY-ae-eYj">
+                        <rect key="frame" x="0.0" y="0.0" width="475" height="325"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="211-ns-s0x">
+                                <rect key="frame" x="6" y="3" width="463" height="310"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="New Note" identifier="" id="Avm-my-ALo">
+                                        <view key="view" id="gPL-Gc-DYn">
+                                            <rect key="frame" x="10" y="33" width="443" height="264"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Sc4-fz-pal">
+                                                    <rect key="frame" x="0.0" y="0.0" width="443" height="264"/>
+                                                    <connections>
+                                                        <segue destination="wXl-oA-5FD" kind="embed" identifier="NewNote" id="4cq-D9-mAs"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Sc4-fz-pal" secondAttribute="bottom" id="JsI-Ll-A30"/>
+                                                <constraint firstItem="Sc4-fz-pal" firstAttribute="top" secondItem="gPL-Gc-DYn" secondAttribute="top" id="ZAf-u7-tS1"/>
+                                                <constraint firstAttribute="trailing" secondItem="Sc4-fz-pal" secondAttribute="trailing" id="jTj-TM-st8"/>
+                                                <constraint firstItem="Sc4-fz-pal" firstAttribute="leading" secondItem="gPL-Gc-DYn" secondAttribute="leading" id="zme-OM-QfJ"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Open Note" identifier="" id="lDa-wM-pQo">
+                                        <view key="view" id="XVT-NU-hiV">
+                                            <rect key="frame" x="10" y="33" width="443" height="264"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="LBG-XK-V8U">
+                                                    <rect key="frame" x="0.0" y="0.0" width="443" height="264"/>
+                                                    <connections>
+                                                        <segue destination="zgL-1W-E8B" kind="embed" identifier="OpenNote" id="KaV-L8-Yn5"/>
+                                                    </connections>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LBG-XK-V8U" firstAttribute="top" secondItem="XVT-NU-hiV" secondAttribute="top" id="8No-rQ-7uu"/>
+                                                <constraint firstAttribute="bottom" secondItem="LBG-XK-V8U" secondAttribute="bottom" id="cCe-Cb-Ckp"/>
+                                                <constraint firstAttribute="trailing" secondItem="LBG-XK-V8U" secondAttribute="trailing" id="e42-ta-Lbu"/>
+                                                <constraint firstItem="LBG-XK-V8U" firstAttribute="leading" secondItem="XVT-NU-hiV" secondAttribute="leading" id="n8x-RL-wsp"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="211-ns-s0x" secondAttribute="trailing" constant="13" id="1dR-nG-xgA"/>
+                            <constraint firstItem="211-ns-s0x" firstAttribute="leading" secondItem="bFY-ae-eYj" secondAttribute="leading" constant="13" id="JPm-tS-2rz"/>
+                            <constraint firstItem="211-ns-s0x" firstAttribute="top" secondItem="bFY-ae-eYj" secondAttribute="top" constant="18" id="WMg-ph-mEZ"/>
+                            <constraint firstAttribute="bottom" secondItem="211-ns-s0x" secondAttribute="bottom" constant="13" id="sfl-RN-o4o"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="RT5-Y2-nIN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-210" y="563"/>
+        </scene>
+        <!--NewOrOpenNoteShortcutPreference-->
+        <scene sceneID="Mpd-0d-xTI">
+            <objects>
+                <controllerPlaceholder storyboardName="NewOrOpenNoteShortcutPreference" id="wXl-oA-5FD" sceneMemberID="viewController"/>
+                <customObject id="GnB-Zg-Sip" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="269" y="457"/>
+        </scene>
+        <!--NewOrOpenNoteShortcutPreference-->
+        <scene sceneID="0RM-dA-oPR">
+            <objects>
+                <customObject id="AgE-EP-SJr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="NewOrOpenNoteShortcutPreference" id="zgL-1W-E8B" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="276" y="649"/>
+        </scene>
+    </scenes>
+</document>

@@ -69,6 +69,10 @@ final class SidebarViewController: NSViewController {
       self?.outlineView.reloadData()
     }).disposed(by: bag)
     
+    NewOrOpenNoteShortcutManager.shared.addInsertNodeHandler { [weak self] (node) in
+      self?.insert(node: node, in: node.parent)
+    }
+    
     NSApplication.shared.endEditing()
   }
   
@@ -461,8 +465,10 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
       return [.copy]
     }
     
+    let nodes = info.draggingPasteboard().nodes
+    if nodes.count == 0 { return [] }
+
     guard let parentNode = item as? NodeModel else {
-      guard let nodes = info.draggingPasteboard().nodes else { return [] }
       let noteContains = nodes.contains(where: { !$0.isDirectory })
       return noteContains ? [] : [.move]
     }
@@ -471,7 +477,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     } else {
       return []
     }
-    guard let nodes = info.draggingPasteboard().nodes else { return [.move] }
+
     for node in nodes {
       if node == parentNode { return [] }
       if node.descendants.contains(parentNode) { return [] }
@@ -523,34 +529,33 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
       return true
     }
     
-    if let ids = info.draggingPasteboard().string(forType: .nodeModel) {
-      let movedNodes = ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }
-      fixedIndex -= movedNodes.filter { !$0.isDeleted && $0.parent == parent }.map { outlineView.childIndex(forItem: $0) }.filter { $0 < fixedIndex }.count
-      
-      Realm.transaction { _ in
-        if parent == .trash {
-          for node in movedNodes {
-            node.isDeleted = true
-          }
-        } else {
-          for node in movedNodes { node.index = -1 }
-          for (i, child) in (parent?.sortedChildren(query: queryText.value) ?? NodeModel.roots(query: queryText.value)).enumerated() {
-            if fixedIndex > i {
-              child.index = i
-            } else {
-              child.index = i + movedNodes.count
-            }
-          }
-          for (i, node) in movedNodes.enumerated() {
-            node.index = i + fixedIndex
-            node.setParent(parent)
-            node.isDeleted = false
+    let movedNodes = info.draggingPasteboard().nodes
+    if movedNodes.count == 0 { return false }
+    
+    fixedIndex -= movedNodes.filter { !$0.isDeleted && $0.parent == parent }.map { outlineView.childIndex(forItem: $0) }.filter { $0 < fixedIndex }.count
+    
+    Realm.transaction { _ in
+      if parent == .trash {
+        for node in movedNodes {
+          node.isDeleted = true
+        }
+      } else {
+        for node in movedNodes { node.index = -1 }
+        for (i, child) in (parent?.sortedChildren(query: queryText.value) ?? NodeModel.roots(query: queryText.value)).enumerated() {
+          if fixedIndex > i {
+            child.index = i
+          } else {
+            child.index = i + movedNodes.count
           }
         }
+        for (i, node) in movedNodes.enumerated() {
+          node.index = i + fixedIndex
+          node.setParent(parent)
+          node.isDeleted = false
+        }
       }
-      return true
     }
-    return false
+    return true
   }
 }
 

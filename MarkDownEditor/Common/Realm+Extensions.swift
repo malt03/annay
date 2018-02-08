@@ -11,7 +11,11 @@ import Foundation
 
 extension Realm {
   static var instance: Realm {
-    return try! Realm(configuration: configuration(for: WorkspaceModel.selected.value))
+    return instance(for: WorkspaceModel.selected.value)
+  }
+  
+  static func instance(for workspace: WorkspaceModel) -> Realm {
+    return try! Realm(configuration: configuration(for: workspace))
   }
   
   private static func configuration(for workspace: WorkspaceModel) -> Realm.Configuration {
@@ -56,7 +60,7 @@ extension Realm {
   }
   
   private static func directory(for workspace: WorkspaceModel) -> URL {
-    return WorkspaceModel.selected.value.workspaceDirectory
+    return workspace.workspaceDirectory
   }
   
   static func transaction(_ block: (_ realm: Realm) throws -> Void) rethrows {

@@ -58,6 +58,7 @@ final class MarkDownEditorViewController: NSViewController {
   }
   
   @objc private func moveFocusToEditor() {
+    view.window?.makeKeyAndOrderFront(nil)
     view.window?.makeFirstResponder(textView)
   }
   

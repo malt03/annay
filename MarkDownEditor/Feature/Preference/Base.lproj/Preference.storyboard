@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="b0T-G7-odI">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="D3A-1q-dZS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Window Controller-->
-        <scene sceneID="f5O-bv-GNj">
+        <scene sceneID="RM8-F1-3Ja">
             <objects>
-                <windowController id="b0T-G7-odI" customClass="WindowController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" id="nLs-Kb-MWz">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                <windowController id="D3A-1q-dZS" customClass="PreferenceWindowController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Preference" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="MBI-fw-4Oy">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <rect key="contentRect" x="294" y="362" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
                         <connections>
-                            <outlet property="delegate" destination="b0T-G7-odI" id="f5D-GU-1sf"/>
+                            <outlet property="delegate" destination="D3A-1q-dZS" id="IWk-gV-K6i"/>
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="wIz-lQ-0Hg" kind="relationship" relationship="window.shadowedContentViewController" id="7Wx-xl-khN"/>
+                        <segue destination="wIz-lQ-0Hg" kind="relationship" relationship="window.shadowedContentViewController" id="gcQ-43-nSr"/>
                     </connections>
                 </windowController>
-                <customObject id="O3c-F8-mla" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="TDq-hV-INF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="163"/>
+            <point key="canvasLocation" x="-26" y="197"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="lYm-M9-E81">
             <objects>
                 <tabViewController selectedTabViewItemIndex="0" tabStyle="toolbar" id="wIz-lQ-0Hg" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem label="Workspace" id="pdj-Ns-ucW"/>
+                        <tabViewItem label="Shortcut" image="Shortcut" id="IQM-9u-Oe1"/>
                     </tabViewItems>
+                    <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="mJW-Z7-ChU">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="172"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="275"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
                         <tabViewItems/>
@@ -44,20 +45,23 @@
                     </tabView>
                     <connections>
                         <outlet property="tabView" destination="mJW-Z7-ChU" id="RfQ-YN-3Vo"/>
-                        <segue destination="UpR-n9-vYd" kind="relationship" relationship="tabItems" id="kRz-jl-9sp"/>
+                        <segue destination="D5z-A1-9ny" kind="relationship" relationship="tabItems" id="CKu-Xt-fJi"/>
                     </connections>
                 </tabViewController>
                 <customObject id="mqp-vF-CGF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="546"/>
+            <point key="canvasLocation" x="-26" y="597.5"/>
         </scene>
-        <!--WorkspacePreference-->
-        <scene sceneID="lFb-0S-9JU">
+        <!--ShortcutPreference-->
+        <scene sceneID="DO8-hG-v2P">
             <objects>
-                <controllerPlaceholder storyboardName="WorkspacePreference" id="UpR-n9-vYd" sceneMemberID="viewController"/>
-                <customObject id="k9n-xn-ejf" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="ShortcutPreference" id="D5z-A1-9ny" sceneMemberID="viewController"/>
+                <customObject id="rfW-Xy-Xrz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="794"/>
+            <point key="canvasLocation" x="-26" y="833"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Shortcut" width="32" height="32"/>
+    </resources>
 </document>

@@ -12,17 +12,23 @@ import RealmSwift
 final class NodeTableCellView: NSTableCellView {
   override func draw(_ dirtyRect: NSRect) {
     super.draw(dirtyRect)
-    (superview as? NodeTableRowView)?.fillColor.setFill()
+    if inPreference { return }
+
+    guard let row = superview as? NodeTableRowView else { return }
+    row.fillColor.setFill()
     dirtyRect.fill()
   }
   
   private var token: NotificationToken?
   private var node: NodeModel!
-  func prepare(node: NodeModel) {
+  private var inPreference = false
+  
+  func prepare(node: NodeModel, inPreference: Bool = false) {
     self.node = node
+    self.inPreference = inPreference
     
-    textField?.textColor = .text
-    textField?.isEditable = node.isDirectory && !node.isDeleted
+    textField?.textColor = inPreference ? .textColor : .text
+    textField?.isEditable = !inPreference && node.isDirectory && !node.isDeleted
     textField?.font = NSFont.systemFont(ofSize: 14)
     imageView?.image = NSImage(named: .folder)
     textField?.stringValue = node.name

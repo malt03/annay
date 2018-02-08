@@ -36,6 +36,10 @@ extension AppDelegate {
     OpenQuicklyWindowController.toggle()
   }
 
+  @IBAction private func openPreference(_ sender: NSMenuItem) {
+    PreferenceWindowController.show()
+  }
+
   @IBAction private func saveWorkspace(_ sender: NSMenuItem) {
     WorkspaceModel.selected.value.save()
   }
