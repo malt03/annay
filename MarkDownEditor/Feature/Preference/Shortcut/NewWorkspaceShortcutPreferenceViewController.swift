@@ -8,15 +8,19 @@
 
 import Cocoa
 import RxSwift
+import MASShortcut
 
 final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
   private let bag = DisposeBag()
   
+  @IBOutlet private weak var shortcutView: MASShortcutView!
   @IBOutlet private weak var popUpButton: NSPopUpButton!
-  @IBOutlet weak var outlineView: NSOutlineView!
+  @IBOutlet private weak var outlineView: NSOutlineView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    shortcutView.associatedUserDefaultsKey = NewWorkspaceShortcutManager.Key.ShortcutKey
     
     WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] (spaces) in
       guard let s = self else { return }

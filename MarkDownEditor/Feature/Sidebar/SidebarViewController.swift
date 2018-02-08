@@ -69,6 +69,10 @@ final class SidebarViewController: NSViewController {
       self?.outlineView.reloadData()
     }).disposed(by: bag)
     
+    NewWorkspaceShortcutManager.shared.addInsertNodeHandler { [weak self] (node) in
+      self?.insert(node: node, in: node.parent)
+    }
+    
     NSApplication.shared.endEditing()
   }
   

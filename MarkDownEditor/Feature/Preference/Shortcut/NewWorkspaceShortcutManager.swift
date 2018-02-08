@@ -8,15 +8,17 @@
 
 import RxSwift
 import Foundation
+import MASShortcut
 
 final class NewWorkspaceShortcutManager {
   static let shared = NewWorkspaceShortcutManager()
   
   private let bag = DisposeBag()
   
-  private struct Key {
+  struct Key {
     static let WorkspaceId = "NewWorkspaceShortcutManager/WorkspaceId"
     static let NodeId = "NewWorkspaceShortcutManager/NodeId"
+    static let ShortcutKey = "NewWorkspaceShortcutPreferenceViewController/Shortcut"
   }
   
   private init() {
@@ -40,6 +42,28 @@ final class NewWorkspaceShortcutManager {
     }).disposed(by: bag)
   }
   
+  func prepare() {
+    MASShortcutBinder.shared().bindShortcut(withDefaultsKey: Key.ShortcutKey) { [weak self] in
+      guard let s = self else { return }
+      guard let node = s.node else { return }
+      s.workspace.value.select()
+      let note = NodeModel.createNote(in: node)
+      note.selected()
+      NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
+      Application.shared.activate(ignoringOtherApps: true)
+      for handler in s.insertNodeHandlers {
+        handler(note)
+      }
+    }
+  }
+  
+  func addInsertNodeHandler(_ handler: @escaping InsertNodeHandler) {
+    insertNodeHandlers.append(handler)
+  }
+  
+  typealias InsertNodeHandler = (_ node: NodeModel) -> Void
+  
+  private var insertNodeHandlers = [InsertNodeHandler]()
   let workspace: Variable<WorkspaceModel>
   var node: NodeModel? {
     didSet {
