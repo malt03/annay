@@ -5,19 +5,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="aHn-r9-vBP">
-            <objects>
-                <viewController id="4Cl-f4-opg" sceneMemberID="viewController">
-                    <view key="view" id="Yp0-cc-tYZ">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="Ww5-7e-E8R" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1086" y="208"/>
-        </scene>
         <!--Window Controller-->
         <scene sceneID="RM8-F1-3Ja">
             <objects>
