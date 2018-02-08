@@ -26,3 +26,4 @@
 "File update for '%@' was detected.\nWhich one should take priority?" = "「%@」のファイルの更新が検知されました。\nどちらを優先しますか？";
 "Editing Data" = "編集中データ";
 "File" = "ファイル";
+"No parent directory was selected." = "親ディレクトリが選択されていません。";
