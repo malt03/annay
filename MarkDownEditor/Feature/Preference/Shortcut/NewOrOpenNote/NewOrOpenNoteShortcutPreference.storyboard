@@ -6,10 +6,10 @@
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
-        <!--New Note Shortcut Preference View Controller-->
+        <!--New Or Open Note Shortcut Preference View Controller-->
         <scene sceneID="Km4-mX-HLD">
             <objects>
-                <viewController id="7wa-Mx-I7f" customClass="NewNoteShortcutPreferenceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7wa-Mx-I7f" customClass="NewOrOpenNoteShortcutPreferenceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="GnK-3f-DUR">
                         <rect key="frame" x="0.0" y="0.0" width="496" height="289"/>
                         <autoresizingMask key="autoresizingMask"/>

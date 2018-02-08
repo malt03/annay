@@ -1,5 +1,5 @@
 //
-//  NewNoteShortcutPreferenceViewController.swift
+//  NewOrOpenNoteShortcutPreferenceViewController.swift
 //  MarkDownEditor
 //
 //  Created by Koji Murata on 2018/02/07.
@@ -11,21 +11,27 @@ import RxSwift
 import MASShortcut
 import RealmSwift
 
-final class NewNoteShortcutPreferenceViewController: NSViewController {
+final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
   private let bag = DisposeBag()
   private var refreshNodesToken: NotificationToken?
   
-  private var selectedWorkspace = Variable(NewNoteShortcutManager.shared.workspace)
+  private lazy var selectedWorkspace = Variable(NewOrOpenNoteShortcutManager.shared.workspace(for: kind) ?? WorkspaceModel.selected.value)
   
   @IBOutlet private weak var shortcutView: MASShortcutView!
   @IBOutlet private weak var popUpButton: NSPopUpButton!
   @IBOutlet private weak var outlineView: NSOutlineView!
   @IBOutlet private weak var outlineViewHightConstraint: NSLayoutConstraint!
   
+  private var kind: NewOrOpenNoteShortcutManager.Kind!
+  
+  func prepare(kind: NewOrOpenNoteShortcutManager.Kind) {
+    self.kind = kind
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    shortcutView.associatedUserDefaultsKey = NewNoteShortcutManager.Key.ShortcutKey
+    shortcutView.associatedUserDefaultsKey = NewOrOpenNoteShortcutManager.Key.ShortcutKey(for: kind)
     
     WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] (spaces) in
       guard let s = self else { return }
@@ -64,14 +70,14 @@ final class NewNoteShortcutPreferenceViewController: NSViewController {
   }
   
   private func selectSelectedDirectory() {
-    let row = outlineView.row(forItem: NewNoteShortcutManager.shared.node)
+    let row = outlineView.row(forItem: NewOrOpenNoteShortcutManager.shared.node(for: kind))
     if row > 0 {
       outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
     }
   }
 }
 
-extension NewNoteShortcutPreferenceViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
+extension NewOrOpenNoteShortcutPreferenceViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
   func outlineView(_ outlineView: NSOutlineView, persistentObjectForItem item: Any?) -> Any? {
     return (item as? NodeModel)?.id
   }
@@ -101,8 +107,8 @@ extension NewNoteShortcutPreferenceViewController: NSOutlineViewDelegate, NSOutl
   }
   
   func outlineViewSelectionDidChange(_ notification: Notification) {
-    NewNoteShortcutManager.shared.workspace = selectedWorkspace.value
-    NewNoteShortcutManager.shared.node = outlineView.item(atRow: outlineView.selectedRow) as? NodeModel
+    NewOrOpenNoteShortcutManager.shared.setWorkspace(selectedWorkspace.value, for: kind)
+    NewOrOpenNoteShortcutManager.shared.setNode((outlineView.item(atRow: outlineView.selectedRow) as? NodeModel), for: kind)
   }
   
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {

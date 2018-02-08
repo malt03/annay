@@ -5,27 +5,27 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Shortcut Preference View Controller-->
         <scene sceneID="xMU-rn-ZbG">
             <objects>
-                <viewController id="QwI-DJ-ROh" sceneMemberID="viewController">
+                <viewController id="QwI-DJ-ROh" customClass="ShortcutPreferenceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="bFY-ae-eYj">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="350"/>
+                        <rect key="frame" x="0.0" y="0.0" width="475" height="325"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="211-ns-s0x">
-                                <rect key="frame" x="6" y="3" width="438" height="335"/>
+                                <rect key="frame" x="6" y="3" width="463" height="310"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="New Note" identifier="" id="Avm-my-ALo">
                                         <view key="view" id="gPL-Gc-DYn">
-                                            <rect key="frame" x="10" y="33" width="418" height="289"/>
+                                            <rect key="frame" x="10" y="33" width="443" height="264"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="Sc4-fz-pal">
-                                                    <rect key="frame" x="0.0" y="0.0" width="418" height="289"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="443" height="264"/>
                                                     <connections>
-                                                        <segue destination="wXl-oA-5FD" kind="embed" id="4cq-D9-mAs"/>
+                                                        <segue destination="wXl-oA-5FD" kind="embed" identifier="NewNote" id="4cq-D9-mAs"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
@@ -39,8 +39,19 @@
                                     </tabViewItem>
                                     <tabViewItem label="Open Note" identifier="" id="lDa-wM-pQo">
                                         <view key="view" id="XVT-NU-hiV">
-                                            <rect key="frame" x="10" y="33" width="418" height="239"/>
+                                            <rect key="frame" x="10" y="33" width="443" height="264"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <containerView translatesAutoresizingMaskIntoConstraints="NO" id="LBG-XK-V8U">
+                                                    <rect key="frame" x="0.0" y="0.0" width="443" height="264"/>
+                                                </containerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LBG-XK-V8U" firstAttribute="top" secondItem="XVT-NU-hiV" secondAttribute="top" id="8No-rQ-7uu"/>
+                                                <constraint firstAttribute="bottom" secondItem="LBG-XK-V8U" secondAttribute="bottom" id="cCe-Cb-Ckp"/>
+                                                <constraint firstAttribute="trailing" secondItem="LBG-XK-V8U" secondAttribute="trailing" id="e42-ta-Lbu"/>
+                                                <constraint firstItem="LBG-XK-V8U" firstAttribute="leading" secondItem="XVT-NU-hiV" secondAttribute="leading" id="n8x-RL-wsp"/>
+                                            </constraints>
                                         </view>
                                     </tabViewItem>
                                 </tabViewItems>
@@ -56,12 +67,12 @@
                 </viewController>
                 <customObject id="RT5-Y2-nIN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-199" y="563"/>
+            <point key="canvasLocation" x="-210" y="563"/>
         </scene>
-        <!--NewNoteShortcutPreference-->
+        <!--NewOrOpenNoteShortcutPreference-->
         <scene sceneID="Mpd-0d-xTI">
             <objects>
-                <controllerPlaceholder storyboardName="NewNoteShortcutPreference" id="wXl-oA-5FD" sceneMemberID="viewController"/>
+                <controllerPlaceholder storyboardName="NewOrOpenNoteShortcutPreference" id="wXl-oA-5FD" sceneMemberID="viewController"/>
                 <customObject id="GnB-Zg-Sip" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="269" y="457"/>

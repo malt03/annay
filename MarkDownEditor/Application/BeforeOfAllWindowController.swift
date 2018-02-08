@@ -16,7 +16,7 @@ final class BeforeOfAllWindowController: NSWindowController {
       WorkspaceDirectoryWatcherManager.shared.prepare()
       NodeModel.createFirstDirectoryIfNeeded()
       
-      NewNoteShortcutManager.shared.prepare()
+      NewOrOpenNoteShortcutManager.shared.prepare()
       
       for workspace in WorkspaceModel.spaces.value { workspace.saveToUserDefaults() }
       let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: .main)
