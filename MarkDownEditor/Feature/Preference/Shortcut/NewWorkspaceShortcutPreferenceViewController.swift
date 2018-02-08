@@ -15,8 +15,6 @@ final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
   @IBOutlet private weak var popUpButton: NSPopUpButton!
   @IBOutlet weak var outlineView: NSOutlineView!
   
-  private var workspace = Variable<WorkspaceModel>(WorkspaceModel.selected.value)
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -24,10 +22,10 @@ final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
       guard let s = self else { return }
       s.popUpButton.removeAllItems()
       s.popUpButton.addItems(withTitles: spaces.map { $0.name })
-      s.popUpButton.selectItem(at: spaces.index(of: s.workspace.value) ?? 0)
+      s.popUpButton.selectItem(at: spaces.index(of: NewWorkspaceShortcutManager.shared.workspace.value) ?? 0)
     }).disposed(by: bag)
     
-    workspace.asObservable().subscribe(onNext: { [weak self] (workspace) in
+    NewWorkspaceShortcutManager.shared.workspace.asObservable().subscribe(onNext: { [weak self] (workspace) in
       guard let s = self else { return }
       s.outlineView.autosaveName = nil
       s.outlineView.autosaveName = NSTableView.AutosaveName("NewWorkspaceShortcutPreference/\(workspace.id)")
@@ -36,8 +34,16 @@ final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
     
     popUpButton.rx.controlEvent.subscribe(onNext: { [weak self] _ in
       guard let s = self else { return }
-      s.workspace.value = WorkspaceModel.spaces.value[s.popUpButton.indexOfSelectedItem]
+      NewWorkspaceShortcutManager.shared.workspace.value = WorkspaceModel.spaces.value[s.popUpButton.indexOfSelectedItem]
     }).disposed(by: bag)
+  }
+  
+  override func viewDidAppear() {
+    super.viewDidAppear()
+    let row = outlineView.row(forItem: NewWorkspaceShortcutManager.shared.node)
+    if row > 0 {
+      outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+    }
   }
 }
 
@@ -48,12 +54,12 @@ extension NewWorkspaceShortcutPreferenceViewController: NSOutlineViewDelegate, N
   
   func outlineView(_ outlineView: NSOutlineView, itemForPersistentObject object: Any) -> Any? {
     guard let id = object as? String else { return nil }
-    return NodeModel.node(for: id, for: workspace.value)
+    return NodeModel.node(for: id, for: NewWorkspaceShortcutManager.shared.workspace.value)
   }
   
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
     guard let node = item as? NodeModel else {
-      return NodeModel.roots(query: nil, for: workspace.value).count
+      return NodeModel.roots(query: nil, for: NewWorkspaceShortcutManager.shared.workspace.value).count
     }
     return node.sortedDirectoryChildren.count
   }
@@ -65,9 +71,13 @@ extension NewWorkspaceShortcutPreferenceViewController: NSOutlineViewDelegate, N
   
   func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
     guard let node = item as? NodeModel else {
-      return NodeModel.roots(query: nil, for: workspace.value)[index]
+      return NodeModel.roots(query: nil, for: NewWorkspaceShortcutManager.shared.workspace.value)[index]
     }
     return node.sortedDirectoryChildren[index]
+  }
+  
+  func outlineViewSelectionDidChange(_ notification: Notification) {
+    NewWorkspaceShortcutManager.shared.node = outlineView.item(atRow: outlineView.selectedRow) as? NodeModel
   }
   
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
