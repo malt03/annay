@@ -69,6 +69,10 @@ final class NodeModel: Object {
     return result
   }
   
+  var sortedDirectoryChildren: Results<NodeModel> {
+    return children.filter("isDeleted = %@ and index >= %@ and isDirectory = %@", false, 0, true).sorted(by: ["index", "createdAt"])
+  }
+  
   var ancestors: [NodeModel] {
     guard let parent = parent else { return [] }
     return [parent] + parent.ancestors
@@ -80,12 +84,12 @@ final class NodeModel: Object {
       .sorted(byKeyPath: "deletedAt")
   }
 
-  static func node(for id: String) -> NodeModel? {
-    return Realm.instance.object(ofType: NodeModel.self, forPrimaryKey: id)
+  static func node(for id: String, for workspace: WorkspaceModel = WorkspaceModel.selected.value) -> NodeModel? {
+    return Realm.instance(for: workspace).object(ofType: NodeModel.self, forPrimaryKey: id)
   }
   
-  static func roots(query: String?) -> Results<NodeModel> {
-    let result = Realm.instance.objects(NodeModel.self)
+  static func roots(query: String?, for workspace: WorkspaceModel = WorkspaceModel.selected.value) -> Results<NodeModel> {
+    let result = Realm.instance(for: workspace).objects(NodeModel.self)
       .filter("parent = nil and id != %@ and index >= %@ and isDeleted = %@", trashId, 0, false)
       .sorted(by: ["index", "createdAt"])
     if let query = query {
