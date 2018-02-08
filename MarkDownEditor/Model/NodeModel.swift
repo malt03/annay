@@ -245,15 +245,6 @@ extension NodeModel: NSPasteboardWriting {
     return [.nodeModel, .string]
   }
   
-  func writingOptions(forType type: NSPasteboard.PasteboardType, pasteboard: NSPasteboard) -> NSPasteboard.WritingOptions {
-    if type == .nodeModel {
-      if let old = pasteboard.string(forType: .nodeModel) {
-        pasteboard.setString(old + "\n" + id, forType: .nodeModel)
-      }
-    }
-    return []
-  }
-  
   func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
     switch type {
     case .nodeModel: return id

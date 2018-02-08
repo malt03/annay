@@ -9,9 +9,11 @@
 import Cocoa
 
 extension NSPasteboard {
-  var nodes: [NodeModel]? {
-    guard let ids = string(forType: .nodeModel) else { return nil }
-    return ids.split(separator: "\n").flatMap { NodeModel.node(for: String($0)) }
+  var nodes: [NodeModel] {
+    return (pasteboardItems ?? []).flatMap { (item) -> NodeModel? in
+      guard let id = item.string(forType: .nodeModel) else { return nil }
+      return NodeModel.node(for: id)
+    }
   }
   
   func relaceLinkToMarkdown() -> Bool {
