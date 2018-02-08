@@ -66,6 +66,18 @@ final class NewOrOpenNoteShortcutManager {
         handler(note)
       }
     }
+    
+    MASShortcutBinder.shared().bindShortcut(withDefaultsKey: Key.ShortcutKey(for: .open)) { [weak self] in
+      guard let s = self else { return }
+      guard let node = s.node(for: .open), let workspace = s.workspace(for: .open) else {
+        NSAlert(localizedMessageText: "No note was selected.").runModal()
+        return
+      }
+      workspace.select()
+      node.selected()
+      NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
+      Application.shared.activate(ignoringOtherApps: true)
+    }
   }
   
   func addInsertNodeHandler(_ handler: @escaping InsertNodeHandler) {

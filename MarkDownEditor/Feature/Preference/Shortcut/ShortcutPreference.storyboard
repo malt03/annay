@@ -44,6 +44,9 @@
                                             <subviews>
                                                 <containerView translatesAutoresizingMaskIntoConstraints="NO" id="LBG-XK-V8U">
                                                     <rect key="frame" x="0.0" y="0.0" width="443" height="264"/>
+                                                    <connections>
+                                                        <segue destination="zgL-1W-E8B" kind="embed" identifier="OpenNote" id="KaV-L8-Yn5"/>
+                                                    </connections>
                                                 </containerView>
                                             </subviews>
                                             <constraints>
@@ -76,6 +79,14 @@
                 <customObject id="GnB-Zg-Sip" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="269" y="457"/>
+        </scene>
+        <!--NewOrOpenNoteShortcutPreference-->
+        <scene sceneID="0RM-dA-oPR">
+            <objects>
+                <customObject id="AgE-EP-SJr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="NewOrOpenNoteShortcutPreference" id="zgL-1W-E8B" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="276" y="649"/>
         </scene>
     </scenes>
 </document>

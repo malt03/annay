@@ -91,19 +91,36 @@ extension NewOrOpenNoteShortcutPreferenceViewController: NSOutlineViewDelegate, 
     guard let node = item as? NodeModel else {
       return NodeModel.roots(query: nil, for: selectedWorkspace.value).count
     }
-    return node.sortedDirectoryChildren.count
+    switch kind! {
+    case .new:  return node.sortedDirectoryChildren.count
+    case .open: return node.sortedChildren(query: nil).count
+    }
+  }
+  
+  func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
+    switch kind! {
+    case .new:  return true
+    case .open: return !(item as! NodeModel).isDirectory
+    }
   }
   
   func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
     let node = item as! NodeModel
-    return node.sortedDirectoryChildren.count > 0
+    switch kind! {
+    case .new:  return node.sortedDirectoryChildren.count > 0
+    case .open: return node.isDirectory
+    }
   }
   
   func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
     guard let node = item as? NodeModel else {
       return NodeModel.roots(query: nil, for: selectedWorkspace.value)[index]
     }
-    return node.sortedDirectoryChildren[index]
+    switch kind! {
+    case .new:  return node.sortedDirectoryChildren[index]
+    case .open: return node.sortedChildren(query: nil)[index]
+    }
+    
   }
   
   func outlineViewSelectionDidChange(_ notification: Notification) {
@@ -113,7 +130,7 @@ extension NewOrOpenNoteShortcutPreferenceViewController: NSOutlineViewDelegate, 
   
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
     let node = item as! NodeModel
-    let identifier = NSUserInterfaceItemIdentifier(rawValue: node.isRoot ? "note" : "directory")
+    let identifier = NSUserInterfaceItemIdentifier(rawValue: node.isDirectory ? "directory" : "note")
     let nodeCell = outlineView.makeView(withIdentifier: identifier, owner: self) as! NodeTableCellView
     nodeCell.prepare(node: node, inPreference: true)
     return nodeCell
