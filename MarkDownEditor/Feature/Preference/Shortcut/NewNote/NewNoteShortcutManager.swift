@@ -1,5 +1,5 @@
 //
-//  NewWorkspaceShortcutManager.swift
+//  NewNoteShortcutManager.swift
 //  MarkDownEditor
 //
 //  Created by Koji Murata on 2018/02/08.
@@ -10,15 +10,15 @@ import RxSwift
 import Foundation
 import MASShortcut
 
-final class NewWorkspaceShortcutManager {
-  static let shared = NewWorkspaceShortcutManager()
+final class NewNoteShortcutManager {
+  static let shared = NewNoteShortcutManager()
   
   private let bag = DisposeBag()
   
   struct Key {
-    static let WorkspaceId = "NewWorkspaceShortcutManager/WorkspaceId"
-    static let NodeId = "NewWorkspaceShortcutManager/NodeId"
-    static let ShortcutKey = "NewWorkspaceShortcutPreferenceViewController/Shortcut"
+    static let WorkspaceId = "NewNoteShortcutManager/WorkspaceId"
+    static let NodeId = "NewNoteShortcutManager/NodeId"
+    static let ShortcutKey = "NewNoteShortcutPreferenceViewController/Shortcut"
   }
   
   private init() {

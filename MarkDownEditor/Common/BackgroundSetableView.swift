@@ -13,12 +13,15 @@ class BackgroundSetableView: NSView {
   @IBInspectable var backgroundColor: NSColor? {
     didSet { needsDisplay = true }
   }
+  @IBInspectable var borderColor: NSColor?
 
   override func draw(_ dirtyRect: NSRect) {
-    if let backgroundColor = backgroundColor {
-      backgroundColor.setFill()
-      NSBezierPath(roundedRect: dirtyRect, xRadius: cornerRadius, yRadius: cornerRadius).fill()
-    }
+    backgroundColor?.setFill()
+    borderColor?.setStroke()
+    let path = NSBezierPath(roundedRect: dirtyRect, xRadius: cornerRadius, yRadius: cornerRadius)
+    path.fill()
+    path.stroke()
+
     super.draw(dirtyRect)
   }
 }

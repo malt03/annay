@@ -10,7 +10,7 @@
             <objects>
                 <windowController id="D3A-1q-dZS" customClass="PreferenceWindowController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Preference" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="MBI-fw-4Oy">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="294" y="362" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
@@ -35,7 +35,7 @@
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="mJW-Z7-ChU">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="172"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="275"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <font key="font" metaFont="message"/>
                         <tabViewItems/>
@@ -50,7 +50,7 @@
                 </tabViewController>
                 <customObject id="mqp-vF-CGF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="546"/>
+            <point key="canvasLocation" x="-26" y="597.5"/>
         </scene>
         <!--ShortcutPreference-->
         <scene sceneID="DO8-hG-v2P">
@@ -58,7 +58,7 @@
                 <controllerPlaceholder storyboardName="ShortcutPreference" id="D5z-A1-9ny" sceneMemberID="viewController"/>
                 <customObject id="rfW-Xy-Xrz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="786"/>
+            <point key="canvasLocation" x="-26" y="833"/>
         </scene>
     </scenes>
     <resources>

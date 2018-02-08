@@ -1,5 +1,5 @@
 //
-//  NewWorkspaceShortcutPreferenceViewController.swift
+//  NewNoteShortcutPreferenceViewController.swift
 //  MarkDownEditor
 //
 //  Created by Koji Murata on 2018/02/07.
@@ -11,20 +11,21 @@ import RxSwift
 import MASShortcut
 import RealmSwift
 
-final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
+final class NewNoteShortcutPreferenceViewController: NSViewController {
   private let bag = DisposeBag()
   private var refreshNodesToken: NotificationToken?
   
-  private var selectedWorkspace = Variable(NewWorkspaceShortcutManager.shared.workspace)
+  private var selectedWorkspace = Variable(NewNoteShortcutManager.shared.workspace)
   
   @IBOutlet private weak var shortcutView: MASShortcutView!
   @IBOutlet private weak var popUpButton: NSPopUpButton!
   @IBOutlet private weak var outlineView: NSOutlineView!
+  @IBOutlet private weak var outlineViewHightConstraint: NSLayoutConstraint!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    shortcutView.associatedUserDefaultsKey = NewWorkspaceShortcutManager.Key.ShortcutKey
+    shortcutView.associatedUserDefaultsKey = NewNoteShortcutManager.Key.ShortcutKey
     
     WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] (spaces) in
       guard let s = self else { return }
@@ -36,7 +37,7 @@ final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
     selectedWorkspace.asObservable().subscribe(onNext: { [weak self] (workspace) in
       guard let s = self else { return }
       s.outlineView.autosaveName = nil
-      s.outlineView.autosaveName = NSTableView.AutosaveName("NewWorkspaceShortcutPreference/\(workspace.id)")
+      s.outlineView.autosaveName = NSTableView.AutosaveName("NewNoteShortcutPreference/\(workspace.id)")
       s.reloadData()
       
       s.refreshNodesToken?.invalidate()
@@ -52,6 +53,9 @@ final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
   override func viewDidAppear() {
     super.viewDidAppear()
     selectSelectedDirectory()
+    
+    // 何故かwindowの初期サイズがおかしい
+    outlineViewHightConstraint.priority = .dragThatCannotResizeWindow
   }
 
   private func reloadData() {
@@ -60,14 +64,14 @@ final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
   }
   
   private func selectSelectedDirectory() {
-    let row = outlineView.row(forItem: NewWorkspaceShortcutManager.shared.node)
+    let row = outlineView.row(forItem: NewNoteShortcutManager.shared.node)
     if row > 0 {
       outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
     }
   }
 }
 
-extension NewWorkspaceShortcutPreferenceViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
+extension NewNoteShortcutPreferenceViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
   func outlineView(_ outlineView: NSOutlineView, persistentObjectForItem item: Any?) -> Any? {
     return (item as? NodeModel)?.id
   }
@@ -97,8 +101,8 @@ extension NewWorkspaceShortcutPreferenceViewController: NSOutlineViewDelegate, N
   }
   
   func outlineViewSelectionDidChange(_ notification: Notification) {
-    NewWorkspaceShortcutManager.shared.workspace = selectedWorkspace.value
-    NewWorkspaceShortcutManager.shared.node = outlineView.item(atRow: outlineView.selectedRow) as? NodeModel
+    NewNoteShortcutManager.shared.workspace = selectedWorkspace.value
+    NewNoteShortcutManager.shared.node = outlineView.item(atRow: outlineView.selectedRow) as? NodeModel
   }
   
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
