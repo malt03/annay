@@ -9,9 +9,11 @@
 import Cocoa
 import RxSwift
 import MASShortcut
+import RealmSwift
 
 final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
   private let bag = DisposeBag()
+  private var refreshNodesToken: NotificationToken?
   
   @IBOutlet private weak var shortcutView: MASShortcutView!
   @IBOutlet private weak var popUpButton: NSPopUpButton!
@@ -33,7 +35,10 @@ final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
       guard let s = self else { return }
       s.outlineView.autosaveName = nil
       s.outlineView.autosaveName = NSTableView.AutosaveName("NewWorkspaceShortcutPreference/\(workspace.id)")
-      s.outlineView.reloadData()
+      s.reloadData()
+      
+      s.refreshNodesToken?.invalidate()
+      s.refreshNodesToken = NodeModel.roots(query: nil, for: workspace).observe { [weak self] _ in self?.reloadData() }
     }).disposed(by: bag)
     
     popUpButton.rx.controlEvent.subscribe(onNext: { [weak self] _ in
@@ -44,6 +49,15 @@ final class NewWorkspaceShortcutPreferenceViewController: NSViewController {
   
   override func viewDidAppear() {
     super.viewDidAppear()
+    selectSelectedDirectory()
+  }
+
+  private func reloadData() {
+    outlineView.reloadData()
+    selectSelectedDirectory()
+  }
+  
+  private func selectSelectedDirectory() {
     let row = outlineView.row(forItem: NewWorkspaceShortcutManager.shared.node)
     if row > 0 {
       outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
