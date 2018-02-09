@@ -19,4 +19,13 @@ extension FileManager {
       try createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
     }
   }
+  
+  func copyAllItem(in parent: URL, to url: URL) throws {
+    if !fileExists(atPath: parent.path) { return }
+    for child in try contentsOfDirectory(atPath: parent.path) {
+      let copyUrl = url.appendingPathComponent(child)
+      if fileExists(atPath: copyUrl.path) { try removeItem(at: copyUrl) }
+      try copyItem(at: parent.appendingPathComponent(child), to: copyUrl)
+    }
+  }
 }

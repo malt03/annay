@@ -36,6 +36,7 @@
 		ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9E1201DAA1700B4CBE7 /* OpenQuicklyViewController.swift */; };
 		ED4EB9E4201DAADD00B4CBE7 /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9E3201DAADD00B4CBE7 /* NSImage+Extensions.swift */; };
 		ED4EB9E6201DB71B00B4CBE7 /* Results+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9E5201DB71B00B4CBE7 /* Results+Extensions.swift */; };
+		ED5569E2202DDC4C00D92A75 /* ResourceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5569E1202DDC4C00D92A75 /* ResourceManager.swift */; };
 		ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */; };
 		ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55C500200E56F10070301A /* Preference.storyboard */; };
 		ED55C50C201312570070301A /* CreateWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55C50E201312570070301A /* CreateWorkspace.storyboard */; };
@@ -94,8 +95,6 @@
 		EDEB7A622004EDF000F8C48A /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A602004EDF000F8C48A /* Launch.storyboard */; };
 		EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */; };
 		EDF6A7E7202B082000B85B2C /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */; };
-		EDFE82B720256AEC00702C85 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B220256AE400702C85 /* Kingfisher.framework */; };
-		EDFE82B820256AEC00702C85 /* Kingfisher.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B220256AE400702C85 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EDFE82B920256AEC00702C85 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B320256AE500702C85 /* Realm.framework */; };
 		EDFE82BA20256AEC00702C85 /* Realm.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B320256AE500702C85 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EDFE82BB20256AEC00702C85 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B520256AE500702C85 /* RealmSwift.framework */; };
@@ -119,7 +118,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				EDFE82BA20256AEC00702C85 /* Realm.framework in Embed Libraries */,
-				EDFE82B820256AEC00702C85 /* Kingfisher.framework in Embed Libraries */,
 				EDFE82C220256AEC00702C85 /* RxSwift.framework in Embed Libraries */,
 				EDFE82BC20256AEC00702C85 /* RealmSwift.framework in Embed Libraries */,
 				EDFE82C020256AEC00702C85 /* RxCocoa.framework in Embed Libraries */,
@@ -164,6 +162,7 @@
 		ED4EB9E1201DAA1700B4CBE7 /* OpenQuicklyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyViewController.swift; sourceTree = "<group>"; };
 		ED4EB9E3201DAADD00B4CBE7 /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		ED4EB9E5201DB71B00B4CBE7 /* Results+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Results+Extensions.swift"; sourceTree = "<group>"; };
+		ED5569E1202DDC4C00D92A75 /* ResourceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceManager.swift; sourceTree = "<group>"; };
 		ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSetableView.swift; sourceTree = "<group>"; };
 		ED55C4FF200E56F10070301A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preference.storyboard; sourceTree = "<group>"; };
 		ED55C50D201312570070301A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CreateWorkspace.storyboard; sourceTree = "<group>"; };
@@ -235,7 +234,6 @@
 		EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceWindowController.swift; sourceTree = "<group>"; };
 		EDFE82B020256AE400702C85 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
 		EDFE82B120256AE400702C85 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/Mac/RxBlocking.framework; sourceTree = "<group>"; };
-		EDFE82B220256AE400702C85 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/Mac/Kingfisher.framework; sourceTree = "<group>"; };
 		EDFE82B320256AE500702C85 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
 		EDFE82B420256AE500702C85 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
 		EDFE82B520256AE500702C85 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDFE82B920256AEC00702C85 /* Realm.framework in Frameworks */,
-				EDFE82B720256AEC00702C85 /* Kingfisher.framework in Frameworks */,
 				EDFE82C120256AEC00702C85 /* RxSwift.framework in Frameworks */,
 				EDFE82BB20256AEC00702C85 /* RealmSwift.framework in Frameworks */,
 				EDFE82BF20256AEC00702C85 /* RxCocoa.framework in Frameworks */,
@@ -293,6 +290,7 @@
 				ED19084A201F6EC0009497EE /* ContainerView.swift */,
 				EDFE82C520256BE700702C85 /* FileManager+Extensions.swift */,
 				ED9CCA6C2025927600EB2F7C /* DateFormatter+Extensions.swift */,
+				ED5569E1202DDC4C00D92A75 /* ResourceManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -548,7 +546,6 @@
 			children = (
 				ED86DCCE2029EE3A0096AB38 /* MASShortcut.framework */,
 				EDFE82CD202583DD00702C85 /* Zip.framework */,
-				EDFE82B220256AE400702C85 /* Kingfisher.framework */,
 				EDFE82B320256AE500702C85 /* Realm.framework */,
 				EDFE82B520256AE500702C85 /* RealmSwift.framework */,
 				EDFE82B120256AE400702C85 /* RxBlocking.framework */,
@@ -693,6 +690,7 @@
 				ED4EB9E4201DAADD00B4CBE7 /* NSImage+Extensions.swift in Sources */,
 				ED840D2F201C5AB600EF2C42 /* NSView+Extensions.swift in Sources */,
 				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
+				ED5569E2202DDC4C00D92A75 /* ResourceManager.swift in Sources */,
 				EDFE82C620256BE700702C85 /* FileManager+Extensions.swift in Sources */,
 				ED9CCA6D2025927600EB2F7C /* DateFormatter+Extensions.swift in Sources */,
 				ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */,

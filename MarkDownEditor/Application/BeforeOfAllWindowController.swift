@@ -13,6 +13,8 @@ final class BeforeOfAllWindowController: NSWindowController {
     super.windowDidLoad()
     
     DispatchQueue.main.async {
+      ResourceManager.prepare()
+      
       WorkspaceDirectoryWatcherManager.shared.prepare()
       NodeModel.createFirstDirectoryIfNeeded()
       

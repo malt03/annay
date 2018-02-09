@@ -84,12 +84,9 @@ extension NSPasteboard {
   }
   
   private func replaceImagesDataToMarkdown(_ imagesData: [Data], fileExtension: String) -> Bool {
-    let imageDirectory = WorkspaceModel.selected.value.sourceDirectory.appendingPathComponent("images", isDirectory: true)
     do {
-      try FileManager.default.createDirectoryIfNeeded(url: imageDirectory)
       let imageTexts: [String] = try imagesData.flatMap { (imageData) in
-        let url = imageDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension(fileExtension)
-        try imageData.write(to: url)
+        let url = try ResourceManager.save(data: imageData, fileExtension: fileExtension)
         return "![image](\(url.absoluteString))"
       }
       clearContents()

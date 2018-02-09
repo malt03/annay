@@ -61,10 +61,6 @@ final class WorkspaceModel {
     return WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
   }
   
-  var sourceDirectory: URL {
-    return workspaceDirectory.appendingPathComponent("sources", isDirectory: true)
-  }
-  
   func setUrl(_ newUrl: URL) throws {
     if url == newUrl { return }
     if FileManager.default.fileExists(atPath: newUrl.path) { throw MarkDownEditorError.fileExists(oldUrl: url) }
@@ -236,6 +232,7 @@ final class WorkspaceModel {
             workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
             try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
             tmpLastSavedUpdateId = workspaceDirectory.updateId
+            try ResourceManager.copy(from: workspaceDirectory.resourceDirectory)
           }
           
           if workspaceDirectory.updateId == oldLastSavedUpdatedId {
@@ -252,6 +249,7 @@ final class WorkspaceModel {
         }
       } else {
         try Zip.unzipFile(url, destination: workspaceDirectory, overwrite: true, password: nil)
+        try ResourceManager.copy(from: workspaceDirectory.resourceDirectory)
       }
     } else {
       try fileManager.createDirectoryIfNeeded(url: workspaceDirectory)
@@ -266,6 +264,7 @@ final class WorkspaceModel {
         workspaceDirectory.realmFile,
         workspaceDirectory.secretKeyFile,
         workspaceDirectory.infoFile,
+        workspaceDirectory.resourceDirectory,
       ]
       try FileManager.default.createDirectoryIfNeeded(url: url.deletingLastPathComponent())
       try Zip.zipFiles(paths: urls, zipFilePath: url, password: nil, compression: .BestSpeed, progress: nil)
@@ -289,6 +288,7 @@ final class WorkspaceModel {
 
         workspaceDirectoryName = UUID().uuidString
         try Zip.unzipFile(url, destination: workspaceDirectory, overwrite: true, password: nil)
+        try ResourceManager.copy(from: workspaceDirectory.resourceDirectory)
 
         info = try workspaceDirectory.getInfoData()
         saveToUserDefaults()

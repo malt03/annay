@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Kingfisher
 import RxSwift
 import RxCocoa
 

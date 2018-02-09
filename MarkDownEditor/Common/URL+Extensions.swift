@@ -41,6 +41,10 @@ extension URL {
     return appendingPathComponent("secretKey")
   }
   
+  var resourceDirectory: URL {
+    return appendingPathComponent("resource", isDirectory: true)
+  }
+  
   var uti: CFString {
     return ((try? resourceValues(forKeys: [.typeIdentifierKey]).typeIdentifier ?? "") ?? "") as CFString
   }
