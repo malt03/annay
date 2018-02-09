@@ -223,6 +223,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="descriptionLabel" destination="5U4-bF-LAC" id="3jh-LD-xfg"/>
                         <outlet property="outlineView" destination="2wZ-P5-j0G" id="TDW-A5-BMr"/>
                         <outlet property="outlineViewHightConstraint" destination="CXM-jf-tea" id="uzi-ad-hXf"/>
                         <outlet property="popUpButton" destination="xO8-1I-tFG" id="OBr-Du-03F"/>

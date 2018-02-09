@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-26" y="197"/>
         </scene>
-        <!--Tab View Controller-->
+        <!--Preference Tab View Controller-->
         <scene sceneID="lYm-M9-E81">
             <objects>
-                <tabViewController selectedTabViewItemIndex="0" tabStyle="toolbar" id="wIz-lQ-0Hg" sceneMemberID="viewController">
+                <tabViewController selectedTabViewItemIndex="0" tabStyle="toolbar" id="wIz-lQ-0Hg" customClass="PreferenceTabViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
                         <tabViewItem label="Shortcut" image="Shortcut" id="IQM-9u-Oe1"/>
                     </tabViewItems>

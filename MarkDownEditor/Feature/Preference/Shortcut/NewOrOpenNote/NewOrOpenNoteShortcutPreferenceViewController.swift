@@ -21,6 +21,7 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
   @IBOutlet private weak var popUpButton: NSPopUpButton!
   @IBOutlet private weak var outlineView: NSOutlineView!
   @IBOutlet private weak var outlineViewHightConstraint: NSLayoutConstraint!
+  @IBOutlet private weak var descriptionLabel: NSTextField!
   
   private var kind: NewOrOpenNoteShortcutManager.Kind!
   
@@ -54,6 +55,11 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
       guard let s = self else { return }
       s.selectedWorkspace.value = WorkspaceModel.spaces.value[s.popUpButton.indexOfSelectedItem]
     }).disposed(by: bag)
+    
+    switch kind! {
+    case .new:  descriptionLabel.stringValue = Localized("Parent directory or group")
+    case .open: descriptionLabel.stringValue = Localized("Note")
+    }
   }
   
   override func viewDidAppear() {

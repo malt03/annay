@@ -28,4 +28,6 @@
 "File" = "ファイル";
 "No parent directory was selected." = "親ディレクトリが選択されていません。";
 "No note was selected." = "ノートが選択されていません。";
-
+"Shortcut" = "ショートカット";
+"Parent directory or group" = "親ディレクトリを選択";
+"Note" = "ノートを選択";
