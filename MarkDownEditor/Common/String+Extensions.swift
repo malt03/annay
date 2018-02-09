@@ -46,6 +46,10 @@ extension String {
     return NSRange(location: distance(from: startIndex, to: range.lowerBound), length: distance(from: range.lowerBound, to: range.upperBound))
   }
   
+  func oldRange(from range: ClosedRange<String.Index>) -> NSRange {
+    return NSRange(location: distance(from: startIndex, to: range.lowerBound), length: distance(from: range.lowerBound, to: range.upperBound))
+  }
+  
   var replacingHomePathToTilde: String {
     let homePath = FileManager.default.homeDirectoryForCurrentUser.path
     return replacingOccurrences(of: "^\(homePath)", with: "~", options: .regularExpression)

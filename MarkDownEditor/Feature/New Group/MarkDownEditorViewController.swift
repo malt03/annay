@@ -120,7 +120,32 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
         }
         textView.insertText(replaced, replacementRange: selectedRange)
       }
+      return true
+    case #selector(textView.insertTab(_:)):
+      let selectedRange = textView.selectedRange()
+      let text = textView.string
+      let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
+      let line = text.lineRange(for: index...index)
+      let lineText = String(text[line])
       
+      if lineText.match(with: "^\\s*([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|) $") != nil {
+        textView.replaceCharacters(in: text.oldRange(from: line), with: "\t\(lineText)")
+      } else {
+        textView.insertTab(nil)
+      }
+      return true
+    case #selector(textView.insertBacktab(_:)):
+      let selectedRange = textView.selectedRange()
+      let text = textView.string
+      let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
+      let line = text.lineRange(for: index...index)
+      
+      if String(text[line]).match(with: "^\t+") != nil {
+        
+        textView.replaceCharacters(in: text.oldRange(from: line.lowerBound...text.index(after: line.lowerBound)), with: "")
+      } else {
+        textView.insertBacktab(nil)
+      }
       return true
     default: break
     }
