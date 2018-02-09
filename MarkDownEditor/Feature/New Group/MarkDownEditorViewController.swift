@@ -86,6 +86,7 @@ final class MarkDownEditorViewController: NSViewController {
     let markDown = (note?.body ?? "")
       .replacingOccurrences(of: "\\", with: "\\\\")
       .replacingOccurrences(of: "\n", with: "\\n")
+      .replacingOccurrences(of: "\"", with: "\\\"")
     webView.update(markdown: markDown)
   }
 }
