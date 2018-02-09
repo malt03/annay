@@ -31,3 +31,6 @@
 "Shortcut" = "ショートカット";
 "Parent directory or group" = "親ディレクトリを選択";
 "Note" = "ノートを選択";
+"Reset Workspace" = "ワークスペースのリセット";
+"Data being edited will be lost" = "編集中のデータは失われます";
+"Reset" = "リセット";

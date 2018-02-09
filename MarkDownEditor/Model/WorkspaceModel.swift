@@ -47,6 +47,8 @@ final class WorkspaceModel {
   }
   var detectChange: Observable<Void> { return _detectChange }
   
+  private var isSaved: Bool { return updateId.value == lastSavedUpdateId.value }
+  
   private static func workspaceDirectory(for name: String) -> URL {
     return FileManager.default.applicationWorkspace.appendingPathComponent(name, isDirectory: true)
   }
@@ -272,6 +274,30 @@ final class WorkspaceModel {
     }
     lastSavedUpdateId.value = updateId.value
     saveToUserDefaults()
+  }
+  
+  func reset() {
+    if isSaved { return }
+    let alert = NSAlert()
+    alert.messageText = Localized("Reset Workspace")
+    alert.informativeText = Localized("Data being edited will be lost")
+    alert.addButton(withTitle: Localized("Reset"))
+    alert.addButton(withTitle: Localized("Cancel"))
+    if alert.runModal() == .alertFirstButtonReturn {
+      do {
+        try FileManager.default.removeItem(at: workspaceDirectory)
+
+        workspaceDirectoryName = UUID().uuidString
+        try Zip.unzipFile(url, destination: workspaceDirectory, overwrite: true, password: nil)
+
+        info = try workspaceDirectory.getInfoData()
+        saveToUserDefaults()
+        reloadInfo(lastSavedUpdateId: nil)
+        _detectChange.onNext(())
+      } catch {
+        NSAlert(error: error).runModal()
+      }
+    }
   }
   
   func update() {

@@ -10,9 +10,13 @@ import Cocoa
 import RealmSwift
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
     return WorkspaceModel.open(url: URL(fileURLWithPath: filename))
+  }
+  
+  @IBAction private func resetWorkspace(_ sender: NSMenuItem) {
+    WorkspaceModel.selected.value.reset()
   }
 }
 
