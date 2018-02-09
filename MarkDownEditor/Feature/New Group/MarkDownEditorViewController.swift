@@ -100,6 +100,32 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
     }
     updateWebView()
   }
+  
+  func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+    switch commandSelector {
+    case #selector(textView.insertNewline(_:)):
+      textView.insertNewline(nil)
+      let selectedRange = textView.selectedRange()
+      let text = textView.string
+      let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
+      let line = text.lineRange(for: index...index)
+      
+      if String(text[line]).match(with: "^\\s*([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|) $") != nil {
+        textView.replaceCharacters(in: text.oldRange(from: line), with: "")
+        textView.insertNewline(nil)
+      } else if let match = String(text[line]).match(with: "^\\s*([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|) ") {
+        var replaced = match.replacingOccurrences(of: "[x]", with: "[ ]")
+        if let number = replaced.match(with: "\\d+") {
+          replaced = replaced.replacingOccurrences(of: number, with: "\(Int(number)! + 1)")
+        }
+        textView.insertText(replaced, replacementRange: selectedRange)
+      }
+      
+      return true
+    default: break
+    }
+    return false
+  }
 }
 
 extension MarkDownEditorViewController: WKScriptMessageHandler {

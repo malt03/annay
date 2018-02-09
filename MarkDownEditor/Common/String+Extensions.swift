@@ -29,6 +29,23 @@ extension String {
     return ranges
   }
   
+  func match(with pattern: String) -> Substring? {
+    let regex = try! NSRegularExpression(pattern: pattern, options: [])
+    let matches = regex.matches(in: self, options: [], range: NSRange(location: 0, length: count))
+    guard let oldRange = matches.first?.range else { return nil }
+    return self[range(from: oldRange)]
+  }
+  
+  func range(from old: NSRange) -> Range<String.Index> {
+    let start = index(startIndex, offsetBy: old.location)
+    let end = index(start, offsetBy: old.length)
+    return start..<end
+  }
+  
+  func oldRange(from range: Range<String.Index>) -> NSRange {
+    return NSRange(location: distance(from: startIndex, to: range.lowerBound), length: distance(from: range.lowerBound, to: range.upperBound))
+  }
+  
   var replacingHomePathToTilde: String {
     let homePath = FileManager.default.homeDirectoryForCurrentUser.path
     return replacingOccurrences(of: "^\(homePath)", with: "~", options: .regularExpression)
