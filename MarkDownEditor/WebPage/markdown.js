@@ -1,5 +1,6 @@
 function update(markdown) {
     var md = window.markdownit({
+        breaks: true,
         highlight: function (str, lang) {
             if (lang && hljs.getLanguage(lang)) {
                 try {

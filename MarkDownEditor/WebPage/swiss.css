@@ -94,6 +94,15 @@ p, blockquote, table, pre {
     margin: 15px 0;
 }
 
+blockquote {
+  border-left: 4px solid #40607F;
+  padding: 0 15px;
+  color: #DAE0E5; }
+blockquote > :first-child {
+  margin-top: 0; }
+blockquote > :last-child {
+  margin-bottom: 0; }
+
 code, pre {
     border-radius: 3px;
     color: inherit;

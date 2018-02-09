@@ -110,10 +110,10 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
       let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
       let line = text.lineRange(for: index...index)
       
-      if String(text[line]).match(with: "^\\s*([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|) $") != nil {
+      if String(text[line]).match(with: "^\\s*(([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|)|>+) $") != nil {
         textView.replaceCharacters(in: text.oldRange(from: line), with: "")
         textView.insertNewline(nil)
-      } else if let match = String(text[line]).match(with: "^\\s*([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|) ") {
+      } else if let match = String(text[line]).match(with: "^\\s*(([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|)|>+) ") {
         var replaced = match.replacingOccurrences(of: "[x]", with: "[ ]")
         if let number = replaced.match(with: "\\d+") {
           replaced = replaced.replacingOccurrences(of: number, with: "\(Int(number)! + 1)")
@@ -141,7 +141,6 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
       let line = text.lineRange(for: index...index)
       
       if String(text[line]).match(with: "^\t+") != nil {
-        
         textView.replaceCharacters(in: text.oldRange(from: line.lowerBound...text.index(after: line.lowerBound)), with: "")
       } else {
         textView.insertBacktab(nil)
