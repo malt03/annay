@@ -88,6 +88,10 @@
 		EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A296200EF75300D5E7BE /* WorkspaceModel.swift */; };
 		EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */; };
 		EDD0A2B9200F2B9E00D5E7BE /* WorkspacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A2B8200F2B9E00D5E7BE /* WorkspacesViewController.swift */; };
+		EDD4C743202E9AF70029FF4C /* GeneralPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4C742202E9AF70029FF4C /* GeneralPreferenceViewController.swift */; };
+		EDD4C745202E9B060029FF4C /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4C744202E9B060029FF4C /* FontManager.swift */; };
+		EDD4C747202EB0EB0029FF4C /* NSFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4C746202EB0EB0029FF4C /* NSFont+Extensions.swift */; };
+		EDD4C748202EBD470029FF4C /* GeneralPreference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDD4C74A202EBD470029FF4C /* GeneralPreference.storyboard */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
 		EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */; };
@@ -222,6 +226,11 @@
 		EDD0A296200EF75300D5E7BE /* WorkspaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceModel.swift; sourceTree = "<group>"; };
 		EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavableInUserDefaults.swift; sourceTree = "<group>"; };
 		EDD0A2B8200F2B9E00D5E7BE /* WorkspacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesViewController.swift; sourceTree = "<group>"; };
+		EDD4C742202E9AF70029FF4C /* GeneralPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferenceViewController.swift; sourceTree = "<group>"; };
+		EDD4C744202E9B060029FF4C /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		EDD4C746202EB0EB0029FF4C /* NSFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFont+Extensions.swift"; sourceTree = "<group>"; };
+		EDD4C749202EBD470029FF4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GeneralPreference.storyboard; sourceTree = "<group>"; };
+		EDD4C74C202EBD7D0029FF4C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/GeneralPreference.strings; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
 		EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkDownEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,6 +300,7 @@
 				EDFE82C520256BE700702C85 /* FileManager+Extensions.swift */,
 				ED9CCA6C2025927600EB2F7C /* DateFormatter+Extensions.swift */,
 				ED5569E1202DDC4C00D92A75 /* ResourceManager.swift */,
+				EDD4C746202EB0EB0029FF4C /* NSFont+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -466,6 +476,7 @@
 		EDA736CF200E2634000BC5DA /* Preference */ = {
 			isa = PBXGroup;
 			children = (
+				EDD4C73F202E98DE0029FF4C /* General */,
 				ED86DCCB2029ED550096AB38 /* Shortcut */,
 				ED55C500200E56F10070301A /* Preference.storyboard */,
 				EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */,
@@ -496,6 +507,16 @@
 				ED840D1E201A217300EF2C42 /* WorkspacesTableView.swift */,
 			);
 			path = Workspaces;
+			sourceTree = "<group>";
+		};
+		EDD4C73F202E98DE0029FF4C /* General */ = {
+			isa = PBXGroup;
+			children = (
+				EDD4C74A202EBD470029FF4C /* GeneralPreference.storyboard */,
+				EDD4C742202E9AF70029FF4C /* GeneralPreferenceViewController.swift */,
+				EDD4C744202E9B060029FF4C /* FontManager.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		EDDED73A20051B880079F3D0 /* Frameworks */ = {
@@ -623,6 +644,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED2E149A20055650003D55A3 /* markdown-it-footnote.min.js in Resources */,
+				EDD4C748202EBD470029FF4C /* GeneralPreference.storyboard in Resources */,
 				ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */,
 				ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */,
 				EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */,
@@ -687,6 +709,7 @@
 				ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */,
 				ED187FD420053206002E51C0 /* WebView.swift in Sources */,
 				EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */,
+				EDD4C747202EB0EB0029FF4C /* NSFont+Extensions.swift in Sources */,
 				ED4EB9E4201DAADD00B4CBE7 /* NSImage+Extensions.swift in Sources */,
 				ED840D2F201C5AB600EF2C42 /* NSView+Extensions.swift in Sources */,
 				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
@@ -695,11 +718,13 @@
 				ED9CCA6D2025927600EB2F7C /* DateFormatter+Extensions.swift in Sources */,
 				ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */,
 				EDD0A28E200ED29400D5E7BE /* Util.swift in Sources */,
+				EDD4C745202E9B060029FF4C /* FontManager.swift in Sources */,
 				EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */,
 				ED598C39201F03E200072D8A /* NSAlert+Extensions.swift in Sources */,
 				ED840D2B201A2DF400EF2C42 /* URL+Extensions.swift in Sources */,
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
 				EDD0805D202BDEB20021895A /* NewOrOpenNoteShortcutManager.swift in Sources */,
+				EDD4C743202E9AF70029FF4C /* GeneralPreferenceViewController.swift in Sources */,
 				EDF6A7E7202B082000B85B2C /* PreferenceWindowController.swift in Sources */,
 				ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */,
 				EDB601492022C06A00EDF59C /* Application.swift in Sources */,
@@ -813,6 +838,15 @@
 				ED0C373B2021609E00D1CC20 /* ja */,
 			);
 			name = Sidebar.storyboard;
+			sourceTree = "<group>";
+		};
+		EDD4C74A202EBD470029FF4C /* GeneralPreference.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDD4C749202EBD470029FF4C /* Base */,
+				EDD4C74C202EBD7D0029FF4C /* ja */,
+			);
+			name = GeneralPreference.storyboard;
 			sourceTree = "<group>";
 		};
 		EDEB7A602004EDF000F8C48A /* Launch.storyboard */ = {

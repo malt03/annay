@@ -28,9 +28,10 @@
 "File" = "ファイル";
 "No parent directory was selected." = "親ディレクトリが選択されていません。";
 "No note was selected." = "ノートが選択されていません。";
-"Shortcut" = "ショートカット";
+"Shortcuts" = "ショートカット";
 "Parent directory or group" = "親ディレクトリを選択";
 "Note" = "ノートを選択";
 "Reset Workspace" = "ワークスペースのリセット";
 "Data being edited will be lost" = "編集中のデータは失われます";
 "Reset" = "リセット";
+"General" = "一般";

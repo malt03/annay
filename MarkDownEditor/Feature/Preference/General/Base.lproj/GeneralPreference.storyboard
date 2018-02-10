@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="4RZ-6S-0Dx">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
+    </dependencies>
+    <scenes>
+        <!--General Preference View Controller-->
+        <scene sceneID="ETU-Ms-2Hw">
+            <objects>
+                <viewController id="4RZ-6S-0Dx" customClass="GeneralPreferenceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" misplaced="YES" id="fhr-Mk-U6P">
+                        <rect key="frame" x="0.0" y="0.0" width="438" height="85"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hC3-Yp-GJX">
+                                <rect key="frame" x="32" y="32" width="374" height="21"/>
+                                <subviews>
+                                    <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-Od-eSY">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="21"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dhJ-F7-TwP">
+                                                <rect key="frame" x="-2" y="2" width="75" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Editor Font:" id="Wma-ND-u1O">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kTo-iG-kSc">
+                                                <rect key="frame" x="77" y="2" width="204" height="17"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="Fpn-Wz-iW3"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="hej-OY-VqX">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vbc-ih-DAa">
+                                                <rect key="frame" x="281" y="-7" width="99" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Change..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yfy-0e-spP">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="presentFontPanel:" target="4RZ-6S-0Dx" id="G5w-Pn-L1Q"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="vbc-ih-DAa" firstAttribute="height" secondItem="zYf-Od-eSY" secondAttribute="height" id="eCW-VR-9n3"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="zYf-Od-eSY" firstAttribute="width" secondItem="hC3-Yp-GJX" secondAttribute="width" id="WtX-sp-azf"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hC3-Yp-GJX" secondAttribute="trailing" constant="32" id="3bz-Xg-mY7"/>
+                            <constraint firstItem="hC3-Yp-GJX" firstAttribute="top" secondItem="fhr-Mk-U6P" secondAttribute="top" constant="32" id="e2U-yf-vQF"/>
+                            <constraint firstItem="hC3-Yp-GJX" firstAttribute="leading" secondItem="fhr-Mk-U6P" secondAttribute="leading" constant="32" id="oFk-3K-UnL"/>
+                            <constraint firstAttribute="bottom" secondItem="hC3-Yp-GJX" secondAttribute="bottom" constant="32" id="ydO-Nk-u5I"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="fontLabel" destination="kTo-iG-kSc" id="hT0-Th-ODm"/>
+                    </connections>
+                </viewController>
+                <customObject id="DnL-JU-WyJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="225" y="196"/>
+        </scene>
+    </scenes>
+</document>

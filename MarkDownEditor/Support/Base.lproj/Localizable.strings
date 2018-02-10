@@ -29,9 +29,10 @@
 "File" = "File";
 "No parent directory was selected." = "No parent directory was selected.";
 "No note was selected." = "No note was selected.";
-"Shortcut" = "Shortcut";
+"Shortcuts" = "Shortcuts";
 "Parent directory or group" = "Parent directory or group";
 "Note" = "Note";
 "Reset Workspace" = "Reset Workspace";
 "Data being edited will be lost" = "Data being edited will be lost";
 "Reset" = "Reset";
+"General" = "General";

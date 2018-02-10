@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="D3A-1q-dZS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="D3A-1q-dZS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,7 +31,8 @@
             <objects>
                 <tabViewController selectedTabViewItemIndex="0" tabStyle="toolbar" id="wIz-lQ-0Hg" customClass="PreferenceTabViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem label="Shortcut" image="Shortcut" id="IQM-9u-Oe1"/>
+                        <tabViewItem image="NSPreferencesGeneral" id="PnF-2B-FoW"/>
+                        <tabViewItem image="Shortcut" id="eH8-jR-A2l"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" type="noTabsNoBorder" id="mJW-Z7-ChU">
@@ -45,7 +46,8 @@
                     </tabView>
                     <connections>
                         <outlet property="tabView" destination="mJW-Z7-ChU" id="RfQ-YN-3Vo"/>
-                        <segue destination="D5z-A1-9ny" kind="relationship" relationship="tabItems" id="CKu-Xt-fJi"/>
+                        <segue destination="n10-8y-g9P" kind="relationship" relationship="tabItems" id="P1K-zo-8Gv"/>
+                        <segue destination="D5z-A1-9ny" kind="relationship" relationship="tabItems" id="YBL-JQ-IrM"/>
                     </connections>
                 </tabViewController>
                 <customObject id="mqp-vF-CGF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -58,10 +60,19 @@
                 <controllerPlaceholder storyboardName="ShortcutPreference" id="D5z-A1-9ny" sceneMemberID="viewController"/>
                 <customObject id="rfW-Xy-Xrz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26" y="833"/>
+            <point key="canvasLocation" x="94" y="914"/>
+        </scene>
+        <!--GeneralPreference-->
+        <scene sceneID="Bsz-2U-4oM">
+            <objects>
+                <controllerPlaceholder storyboardName="GeneralPreference" id="n10-8y-g9P" sceneMemberID="viewController"/>
+                <customObject id="z4V-eC-HS7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-139" y="914"/>
         </scene>
     </scenes>
     <resources>
+        <image name="NSPreferencesGeneral" width="32" height="32"/>
         <image name="Shortcut" width="32" height="32"/>
     </resources>
 </document>

@@ -13,6 +13,7 @@ final class PreferenceTabViewController: NSTabViewController {
     super.viewDidLoad()
     
     // 何故かStrotyboardのローカライズが使えない
-    tabViewItems[0].label = Localized("Shortcut")
+    tabViewItems[0].label = Localized("General")
+    tabViewItems[1].label = Localized("Shortcuts")
   }
 }

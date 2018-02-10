@@ -7,11 +7,17 @@
 //
 
 import Cocoa
+import RxSwift
 
 final class TextView: NSTextView {
+  private let bag = DisposeBag()
+  
   override func awakeFromNib() {
     super.awakeFromNib()
-    font = NSFont(name: "Osaka-Mono", size: 14)
+    FontManager.shared.font.subscribe(onNext: { [weak self] (font) in
+      self?.font = font
+    }).disposed(by: bag)
+
     textColor = .text
     textContainerInset = NSSize(width: 10, height: 10)
     insertionPointColor = .text

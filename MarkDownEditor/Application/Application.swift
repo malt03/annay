@@ -33,4 +33,9 @@ final class Application: NSApplication {
     }
     super.sendEvent(event)
   }
+  
+  override func changeFont(_ sender: Any?) {
+    guard let manager = sender as? NSFontManager else { return }
+    FontManager.shared.convert(with: manager)
+  }
 }
