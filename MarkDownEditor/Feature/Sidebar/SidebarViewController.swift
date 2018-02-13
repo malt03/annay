@@ -292,7 +292,12 @@ final class SidebarViewController: NSViewController {
     if !textEditing {
       switch KeyCode(rawValue: event.keyCode) ?? .none {
       case .returnKey: moveFocusToEditor()
-      case .delete:    delete()
+      case .delete:
+        if event.isPressModifierFlags(only: .shift){
+          putBackFromTrash()
+        } else {
+          delete()
+        }
       default: break
       }
     }
