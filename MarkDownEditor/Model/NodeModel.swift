@@ -147,7 +147,7 @@ final class NodeModel: Object {
 
 extension NodeModel {
   func selected() {
-    if !isDirectory && !isDeleted {
+    if !isDirectory {
       NodeModel.selectedNode.value = self
     }
   }

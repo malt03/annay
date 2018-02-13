@@ -77,7 +77,11 @@ final class MarkDownEditorViewController: NSViewController {
   }
   
   private func updateNote(note: NodeModel? = NodeModel.selectedNode.value) {
-    textView.isEditable = note != nil
+    if let note = note {
+      textView.isEditable = !note.isDeleted
+    } else {
+      textView.isEditable = false
+    }
     textView.string = note?.body ?? ""
     updateWebView(note: note)
   }
