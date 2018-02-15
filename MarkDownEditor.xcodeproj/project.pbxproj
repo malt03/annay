@@ -99,6 +99,9 @@
 		EDEB7A622004EDF000F8C48A /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A602004EDF000F8C48A /* Launch.storyboard */; };
 		EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */; };
 		EDF6A7E7202B082000B85B2C /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */; };
+		EDFAC7E820357F71002BB3C9 /* editor.html in Resources */ = {isa = PBXBuildFile; fileRef = EDFAC7E720357F71002BB3C9 /* editor.html */; };
+		EDFAC7EA20357F9C002BB3C9 /* ace.js in Resources */ = {isa = PBXBuildFile; fileRef = EDFAC7E920357F9B002BB3C9 /* ace.js */; };
+		EDFAC7ED20357FC7002BB3C9 /* MarkDownWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFAC7EC20357FC7002BB3C9 /* MarkDownWebView.swift */; };
 		EDFE82B920256AEC00702C85 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B320256AE500702C85 /* Realm.framework */; };
 		EDFE82BA20256AEC00702C85 /* Realm.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B320256AE500702C85 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EDFE82BB20256AEC00702C85 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B520256AE500702C85 /* RealmSwift.framework */; };
@@ -241,6 +244,9 @@
 		EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkDownEditor.entitlements; sourceTree = "<group>"; };
 		EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorViewController.swift; sourceTree = "<group>"; };
 		EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceWindowController.swift; sourceTree = "<group>"; };
+		EDFAC7E720357F71002BB3C9 /* editor.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = editor.html; sourceTree = "<group>"; };
+		EDFAC7E920357F9B002BB3C9 /* ace.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ace.js; sourceTree = "<group>"; };
+		EDFAC7EC20357FC7002BB3C9 /* MarkDownWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownWebView.swift; sourceTree = "<group>"; };
 		EDFE82B020256AE400702C85 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
 		EDFE82B120256AE400702C85 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/Mac/RxBlocking.framework; sourceTree = "<group>"; };
 		EDFE82B320256AE500702C85 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
@@ -273,7 +279,7 @@
 			children = (
 				EDDED6FA20050C0B0079F3D0 /* TextView.swift */,
 				EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */,
-				ED187FD320053206002E51C0 /* WebView.swift */,
+				EDFAC7EB20357FB0002BB3C9 /* WebView */,
 				ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */,
 				ED434F0220079DBD00C2357D /* LocalizedString.swift */,
 				ED841BD22009217F0097996A /* NSEvent+Extensions.swift */,
@@ -308,12 +314,8 @@
 		ED187FD82005396C002E51C0 /* WebPage */ = {
 			isa = PBXGroup;
 			children = (
-				ED2E149E20055B87003D55A3 /* highlight */,
-				ED2E159C2005662A003D55A3 /* markdown-it */,
-				ED840D2C201A364600EF2C42 /* jquery.min.js */,
-				ED2E159A20056621003D55A3 /* markdown.js */,
-				ED187FD120052D30002E51C0 /* markdown.html */,
-				ED4EB9D1201C803800B4CBE7 /* swiss.css */,
+				EDFAC7E620357F3E002BB3C9 /* Editor */,
+				EDFAC7E520357F33002BB3C9 /* Markdown */,
 			);
 			path = WebPage;
 			sourceTree = "<group>";
@@ -562,6 +564,37 @@
 			path = MarkDownEditor;
 			sourceTree = "<group>";
 		};
+		EDFAC7E520357F33002BB3C9 /* Markdown */ = {
+			isa = PBXGroup;
+			children = (
+				ED2E149E20055B87003D55A3 /* highlight */,
+				ED2E159C2005662A003D55A3 /* markdown-it */,
+				ED840D2C201A364600EF2C42 /* jquery.min.js */,
+				ED2E159A20056621003D55A3 /* markdown.js */,
+				ED187FD120052D30002E51C0 /* markdown.html */,
+				ED4EB9D1201C803800B4CBE7 /* swiss.css */,
+			);
+			path = Markdown;
+			sourceTree = "<group>";
+		};
+		EDFAC7E620357F3E002BB3C9 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				EDFAC7E720357F71002BB3C9 /* editor.html */,
+				EDFAC7E920357F9B002BB3C9 /* ace.js */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
+		EDFAC7EB20357FB0002BB3C9 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				ED187FD320053206002E51C0 /* WebView.swift */,
+				EDFAC7EC20357FC7002BB3C9 /* MarkDownWebView.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 		EDFE82AF20256AD900702C85 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
@@ -644,11 +677,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED2E149A20055650003D55A3 /* markdown-it-footnote.min.js in Resources */,
+				EDFAC7E820357F71002BB3C9 /* editor.html in Resources */,
 				EDD4C748202EBD470029FF4C /* GeneralPreference.storyboard in Resources */,
 				ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */,
 				ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */,
 				EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */,
 				EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */,
+				EDFAC7EA20357F9C002BB3C9 /* ace.js in Resources */,
 				EDD0A295200ED98700D5E7BE /* Workspaces.storyboard in Resources */,
 				ED574019202D9D3200D844A3 /* Main.storyboard in Resources */,
 				EDEB7A622004EDF000F8C48A /* Launch.storyboard in Resources */,
@@ -736,6 +771,7 @@
 				ED4EB9E6201DB71B00B4CBE7 /* Results+Extensions.swift in Sources */,
 				ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */,
 				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,
+				EDFAC7ED20357FC7002BB3C9 /* MarkDownWebView.swift in Sources */,
 				ED4EB9E0201DA76000B4CBE7 /* OpenQuicklyTextField.swift in Sources */,
 				ED47CC8B201EF9590052D6EF /* ObservableType+Extensions.swift in Sources */,
 				EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */,
