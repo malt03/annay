@@ -117,7 +117,7 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
       let line = text.lineRange(for: index...index)
       
       if String(text[line]).match(with: "^\\s*(([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|)|>+) $") != nil {
-        textView.replaceCharacters(in: text.oldRange(from: line), with: "")
+        textView.insertText("", replacementRange: text.oldRange(from: line))
         textView.insertNewline(nil)
       } else if let match = String(text[line]).match(with: "^\\s*(([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|)|>+) ") {
         var replaced = match.replacingOccurrences(of: "[x]", with: "[ ]")
@@ -130,28 +130,52 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
     case #selector(textView.insertTab(_:)):
       let selectedRange = textView.selectedRange()
       let text = textView.string
-      let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
-      let line = text.lineRange(for: index...index)
-      let lineText = String(text[line])
-      
-      if lineText.match(with: "^\\s*([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|) $") != nil {
-        textView.replaceCharacters(in: text.oldRange(from: line), with: "\t\(lineText)")
-        textView.moveLeft(nil)
-        textView.moveToEndOfLine(nil)
+
+      if selectedRange.length > 0 {
+        let range = text.lineRange(for: text.range(from: selectedRange))
+        let lineText = text[range]
+        let replacedLineText = lineText
+          .replacingOccurrences(of: "^", with: "\t", options: .regularExpression)
+          .replacingOccurrences(of: "\n", with: "\n\t", options: .regularExpression)
+          .replacingOccurrences(of: "\t$", with: "", options: .regularExpression)
+        textView.insertText(replacedLineText, replacementRange: text.oldRange(from: range))
+        let selectedRange = text.oldRange(from: range)
+        textView.setSelectedRange(NSRange(location: selectedRange.location, length: selectedRange.length + replacedLineText.oldRanges(with: "\n").count))
       } else {
-        textView.insertTab(nil)
+        let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
+        let line = text.lineRange(for: index...index)
+        let lineText = String(text[line])
+        if lineText.match(with: "^\\s*([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|) $") != nil {
+          textView.insertText("\t\(lineText)", replacementRange: text.oldRange(from: line))
+          textView.moveLeft(nil)
+          textView.moveToEndOfLine(nil)
+        } else {
+          textView.insertTab(nil)
+        }
       }
       return true
     case #selector(textView.insertBacktab(_:)):
       let selectedRange = textView.selectedRange()
       let text = textView.string
-      let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
-      let line = text.lineRange(for: index...index)
-      
-      if String(text[line]).match(with: "^\t+") != nil {
-        textView.replaceCharacters(in: text.oldRange(from: line.lowerBound...text.index(after: line.lowerBound)), with: "")
+      if selectedRange.length > 0 {
+        let range = text.lineRange(for: text.range(from: selectedRange))
+        let lineText = text[range]
+        if String(lineText).oldRanges(with: "^\t").count == 0 && String(lineText).oldRanges(with: "\n\t").count == 0 { return true }
+        let replacedLineText = lineText
+          .replacingOccurrences(of: "^\t", with: "", options: .regularExpression)
+          .replacingOccurrences(of: "\n\t", with: "\n", options: .regularExpression)
+        textView.insertText(replacedLineText, replacementRange: text.oldRange(from: range))
+        let selectedRange = text.oldRange(from: range)
+        textView.setSelectedRange(NSRange(location: selectedRange.location, length: selectedRange.length - replacedLineText.oldRanges(with: "\n").count))
       } else {
-        textView.insertBacktab(nil)
+        let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
+        let line = text.lineRange(for: index...index)
+        
+        if String(text[line]).match(with: "^\t+") != nil {
+          textView.insertText("", replacementRange: text.oldRange(from: line.lowerBound...text.index(after: line.lowerBound)))
+        } else {
+          textView.insertBacktab(nil)
+        }
       }
       return true
     default: break
