@@ -136,6 +136,8 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
       
       if lineText.match(with: "^\\s*([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|) $") != nil {
         textView.replaceCharacters(in: text.oldRange(from: line), with: "\t\(lineText)")
+        textView.moveLeft(nil)
+        textView.moveToEndOfLine(nil)
       } else {
         textView.insertTab(nil)
       }
