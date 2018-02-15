@@ -83,6 +83,7 @@ final class MarkDownEditorViewController: NSViewController {
       textView.isEditable = false
     }
     textView.string = note?.body ?? ""
+    textView.textStorage?.highlightMarkdownSyntax()
     updateWebView(note: note)
   }
   
@@ -103,6 +104,7 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
       }
     }
     updateWebView()
+    textView.textStorage?.highlightMarkdownSyntax()
   }
   
   func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {

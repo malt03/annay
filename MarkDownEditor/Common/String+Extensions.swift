@@ -30,10 +30,14 @@ extension String {
   }
   
   func match(with pattern: String) -> Substring? {
+    guard let oldRange = oldRanges(with: pattern).first else { return nil }
+    return self[range(from: oldRange)]
+  }
+  
+  func oldRanges(with pattern: String) -> [NSRange] {
     let regex = try! NSRegularExpression(pattern: pattern, options: [])
     let matches = regex.matches(in: self, options: [], range: NSRange(location: 0, length: count))
-    guard let oldRange = matches.first?.range else { return nil }
-    return self[range(from: oldRange)]
+    return matches.map { $0.range }
   }
   
   func range(from old: NSRange) -> Range<String.Index> {

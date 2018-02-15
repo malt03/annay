@@ -99,6 +99,7 @@
 		EDEB7A622004EDF000F8C48A /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A602004EDF000F8C48A /* Launch.storyboard */; };
 		EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */; };
 		EDF6A7E7202B082000B85B2C /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */; };
+		EDFAC7F12035A339002BB3C9 /* NSTextStorage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFAC7F02035A339002BB3C9 /* NSTextStorage+Extensions.swift */; };
 		EDFE82B920256AEC00702C85 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B320256AE500702C85 /* Realm.framework */; };
 		EDFE82BA20256AEC00702C85 /* Realm.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B320256AE500702C85 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EDFE82BB20256AEC00702C85 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B520256AE500702C85 /* RealmSwift.framework */; };
@@ -241,6 +242,7 @@
 		EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkDownEditor.entitlements; sourceTree = "<group>"; };
 		EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorViewController.swift; sourceTree = "<group>"; };
 		EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceWindowController.swift; sourceTree = "<group>"; };
+		EDFAC7F02035A339002BB3C9 /* NSTextStorage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Extensions.swift"; sourceTree = "<group>"; };
 		EDFE82B020256AE400702C85 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
 		EDFE82B120256AE400702C85 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/Mac/RxBlocking.framework; sourceTree = "<group>"; };
 		EDFE82B320256AE500702C85 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				ED9CCA6C2025927600EB2F7C /* DateFormatter+Extensions.swift */,
 				ED5569E1202DDC4C00D92A75 /* ResourceManager.swift */,
 				EDD4C746202EB0EB0029FF4C /* NSFont+Extensions.swift */,
+				EDFAC7F02035A339002BB3C9 /* NSTextStorage+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */,
 				EDD4C747202EB0EB0029FF4C /* NSFont+Extensions.swift in Sources */,
 				ED4EB9E4201DAADD00B4CBE7 /* NSImage+Extensions.swift in Sources */,
+				EDFAC7F12035A339002BB3C9 /* NSTextStorage+Extensions.swift in Sources */,
 				ED840D2F201C5AB600EF2C42 /* NSView+Extensions.swift in Sources */,
 				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
 				ED5569E2202DDC4C00D92A75 /* ResourceManager.swift in Sources */,
