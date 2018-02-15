@@ -17,6 +17,7 @@ final class WorkspaceModel {
   private let bag = DisposeBag()
   
   let id: String
+  private(set) var uniqId = ""
   private var workspaceDirectoryName: String
   private let _url: Variable<URL>
   private let _name: Variable<String>
@@ -26,8 +27,10 @@ final class WorkspaceModel {
   private let lastSavedUpdateId: Variable<String>
   private let _detectChange = PublishSubject<Void>()
 
+  private static var uniqIdKey: String { return "uniqId" }
   private static var updatedAtKey: String { return "updatedAt" }
   fileprivate static var updateIdKey: String { return "updatedId" }
+  
   private var info: [String: Any] {
     didSet {
       do {
@@ -137,6 +140,7 @@ final class WorkspaceModel {
     let updateId = info[WorkspaceModel.updateIdKey] as? String ?? ""
     self.updateId.value = updateId
     self.lastSavedUpdateId.value = lastSavedUpdateId ?? updateId
+    self.uniqId = info[WorkspaceModel.uniqIdKey] as? String ?? UUID().uuidString
   }
   
   private struct Key {
@@ -307,6 +311,7 @@ final class WorkspaceModel {
     info = [
       WorkspaceModel.updateIdKey: updateId.value,
       WorkspaceModel.updatedAtKey: updatedAtFormatter.string(from: _updatedAt.value),
+      WorkspaceModel.uniqIdKey: uniqId,
     ]
     saveToUserDefaults()
   }

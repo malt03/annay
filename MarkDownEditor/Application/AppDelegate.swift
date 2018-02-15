@@ -15,6 +15,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     return WorkspaceModel.open(url: URL(fileURLWithPath: filename))
   }
   
+  func application(_ application: NSApplication, open urls: [URL]) {
+    guard let url = urls.first else { return }
+    if url.scheme != "markdowneditor" { return }
+    let nodeId = url.lastPathComponent
+    let workspaceUniqId = url.deletingLastPathComponent().lastPathComponent
+    guard
+      let workspace = WorkspaceModel.spaces.value.first(where: { $0.uniqId == workspaceUniqId }),
+      let node = NodeModel.node(for: nodeId, for: workspace)
+      else { return }
+    workspace.select()
+    node.selected()
+    NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
+  }
+  
   @IBAction private func resetWorkspace(_ sender: NSMenuItem) {
     WorkspaceModel.selected.value.reset()
   }

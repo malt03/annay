@@ -66,6 +66,16 @@ extension NSPasteboard {
     }
     return false
   }
+  
+  func replaceNoteToMarkdown() -> Bool {
+    guard let parentWorkspaceId = string(forType: .parentWorkspaceModel) else { return false }
+    let notes = nodes.filter { !$0.isDirectory }
+    if notes.count == 0 { return false }
+    clearContents()
+    let linkTexts = notes.map { "[\($0.name)](markdowneditor:///\(parentWorkspaceId)/\($0.id))" }
+    writeObjects(linkTexts as [NSPasteboardWriting])
+    return true
+  }
  
   func replaceImagesToMarkdown() -> Bool {
     do {

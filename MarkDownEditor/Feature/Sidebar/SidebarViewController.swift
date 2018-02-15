@@ -451,6 +451,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     let filePromiseProviders = nodes.map { NSFilePromiseProvider(fileType: kUTTypePlainText as String, delegate: $0) }
     let objects = (nodes as [NSPasteboardWriting]) + (filePromiseProviders as [NSPasteboardWriting])
     pasteboard.writeObjects(objects)
+    pasteboard.setString(WorkspaceModel.selected.value.uniqId, forType: .parentWorkspaceModel)
     return true
   }
   
