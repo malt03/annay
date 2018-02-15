@@ -49,6 +49,7 @@ tbody > tr:nth-child(odd) {
 
 body {
     font-family: Helvetica, Arial, Freesans, clean, sans-serif;
+    font-weight: bolder;
 padding:1em;
 margin:auto;
 max-width:42em;
@@ -70,7 +71,7 @@ h2 {
 }
 
 h3 {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 h4 {

@@ -16,10 +16,10 @@ final class WebView: WKWebView {
   func prepare(finishHandler: @escaping (() -> Void)) {
     firstNavigation = true
     self.finishHandler = finishHandler
-    isHidden = true
     let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
     loadFileURL(url, allowingReadAccessTo: FileManager.default.homeDirectoryForCurrentUser)
     navigationDelegate = self
+    setValue(false, forKey: "drawsBackground")
   }
   
   private var lastMarkdown: String?
@@ -55,10 +55,7 @@ extension WebView: WKNavigationDelegate {
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
     if !firstNavigation { return }
     firstNavigation = false
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-      self.isHidden = false
-      self.updateRetry()
-      self.finishHandler()
-    }
+    updateRetry()
+    finishHandler()
   }
 }
