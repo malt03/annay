@@ -21,6 +21,9 @@ final class BeforeOfAllWindowController: NSWindowController {
       NewOrOpenNoteShortcutManager.shared.prepare()
       
       for workspace in WorkspaceModel.spaces.value { workspace.saveToUserDefaults() }
+
+      (Application.shared as! Application).prepareForWorkspaces()
+      
       let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: .main)
       (storyboard.instantiateInitialController() as! NSWindowController).showWindow(nil)
       self.close()

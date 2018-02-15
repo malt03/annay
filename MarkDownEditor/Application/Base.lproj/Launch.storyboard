@@ -321,6 +321,7 @@ GQ
                     </menu>
                     <connections>
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
+                        <outlet property="navigateMenu" destination="3St-bZ-rvp" id="ihY-nu-iIM"/>
                     </connections>
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MarkDownEditor" customModuleProvider="target"/>
