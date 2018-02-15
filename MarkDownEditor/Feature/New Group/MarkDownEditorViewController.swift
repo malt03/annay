@@ -17,7 +17,7 @@ final class MarkDownEditorViewController: NSViewController {
   @IBOutlet private weak var textView: TextView!
   @IBOutlet private weak var webParentView: NSView!
   @IBOutlet private weak var progressIndicator: NSProgressIndicator!
-  private var webView: MarkDownWebView!
+  private var webView: WebView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,7 +29,7 @@ final class MarkDownEditorViewController: NSViewController {
     let webConfiguration = WKWebViewConfiguration()
     webConfiguration.userContentController = userController
     
-    webView = MarkDownWebView(frame: webParentView.bounds, configuration: webConfiguration)
+    webView = WebView(frame: webParentView.bounds, configuration: webConfiguration)
     webParentView.addSubviewWithFillConstraints(webView)
     webView.prepare { [weak self] in
       self?.progressIndicator.stopAnimation(nil)
