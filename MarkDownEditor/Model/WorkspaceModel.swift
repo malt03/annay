@@ -116,6 +116,7 @@ final class WorkspaceModel {
     reloadInfo(lastSavedUpdateId: tmpLastSavedUpdateId ?? lastSavedUpdateId)
 
     selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
+    try FileManager.default.createDirectoryIfNeeded(url: workspaceDirectory.resourceDirectory)
   }
   
   convenience init(name: String, parentDirectoryUrl: URL) throws {
