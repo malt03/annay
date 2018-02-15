@@ -21,7 +21,7 @@ final class WorkspacesViewController: NSViewController {
       self?.performSegue(withIdentifier: .init(rawValue: "moveWorkspace"), sender: nil)
     })
     
-    tableView.registerForDraggedTypes([.workspaceModel])
+    tableView.registerForDraggedTypes([.workspaceModel, .nodeModel])
     tableView.setDraggingSourceOperationMask([.move], forLocal: true)
     
     WorkspaceModel.spaces.asObservable().distinctUntilChanged().subscribe(onNext: { [weak self] _ in
@@ -140,6 +140,12 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
   }
   
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+    let nodes = info.draggingPasteboard().nodes
+    if nodes.count > 0 {
+      if dropOperation == .on { WorkspaceModel.spaces.value[row].select() }
+      return []
+    }
+
     if dropOperation == .on { return [] }
     guard let draggingRow = Int(info.draggingPasteboard().string(forType: .workspaceModel) ?? "") else { return [] }
     if draggingRow == row || draggingRow == row - 1 { return [] }

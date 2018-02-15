@@ -10,10 +10,16 @@ import Cocoa
 
 extension NSPasteboard {
   var nodes: [NodeModel] {
+    guard let workspace = parentWorkspace else { return [] }
     return (pasteboardItems ?? []).flatMap { (item) -> NodeModel? in
       guard let id = item.string(forType: .nodeModel) else { return nil }
-      return NodeModel.node(for: id)
+      return NodeModel.node(for: id, for: workspace)
     }
+  }
+  
+  var parentWorkspace: WorkspaceModel? {
+    guard let workspaceUniqId = string(forType: .parentWorkspaceModel) else { return nil }
+    return WorkspaceModel.spaces.value.first(where: { $0.uniqId == workspaceUniqId })
   }
   
   func relaceLinkToMarkdown() -> Bool {

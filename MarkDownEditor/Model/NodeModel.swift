@@ -27,6 +27,15 @@ final class NodeModel: Object {
   @objc dynamic var isDeleted = false
   @objc dynamic var deletedAt: Date?
   
+  var copied: NodeModel {
+    let node = NodeModel()
+    let keys = ["name", "isDirectory", "body", "createdAt", "isDeleted", "deletedAt"]
+    for key in keys {
+      node.setValue(value(forKey: key), forKey: key)
+    }
+    return node
+  }
+  
   func setBody(_ body: String?) {
     self.body = body
     let nameFromBody = body?.components(separatedBy: CharacterSet.newlines)[safe: 0]?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -184,6 +193,17 @@ extension NodeModel {
       realm.add(node)
     }
     return node
+  }
+
+  func createCopy(realm: Realm, parent: NodeModel?, index: Int) {
+    let node = copied
+    if let parent = parent { node.setParent(parent) }
+    node.index = index
+    realm.add(node)
+    
+    for (index, child) in sortedChildren(query: nil).enumerated() {
+      child.createCopy(realm: realm, parent: node, index: index)
+    }
   }
   
   func delete() -> Bool {

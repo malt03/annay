@@ -473,7 +473,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     
     let nodes = info.draggingPasteboard().nodes
     if nodes.count == 0 { return [] }
-
+    
     guard let parentNode = item as? NodeModel else {
       let noteContains = nodes.contains(where: { !$0.isDirectory })
       return noteContains ? [] : [.move]
@@ -483,18 +483,22 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     } else {
       return []
     }
-
-    for node in nodes {
-      if node == parentNode { return [] }
-      if node.descendants.contains(parentNode) { return [] }
-      if node.isDeleted {
-        if parentNode.isTrash { return [] }
-      } else if node.parent == parentNode {
-        let childIndex = outlineView.childIndex(forItem: node)
-        if childIndex == index || childIndex + 1 == index { return [] }
+    
+    if info.draggingPasteboard().parentWorkspace == WorkspaceModel.selected.value {
+      for node in nodes {
+        if node == parentNode { return [] }
+        if node.descendants.contains(parentNode) { return [] }
+        if node.isDeleted {
+          if parentNode.isTrash { return [] }
+        } else if node.parent == parentNode {
+          let childIndex = outlineView.childIndex(forItem: node)
+          if childIndex == index || childIndex + 1 == index { return [] }
+        }
       }
+      return [.move]
+    } else {
+      return parentNode.isTrash ? [] : [.copy]
     }
-    return [.move]
   }
   
   func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
@@ -538,26 +542,42 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     let movedNodes = info.draggingPasteboard().nodes
     if movedNodes.count == 0 { return false }
     
-    fixedIndex -= movedNodes.filter { !$0.isDeleted && $0.parent == parent }.map { outlineView.childIndex(forItem: $0) }.filter { $0 < fixedIndex }.count
-    
-    Realm.transaction { _ in
-      if parent == .trash {
-        for node in movedNodes {
-          node.isDeleted = true
+    if info.draggingPasteboard().parentWorkspace == WorkspaceModel.selected.value {
+      fixedIndex -= movedNodes.filter { !$0.isDeleted && $0.parent == parent }.map { outlineView.childIndex(forItem: $0) }.filter { $0 < fixedIndex }.count
+      
+      Realm.transaction { _ in
+        if parent == .trash {
+          for node in movedNodes {
+            node.isDeleted = true
+          }
+        } else {
+          for node in movedNodes { node.index = -1 }
+          for (i, child) in (parent?.sortedChildren(query: queryText.value) ?? NodeModel.roots(query: queryText.value)).enumerated() {
+            if fixedIndex > i {
+              child.index = i
+            } else {
+              child.index = i + movedNodes.count
+            }
+          }
+          for (i, node) in movedNodes.enumerated() {
+            node.index = i + fixedIndex
+            node.setParent(parent)
+            node.isDeleted = false
+          }
         }
-      } else {
-        for node in movedNodes { node.index = -1 }
+      }
+    } else {
+      Realm.transaction { (realm) in
+        let count = movedNodes.count
         for (i, child) in (parent?.sortedChildren(query: queryText.value) ?? NodeModel.roots(query: queryText.value)).enumerated() {
           if fixedIndex > i {
             child.index = i
           } else {
-            child.index = i + movedNodes.count
+            child.index = i + count
           }
         }
-        for (i, node) in movedNodes.enumerated() {
-          node.index = i + fixedIndex
-          node.setParent(parent)
-          node.isDeleted = false
+        for (index, node) in movedNodes.enumerated() {
+          node.createCopy(realm: realm, parent: parent, index: fixedIndex + index)
         }
       }
     }
