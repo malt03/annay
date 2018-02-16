@@ -213,6 +213,11 @@ extension NodeModel {
     return true
   }
   
+  func deleteImmediately(realm: Realm) {
+    realm.delete(descendants)
+    realm.delete(self)
+  }
+  
   func putBack() -> Bool {
     if !isDeleted { return false }
     if hasDeletedAncestor { return false }

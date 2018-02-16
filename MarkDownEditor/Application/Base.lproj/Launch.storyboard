@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHw-0N-ZGZ">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHw-0N-ZGZ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -64,6 +64,7 @@
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
                                         <menuItem title="New" id="JMo-Dl-a5G">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="File" id="G3u-f0-Dhr">
                                                 <items>
                                                     <menuItem title="New Workspace..." keyEquivalent="N" id="O6a-Cm-4FV">
@@ -94,6 +95,43 @@
                                             </menu>
                                             <connections>
                                                 <action selector="openWorkspace:" target="Voe-Tx-rLC" id="qGz-eb-nqX"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Delete" id="qfh-7N-1H4">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Delete" id="jVb-lo-gsG">
+                                                <items>
+                                                    <menuItem title="Delete Note" id="7k0-en-khh">
+                                                        <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                                        <connections>
+                                                            <action selector="deleteNote:" target="Voe-Tx-rLC" id="Omm-Qe-PwJ"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Delete Note Immediately" id="o3h-im-mcz">
+                                                        <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                                        <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                                        <connections>
+                                                            <action selector="deleteNoteImmediately:" target="Voe-Tx-rLC" id="yfz-gY-l5b"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem isSeparatorItem="YES" id="MtW-pY-iIG"/>
+                                                    <menuItem title="Put Back Note" id="vuQ-my-p0i">
+                                                        <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                                        <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                                        <connections>
+                                                            <action selector="putBackNote:" target="Voe-Tx-rLC" id="O4N-FJ-BQb"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                            <connections>
+                                                <action selector="openWorkspace:" target="Voe-Tx-rLC" id="NEP-xY-zLN"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="lch-Ip-u2g"/>

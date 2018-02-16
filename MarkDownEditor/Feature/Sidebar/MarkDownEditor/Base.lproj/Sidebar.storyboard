@@ -73,23 +73,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="280" height="602"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveColumns="NO" rowHeight="24" viewBased="YES" floatsGroupRows="NO" indentationPerLevel="14" autosaveExpandedItems="YES" outlineTableColumn="hkY-av-AqO" id="SgN-Px-bBE">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveColumns="NO" rowHeight="24" viewBased="YES" floatsGroupRows="NO" indentationPerLevel="14" autosaveExpandedItems="YES" outlineTableColumn="hkY-av-AqO" id="SgN-Px-bBE" customClass="SidebarOutlineView" customModule="MarkDownEditor" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="602"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <gestureRecognizers>
-                                                <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="LMQ-W6-UtE">
-                                                    <connections>
-                                                        <action selector="secondaryClicked:" target="PrQ-Do-4mD" id="Pjo-0A-qeH"/>
-                                                        <outlet property="delegate" destination="PrQ-Do-4mD" id="b7E-sy-y4d"/>
-                                                    </connections>
-                                                </clickGestureRecognizer>
-                                                <clickGestureRecognizer delaysSecondaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="z93-g6-nAu">
-                                                    <buttonMask key="buttonMask" secondary="YES"/>
-                                                    <connections>
-                                                        <action selector="secondaryClicked:" target="PrQ-Do-4mD" id="J9w-NY-TyF"/>
-                                                    </connections>
-                                                </clickGestureRecognizer>
-                                            </gestureRecognizers>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <color key="gridColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <tableColumns>
@@ -176,6 +162,7 @@
                                                 <action trigger="doubleAction" selector="outlineViewDoubleAction:" target="PrQ-Do-4mD" id="5EY-Cw-kbm"/>
                                                 <outlet property="dataSource" destination="PrQ-Do-4mD" id="xTA-Xq-jIx"/>
                                                 <outlet property="delegate" destination="PrQ-Do-4mD" id="TI5-ZP-rRN"/>
+                                                <outlet property="menu" destination="DW7-F4-zF5" id="Fkw-6c-CXL"/>
                                             </connections>
                                         </outlineView>
                                     </subviews>
@@ -279,15 +266,94 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundMenu" destination="1uH-t7-6Oj" id="mYb-Gf-6T5"/>
+                        <outlet property="defaultNoteMenu" destination="DW7-F4-zF5" id="hfO-bZ-Pph"/>
+                        <outlet property="deletedNoteMenu" destination="AB4-Zv-pQo" id="6EH-kt-AzP"/>
                         <outlet property="editedView" destination="FwV-rs-jxT" id="tcF-HC-rVU"/>
                         <outlet property="outlineView" destination="SgN-Px-bBE" id="0qa-0v-86C"/>
                         <outlet property="searchField" destination="ITs-ya-jKc" id="fj4-mw-xc6"/>
                         <outlet property="searchFieldHiddenConstraint" destination="Pdx-aw-bKk" id="wOq-a5-cJi"/>
                         <outlet property="searchFieldPresentConstraint" destination="jYN-qe-rIC" id="ynm-hB-hEb"/>
+                        <outlet property="trashMenu" destination="VSo-4k-mmf" id="3JL-we-HDd"/>
                         <outlet property="updatedAtLabel" destination="Nkn-dX-xPZ" id="E73-sA-reV"/>
                         <outlet property="workspaceNameTextField" destination="Ggo-HV-esS" id="1E3-rV-rHF"/>
                     </connections>
                 </viewController>
+                <menu id="DW7-F4-zF5">
+                    <items>
+                        <menuItem title="New Directory [⌥N D]" id="cc8-Fp-5dI">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="createDirectory:" target="PrQ-Do-4mD" id="FPG-Bf-JMw"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="New Note" keyEquivalent="n" id="aUq-FP-kz8">
+                            <connections>
+                                <action selector="createNote:" target="PrQ-Do-4mD" id="GAN-7P-LV9"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="rmG-FC-GND"/>
+                        <menuItem title="Delete" id="Ap9-YU-Z1R">
+                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                            <connections>
+                                <action selector="delete:" target="PrQ-Do-4mD" id="Goa-Ol-LGx"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Delete Immediately" id="YMw-Qi-RJW">
+                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <connections>
+                                <action selector="deleteImmediately:" target="PrQ-Do-4mD" id="yaB-I6-fCl"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
+                <menu id="AB4-Zv-pQo">
+                    <items>
+                        <menuItem title="Put Back" id="G8P-Yd-DTI">
+                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                            <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                            <connections>
+                                <action selector="putBackFromTrash:" target="PrQ-Do-4mD" id="GOj-gF-N3x"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Delete Immediately" id="XPW-4N-Ycp">
+                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <connections>
+                                <action selector="deleteImmediately:" target="PrQ-Do-4mD" id="Eut-8u-tMH"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
+                <menu id="VSo-4k-mmf">
+                    <items>
+                        <menuItem title="Empty" keyEquivalent="e" id="anD-R4-sHh">
+                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                            <connections>
+                                <action selector="emptyTrash:" target="PrQ-Do-4mD" id="U6O-Op-Dzp"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
+                <menu id="1uH-t7-6Oj">
+                    <items>
+                        <menuItem title="New Group [⌥N G]" id="OeJ-Ov-fHX">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="createGroup:" target="PrQ-Do-4mD" id="aGv-Z1-BMc"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="-201" y="1382"/>
         </scene>

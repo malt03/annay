@@ -52,6 +52,7 @@
 		ED598C59201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */; };
 		ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */; };
 		ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */; };
+		ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */; };
 		ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED840D1E201A217300EF2C42 /* WorkspacesTableView.swift */; };
 		ED840D23201A2A7700EF2C42 /* MoveWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED840D25201A2A7700EF2C42 /* MoveWorkspace.storyboard */; };
 		ED840D29201A2AC000EF2C42 /* MoveWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED840D28201A2AC000EF2C42 /* MoveWorkspaceViewController.swift */; };
@@ -190,6 +191,7 @@
 		ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDirectoryWatcherManager.swift; sourceTree = "<group>"; };
 		ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
+		ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
 		ED840D1E201A217300EF2C42 /* WorkspacesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableView.swift; sourceTree = "<group>"; };
 		ED840D24201A2A7700EF2C42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MoveWorkspace.storyboard; sourceTree = "<group>"; };
 		ED840D27201A2A7900EF2C42 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MoveWorkspace.strings; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */,
 				ED841BD02008EC2B0097996A /* NodeTableCellView.swift */,
 				ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */,
+				ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */,
 			);
 			path = Sidebar;
 			sourceTree = "<group>";
@@ -725,6 +728,7 @@
 				EDD4C745202E9B060029FF4C /* FontManager.swift in Sources */,
 				EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */,
 				ED598C39201F03E200072D8A /* NSAlert+Extensions.swift in Sources */,
+				ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */,
 				ED840D2B201A2DF400EF2C42 /* URL+Extensions.swift in Sources */,
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
 				EDD0805D202BDEB20021895A /* NewOrOpenNoteShortcutManager.swift in Sources */,

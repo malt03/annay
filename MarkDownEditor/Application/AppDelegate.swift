@@ -49,7 +49,10 @@ extension AppDelegate {
   @IBAction private func moveFocusToWorkspaces(_ sender: NSMenuItem)    { NotificationCenter.default.post(name: .MoveFocusToWorkspaces, object: nil) }
   @IBAction private func moveFocusToSidebar(_ sender: NSMenuItem)       { NotificationCenter.default.post(name: .MoveFocusToSidebar, object: nil) }
   @IBAction private func moveFocusToEditor(_ sender: NSMenuItem)        { NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil) }
-  
+  @IBAction private func deleteNote(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .DeleteNote, object: nil) }
+  @IBAction private func deleteNoteImmediately(_ sender: NSMenuItem)    { NotificationCenter.default.post(name: .DeleteNoteImmediately, object: nil) }
+  @IBAction private func putBackNote(_ sender: NSMenuItem)              { NotificationCenter.default.post(name: .PutBackNote, object: nil) }
+
   @IBAction private func openQuickly(_ sender: NSMenuItem) {
     OpenQuicklyWindowController.toggle()
   }
@@ -78,4 +81,7 @@ extension Notification.Name {
   static let MoveFocusToWorkspaces = Notification.Name(rawValue: "AppDelegate/MoveFocusToWorkspaces")
   static let MoveFocusToSidebar = Notification.Name(rawValue: "AppDelegate/MoveFocusToSidebar")
   static let MoveFocusToEditor = Notification.Name(rawValue: "AppDelegate/MoveFocusToEditor")
+  static let DeleteNote = Notification.Name(rawValue: "AppDelegate/DeleteNote")
+  static let DeleteNoteImmediately = Notification.Name(rawValue: "AppDelegate/DeleteNoteImmediately")
+  static let PutBackNote = Notification.Name(rawValue: "AppDelegate/PutBackNote")
 }

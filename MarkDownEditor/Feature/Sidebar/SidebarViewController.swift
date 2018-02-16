@@ -30,13 +30,17 @@ final class SidebarViewController: NSViewController {
   @IBOutlet private weak var searchFieldPresentConstraint: NSLayoutConstraint!
   @IBOutlet private weak var searchField: NSSearchField!
   @IBOutlet private weak var workspaceNameTextField: NSTextField!
-  @IBOutlet private weak var outlineView: NSOutlineView!
+  @IBOutlet private weak var outlineView: SidebarOutlineView!
   @IBOutlet private weak var updatedAtLabel: NSTextField!
+  
+  @IBOutlet private var defaultNoteMenu: NSMenu!
+  @IBOutlet private var deletedNoteMenu: NSMenu!
+  @IBOutlet private var trashMenu: NSMenu!
+  @IBOutlet private var backgroundMenu: NSMenu!
   
   private let isSearching = Variable<Bool>(false)
   private let queryText = Variable<String?>(nil)
   
-  private var secondaryClickedRow = -1
   private var textEditing = false
   
   override func viewDidLoad() {
@@ -45,6 +49,13 @@ final class SidebarViewController: NSViewController {
     outlineView.setDraggingSourceOperationMask([.move, .copy], forLocal: false)
     outlineView.backgroundColor = .clear
     outlineView.headerView = nil
+    
+    outlineView.setMenus(
+      defaultNoteMenu: defaultNoteMenu,
+      deletedNoteMenu: deletedNoteMenu,
+      trashMenu: trashMenu,
+      backgroundMenu: backgroundMenu
+    )
     
     WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] (workspace) in
       self?.reloadWorkspace(workspace)
@@ -78,14 +89,17 @@ final class SidebarViewController: NSViewController {
   
   override func viewWillAppear() {
     super.viewWillAppear()
-    NotificationCenter.default.addObserver(self, selector: #selector(selectNextNote),                       name: .SelectNextNote,     object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(selectPreviousNote),                   name: .SelectPreviousNote, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(findInWorkspace),                      name: .FindInWorkspace,    object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutSecondaryClick),      name: .CreateNote,         object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(createDirectoryWithoutSecondaryClick), name: .CreateDirectory,    object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(createGroup),                          name: .CreateGroup,        object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar),                      name: .RevealInSidebar,    object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar),                   name: .MoveFocusToSidebar, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(selectNextNote),               name: .SelectNextNote,        object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(selectPreviousNote),           name: .SelectPreviousNote,    object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(findInWorkspace),              name: .FindInWorkspace,       object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutMenu),        name: .CreateNote,            object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createDirectoryWithoutMenu),   name: .CreateDirectory,       object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createGroupWithoutMenu),       name: .CreateGroup,           object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar),              name: .RevealInSidebar,       object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar),           name: .MoveFocusToSidebar,    object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(deleteNote),                   name: .DeleteNote,            object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(deleteNoteImmediately),        name: .DeleteNoteImmediately, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(putBackNote),                  name: .PutBackNote, object: nil)
   }
   
   override func viewWillDisappear() {
@@ -199,31 +213,6 @@ final class SidebarViewController: NSViewController {
     isSearching.value = false
   }
   
-  @IBAction private func secondaryClicked(_ sender: NSClickGestureRecognizer) {
-    let location = sender.location(in: outlineView)
-    secondaryClickedRow = outlineView.row(at: location)
-    if secondaryClickedRow >= 0 {
-      if !outlineView.selectedRowIndexes.contains(secondaryClickedRow) {
-        outlineView.selectRowIndexes(IndexSet(integer: secondaryClickedRow), byExtendingSelection: false)
-      }
-    } else {
-      outlineView.deselectAll(nil)
-    }
-    let menu = NSMenu()
-    if selectedNode?.isTrash ?? false {
-      menu.addItem(NSMenuItem(title: Localized("Empty"), action: #selector(emptyTrash), keyEquivalent: ""))
-    } else if selectedNode?.isDeleted ?? false {
-      menu.addItem(NSMenuItem(title: Localized("Put Back"), action: #selector(putBackFromTrash), keyEquivalent: ""))
-    } else {
-      let selected = outlineView.selectedRowIndexes.count > 0
-      menu.addItem(NSMenuItem(title: Localized("New Directory"), action: selected ? #selector(createDirectory) : nil, keyEquivalent: ""))
-      menu.addItem(NSMenuItem(title: Localized("New Note"), action: selected ? #selector(createNote) : nil, keyEquivalent: "n"))
-      menu.addItem(NSMenuItem(title: Localized("New Group"), action: #selector(createGroup), keyEquivalent: ""))
-      menu.addItem(NSMenuItem(title: Localized("Delete"), action: selected ? #selector(delete) : nil, keyEquivalent: ""))
-    }
-    menu.popUp(positioning: nil, at: location, in: outlineView)
-  }
-
   @IBAction private func outlineViewDoubleAction(_ sender: NSOutlineView) {
     guard let clickedItem = outlineView.item(atRow: sender.clickedRow) as? NodeModel else { return }
     if clickedItem.isDirectory {
@@ -235,71 +224,70 @@ final class SidebarViewController: NSViewController {
     }
   }
   
-  @objc private func emptyTrash() {
+  @IBAction private func emptyTrash(_ sender: NSMenuItem) {
+    emptyTrash()
+  }
+  
+  private func emptyTrash() {
     let alert = NSAlert()
     alert.messageText = Localized("This operation cannot be undone.")
-    alert.addButton(withTitle: Localized("Empty"))
     alert.addButton(withTitle: Localized("Cancel"))
+    alert.addButton(withTitle: Localized("Empty"))
     let response = alert.runModal()
-    if response == .alertFirstButtonReturn {
+    if response == .alertSecondButtonReturn {
       let count = NodeModel.deleted.count
       outlineView.removeItems(at: IndexSet(integersIn: 0..<count), inParent: NodeModel.trash, withAnimation: .effectFade)
       NodeModel.emptyTrash()
     }
   }
   
-  @objc private func createDirectoryWithoutSecondaryClick() {
-    secondaryClickedRow = outlineView.selectedRow
-    createDirectory()
+  @objc private func createDirectoryWithoutMenu() {
+    guard
+      let selectedNode = outlineView.item(atRow: outlineView.selectedRow) as? NodeModel,
+      let parent = selectedNode.isDirectory ? selectedNode : selectedNode.parent
+      else { return }
+    createDirectory(parent: parent)
   }
   
-  @objc private func createDirectory() {
-    guard let selectedParent = selectedParent, !selectedParent.isDeleted else { return }
-    let insertedNode = NodeModel.createDirectory(parent: selectedParent)
-    insert(node: insertedNode, in: selectedParent)
+  @IBAction private func createDirectory(_ sender: NSMenuItem) {
+    guard let parent = outlineView.parentNodeForMenu else { return }
+    createDirectory(parent: parent)
   }
   
-  @objc private func createNoteWithoutSecondaryClick() {
-    secondaryClickedRow = outlineView.selectedRow
-    createNote()
+  private func createDirectory(parent: NodeModel) {
+    let insertedNode = NodeModel.createDirectory(parent: parent)
+    insert(node: insertedNode, in: parent)
   }
   
-  @objc private func createNote() {
-    guard let selectedParent = selectedParent, !selectedParent.isDeleted else { return }
-    let insertedNode = NodeModel.createNote(in: selectedParent)
-    insert(node: insertedNode, in: selectedParent)
+  @objc private func createNoteWithoutMenu() {
+    guard
+      let selectedNode = outlineView.item(atRow: outlineView.selectedRow) as? NodeModel,
+      let parent = selectedNode.isDirectory ? selectedNode : selectedNode.parent
+      else { return }
+    createNote(parent: parent)
   }
   
-  @objc private func createGroup() {
+  @IBAction private func createNote(_ sender: NSMenuItem) {
+    guard let parent = outlineView.parentNodeForMenu else { return }
+    createNote(parent: parent)
+  }
+
+  private func createNote(parent: NodeModel) {
+    let insertedNode = NodeModel.createNote(in: parent)
+    insert(node: insertedNode, in: parent)
+  }
+  
+  @IBAction private func createGroup(_ sender: NSMenuItem) {
+    createGroupWithoutMenu()
+  }
+  
+  @objc private func createGroupWithoutMenu() {
     let group = NodeModel.createDirectory(name: Localized("New Group"), parent: nil)
     outlineView.reloadData() // アニメーション走らせると表示がバグる
     let row = outlineView.row(forItem: group)
     if row >= 0 {
       outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
       outlineView.editColumn(0, row: row, with: nil, select: true)
-    }
-  }
-  
-  override func keyDown(with event: NSEvent) {
-    // ビープ音を消すため
-    if event.isPushed(.delete) { return }
-    super.keyDown(with: event)
-  }
-  
-  override func keyUp(with event: NSEvent) {
-    super.keyUp(with: event)
-    
-    if !textEditing {
-      switch KeyCode(rawValue: event.keyCode) ?? .none {
-      case .returnKey: moveFocusToEditor()
-      case .delete:
-        if event.isPressModifierFlags(only: .shift){
-          putBackFromTrash()
-        } else {
-          delete()
-        }
-      default: break
-      }
     }
   }
   
@@ -311,9 +299,18 @@ final class SidebarViewController: NSViewController {
     }
   }
   
-  @objc private func delete() {
+  @objc private func deleteNote() {
+    delete(indexes: outlineView.selectedRowIndexes)
+  }
+  
+  @IBAction private func delete(_ sender: NSMenuItem) {
+    guard let indexes = outlineView.indexesForMenu else { return }
+    delete(indexes: indexes)
+  }
+  
+  private func delete(indexes: IndexSet) {
     outlineView.expandItem(NodeModel.trash)
-    let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
+    let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
     let beforeCount = NodeModel.deleted.count
     Realm.transaction { _ in
       for node in nodes {
@@ -334,8 +331,48 @@ final class SidebarViewController: NSViewController {
     outlineView.selectRowIndexes(selectIndexSet, byExtendingSelection: false)
   }
   
-  @objc private func putBackFromTrash() {
-    let nodes = outlineView.selectedRowIndexes.map { outlineView.item(atRow: $0) as! NodeModel }
+  @objc private func deleteNoteImmediately() {
+    deleteImmediately(indexes: outlineView.selectedRowIndexes)
+  }
+  
+  @IBAction private func deleteImmediately(_ sender: NSMenuItem) {
+    guard let indexes = outlineView.indexesForMenu else { return }
+    deleteImmediately(indexes: indexes)
+  }
+  
+  private func deleteImmediately(indexes: IndexSet) {
+    let alert = NSAlert()
+    alert.messageText = Localized("This operation cannot be undone.")
+    alert.addButton(withTitle: Localized("Cancel"))
+    alert.addButton(withTitle: Localized("Delete"))
+    let response = alert.runModal()
+    if response == .alertSecondButtonReturn {
+      Realm.transaction { (realm) in
+        let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
+        for node in nodes {
+          let index = outlineView.childIndex(forItem: node)
+          let parent = node.isDeleted ? NodeModel.trash : node.parent
+          outlineView.removeItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .effectFade)
+        }
+        for node in nodes {
+          if node.isInvalidated { continue }
+          node.deleteImmediately(realm: realm)
+        }
+      }
+    }
+  }
+  
+  @objc private func putBackNote() {
+    putBackFromTrash(indexes: outlineView.selectedRowIndexes)
+  }
+  
+  @IBAction private func putBackFromTrash(_ sender: NSMenuItem) {
+    guard let indexes = outlineView.indexesForMenu else { return }
+    putBackFromTrash(indexes: indexes)
+  }
+  
+  private func putBackFromTrash(indexes: IndexSet) {
+    let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }
     var putBackNodes = [NodeModel]()
     Realm.transaction { _ in
       for node in nodes {
@@ -371,16 +408,6 @@ final class SidebarViewController: NSViewController {
     let row = outlineView.row(forItem: node)
     outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
     outlineView.editColumn(0, row: row, with: nil, select: true)
-  }
-  
-  private var selectedParent: NodeModel? {
-    guard let selectedNode = selectedNode else { return nil }
-    if selectedNode.isDirectory { return selectedNode }
-    return selectedNode.parent
-  }
-  
-  private var selectedNode: NodeModel? {
-    return outlineView.item(atRow: secondaryClickedRow) as? NodeModel
   }
 }
 
