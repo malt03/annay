@@ -21,7 +21,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="68" height="270"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="52" viewBased="YES" id="5TB-xv-gAB" customClass="WorkspacesTableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="52" viewBased="YES" id="5TB-xv-gAB" customClass="WorkspacesTableView" customModule="MarkDownEditor" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="68" height="270"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -197,12 +197,35 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="defaultMenu" destination="3eQ-Dh-vsx" id="Vmi-Av-HCQ"/>
                         <outlet property="tableView" destination="5TB-xv-gAB" id="MBw-1T-Mln"/>
                         <segue destination="hq4-NC-f6R" kind="sheet" identifier="createOrOpenWorkspace" id="nG7-5l-gRl"/>
                         <segue destination="2Zz-rt-Hmg" kind="sheet" identifier="moveWorkspace" id="l1I-lM-d9f"/>
                     </connections>
                 </viewController>
                 <customObject id="kd4-G0-xj2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="3eQ-Dh-vsx">
+                    <items>
+                        <menuItem title="Show in Finder" id="Hpe-Hn-GT7">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showInFinder:" target="gIM-Og-53C" id="oCd-Oe-O2z"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Delete" id="Dwa-Mn-L0J">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="delete:" target="gIM-Og-53C" id="M2L-ZP-aIg"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Move the workspace file" id="AEx-aw-jWR">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="moveTheWorkspaceFile:" target="gIM-Og-53C" id="BP8-ep-zlj"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="103" y="-61"/>
         </scene>
@@ -232,9 +255,6 @@
         </namedColor>
         <namedColor name="Text">
             <color red="0.94900000095367432" green="0.97500002384185791" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="WorkspacesBackground">
-            <color red="0.075000002979999994" green="0.087999999519999997" blue="0.1000000015" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="WorkspacesBackground">
             <color red="0.075000002979999994" green="0.087999999519999997" blue="0.1000000015" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

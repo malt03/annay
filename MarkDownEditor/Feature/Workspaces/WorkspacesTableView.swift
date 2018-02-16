@@ -9,49 +9,24 @@
 import Cocoa
 
 final class WorkspacesTableView: NSTableView {
-  private var moveAction: (() -> Void)!
+  private var defaultMenu: NSMenu!
   
-  func prepare(moveAction: @escaping (() -> Void)) {
-    self.moveAction = moveAction
+  private(set) var rowForMenu: Int?
+  
+  func prepare(defaultMenu: NSMenu) {
+    self.defaultMenu = defaultMenu
   }
   
-  override func mouseDown(with event: NSEvent) {
-    let location = convert(event.locationInWindow, to: nil)
-    if event.modifierFlags.contains(.control) {
-      rightMouseDown(with: event)
-      return
-    }
-    if row(at: location) == -1 { return }
-    super.mouseDown(with: event)
-  }
-  
-  override func rightMouseDown(with event: NSEvent) {
-    let location = convert(event.locationInWindow, to: nil)
+  override func menu(for event: NSEvent) -> NSMenu? {
+    let location = convert(event.locationInWindow, from: nil)
     let clickedRow = row(at: location)
-    if clickedRow == -1 || clickedRow >= WorkspaceModel.spaces.value.count { return }
-
-    selectRowIndexes(IndexSet(integer: clickedRow), byExtendingSelection: false)
-    let menu = NSMenu()
-    menu.addItem(NSMenuItem(title: Localized("Show in Finder"), action: #selector(showInFinder), keyEquivalent: ""))
-    menu.addItem(NSMenuItem.separator())
-    menu.addItem(NSMenuItem(title: Localized("Delete"), action: #selector(delete), keyEquivalent: ""))
-    menu.addItem(NSMenuItem(title: Localized("Move the workspace file"), action: #selector(move), keyEquivalent: ""))
-    menu.popUp(positioning: nil, at: location, in: self)
-  }
-  
-  @objc private func delete() {
-    if selectedRow == -1 { return }
-    WorkspaceModel.spaces.value.remove(at: selectedRow)
-  }
-
-  @objc private func move() {
-    if selectedRow == -1 { return }
-    moveAction()
-  }
-  
-  @objc private func showInFinder() {
-    if selectedRow == -1 { return }
-    let url = WorkspaceModel.spaces.value[selectedRow].url
-    NSWorkspace.shared.selectFile(url.path, inFileViewerRootedAtPath: url.deletingLastPathComponent().path)
+    if clickedRow == -1 || clickedRow == WorkspaceModel.spaces.value.count {
+      menu = nil
+      rowForMenu = nil
+    } else {
+      menu = defaultMenu
+      rowForMenu = clickedRow
+    }
+    return super.menu(for: event)
   }
 }

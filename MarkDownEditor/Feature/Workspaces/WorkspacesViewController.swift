@@ -12,14 +12,13 @@ import RxSwift
 final class WorkspacesViewController: NSViewController {
   private let bag = DisposeBag()
   @IBOutlet private weak var tableView: WorkspacesTableView!
+  @IBOutlet private var defaultMenu: NSMenu!
   
   private var createOrOpenWorkspaceSegment = CreateOrOpenWorkspaceTabViewController.Segment.create
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.prepare(moveAction: { [weak self] in
-      self?.performSegue(withIdentifier: .init(rawValue: "moveWorkspace"), sender: nil)
-    })
+    tableView.prepare(defaultMenu: defaultMenu)
     
     tableView.registerForDraggedTypes([.workspaceModel, .nodeModel])
     tableView.setDraggingSourceOperationMask([.move], forLocal: true)
@@ -97,6 +96,21 @@ final class WorkspacesViewController: NSViewController {
     default: break
     }
     super.prepare(for: segue, sender: sender)
+  }
+  
+  @IBAction private func showInFinder(_ sender: NSMenuItem) {
+    guard let row = tableView.rowForMenu else { return }
+    let url = WorkspaceModel.spaces.value[row].url
+    NSWorkspace.shared.selectFile(url.path, inFileViewerRootedAtPath: url.deletingLastPathComponent().path)
+  }
+
+  @IBAction private func delete(_ sender: NSMenuItem) {
+    guard let row = tableView.rowForMenu else { return }
+    WorkspaceModel.spaces.value.remove(at: row)
+  }
+  
+  @IBAction private func moveTheWorkspaceFile(_ sender: NSMenuItem) {
+    performSegue(withIdentifier: .init(rawValue: "moveWorkspace"), sender: nil)
   }
 }
 
