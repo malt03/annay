@@ -76,6 +76,8 @@ final class MarkDownEditorViewController: NSViewController {
     textView.isGrammarCheckingEnabled = false
   }
   
+  private var noteChangeNotificationToken: NotificationToken?
+  
   private func updateNote(note: NodeModel? = NodeModel.selectedNode.value) {
     if let note = note {
       textView.isEditable = !note.isDeleted
@@ -85,6 +87,15 @@ final class MarkDownEditorViewController: NSViewController {
     textView.string = note?.body ?? ""
     textView.textStorage?.highlightMarkdownSyntax()
     updateWebView(note: note)
+    
+    noteChangeNotificationToken?.invalidate()
+    noteChangeNotificationToken = note?.observe { [weak self] (change) in
+      guard let s = self else { return }
+      switch change {
+      case .deleted: s.updateNote(note: nil)
+      default: break
+      }
+    }
   }
   
   private func updateWebView(note: NodeModel? = NodeModel.selectedNode.value) {
