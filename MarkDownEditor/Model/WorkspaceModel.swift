@@ -18,7 +18,7 @@ final class WorkspaceModel {
   
   let id: String
   private(set) var uniqId = ""
-  private var workspaceDirectoryName: String
+  private(set) var workspaceDirectoryName: String
   private let _url: Variable<URL>
   private let _name: Variable<String>
   private let _updatedAt: Variable<Date>
@@ -405,15 +405,5 @@ extension URL {
     } else {
       return [:]
     }
-  }
-}
-
-extension FileManager {
-  fileprivate var applicationWorkspace: URL {
-    return applicationSupport.appendingPathComponent("workspace", isDirectory: true)
-  }
-
-  fileprivate var applicationTmp: URL {
-    return applicationSupport.appendingPathComponent("tmp", isDirectory: true)
   }
 }

@@ -11,7 +11,7 @@ import Cocoa
 final class ResourceManager {
   private init() {}
   
-  private static var resourceUrl: URL { return FileManager.default.applicationSupport.appendingPathComponent("resource", isDirectory: true) }
+  static var resourceUrl: URL { return FileManager.default.applicationSupport.appendingPathComponent("resource", isDirectory: true) }
   
   static func prepare() {
     do {

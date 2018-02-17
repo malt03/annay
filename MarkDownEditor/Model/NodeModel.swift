@@ -114,6 +114,10 @@ final class NodeModel: Object {
     return result.filter("isDirectory = false and name contains[c] %@", query).sorted(byKeyPath: "name")
   }
   
+  static func containsBody(_ body: String, in workspace: WorkspaceModel) -> Bool {
+    return !Realm.instance(for: workspace).objects(NodeModel.self).filter("body contains %@", body).isEmpty
+  }
+  
   static var selectedNode: Variable<NodeModel?> = {
     let selectedNode = Variable<NodeModel?>(nil)
     _ = WorkspaceModel.selected.asObservable().map { (workspace) -> NodeModel? in

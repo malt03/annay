@@ -28,4 +28,12 @@ extension FileManager {
       try copyItem(at: parent.appendingPathComponent(child), to: copyUrl)
     }
   }
+  
+  var applicationTmp: URL {
+    return applicationSupport.appendingPathComponent("tmp", isDirectory: true)
+  }
+  
+  var applicationWorkspace: URL {
+    return applicationSupport.appendingPathComponent("workspace", isDirectory: true)
+  }
 }
