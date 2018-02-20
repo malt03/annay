@@ -36,4 +36,8 @@ extension FileManager {
   var applicationWorkspace: URL {
     return applicationSupport.appendingPathComponent("workspace", isDirectory: true)
   }
+  
+  var applicationWeb: URL {
+    return applicationSupport.appendingPathComponent("web", isDirectory: true)
+  }
 }

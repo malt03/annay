@@ -2,13 +2,15 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreviewViewController" customModule="MarkDownEditorPreviewExtension" customModuleProvider="target">
             <connections>
-                <outlet property="label" destination="ibu-oS-SHj" id="CRb-dw-PWY"/>
+                <outlet property="notFoundLabel" destination="Kvu-9t-5ZR" id="Tyt-tI-7cr"/>
                 <outlet property="view" destination="c22-O7-iKe" id="NRM-P4-wb6"/>
+                <outlet property="webView" destination="1QZ-DZ-XHB" id="j6L-Yk-eth"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -17,9 +19,16 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ibu-oS-SHj">
-                    <rect key="frame" x="-2" y="255" width="37" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="hCW-Qe-EEe">
+                <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1QZ-DZ-XHB">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+                    <wkWebViewConfiguration key="configuration">
+                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                        <wkPreferences key="preferences"/>
+                    </wkWebViewConfiguration>
+                </wkWebView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kvu-9t-5ZR">
+                    <rect key="frame" x="205" y="127" width="72" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Not Found." id="5Af-fm-BcR">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -27,9 +36,12 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ibu-oS-SHj" secondAttribute="trailing" constant="20" symbolic="YES" id="SK1-Ab-1f1"/>
-                <constraint firstItem="ibu-oS-SHj" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="iDj-w9-syJ"/>
-                <constraint firstItem="ibu-oS-SHj" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="o8q-jT-5su"/>
+                <constraint firstItem="1QZ-DZ-XHB" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="AXc-ZZ-gDD"/>
+                <constraint firstAttribute="trailing" secondItem="1QZ-DZ-XHB" secondAttribute="trailing" id="K5Y-Hw-mh1"/>
+                <constraint firstItem="Kvu-9t-5ZR" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="MBv-fy-dz4"/>
+                <constraint firstAttribute="bottom" secondItem="1QZ-DZ-XHB" secondAttribute="bottom" id="eJ0-Wb-Fwe"/>
+                <constraint firstItem="1QZ-DZ-XHB" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="g3I-gi-OFw"/>
+                <constraint firstItem="Kvu-9t-5ZR" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="sYt-Cr-bd2"/>
             </constraints>
         </customView>
     </objects>

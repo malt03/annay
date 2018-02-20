@@ -47,5 +47,5 @@ function update(markdown) {
         window.webkit.messageHandlers.checkboxChanged.postMessage(json);
     });
  
-    return html;
+    return document.documentElement.outerHTML;
 }

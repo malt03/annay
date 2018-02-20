@@ -103,7 +103,10 @@ final class MarkDownEditorViewController: NSViewController {
       .replacingOccurrences(of: "\\", with: "\\\\")
       .replacingOccurrences(of: "\n", with: "\\n")
       .replacingOccurrences(of: "\"", with: "\\\"")
-    webView.update(markdown: markDown)
+    webView.update(markdown: markDown, completionHandler: { (html) in
+      guard let id = note?.id else { return }
+      HtmlDataStore.shared.set(id: id, html: html)
+    })
   }
 }
 

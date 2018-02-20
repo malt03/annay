@@ -16,22 +16,64 @@ final class WebView: WKWebView {
   func prepare(finishHandler: @escaping (() -> Void)) {
     firstNavigation = true
     self.finishHandler = finishHandler
-    let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
-    loadFileURL(url, allowingReadAccessTo: FileManager.default.homeDirectoryForCurrentUser)
+
+    createHtmlFilesIfNeeded()
+    loadFileURL(htmlFileUrl, allowingReadAccessTo: URL(fileURLWithPath: "/"))
+    
     navigationDelegate = self
     setValue(false, forKey: "drawsBackground")
   }
+
+  private var baseDirectory: URL { return FileManager.default.applicationWeb }
+  private var htmlFileUrl: URL { return baseDirectory.appendingPathComponent("index").appendingPathExtension("html") }
+  
+  private func createHtmlFilesIfNeeded() {
+    if FileManager.default.fileExists(atPath: baseDirectory.path) { return }
+    
+    let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
+    let styleHighlight = Bundle.main.url(forResource: "monokai-sublime", withExtension: "css")!
+    let style = Bundle.main.url(forResource: "swiss", withExtension: "css")!
+    let html = try! String(contentsOfFile: url.path)
+      .replacingOccurrences(of: "{{style-highlight}}", with: try! String(contentsOfFile: styleHighlight.path))
+      .replacingOccurrences(of: "{{style}}", with: try! String(contentsOfFile: style.path))
+    try! FileManager.default.createDirectory(at: baseDirectory, withIntermediateDirectories: true, attributes: nil)
+    
+    let scriptNames = [
+      "highlight.pack.js",
+      "jquery.min.js",
+      "markdown-it.min.js",
+      "markdown-it-task-checkbox.min.js",
+      "markdown-it-sub.min.js",
+      "markdown-it-sup.min.js",
+      "markdown-it-footnote.min.js",
+      "markdown-it-emoji.min.js",
+      "markdown.js",
+    ]
+    
+    for name in scriptNames {
+      try! FileManager.default.copyItem(at: Bundle.main.url(forResource: name, withExtension: nil)!, to: baseDirectory.appendingPathComponent(name))
+    }
+    
+    try! html.write(to: htmlFileUrl, atomically: false, encoding: .utf8)
+  }
   
   private var lastMarkdown: String?
+  private var lastCompletionHandler: UpdateCompletion?
   
-  func update(markdown: String) {
+  typealias UpdateCompletion = ((_ html: String) -> Void)
+  
+  func update(markdown: String, completionHandler: @escaping UpdateCompletion) {
     lastMarkdown = markdown
-    evaluateJavaScript("update(\"\(markdown)\")", completionHandler: nil)
+    lastCompletionHandler = completionHandler
+    evaluateJavaScript("update(\"\(markdown)\")", completionHandler: { (html, _) in
+      guard let html = html as? String else { return }
+      completionHandler(html)
+    })
   }
   
   private func updateRetry() {
-    guard let lastMarkdown = lastMarkdown else { return }
-    update(markdown: lastMarkdown)
+    guard let lastMarkdown = lastMarkdown, let completionHandler = lastCompletionHandler else { return }
+    update(markdown: lastMarkdown, completionHandler: completionHandler)
   }
 }
 

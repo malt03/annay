@@ -1,5 +1,5 @@
 //
-//  SpotlightDataStore.swift
+//  HtmlDataStore.swift
 //  MarkDownEditor
 //
 //  Created by Koji Murata on 2018/02/20.
@@ -8,19 +8,23 @@
 
 import Foundation
 
-final class SpotlightDataStore {
-  static let shared = SpotlightDataStore()
+final class HtmlDataStore {
+  private struct Key {
+    static func Html(for id: String) -> String { return "HtmlDataStore/Html/\(id)" }
+  }
+  
+  static let shared = HtmlDataStore()
   
   private let userDefault = UserDefaults(suiteName: "group.koji.murata.MarkDownEditor")!
   
   private init() {}
   
-  func set(id: String, body: String) {
-    userDefault.set(body, forKey: id)
+  func set(id: String, html: String) {
+    userDefault.set(html, forKey: Key.Html(for: id))
     userDefault.synchronize()
   }
   
-  func body(for id: String) -> String? {
+  func html(for id: String) -> String? {
     return userDefault.string(forKey: id)
   }
 }
