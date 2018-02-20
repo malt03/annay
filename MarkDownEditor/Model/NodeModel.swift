@@ -315,7 +315,8 @@ extension NodeModel {
     if isDirectory { return }
     let attribute = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
     attribute.title = name
-    attribute.textContent = body
+    attribute.contentDescription = body
+    SpotlightDataStore.shared.set(id: id, body: body ?? "")
     let item = CSSearchableItem(uniqueIdentifier: id, domainIdentifier: nil, attributeSet: attribute)
     CSSearchableIndex.default().indexSearchableItems([item], completionHandler: nil)
   }
