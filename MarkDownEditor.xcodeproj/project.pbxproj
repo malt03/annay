@@ -101,6 +101,7 @@
 		EDD4CA78203BB331003F8072 /* MarkDownEditorPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EDD4CA6B203BB331003F8072 /* MarkDownEditorPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EDDE608F203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */; };
 		EDDE6090203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */; };
+		EDDE6093203C65A500331A77 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE6091203C65A500331A77 /* WebView.swift */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
 		EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */; };
@@ -273,6 +274,7 @@
 		EDD4CA74203BB331003F8072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDD4CA75203BB331003F8072 /* MarkDownEditorPreviewExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkDownEditorPreviewExtension.entitlements; sourceTree = "<group>"; };
 		EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CSSearchableIndex+Extensions.swift"; sourceTree = "<group>"; };
+		EDDE6091203C65A500331A77 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
 		EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkDownEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -588,6 +590,7 @@
 				EDD4CA71203BB331003F8072 /* PreviewViewController.xib */,
 				EDD4CA74203BB331003F8072 /* Info.plist */,
 				EDD4CA75203BB331003F8072 /* MarkDownEditorPreviewExtension.entitlements */,
+				EDDE6091203C65A500331A77 /* WebView.swift */,
 			);
 			path = MarkDownEditorPreviewExtension;
 			sourceTree = "<group>";
@@ -803,6 +806,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDDE6090203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */,
+				EDDE6093203C65A500331A77 /* WebView.swift in Sources */,
 				ED55C62F203BB51900827140 /* HtmlDataStore.swift in Sources */,
 				EDD4CA70203BB331003F8072 /* PreviewViewController.swift in Sources */,
 			);
