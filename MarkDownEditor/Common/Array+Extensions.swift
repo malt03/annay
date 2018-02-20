@@ -44,7 +44,7 @@ extension Array where Element == URL {
   }
   
   @discardableResult
-  func createNodes(parent: NodeModel?, startIndex: Int, realm: Realm) throws -> [NodeModel] {
+  func createNodes(parent: NodeModel?, startIndex: Int, realm: Realm, workspace: WorkspaceModel) throws -> [NodeModel] {
     var index = startIndex
     return try flatMap { (url) -> NodeModel? in
       let isDirectory = url.isDirectory
@@ -61,10 +61,10 @@ extension Array where Element == URL {
         realm.add(node)
         try FileManager.default.contentsOfDirectory(atPath: url.path).map {
           url.appendingPathComponent($0)
-        }.createNodes(parent: node, startIndex: 0, realm: realm)
+        }.createNodes(parent: node, startIndex: 0, realm: realm, workspace: workspace)
         return node
       } else {
-        node.setBody(try String(contentsOfFile: url.path))
+        node.setBody(try String(contentsOfFile: url.path), workspace: workspace)
         realm.add(node)
         return node
       }

@@ -104,8 +104,8 @@ final class MarkDownEditorViewController: NSViewController {
       .replacingOccurrences(of: "\n", with: "\\n")
       .replacingOccurrences(of: "\"", with: "\\\"")
     webView.update(markdown: markDown, completionHandler: { (html) in
-      guard let id = note?.id else { return }
-      HtmlDataStore.shared.set(id: id, html: html)
+      guard let nodeId = note?.id else { return }
+      HtmlDataStore.shared.set(nodeId: nodeId, workspaceId: WorkspaceModel.selected.value.id, html: html)
     })
   }
 }
@@ -113,8 +113,9 @@ final class MarkDownEditorViewController: NSViewController {
 extension MarkDownEditorViewController: NSTextViewDelegate {
   func textDidChange(_ notification: Notification) {
     if let note = NodeModel.selectedNode.value {
+      let workspace = WorkspaceModel.selected.value
       Realm.transaction { _ in
-        note.setBody(textView.string)
+        note.setBody(textView.string, workspace: workspace)
       }
     }
     updateWebView()

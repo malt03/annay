@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreSpotlight
 
 final class HtmlDataStore {
   private struct Key {
@@ -19,8 +20,8 @@ final class HtmlDataStore {
   
   private init() {}
   
-  func set(id: String, html: String) {
-    userDefault.set(html, forKey: Key.Html(for: id))
+  func set(nodeId: String, workspaceId: String, html: String) {
+    userDefault.set(html, forKey: Key.Html(for: CSSearchableIndex.identifier(nodeId: nodeId, workspaceId: workspaceId)))
     userDefault.synchronize()
   }
   

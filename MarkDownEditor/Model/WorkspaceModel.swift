@@ -264,8 +264,8 @@ final class WorkspaceModel {
   }
   
   func deleteFromSearchableIndex() {
-    let ids = [String](Realm.instance(for: self).objects(NodeModel.self).filter("isDirectory = false").map { $0.id })
-    CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: ids)
+    let nodeIds = [String](Realm.instance(for: self).objects(NodeModel.self).filter("isDirectory = false").map { $0.id })
+    CSSearchableIndex.default().deleteSearchableItemsWithDataStore(nodeIds: nodeIds, workspaceId: id)
   }
   
   func save() {

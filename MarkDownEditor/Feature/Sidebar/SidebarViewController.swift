@@ -347,6 +347,7 @@ final class SidebarViewController: NSViewController {
     alert.addButton(withTitle: Localized("Delete"))
     let response = alert.runModal()
     if response == .alertSecondButtonReturn {
+      let workspace = WorkspaceModel.selected.value
       Realm.transaction { (realm) in
         let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
         for node in nodes {
@@ -356,7 +357,7 @@ final class SidebarViewController: NSViewController {
         }
         for node in nodes {
           if node.isInvalidated { continue }
-          node.deleteImmediately(realm: realm)
+          node.deleteImmediately(realm: realm, workspace: workspace)
         }
       }
     }
@@ -548,6 +549,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     let fileURLs = items.flatMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
     if fileURLs.count > 0 {
       do {
+        let workspace = WorkspaceModel.selected.value
         try Realm.transaction { (realm) in
           let creatableCount = fileURLs.creatableRootNodesCount
           for (i, child) in (parent?.sortedChildren(query: queryText.value) ?? NodeModel.roots(query: queryText.value)).enumerated() {
@@ -557,7 +559,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
               child.index = i + creatableCount
             }
           }
-          try fileURLs.createNodes(parent: parent, startIndex: fixedIndex, realm: realm)
+          try fileURLs.createNodes(parent: parent, startIndex: fixedIndex, realm: realm, workspace: workspace)
           outlineView.reloadData()
         }
       } catch {

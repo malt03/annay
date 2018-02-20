@@ -36,14 +36,14 @@ final class NodeModel: Object {
     return node
   }
   
-  func setBody(_ body: String?) {
+  func setBody(_ body: String?, workspace: WorkspaceModel) {
     self.body = body
     let nameFromBody = body?.components(separatedBy: CharacterSet.newlines)[safe: 0]?.trimmingCharacters(in: .whitespacesAndNewlines)
     var markdownName = nameFromBody ?? Localized("New Note")
     if markdownName == "" { markdownName = Localized("New Note") }
     name = markdownName.replacingOccurrences(of: "^#+ ", with: "", options: .regularExpression)
     
-    updateSpotlight()
+    updateSpotlight(workspace: workspace)
   }
   
   func updateCheckbox(content: String, index: Int, isChecked: Bool) {
@@ -51,8 +51,9 @@ final class NodeModel: Object {
     guard let body = body, let range = body.ranges(of: content)[safe: index] else { return }
     let from = isChecked ? "[ ]" : "[x]"
     let to = isChecked ? "[x]" : "[ ]"
+    let workspace = WorkspaceModel.selected.value
     Realm.transaction { _ in
-      self.setBody(body.replacingOccurrences(of: from, with: to, options: [], range: range))
+      self.setBody(body.replacingOccurrences(of: from, with: to, options: [], range: range), workspace: workspace)
     }
   }
   
@@ -217,8 +218,9 @@ extension NodeModel {
     return true
   }
   
-  func deleteImmediately(realm: Realm) {
-    CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: descendants.map { $0.id } + [id])
+  func deleteImmediately(realm: Realm, workspace: WorkspaceModel) {
+    let nodeIds = descendants.map { $0.id } + [id]
+    CSSearchableIndex.default().deleteSearchableItemsWithDataStore(nodeIds: nodeIds, workspaceId: workspace.id)
     realm.delete(descendants)
     realm.delete(self)
   }
@@ -238,10 +240,11 @@ extension NodeModel {
   }
   
   static func emptyTrash() {
+    let workspaceId = WorkspaceModel.selected.value.id
     Realm.transaction { (realm) in
       let deletedNodes = realm.objects(NodeModel.self).filter("isDeleted = %@", true)
       let ids = Array(Set<String>(deletedNodes.filter("isDirectory = false").map { [$0.id] + $0.descendants.map { $0.id } }.joined()))
-      CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: ids)
+      CSSearchableIndex.default().deleteSearchableItemsWithDataStore(nodeIds: ids, workspaceId: workspaceId)
       for node in deletedNodes {
         if node.isInvalidated { continue }
         realm.delete(node.descendants)
@@ -314,12 +317,12 @@ extension NodeModel: NSFilePromiseProviderDelegate {
 
 // スポットライト
 extension NodeModel {
-  private func updateSpotlight() {
+  private func updateSpotlight(workspace: WorkspaceModel) {
     if isDirectory { return }
     let attribute = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
     attribute.title = name
     attribute.contentDescription = body
-    let item = CSSearchableItem(uniqueIdentifier: id, domainIdentifier: nil, attributeSet: attribute)
+    let item = CSSearchableItem(uniqueIdentifier: CSSearchableIndex.identifier(nodeId: id, workspaceId: workspace.id), domainIdentifier: nil, attributeSet: attribute)
     CSSearchableIndex.default().indexSearchableItems([item], completionHandler: nil)
   }
 }

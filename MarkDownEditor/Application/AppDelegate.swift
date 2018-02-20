@@ -8,6 +8,7 @@
 
 import Cocoa
 import RealmSwift
+import CoreSpotlight
 
 @NSApplicationMain
 final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -31,6 +32,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   
   @IBAction private func resetWorkspace(_ sender: NSMenuItem) {
     WorkspaceModel.selected.value.reset()
+  }
+  
+  func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]) -> Void) -> Bool {
+    print(userActivity.userInfo?[CSSearchableItemActivityIdentifier])
+    return true
   }
 }
 
