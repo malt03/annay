@@ -10,6 +10,7 @@ import RxSwift
 import RealmSwift
 import Cocoa
 import Zip
+import CoreSpotlight
 
 final class WorkspaceModel {
   static var fileExtension: String { return "mdworkspace" }
@@ -260,6 +261,11 @@ final class WorkspaceModel {
       try fileManager.createDirectoryIfNeeded(url: workspaceDirectory)
     }
     return tmpLastSavedUpdateId
+  }
+  
+  func deleteFromSearchableIndex() {
+    let ids = [String](Realm.instance(for: self).objects(NodeModel.self).filter("isDirectory = false").map { $0.id })
+    CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: ids)
   }
   
   func save() {

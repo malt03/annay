@@ -99,6 +99,8 @@
 		EDD4CA70203BB331003F8072 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4CA6F203BB331003F8072 /* PreviewViewController.swift */; };
 		EDD4CA73203BB331003F8072 /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD4CA71203BB331003F8072 /* PreviewViewController.xib */; };
 		EDD4CA78203BB331003F8072 /* MarkDownEditorPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EDD4CA6B203BB331003F8072 /* MarkDownEditorPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EDDE608F203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */; };
+		EDDE6090203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
 		EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */; };
@@ -270,6 +272,7 @@
 		EDD4CA72203BB331003F8072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreviewViewController.xib; sourceTree = "<group>"; };
 		EDD4CA74203BB331003F8072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDD4CA75203BB331003F8072 /* MarkDownEditorPreviewExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkDownEditorPreviewExtension.entitlements; sourceTree = "<group>"; };
+		EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CSSearchableIndex+Extensions.swift"; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
 		EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkDownEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -451,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				ED55C62D203BB51900827140 /* HtmlDataStore.swift */,
+				EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -798,6 +802,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDDE6090203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */,
 				ED55C62F203BB51900827140 /* HtmlDataStore.swift in Sources */,
 				EDD4CA70203BB331003F8072 /* PreviewViewController.swift in Sources */,
 			);
@@ -861,6 +866,7 @@
 				ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */,
 				ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */,
 				ED9EEEE8201F63E200C96CC1 /* OpenWorkspaceViewController.swift in Sources */,
+				EDDE608F203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */,
 				ED4EB9E6201DB71B00B4CBE7 /* Results+Extensions.swift in Sources */,
 				ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */,
 				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,

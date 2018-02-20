@@ -106,6 +106,7 @@ final class WorkspacesViewController: NSViewController {
 
   @IBAction private func delete(_ sender: NSMenuItem) {
     guard let row = tableView.rowForMenu else { return }
+    WorkspaceModel.spaces.value[row].deleteFromSearchableIndex()
     WorkspaceModel.spaces.value.remove(at: row)
   }
   

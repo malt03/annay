@@ -218,6 +218,7 @@ extension NodeModel {
   }
   
   func deleteImmediately(realm: Realm) {
+    CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: descendants.map { $0.id } + [id])
     realm.delete(descendants)
     realm.delete(self)
   }
@@ -239,6 +240,8 @@ extension NodeModel {
   static func emptyTrash() {
     Realm.transaction { (realm) in
       let deletedNodes = realm.objects(NodeModel.self).filter("isDeleted = %@", true)
+      let ids = Array(Set<String>(deletedNodes.filter("isDirectory = false").map { [$0.id] + $0.descendants.map { $0.id } }.joined()))
+      CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: ids)
       for node in deletedNodes {
         if node.isInvalidated { continue }
         realm.delete(node.descendants)

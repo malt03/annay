@@ -9,6 +9,7 @@
 import Cocoa
 import Quartz
 import WebKit
+import CoreSpotlight
 
 class PreviewViewController: NSViewController, QLPreviewingController {
   
@@ -26,6 +27,7 @@ class PreviewViewController: NSViewController, QLPreviewingController {
       notFoundLabel.isHidden = false
       webView.isHidden = true
       handler(nil)
+      CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: [identifier])
       return
     }
     notFoundLabel.isHidden = true

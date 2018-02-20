@@ -24,7 +24,14 @@ final class HtmlDataStore {
     userDefault.synchronize()
   }
   
+  func remove(ids: [String]) {
+    for id in ids {
+      userDefault.removeObject(forKey: Key.Html(for: id))
+    }
+    userDefault.synchronize()
+  }
+  
   func html(for id: String) -> String? {
-    return userDefault.string(forKey: id)
+    return userDefault.string(forKey: Key.Html(for: id))
   }
 }
