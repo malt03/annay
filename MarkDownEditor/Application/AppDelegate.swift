@@ -35,7 +35,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   }
   
   func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]) -> Void) -> Bool {
-    print(userActivity.userInfo?[CSSearchableItemActivityIdentifier])
+    if userActivity.activityType == CSSearchableItemActionType {
+      guard
+        let ids = (userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String)?.split(separator: "/"),
+        let workspaceId = ids[safe: 0],
+        let nodeId = ids[safe: 1],
+        let workspace = WorkspaceModel.spaces.value.first(where: { $0.id == workspaceId }),
+        let node = NodeModel.node(for: String(nodeId), for: workspace)
+        else { return false }
+      workspace.select()
+      node.selected()
+    }
     return true
   }
 }
