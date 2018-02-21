@@ -10,15 +10,15 @@
         <scene sceneID="ETU-Ms-2Hw">
             <objects>
                 <viewController id="4RZ-6S-0Dx" customClass="GeneralPreferenceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="fhr-Mk-U6P">
-                        <rect key="frame" x="0.0" y="0.0" width="438" height="85"/>
+                    <view key="view" id="fhr-Mk-U6P">
+                        <rect key="frame" x="0.0" y="0.0" width="477" height="116"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hC3-Yp-GJX">
-                                <rect key="frame" x="32" y="32" width="374" height="21"/>
+                                <rect key="frame" x="32" y="32" width="413" height="52"/>
                                 <subviews>
                                     <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-Od-eSY">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="21"/>
+                                        <rect key="frame" x="0.0" y="31" width="413" height="21"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dhJ-F7-TwP">
                                                 <rect key="frame" x="-2" y="2" width="75" height="17"/>
@@ -29,9 +29,9 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kTo-iG-kSc">
-                                                <rect key="frame" x="77" y="2" width="204" height="17"/>
+                                                <rect key="frame" x="77" y="2" width="243" height="17"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="Fpn-Wz-iW3"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="Fpn-Wz-iW3"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="hej-OY-VqX">
                                                     <font key="font" metaFont="system"/>
@@ -40,7 +40,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vbc-ih-DAa">
-                                                <rect key="frame" x="281" y="-7" width="99" height="32"/>
+                                                <rect key="frame" x="320" y="-7" width="99" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Change..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yfy-0e-spP">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -64,14 +64,52 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
+                                    <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cPR-zF-DN6">
+                                        <rect key="frame" x="0.0" y="0.0" width="377" height="21"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="64o-Ts-E9h">
+                                                <rect key="frame" x="-2" y="2" width="75" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Layout:" id="tSM-xb-2jT">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="I7E-Pe-p74">
+                                                <rect key="frame" x="77" y="-2" width="302" height="25"/>
+                                                <buttonCell key="cell" type="check" title="Hide editor when unfocused" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9tn-SZ-we8">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <binding destination="4RZ-6S-0Dx" name="value" keyPath="self" id="t7f-rj-Z4Q"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="I7E-Pe-p74" firstAttribute="height" secondItem="cPR-zF-DN6" secondAttribute="height" id="ciS-ml-fFg"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="zYf-Od-eSY" firstAttribute="height" secondItem="cPR-zF-DN6" secondAttribute="height" id="Ebq-pC-2TS"/>
+                                    <constraint firstItem="64o-Ts-E9h" firstAttribute="width" secondItem="dhJ-F7-TwP" secondAttribute="width" id="Gzk-RT-yDt"/>
                                     <constraint firstItem="zYf-Od-eSY" firstAttribute="width" secondItem="hC3-Yp-GJX" secondAttribute="width" id="WtX-sp-azf"/>
                                 </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
