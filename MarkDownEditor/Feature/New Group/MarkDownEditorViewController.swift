@@ -14,6 +14,7 @@ import WebKit
 final class MarkDownEditorViewController: NSViewController {
   private let bag = DisposeBag()
   
+  @IBOutlet private weak var splitView: SplitView!
   @IBOutlet private weak var textView: TextView!
   @IBOutlet private weak var webParentView: NSView!
   @IBOutlet private weak var progressIndicator: NSProgressIndicator!
@@ -21,6 +22,11 @@ final class MarkDownEditorViewController: NSViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    GeneralPreferenceManager.shared.isHideEditorWhenUnfocused.asObservable().subscribe(onNext: { [weak self] (isHideEditorWhenUnfocused) in
+      guard let s = self else { return }
+      s.splitView.setPosition(isHideEditorWhenUnfocused ? 0 : s.view.bounds.width / 2, ofDividerAt: 0)
+    }).disposed(by: bag)
     
     progressIndicator.startAnimation(nil)
     

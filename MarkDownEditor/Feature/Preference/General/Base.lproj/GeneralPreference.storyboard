@@ -81,9 +81,6 @@
                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
-                                                <connections>
-                                                    <binding destination="4RZ-6S-0Dx" name="value" keyPath="self" id="t7f-rj-Z4Q"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -123,6 +120,7 @@
                     </view>
                     <connections>
                         <outlet property="fontLabel" destination="kTo-iG-kSc" id="hT0-Th-ODm"/>
+                        <outlet property="isHideEditorWhenUnfocusedCheckbox" destination="I7E-Pe-p74" id="QN0-EB-ZeG"/>
                     </connections>
                 </viewController>
                 <customObject id="DnL-JU-WyJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
