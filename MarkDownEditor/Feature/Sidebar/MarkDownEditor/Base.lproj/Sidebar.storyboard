@@ -310,6 +310,19 @@ CA
                                 <action selector="deleteImmediately:" target="PrQ-Do-4mD" id="yaB-I6-fCl"/>
                             </connections>
                         </menuItem>
+                        <menuItem isSeparatorItem="YES" id="HWB-yW-H73"/>
+                        <menuItem title="Export as Text" id="h8p-TM-LnV">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="exportAsText:" target="PrQ-Do-4mD" id="inG-3v-dif"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Export as HTML" id="ymV-xF-Ywl">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="exportAsHtml:" target="PrQ-Do-4mD" id="Rbh-4S-jDl"/>
+                            </connections>
+                        </menuItem>
                     </items>
                 </menu>
                 <menu id="AB4-Zv-pQo">

@@ -240,6 +240,18 @@ final class SidebarViewController: NSViewController {
     emptyTrash()
   }
   
+  @IBAction private func exportAsText(_ sender: NSMenuItem) {
+    guard let indexes = outlineView.indexesForMenu else { return }
+    let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
+
+  }
+  
+  @IBAction private func exportAsHtml(_ sender: NSMenuItem) {
+    guard let indexes = outlineView.indexesForMenu else { return }
+    let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
+
+  }
+  
   private func emptyTrash() {
     let alert = NSAlert()
     alert.messageText = Localized("This operation cannot be undone.")
