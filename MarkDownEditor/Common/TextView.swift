@@ -12,6 +12,10 @@ import RxSwift
 final class TextView: NSTextView {
   private let bag = DisposeBag()
   
+  private let _isFirstResponder = Variable<Bool>(false)
+  var isFirstResponder: Observable<Bool> { return _isFirstResponder.asObservable() }
+  var isFirstResponderValue: Bool { return _isFirstResponder.value }
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     FontManager.shared.font.subscribe(onNext: { [weak self] (font) in
@@ -56,5 +60,17 @@ final class TextView: NSTextView {
       NSAlert(error: error).runModal()
       return false
     }
+  }
+  
+  override func becomeFirstResponder() -> Bool {
+    let should = super.becomeFirstResponder()
+    if should { _isFirstResponder.value = true }
+    return should
+  }
+  
+  override func resignFirstResponder() -> Bool {
+    let should = super.resignFirstResponder()
+    if should { _isFirstResponder.value = false }
+    return should
   }
 }

@@ -17,17 +17,41 @@ final class MarkDownEditorViewController: NSViewController {
   @IBOutlet private weak var splitView: SplitView!
   @IBOutlet private weak var textView: TextView!
   @IBOutlet private weak var webParentView: NSView!
+  @IBOutlet private weak var editorHidingWebParentView: BackgroundSetableView!
   @IBOutlet private weak var progressIndicator: NSProgressIndicator!
+  @IBOutlet private weak var editorHidingProgressIndicator: NSProgressIndicator!
   private var webView: WebView!
+  private var editorHidingWebView: WebView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    GeneralPreferenceManager.shared.isHideEditorWhenUnfocused.asObservable().subscribe(onNext: { [weak self] (isHideEditorWhenUnfocused) in
+    prepareWebView()
+    prepareEditorHidingWebView()
+    
+    Observable.combineLatest(
+      textView.isFirstResponder,
+      webView.isFirstResponder,
+      GeneralPreferenceManager.shared.isHideEditorWhenUnfocused.asObservable(),
+      resultSelector: { !$0 && !$1 && $2 }
+    ).subscribe(onNext: { [weak self] (isHideEditor) in
       guard let s = self else { return }
-      s.splitView.setPosition(isHideEditorWhenUnfocused ? 0 : s.view.bounds.width / 2, ofDividerAt: 0)
+      s.editorHidingWebParentView.isHidden = !isHideEditor
+    }).disposed(by: bag)
+
+    NodeModel.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
+      self?.updateNote(note: node)
     }).disposed(by: bag)
     
+    let isSelectedNote = !(NodeModel.selectedNode.value?.isDirectory ?? true)
+    if isSelectedNote {
+      DispatchQueue.main.async { self.moveFocusToEditor() }
+    }
+    
+    prepareTextView()
+  }
+  
+  private func prepareWebView() {
     progressIndicator.startAnimation(nil)
     
     let userController = WKUserContentController()
@@ -40,17 +64,20 @@ final class MarkDownEditorViewController: NSViewController {
     webView.prepare { [weak self] in
       self?.progressIndicator.stopAnimation(nil)
     }
-
-    NodeModel.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
-      self?.updateNote(note: node)
-    }).disposed(by: bag)
+  }
+  
+  private func prepareEditorHidingWebView() {
+    let userController = WKUserContentController()
+    userController.add(self, name: "checkboxChanged")
+    userController.add(self, name: "backgroundClicked")
+    let webConfiguration = WKWebViewConfiguration()
+    webConfiguration.userContentController = userController
     
-    let isSelectedNote = !(NodeModel.selectedNode.value?.isDirectory ?? true)
-    if isSelectedNote {
-      DispatchQueue.main.async { self.moveFocusToEditor() }
+    editorHidingWebView = WebView(frame: editorHidingWebParentView.bounds, configuration: webConfiguration)
+    editorHidingWebParentView.addSubviewWithFillConstraints(editorHidingWebView)
+    editorHidingWebView.prepare { [weak self] in
+      self?.editorHidingProgressIndicator.stopAnimation(nil)
     }
-    
-    prepareTextView()
   }
   
   override func viewWillAppear() {
@@ -113,6 +140,7 @@ final class MarkDownEditorViewController: NSViewController {
       guard let nodeId = note?.id else { return }
       HtmlDataStore.shared.set(nodeId: nodeId, workspaceId: WorkspaceModel.selected.value.id, html: html)
     })
+    editorHidingWebView.update(markdown: markDown)
   }
 }
 
@@ -207,14 +235,21 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
 
 extension MarkDownEditorViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    guard
-      let note = NodeModel.selectedNode.value,
-      let dict = message.body as? [String: Any],
-      let content = dict["content"] as? String,
-      let index = dict["index"] as? Int,
-      let isChecked = dict["isChecked"] as? Int
-      else { return }
-    note.updateCheckbox(content: content, index: index, isChecked: isChecked == 1)
-    updateNote(note: note)
+    switch message.name {
+    case "backgroundClicked":
+      if !textView.isFirstResponderValue && GeneralPreferenceManager.shared.isHideEditorWhenUnfocused.value { moveFocusToEditor() }
+    case "checkboxChanged":
+      print(textView.isFirstResponderValue)
+      guard
+        let note = NodeModel.selectedNode.value,
+        let dict = message.body as? [String: Any],
+        let content = dict["content"] as? String,
+        let index = dict["index"] as? Int,
+        let isChecked = dict["isChecked"] as? Int
+        else { return }
+      note.updateCheckbox(content: content, index: index, isChecked: isChecked == 1)
+      updateNote(note: note)
+    default: break
+    }
   }
 }

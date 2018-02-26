@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="2eh-hH-nMr">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="2eh-hH-nMr">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -72,15 +72,38 @@
                                     <real value="250"/>
                                 </holdingPriorities>
                             </splitView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="gOf-3f-bvC" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="930" height="600"/>
+                                <subviews>
+                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Xw5-KN-3Mt">
+                                        <rect key="frame" x="449" y="284" width="32" height="32"/>
+                                    </progressIndicator>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Xw5-KN-3Mt" firstAttribute="centerY" secondItem="gOf-3f-bvC" secondAttribute="centerY" id="Cu6-TF-ObO"/>
+                                    <constraint firstItem="Xw5-KN-3Mt" firstAttribute="centerX" secondItem="gOf-3f-bvC" secondAttribute="centerX" id="Y7r-BY-0ii"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" name="EditorBackground"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="VdG-kY-SIQ" firstAttribute="top" secondItem="gi5-cr-AKl" secondAttribute="top" id="3iY-ek-sgb"/>
                             <constraint firstItem="VdG-kY-SIQ" firstAttribute="leading" secondItem="gi5-cr-AKl" secondAttribute="leading" id="4xD-1G-gZk"/>
+                            <constraint firstItem="gOf-3f-bvC" firstAttribute="leading" secondItem="gi5-cr-AKl" secondAttribute="leading" id="DzX-G7-5Ki"/>
+                            <constraint firstItem="gOf-3f-bvC" firstAttribute="top" secondItem="gi5-cr-AKl" secondAttribute="top" id="GaV-sL-KHc"/>
                             <constraint firstAttribute="trailing" secondItem="VdG-kY-SIQ" secondAttribute="trailing" id="Th2-1o-hgG"/>
+                            <constraint firstAttribute="trailing" secondItem="gOf-3f-bvC" secondAttribute="trailing" id="Wsu-7u-WdY"/>
+                            <constraint firstAttribute="bottom" secondItem="gOf-3f-bvC" secondAttribute="bottom" id="eBe-LK-D5H"/>
                             <constraint firstAttribute="bottom" secondItem="VdG-kY-SIQ" secondAttribute="bottom" id="mzN-Nc-Qnj"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="editorHidingProgressIndicator" destination="Xw5-KN-3Mt" id="iHW-Nz-331"/>
+                        <outlet property="editorHidingWebParentView" destination="gOf-3f-bvC" id="QeQ-8V-8Xe"/>
                         <outlet property="progressIndicator" destination="wta-Cg-c3J" id="Qy9-k3-M24"/>
                         <outlet property="splitView" destination="VdG-kY-SIQ" id="kz4-bO-6LR"/>
                         <outlet property="textView" destination="PWg-u2-RO2" id="Je6-iH-TaX"/>

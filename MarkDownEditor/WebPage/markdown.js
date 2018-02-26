@@ -1,3 +1,9 @@
+$(document).on('click', function(event) {
+  if (!$(event.target).closest('.task-list-item').length) {
+    window.webkit.messageHandlers.backgroundClicked.postMessage("");
+  }
+});
+
 function update(markdown) {
     var md = window.markdownit({
         breaks: true,
@@ -49,3 +55,4 @@ function update(markdown) {
  
     return document.documentElement.outerHTML;
 }
+

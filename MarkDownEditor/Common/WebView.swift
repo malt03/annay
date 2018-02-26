@@ -8,10 +8,15 @@
 
 import Cocoa
 import WebKit
+import RxSwift
 
 final class WebView: WKWebView {
   private var finishHandler: (() -> Void)!
   private var firstNavigation = true
+
+  private let _isFirstResponder = Variable<Bool>(false)
+  var isFirstResponder: Observable<Bool> { return _isFirstResponder.asObservable() }
+  var isFirstResponderValue: Bool { return _isFirstResponder.value }
   
   func prepare(finishHandler: @escaping (() -> Void)) {
     firstNavigation = true
@@ -62,7 +67,7 @@ final class WebView: WKWebView {
   
   typealias UpdateCompletion = ((_ html: String) -> Void)
   
-  func update(markdown: String, completionHandler: @escaping UpdateCompletion) {
+  func update(markdown: String, completionHandler: @escaping UpdateCompletion = { _ in }) {
     lastMarkdown = markdown
     lastCompletionHandler = completionHandler
     evaluateJavaScript("update(\"\(markdown)\")", completionHandler: { (html, _) in
@@ -74,6 +79,18 @@ final class WebView: WKWebView {
   private func updateRetry() {
     guard let lastMarkdown = lastMarkdown, let completionHandler = lastCompletionHandler else { return }
     update(markdown: lastMarkdown, completionHandler: completionHandler)
+  }
+  
+  override func becomeFirstResponder() -> Bool {
+    let should = super.becomeFirstResponder()
+    if should { _isFirstResponder.value = true }
+    return should
+  }
+  
+  override func resignFirstResponder() -> Bool {
+    let should = super.resignFirstResponder()
+    if should { _isFirstResponder.value = false }
+    return should
   }
 }
 

@@ -50,9 +50,8 @@ tbody > tr:nth-child(odd) {
 body {
     font-family: Helvetica, Arial, Freesans, clean, sans-serif;
     font-weight: bolder;
-padding:1em;
+padding:2em;
 margin:auto;
-max-width:42em;
 background:#39434C;
 color:#F2F9FF;
 }

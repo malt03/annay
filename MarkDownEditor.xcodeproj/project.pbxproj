@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		ED099FFF201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */; };
 		ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09A000201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift */; };
-		ED187FD220052D30002E51C0 /* markdown.html in Resources */ = {isa = PBXBuildFile; fileRef = ED187FD120052D30002E51C0 /* markdown.html */; };
 		ED187FD420053206002E51C0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED187FD320053206002E51C0 /* WebView.swift */; };
 		ED19084B201F6EC0009497EE /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19084A201F6EC0009497EE /* ContainerView.swift */; };
 		ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149120055548003D55A3 /* markdown-it-task-checkbox.min.js */; };
@@ -19,7 +18,6 @@
 		ED2E149A20055650003D55A3 /* markdown-it-footnote.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149920055650003D55A3 /* markdown-it-footnote.min.js */; };
 		ED2E149C2005575A003D55A3 /* markdown-it-emoji.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149B2005575A003D55A3 /* markdown-it-emoji.min.js */; };
 		ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149F20055B87003D55A3 /* highlight.pack.js */; };
-		ED2E159B20056622003D55A3 /* markdown.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E159A20056621003D55A3 /* markdown.js */; };
 		ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */; };
 		ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */; };
 		ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15AD200666B1003D55A3 /* NodeModel.swift */; };
@@ -105,6 +103,8 @@
 		EDDE6095203DD0C100331A77 /* GeneralPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE6094203DD0C100331A77 /* GeneralPreferenceManager.swift */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
+		EDEA58E220442B1700B1CA66 /* markdown.html in Resources */ = {isa = PBXBuildFile; fileRef = ED187FD120052D30002E51C0 /* markdown.html */; };
+		EDEA58E320442B1B00B1CA66 /* markdown.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E159A20056621003D55A3 /* markdown.js */; };
 		EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */; };
 		EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */; };
 		EDEB7A622004EDF000F8C48A /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A602004EDF000F8C48A /* Launch.storyboard */; };
@@ -773,6 +773,7 @@
 				EDD4C748202EBD470029FF4C /* GeneralPreference.storyboard in Resources */,
 				ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */,
 				ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */,
+				EDEA58E320442B1B00B1CA66 /* markdown.js in Resources */,
 				EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */,
 				EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */,
 				ED83F7152036EB350038D96B /* Workspaces.storyboard in Resources */,
@@ -780,8 +781,8 @@
 				EDEB7A622004EDF000F8C48A /* Launch.storyboard in Resources */,
 				ED55C50C201312570070301A /* CreateWorkspace.storyboard in Resources */,
 				ED2E149C2005575A003D55A3 /* markdown-it-emoji.min.js in Resources */,
+				EDEA58E220442B1700B1CA66 /* markdown.html in Resources */,
 				ED2E1496200555A5003D55A3 /* markdown-it-sub.min.js in Resources */,
-				ED187FD220052D30002E51C0 /* markdown.html in Resources */,
 				EDA736CD200E256D000BC5DA /* MarkDownEditor.storyboard in Resources */,
 				ED9EEEE2201F639B00C96CC1 /* OpenWorkspace.storyboard in Resources */,
 				EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */,
@@ -796,7 +797,6 @@
 				EDC25C85203BCC9F00C8F38E /* Localizable.strings in Resources */,
 				ED574010202D97C100D844A3 /* NewOrOpenNoteShortcutPreference.storyboard in Resources */,
 				ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */,
-				ED2E159B20056622003D55A3 /* markdown.js in Resources */,
 				ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
