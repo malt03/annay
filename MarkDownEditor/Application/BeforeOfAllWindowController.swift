@@ -25,7 +25,9 @@ final class BeforeOfAllWindowController: NSWindowController {
       (Application.shared as! Application).prepareForWorkspaces()
       
       let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: .main)
-      (storyboard.instantiateInitialController() as! NSWindowController).showWindow(nil)
+      let windowController = (storyboard.instantiateInitialController() as! NSWindowController)
+      windowController.windowFrameAutosaveName = NSWindow.FrameAutosaveName("MainWindow")
+      windowController.showWindow(nil)
       self.close()
       
       self.removeUnnecessaryFiles()
