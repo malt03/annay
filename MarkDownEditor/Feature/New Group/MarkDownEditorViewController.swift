@@ -43,11 +43,6 @@ final class MarkDownEditorViewController: NSViewController {
       self?.updateNote(note: node)
     }).disposed(by: bag)
     
-    let isSelectedNote = !(NodeModel.selectedNode.value?.isDirectory ?? true)
-    if isSelectedNote {
-      DispatchQueue.main.async { self.moveFocusToEditor() }
-    }
-    
     prepareTextView()
   }
   

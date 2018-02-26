@@ -15,6 +15,7 @@ final class WorkspacesViewController: NSViewController {
   @IBOutlet private var defaultMenu: NSMenu!
   
   private var createOrOpenWorkspaceSegment = CreateOrOpenWorkspaceTabViewController.Segment.create
+  private var lastSelectionRow: Int?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -125,6 +126,9 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
   }
   
   func tableViewSelectionDidChange(_ notification: Notification) {
+    defer { lastSelectionRow = tableView.selectedRow }
+    guard let lastSelectionRow = lastSelectionRow else { return }
+    if lastSelectionRow == tableView.selectedRow { return }
     WorkspaceModel.spaces.value[safe: tableView.selectedRow]?.select()
   }
   
