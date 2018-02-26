@@ -84,7 +84,9 @@ final class SidebarViewController: NSViewController {
       self?.insert(node: node, in: node.parent)
     }
     
-    NSApplication.shared.endEditing()
+    DispatchQueue.main.async {
+      self.moveFocusToSidebar()
+    }
   }
   
   override func viewWillAppear() {
