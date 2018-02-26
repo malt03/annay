@@ -23,12 +23,15 @@ class PreviewViewController: NSViewController, QLPreviewingController {
   private var completionHandler: QLPreviewItemLoadingBlock?
   
   func preparePreviewOfSearchableItem(withIdentifier identifier: String, queryString: String, completionHandler handler: @escaping QLPreviewItemLoadingBlock) {
-    guard let html = HtmlDataStore.shared.html(for: identifier) else {
-      notFoundLabel.isHidden = false
-      webView.isHidden = true
-      handler(nil)
-      CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: [identifier])
-      return
+    guard
+      let nodeId = identifier.split(separator: "/").last,
+      let html = HtmlDataStore.shared.html(for: String(nodeId))
+      else {
+        notFoundLabel.isHidden = false
+        webView.isHidden = true
+        handler(nil)
+        CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: [identifier])
+        return
     }
     notFoundLabel.isHidden = true
     webView.isHidden = false

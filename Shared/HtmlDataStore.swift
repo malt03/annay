@@ -11,7 +11,7 @@ import CoreSpotlight
 
 final class HtmlDataStore {
   private struct Key {
-    static func Html(for id: String) -> String { return "HtmlDataStore/Html/\(id)" }
+    static func Html(for nodeId: String) -> String { return "HtmlDataStore/Html/\(nodeId)" }
   }
   
   static let shared = HtmlDataStore()
@@ -20,19 +20,19 @@ final class HtmlDataStore {
   
   private init() {}
   
-  func set(nodeId: String, workspaceId: String, html: String) {
-    userDefault.set(html, forKey: Key.Html(for: CSSearchableIndex.identifier(nodeId: nodeId, workspaceId: workspaceId)))
+  func set(nodeId: String, html: String) {
+    userDefault.set(html, forKey: Key.Html(for: nodeId))
     userDefault.synchronize()
   }
   
-  func remove(ids: [String]) {
-    for id in ids {
+  func remove(nodeIds: [String]) {
+    for id in nodeIds {
       userDefault.removeObject(forKey: Key.Html(for: id))
     }
     userDefault.synchronize()
   }
   
-  func html(for id: String) -> String? {
-    return userDefault.string(forKey: Key.Html(for: id))
+  func html(for nodeId: String) -> String? {
+    return userDefault.string(forKey: Key.Html(for: nodeId))
   }
 }

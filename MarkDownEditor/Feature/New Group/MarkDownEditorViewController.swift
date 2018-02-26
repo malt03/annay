@@ -133,7 +133,7 @@ final class MarkDownEditorViewController: NSViewController {
       .replacingOccurrences(of: "\"", with: "\\\"")
     webView.update(markdown: markDown, completionHandler: { (html) in
       guard let nodeId = note?.id else { return }
-      HtmlDataStore.shared.set(nodeId: nodeId, workspaceId: WorkspaceModel.selected.value.id, html: html)
+      HtmlDataStore.shared.set(nodeId: nodeId, html: html)
     })
     editorHidingWebView.update(markdown: markDown)
   }

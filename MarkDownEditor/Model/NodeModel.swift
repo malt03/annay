@@ -272,6 +272,29 @@ extension NodeModel {
     descendants.append(descendant)
     parent?.setAsAncestor(descendant: descendant)
   }
+  
+  enum ExportType {
+    case html
+    case text
+  }
+  
+  func export(type: ExportType) {
+    let openPanel = NSOpenPanel()
+    openPanel.allowsMultipleSelection = false
+    openPanel.canChooseDirectories = true
+    openPanel.canCreateDirectories = true
+    openPanel.canChooseFiles = false
+    openPanel.begin { [weak self] (result) in
+      guard let s = self else { return }
+      if result != .OK { return }
+      guard let url = openPanel.url else { return }
+      do {
+        try s.write(to: url.appendingPathComponent(s.name), as: type)
+      } catch {
+        NSAlert(error: error).runModal()
+      }
+    }
+  }
 }
 
 extension NodeModel: NSPasteboardWriting {
@@ -296,21 +319,26 @@ extension NodeModel: NSFilePromiseProviderDelegate {
   
   func filePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider, writePromiseTo url: URL, completionHandler: @escaping (Error?) -> Void) {
     do {
-      try write(to: url)
+      try write(to: url, as: .text)
     } catch {
       completionHandler(error)
     }
     completionHandler(nil)
   }
   
-  private func write(to url: URL) throws {
+  private func write(to url: URL, as type: ExportType) throws {
     if isDirectory {
       try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
       for child in sortedChildren(query: nil) {
-        try child.write(to: url.appendingPathComponent(child.name))
+        try child.write(to: url.appendingPathComponent(child.name), as: type)
       }
     } else {
-      try (body?.data(using: .utf8) ?? Data()).write(to: url.appendingPathExtension("md"))
+      switch type {
+      case .html:
+        try HtmlDataStore.shared.html(for: id)?.write(to: url.appendingPathExtension("html"), atomically: true, encoding: .utf8)
+      case .text:
+        try (body?.data(using: .utf8) ?? Data()).write(to: url.appendingPathExtension("md"))
+      }
     }
   }
 }
