@@ -17,7 +17,7 @@ final class MarkDownEditorViewController: NSViewController {
   @IBOutlet private weak var splitView: SplitView!
   @IBOutlet private weak var textView: TextView!
   @IBOutlet private weak var webParentView: NSView!
-  @IBOutlet private weak var editorHidingWebParentView: BackgroundSetableView!
+  @IBOutlet private weak var editorHidingWebParentView: NSView!
   @IBOutlet private weak var progressIndicator: NSProgressIndicator!
   @IBOutlet private weak var editorHidingProgressIndicator: NSProgressIndicator!
   private var webView: WebView!
@@ -56,7 +56,7 @@ final class MarkDownEditorViewController: NSViewController {
     
     webView = WebView(frame: webParentView.bounds, configuration: webConfiguration)
     webParentView.addSubviewWithFillConstraints(webView)
-    webView.prepare { [weak self] in
+    webView.prepare(hideWhenDragged: false) { [weak self] in
       self?.progressIndicator.stopAnimation(nil)
     }
   }
@@ -70,7 +70,7 @@ final class MarkDownEditorViewController: NSViewController {
     
     editorHidingWebView = WebView(frame: editorHidingWebParentView.bounds, configuration: webConfiguration)
     editorHidingWebParentView.addSubviewWithFillConstraints(editorHidingWebView)
-    editorHidingWebView.prepare { [weak self] in
+    editorHidingWebView.prepare(hideWhenDragged: true) { [weak self] in
       self?.editorHidingProgressIndicator.stopAnimation(nil)
     }
   }

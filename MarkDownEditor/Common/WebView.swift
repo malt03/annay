@@ -18,7 +18,7 @@ final class WebView: WKWebView {
   var isFirstResponder: Observable<Bool> { return _isFirstResponder.asObservable() }
   var isFirstResponderValue: Bool { return _isFirstResponder.value }
   
-  func prepare(finishHandler: @escaping (() -> Void)) {
+  func prepare(hideWhenDragged: Bool, finishHandler: @escaping (() -> Void)) {
     firstNavigation = true
     self.finishHandler = finishHandler
 
@@ -27,6 +27,15 @@ final class WebView: WKWebView {
     
     navigationDelegate = self
     setValue(false, forKey: "drawsBackground")
+
+    if hideWhenDragged {
+      registerForDraggedTypes([.string])
+    }
+  }
+  
+  override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+    superview?.isHidden = true
+    return []
   }
 
   private var baseDirectory: URL { return FileManager.default.applicationWeb }
