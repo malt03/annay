@@ -1,5 +1,5 @@
 $(document).on('click', function(event) {
-  if (!$(event.target).closest('.task-list-item').length) {
+  if (!$(event.target).closest('.task-list-item,a').length) {
     window.webkit.messageHandlers.backgroundClicked.postMessage("");
   }
 });

@@ -27,7 +27,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
       else { return }
     workspace.select()
     node.selected()
-    NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
   }
   
   @IBAction private func resetWorkspace(_ sender: NSMenuItem) {
