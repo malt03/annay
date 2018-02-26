@@ -239,7 +239,6 @@ extension MarkDownEditorViewController: WKScriptMessageHandler {
     case "backgroundClicked":
       if !textView.isFirstResponderValue && GeneralPreferenceManager.shared.isHideEditorWhenUnfocused.value { moveFocusToEditor() }
     case "checkboxChanged":
-      print(textView.isFirstResponderValue)
       guard
         let note = NodeModel.selectedNode.value,
         let dict = message.body as? [String: Any],
