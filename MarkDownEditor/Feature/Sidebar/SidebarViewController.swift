@@ -169,6 +169,13 @@ final class SidebarViewController: NSViewController {
     view.window?.makeFirstResponder(outlineView)
   }
   
+  override func keyDown(with event: NSEvent) {
+    super.keyDown(with: event)
+    if event.isPushed(KeyCode.returnKey) {
+      moveFocusToEditor()
+    }
+  }
+  
   private func reloadWorkspace(_ workspace: WorkspaceModel) {
     workspaceNameDisposable.disposable = workspace.nameObservable.bind(to: workspaceNameTextField.rx.text)
     workspaceNameEditDisposable.disposable = workspaceNameTextField.rx.text.map { $0 ?? "" }.subscribe(onNext: { [weak self] (name) in
@@ -221,6 +228,9 @@ final class SidebarViewController: NSViewController {
       } else {
         outlineView.expandItem(clickedItem)
       }
+    } else {
+      clickedItem.selected()
+      moveFocusToEditor()
     }
   }
   
@@ -292,11 +302,7 @@ final class SidebarViewController: NSViewController {
   }
   
   private func moveFocusToEditor() {
-    if outlineView.selectedRowIndexes.count == 1 {
-      if let node = outlineView.item(atRow: outlineView.selectedRow) as? NodeModel, !node.isDirectory {
-        NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
-      }
-    }
+    NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
   }
   
   @objc private func deleteNote() {
