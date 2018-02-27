@@ -13,6 +13,7 @@ import RxSwift
 final class WebView: WKWebView {
   private var finishHandler: (() -> Void)!
   private var firstNavigation = true
+  private var hideWhenDragged = false
 
   private let _isFirstResponder = Variable<Bool>(false)
   var isFirstResponder: Observable<Bool> { return _isFirstResponder.asObservable() }
@@ -28,14 +29,18 @@ final class WebView: WKWebView {
     navigationDelegate = self
     setValue(false, forKey: "drawsBackground")
 
+    self.hideWhenDragged = hideWhenDragged
     if hideWhenDragged {
       registerForDraggedTypes([.string])
     }
   }
   
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-    superview?.isHidden = true
-    return []
+    if hideWhenDragged {
+      superview?.isHidden = true
+      return []
+    }
+    return super.draggingEntered(sender)
   }
 
   private var baseDirectory: URL { return FileManager.default.applicationWeb }
