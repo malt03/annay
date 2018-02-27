@@ -9,6 +9,10 @@
 import Foundation
 import CoreSpotlight
 
+extension Notification.Name {
+  static func StoredHtmlData(nodeId: String) -> Notification.Name { return Notification.Name("HtmlDataStore/StoredHtmlData/\(nodeId)") }
+}
+
 final class HtmlDataStore {
   private struct Key {
     static func Html(for nodeId: String) -> String { return "HtmlDataStore/Html/\(nodeId)" }
@@ -21,8 +25,15 @@ final class HtmlDataStore {
   private init() {}
   
   func set(nodeId: String, html: String) {
+    print("set", nodeId)
     userDefault.set(html, forKey: Key.Html(for: nodeId))
+    
+//    for key in userDefault.dictionaryRepresentation().keys {
+//      userDefault.removeObject(forKey: key)
+//    }
+
     userDefault.synchronize()
+    NotificationCenter.default.post(name: .StoredHtmlData(nodeId: nodeId), object: nil)
   }
   
   func remove(nodeIds: [String]) {

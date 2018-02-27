@@ -7,12 +7,16 @@
 //
 
 import Cocoa
+import RxSwift
 
 final class Application: NSApplication {
   @IBOutlet private weak var navigateMenu: NSMenu!
   private var commandNFlag = false
   
+  let isEnabled = Variable(true)
+  
   override func sendEvent(_ event: NSEvent) {
+    if !isEnabled.value { return }
     if event.type == .keyDown {
       if commandNFlag {
         commandNFlag = false

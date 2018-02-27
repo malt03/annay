@@ -109,6 +109,9 @@
 		EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */; };
 		EDEB7A622004EDF000F8C48A /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDEB7A602004EDF000F8C48A /* Launch.storyboard */; };
 		EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */; };
+		EDEDA86D2044F32600260C1E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEDA86C2044F32600260C1E /* Queue.swift */; };
+		EDEDA86F2044F6A700260C1E /* NodeModelExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEDA86E2044F6A700260C1E /* NodeModelExporter.swift */; };
+		EDEDA8732045149F00260C1E /* SuperParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEDA8722045149F00260C1E /* SuperParentViewController.swift */; };
 		EDF6A7E7202B082000B85B2C /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */; };
 		EDFAC7F12035A339002BB3C9 /* NSTextStorage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFAC7F02035A339002BB3C9 /* NSTextStorage+Extensions.swift */; };
 		EDFE82B920256AEC00702C85 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B320256AE500702C85 /* Realm.framework */; };
@@ -286,6 +289,9 @@
 		EDEB7A632004EDF000F8C48A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkDownEditor.entitlements; sourceTree = "<group>"; };
 		EDEB7A6A2004F21800F8C48A /* MarkDownEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorViewController.swift; sourceTree = "<group>"; };
+		EDEDA86C2044F32600260C1E /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		EDEDA86E2044F6A700260C1E /* NodeModelExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeModelExporter.swift; sourceTree = "<group>"; };
+		EDEDA8722045149F00260C1E /* SuperParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperParentViewController.swift; sourceTree = "<group>"; };
 		EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceWindowController.swift; sourceTree = "<group>"; };
 		EDFAC7F02035A339002BB3C9 /* NSTextStorage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Extensions.swift"; sourceTree = "<group>"; };
 		EDFE82B020256AE400702C85 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
@@ -357,6 +363,7 @@
 				ED5569E1202DDC4C00D92A75 /* ResourceManager.swift */,
 				EDD4C746202EB0EB0029FF4C /* NSFont+Extensions.swift */,
 				EDFAC7F02035A339002BB3C9 /* NSTextStorage+Extensions.swift */,
+				EDEDA86C2044F32600260C1E /* Queue.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -414,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				ED2E15AD200666B1003D55A3 /* NodeModel.swift */,
+				EDEDA86E2044F6A700260C1E /* NodeModelExporter.swift */,
 				EDD0A296200EF75300D5E7BE /* WorkspaceModel.swift */,
 				ED598C56201F20D500072D8A /* WorkspaceDirectoryWatcher.swift */,
 				ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */,
@@ -550,6 +558,7 @@
 				EDEB7A602004EDF000F8C48A /* Launch.storyboard */,
 				EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */,
 				EDB601482022C06A00EDF59C /* Application.swift */,
+				EDEDA8722045149F00260C1E /* SuperParentViewController.swift */,
 				ED9CCA722026189B00EB2F7C /* BeforeOfAllWindowController.swift */,
 			);
 			path = Application;
@@ -825,6 +834,7 @@
 				ED57400F202D975800D844A3 /* PreferenceTabViewController.swift in Sources */,
 				ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */,
 				EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */,
+				EDEDA8732045149F00260C1E /* SuperParentViewController.swift in Sources */,
 				ED840D29201A2AC000EF2C42 /* MoveWorkspaceViewController.swift in Sources */,
 				EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */,
 				ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */,
@@ -850,6 +860,7 @@
 				ED4EB9E4201DAADD00B4CBE7 /* NSImage+Extensions.swift in Sources */,
 				EDFAC7F12035A339002BB3C9 /* NSTextStorage+Extensions.swift in Sources */,
 				ED840D2F201C5AB600EF2C42 /* NSView+Extensions.swift in Sources */,
+				EDEDA86D2044F32600260C1E /* Queue.swift in Sources */,
 				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
 				ED5569E2202DDC4C00D92A75 /* ResourceManager.swift in Sources */,
 				EDFE82C620256BE700702C85 /* FileManager+Extensions.swift in Sources */,
@@ -885,6 +896,7 @@
 				ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */,
 				EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */,
 				ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */,
+				EDEDA86F2044F6A700260C1E /* NodeModelExporter.swift in Sources */,
 				ED9CCA732026189B00EB2F7C /* BeforeOfAllWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

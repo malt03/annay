@@ -273,26 +273,13 @@ extension NodeModel {
     parent?.setAsAncestor(descendant: descendant)
   }
   
-  enum ExportType {
-    case html
-    case text
-  }
-  
-  func export(type: ExportType) {
-    let openPanel = NSOpenPanel()
-    openPanel.allowsMultipleSelection = false
-    openPanel.canChooseDirectories = true
-    openPanel.canCreateDirectories = true
-    openPanel.canChooseFiles = false
-    openPanel.begin { [weak self] (result) in
-      guard let s = self else { return }
-      if result != .OK { return }
-      guard let url = openPanel.url else { return }
-      do {
-        try s.write(to: url.appendingPathComponent(s.name), as: type)
-      } catch {
-        NSAlert(error: error).runModal()
+  func export(in url: URL, type: NodeModelExporter.ExportType, selectAndWriteQueue: inout NodeModelExporter.SelectAndWriteQueue) {
+    do {
+      try write(to: url.appendingPathComponent(name), as: type) { (node, url) in
+        selectAndWriteQueue.enqueue((node, url))
       }
+    } catch {
+      NSAlert(error: error).runModal()
     }
   }
 }
@@ -326,16 +313,24 @@ extension NodeModel: NSFilePromiseProviderDelegate {
     completionHandler(nil)
   }
   
-  private func write(to url: URL, as type: ExportType) throws {
+  func write(
+    to url: URL,
+    as type: NodeModelExporter.ExportType,
+    selectAndWriteEnqueueHandler: ((NodeModelExporter.QueueItem) -> Void) = { _ in }
+  ) throws {
     if isDirectory {
       try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
       for child in sortedChildren(query: nil) {
-        try child.write(to: url.appendingPathComponent(child.name), as: type)
+        try child.write(to: url.appendingPathComponent(child.name), as: type, selectAndWriteEnqueueHandler: selectAndWriteEnqueueHandler)
       }
     } else {
       switch type {
       case .html:
-        try HtmlDataStore.shared.html(for: id)?.write(to: url.appendingPathExtension("html"), atomically: true, encoding: .utf8)
+        guard let html = HtmlDataStore.shared.html(for: id) else {
+          selectAndWriteEnqueueHandler((self, url))
+          return
+        }
+        try html.write(to: url.appendingPathExtension("html"), atomically: true, encoding: .utf8)
       case .text:
         try (body?.data(using: .utf8) ?? Data()).write(to: url.appendingPathExtension("md"))
       }

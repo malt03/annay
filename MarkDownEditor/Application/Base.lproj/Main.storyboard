@@ -19,12 +19,12 @@
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="xTu-VI-k9j" kind="relationship" relationship="window.shadowedContentViewController" id="mtN-i9-o1q"/>
+                        <segue destination="MeC-WR-dsE" kind="relationship" relationship="window.shadowedContentViewController" id="asF-T9-48u"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="75" y="-86"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="fUs-gK-hUv">
@@ -51,7 +51,59 @@
                 </splitViewController>
                 <customObject id="YB4-dE-hZF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="699"/>
+            <point key="canvasLocation" x="75" y="733"/>
+        </scene>
+        <!--Super Parent View Controller-->
+        <scene sceneID="Y7f-LQ-kg0">
+            <objects>
+                <viewController id="MeC-WR-dsE" customClass="SuperParentViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="zrR-Z7-Ium">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="utm-l8-sUO">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <connections>
+                                    <segue destination="xTu-VI-k9j" kind="embed" id="Etz-qp-ALR"/>
+                                </connections>
+                            </containerView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="bdV-Iq-Ypy" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <subviews>
+                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="RGy-e2-bxW">
+                                        <rect key="frame" x="209" y="134" width="32" height="32"/>
+                                    </progressIndicator>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="RGy-e2-bxW" firstAttribute="centerX" secondItem="bdV-Iq-Ypy" secondAttribute="centerX" id="XDd-DQ-NVY"/>
+                                    <constraint firstItem="RGy-e2-bxW" firstAttribute="centerY" secondItem="bdV-Iq-Ypy" secondAttribute="centerY" id="qK8-D5-q5O"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="utm-l8-sUO" secondAttribute="trailing" id="H2I-El-5CH"/>
+                            <constraint firstItem="utm-l8-sUO" firstAttribute="top" secondItem="zrR-Z7-Ium" secondAttribute="top" id="HgK-dC-pOc"/>
+                            <constraint firstItem="bdV-Iq-Ypy" firstAttribute="leading" secondItem="zrR-Z7-Ium" secondAttribute="leading" id="MCa-yq-NeW"/>
+                            <constraint firstAttribute="bottom" secondItem="utm-l8-sUO" secondAttribute="bottom" id="b77-sI-0oZ"/>
+                            <constraint firstItem="utm-l8-sUO" firstAttribute="leading" secondItem="zrR-Z7-Ium" secondAttribute="leading" id="cDi-8l-5k7"/>
+                            <constraint firstAttribute="bottom" secondItem="bdV-Iq-Ypy" secondAttribute="bottom" id="get-3h-28q"/>
+                            <constraint firstAttribute="trailing" secondItem="bdV-Iq-Ypy" secondAttribute="trailing" id="iVn-il-gbE"/>
+                            <constraint firstItem="bdV-Iq-Ypy" firstAttribute="top" secondItem="zrR-Z7-Ium" secondAttribute="top" id="lq2-Im-zrL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="indicator" destination="RGy-e2-bxW" id="x5N-eZ-Vb0"/>
+                        <outlet property="overlayView" destination="bdV-Iq-Ypy" id="AUy-Kb-PDU"/>
+                    </connections>
+                </viewController>
+                <customObject id="VKm-V8-xcD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="318"/>
         </scene>
         <!--Workspaces-->
         <scene sceneID="xQ5-Hg-q63">

@@ -241,15 +241,18 @@ final class SidebarViewController: NSViewController {
   }
   
   @IBAction private func exportAsText(_ sender: NSMenuItem) {
-    guard let indexes = outlineView.indexesForMenu else { return }
-    let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
-    for node in nodes { node.export(type: .text) }
+    export(type: .text)
   }
   
   @IBAction private func exportAsHtml(_ sender: NSMenuItem) {
+    export(type: .html)
+  }
+  
+  private func export(type: NodeModelExporter.ExportType) {
     guard let indexes = outlineView.indexesForMenu else { return }
     let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
-    for node in nodes { node.export(type: .html) }
+    if nodes.count == 0 { return }
+    NodeModelExporter(type: type, nodes: nodes).export()
   }
   
   private func emptyTrash() {
