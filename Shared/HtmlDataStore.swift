@@ -25,13 +25,7 @@ final class HtmlDataStore {
   private init() {}
   
   func set(nodeId: String, html: String) {
-    print("set", nodeId)
     userDefault.set(html, forKey: Key.Html(for: nodeId))
-    
-//    for key in userDefault.dictionaryRepresentation().keys {
-//      userDefault.removeObject(forKey: key)
-//    }
-
     userDefault.synchronize()
     NotificationCenter.default.post(name: .StoredHtmlData(nodeId: nodeId), object: nil)
   }

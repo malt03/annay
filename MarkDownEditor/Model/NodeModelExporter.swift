@@ -77,7 +77,6 @@ final class NodeModelExporter {
     defer { performSelectAndWrite() }
     guard let (node, url) = lastDequeuedItem else { return }
     NotificationCenter.default.removeObserver(self, name: .StoredHtmlData(nodeId: node.id), object: nil)
-    print(node.id)
     do {
       try node.write(to: url, as: exportType)
     } catch {
