@@ -29,6 +29,6 @@ extension UserDefaults {
 
   func savableObjectArray<T: SavableInUserDefaults>(forKey key: String) -> [T]? {
     guard let array = array(forKey: key) as? [[String: Any]] else { return nil }
-    return array.flatMap { T(dictionary: $0) }
+    return array.compactMap { T(dictionary: $0) }
   }
 }

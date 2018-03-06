@@ -11,7 +11,7 @@ import Cocoa
 extension NSPasteboard {
   var nodes: [NodeModel] {
     guard let workspace = parentWorkspace else { return [] }
-    return (pasteboardItems ?? []).flatMap { (item) -> NodeModel? in
+    return (pasteboardItems ?? []).compactMap { (item) -> NodeModel? in
       guard let id = item.string(forType: .nodeModel) else { return nil }
       return NodeModel.node(for: id, for: workspace)
     }
@@ -30,7 +30,7 @@ extension NSPasteboard {
   }
   
   private func replaceFileURLsToMarkdown() -> Bool {
-    let texts = (pasteboardItems ?? []).flatMap { (item) -> String? in
+    let texts = (pasteboardItems ?? []).compactMap { (item) -> String? in
       guard let url = URL(string: item.string(forType: .fileURL) ?? "") else { return nil }
       if url.isConformsToUTI("public.image") {
         return "![\(url.name)](\(url.absoluteString))"
@@ -58,7 +58,7 @@ extension NSPasteboard {
   }
   
   private func replaceLinkObjectToMarkdown() -> Bool {
-    let linkTexts = (pasteboardItems ?? []).flatMap { (item) -> String? in
+    let linkTexts = (pasteboardItems ?? []).compactMap { (item) -> String? in
       guard
         let name = item.string(forType: NSPasteboard.PasteboardType("public.url-name")),
         let url = URL(string: item.string(forType: .string) ?? "")
@@ -101,7 +101,7 @@ extension NSPasteboard {
   
   private func replaceImagesDataToMarkdown(_ imagesData: [Data], fileExtension: String) -> Bool {
     do {
-      let imageTexts: [String] = try imagesData.flatMap { (imageData) in
+      let imageTexts: [String] = try imagesData.compactMap { (imageData) in
         let url = try ResourceManager.save(data: imageData, fileExtension: fileExtension)
         return "![image](\(url.absoluteString))"
       }
@@ -117,7 +117,7 @@ extension NSPasteboard {
   var imagesDataRepresentationUsingPNG: [Data] {
     if !canReadObject(forClasses: [NSImage.self], options: nil) { return [] }
     let images = (readObjects(forClasses: [NSImage.self], options: nil) as? [NSImage]) ?? []
-    return images.flatMap { (image) in
+    return images.compactMap { (image) in
       guard
         let imageData = image.tiffRepresentation,
         let imageRep = NSBitmapImageRep(data: imageData),
@@ -128,10 +128,10 @@ extension NSPasteboard {
   }
   
   var pngImagesData: [Data] {
-    return pasteboardItems?.flatMap { $0.data(forType: .png) } ?? []
+    return pasteboardItems?.compactMap { $0.data(forType: .png) } ?? []
   }
   
   var gifImagesData: [Data] {
-    return pasteboardItems?.flatMap { $0.data(forType: NSPasteboard.PasteboardType(kUTTypeGIF as String)) } ?? []
+    return pasteboardItems?.compactMap { $0.data(forType: NSPasteboard.PasteboardType(kUTTypeGIF as String)) } ?? []
   }
 }

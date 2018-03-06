@@ -498,7 +498,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
 
   func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
-    let nodes = items.flatMap { $0 as? NodeModel }.deletingDescendants
+    let nodes = items.compactMap { $0 as? NodeModel }.deletingDescendants
     let filePromiseProviders = nodes.map { NSFilePromiseProvider(fileType: kUTTypePlainText as String, delegate: $0) }
     let objects = (nodes as [NSPasteboardWriting]) + (filePromiseProviders as [NSPasteboardWriting])
     pasteboard.writeObjects(objects)
@@ -508,7 +508,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   
   func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
     let items = info.draggingPasteboard().pasteboardItems ?? []
-    let fileURLs = items.flatMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
+    let fileURLs = items.compactMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
     if fileURLs.count > 0 {
       let containsCopyable = fileURLs.contains { $0.isDirectory || $0.isConformsToUTI(kUTTypePlainText as String) }
       if !containsCopyable { return [] }
@@ -569,7 +569,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     }
     
     let items = info.draggingPasteboard().pasteboardItems ?? []
-    let fileURLs = items.flatMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
+    let fileURLs = items.compactMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
     if fileURLs.count > 0 {
       do {
         let workspace = WorkspaceModel.selected.value

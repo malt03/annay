@@ -23,7 +23,7 @@ extension Array where Element: Equatable {
   
   @discardableResult
   mutating func remove(objects: [Element]) -> [Int] {
-    return objects.flatMap { remove(object: $0) }
+    return objects.compactMap { remove(object: $0) }
   }
 }
 
@@ -46,7 +46,7 @@ extension Array where Element == URL {
   @discardableResult
   func createNodes(parent: NodeModel?, startIndex: Int, realm: Realm, workspace: WorkspaceModel) throws -> [NodeModel] {
     var index = startIndex
-    return try flatMap { (url) -> NodeModel? in
+    return try compactMap { (url) -> NodeModel? in
       let isDirectory = url.isDirectory
       if !isDirectory && !url.isConformsToUTI("public.plain-text") { return nil }
       

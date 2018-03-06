@@ -49,7 +49,7 @@ final class TextView: NSTextView {
   private func writeImages(_ imagesData: [Data], fileExtension: String, sender: NSDraggingInfo) -> Bool {
     let pasteboard = sender.draggingPasteboard()
     do {
-      let imageTexts: [String] = try imagesData.flatMap { (imageData) in
+      let imageTexts: [String] = try imagesData.compactMap { (imageData) in
         let url = try ResourceManager.save(data: imageData, fileExtension: fileExtension)
         return "![image](\(url.absoluteString))"
       }

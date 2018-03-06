@@ -48,7 +48,7 @@ final class Application: NSApplication {
   
   func prepareForWorkspaces() {
     _ = WorkspaceModel.spaces.asObservable().subscribe(onNext: { (spaces) in
-      var newWorkspaceMenus = spaces.enumerated().flatMap { (index, space) -> NSMenuItem? in
+      var newWorkspaceMenus = spaces.enumerated().compactMap { (index, space) -> NSMenuItem? in
         if index >= 9 { return nil }
         let title = String(format: Localized("Select \"%@\""), space.name)
         let item = NSMenuItem(title: title, action: #selector(self.selectWorkspace(_:)), keyEquivalent: "\(index + 1)")

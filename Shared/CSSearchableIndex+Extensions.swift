@@ -16,7 +16,7 @@ extension CSSearchableIndex {
   }
   
   func deleteSearchableItemsWithDataStore(with identifiers: [String]) {
-    let nodeIds = identifiers.flatMap { $0.split(separator: "/").last.flatMap { String($0) } }
+    let nodeIds = identifiers.compactMap { $0.split(separator: "/").last.flatMap { String($0) } }
     HtmlDataStore.shared.remove(nodeIds: nodeIds)
     deleteSearchableItems(withIdentifiers: identifiers, completionHandler: nil)
   }
