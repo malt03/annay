@@ -1,0 +1,42 @@
+//
+//  PreferenceManager.swift
+//  MarkDownEditor
+//
+//  Created by Koji Murata on 2018/03/06.
+//  Copyright © 2018年 Koji Murata. All rights reserved.
+//
+
+import Cocoa
+import RxSwift
+
+final class PreferenceManager {
+  private struct Key {
+    static let DirectoryUrl = "PreferenceManager/DirectoryUrl"
+  }
+  
+  static let shared = PreferenceManager()
+  
+  let preference: Variable<Preference>
+  
+  private var directoryUrl: URL
+  
+  private static var defaultDirectoryUrl: URL { return  FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".markdowneditor.d", isDirectory: true) }
+  
+  private init() {
+    directoryUrl = UserDefaults.standard.url(forKey: Key.DirectoryUrl) ?? PreferenceManager.defaultDirectoryUrl
+    do {
+      try FileManager.default.createDirectoryIfNeeded(url: directoryUrl)
+    } catch {
+      NSAlert(error: error).runModal()
+    }
+    
+    preference = Variable(Preference(from: directoryUrl.preferenceFile))
+    _ = preference.asObservable().subscribe(onNext: { (preference) in
+      preference.save(to: self.directoryUrl.preferenceFile)
+    })
+  }
+}
+
+extension URL {
+  fileprivate var preferenceFile: URL { return appendingPathComponent("preference.yml") }
+}

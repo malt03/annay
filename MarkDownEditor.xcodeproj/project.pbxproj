@@ -50,6 +50,9 @@
 		ED598C59201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */; };
 		ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */; };
 		ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */; };
+		ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710037204E16E90030CDFB /* PreferenceManager.swift */; };
+		ED710076204E4C340030CDFB /* Yams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED710074204E4C2F0030CDFB /* Yams.framework */; };
+		ED710077204E4C340030CDFB /* Yams.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED710074204E4C2F0030CDFB /* Yams.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */; };
 		ED83F7152036EB350038D96B /* Workspaces.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED83F7172036EB350038D96B /* Workspaces.storyboard */; };
 		ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED840D1E201A217300EF2C42 /* WorkspacesTableView.swift */; };
@@ -66,6 +69,10 @@
 		ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */; };
 		ED86DCCF2029EE490096AB38 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED86DCCE2029EE3A0096AB38 /* MASShortcut.framework */; };
 		ED86DCD02029EE490096AB38 /* MASShortcut.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED86DCCE2029EE3A0096AB38 /* MASShortcut.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED8CE48A204E69F8002F1A5D /* Variable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */; };
+		ED8CE48C204E7291002F1A5D /* CodableFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE48B204E7291002F1A5D /* CodableFont.swift */; };
+		ED8CE48E204E7773002F1A5D /* GeneralPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */; };
+		ED8CE490204E7798002F1A5D /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE48F204E7798002F1A5D /* Preference.swift */; };
 		ED9CCA6D2025927600EB2F7C /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CCA6C2025927600EB2F7C /* DateFormatter+Extensions.swift */; };
 		ED9CCA732026189B00EB2F7C /* BeforeOfAllWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9CCA722026189B00EB2F7C /* BeforeOfAllWindowController.swift */; };
 		ED9EEEE2201F639B00C96CC1 /* OpenWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED9EEEE4201F639B00C96CC1 /* OpenWorkspace.storyboard */; };
@@ -160,6 +167,7 @@
 				EDFE82C220256AEC00702C85 /* RxSwift.framework in Embed Libraries */,
 				EDFE82BC20256AEC00702C85 /* RealmSwift.framework in Embed Libraries */,
 				EDFE82C020256AEC00702C85 /* RxCocoa.framework in Embed Libraries */,
+				ED710077204E4C340030CDFB /* Yams.framework in Embed Libraries */,
 				EDFE82CF202583DF00702C85 /* Zip.framework in Embed Libraries */,
 				ED86DCD02029EE490096AB38 /* MASShortcut.framework in Embed Libraries */,
 				EDFE82BE20256AEC00702C85 /* RxBlocking.framework in Embed Libraries */,
@@ -221,6 +229,8 @@
 		ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDirectoryWatcherManager.swift; sourceTree = "<group>"; };
 		ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
+		ED710037204E16E90030CDFB /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
+		ED710074204E4C2F0030CDFB /* Yams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Yams.framework; path = Carthage/Build/Mac/Yams.framework; sourceTree = "<group>"; };
 		ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
 		ED83F7142036E7290038D96B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = MarkDownEditor/ja.lproj/Sidebar.strings; sourceTree = "<group>"; };
 		ED83F7162036EB350038D96B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Workspaces.storyboard; sourceTree = "<group>"; };
@@ -239,6 +249,10 @@
 		ED841BD9200B2FD10097996A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableRowView.swift; sourceTree = "<group>"; };
 		ED86DCCE2029EE3A0096AB38 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Carthage/Build/Mac/MASShortcut.framework; sourceTree = "<group>"; };
+		ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Variable+Extensions.swift"; sourceTree = "<group>"; };
+		ED8CE48B204E7291002F1A5D /* CodableFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFont.swift; sourceTree = "<group>"; };
+		ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreference.swift; sourceTree = "<group>"; };
+		ED8CE48F204E7798002F1A5D /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		ED9CCA6C2025927600EB2F7C /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		ED9CCA722026189B00EB2F7C /* BeforeOfAllWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeforeOfAllWindowController.swift; sourceTree = "<group>"; };
 		ED9EEEE3201F639B00C96CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OpenWorkspace.storyboard; sourceTree = "<group>"; };
@@ -314,6 +328,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED710076204E4C340030CDFB /* Yams.framework in Frameworks */,
 				EDFE82B920256AEC00702C85 /* Realm.framework in Frameworks */,
 				EDFE82C120256AEC00702C85 /* RxSwift.framework in Frameworks */,
 				EDFE82BB20256AEC00702C85 /* RealmSwift.framework in Frameworks */,
@@ -361,6 +376,8 @@
 				EDD4C746202EB0EB0029FF4C /* NSFont+Extensions.swift */,
 				EDFAC7F02035A339002BB3C9 /* NSTextStorage+Extensions.swift */,
 				EDEDA86C2044F32600260C1E /* Queue.swift */,
+				ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */,
+				ED8CE48B204E7291002F1A5D /* CodableFont.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -544,6 +561,8 @@
 				ED55C500200E56F10070301A /* Preference.storyboard */,
 				EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */,
 				ED57400E202D975800D844A3 /* PreferenceTabViewController.swift */,
+				ED710037204E16E90030CDFB /* PreferenceManager.swift */,
+				ED8CE48F204E7798002F1A5D /* Preference.swift */,
 			);
 			path = Preference;
 			sourceTree = "<group>";
@@ -588,6 +607,7 @@
 				EDD4C742202E9AF70029FF4C /* GeneralPreferenceViewController.swift */,
 				EDD4C744202E9B060029FF4C /* FontManager.swift */,
 				EDDE6094203DD0C100331A77 /* GeneralPreferenceManager.swift */,
+				ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -654,6 +674,7 @@
 		EDFE82AF20256AD900702C85 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				ED710074204E4C2F0030CDFB /* Yams.framework */,
 				ED86DCCE2029EE3A0096AB38 /* MASShortcut.framework */,
 				EDFE82CD202583DD00702C85 /* Zip.framework */,
 				EDFE82B320256AE500702C85 /* Realm.framework */,
@@ -832,10 +853,12 @@
 				ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */,
 				EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */,
 				EDEDA8732045149F00260C1E /* SuperParentViewController.swift in Sources */,
+				ED8CE48E204E7773002F1A5D /* GeneralPreference.swift in Sources */,
 				ED840D29201A2AC000EF2C42 /* MoveWorkspaceViewController.swift in Sources */,
 				EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */,
 				ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */,
 				EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */,
+				ED8CE490204E7798002F1A5D /* Preference.swift in Sources */,
 				ED47CC8D201EFBED0052D6EF /* WorkspaceNameFormatter.swift in Sources */,
 				ED598C57201F20D500072D8A /* WorkspaceDirectoryWatcher.swift in Sources */,
 				ED574001202C3F9100D844A3 /* ShortcutPreferenceViewController.swift in Sources */,
@@ -878,12 +901,15 @@
 				EDD0805A202B12210021895A /* NewOrOpenNoteShortcutPreferenceViewController.swift in Sources */,
 				ED55C62E203BB51900827140 /* HtmlDataStore.swift in Sources */,
 				EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */,
+				ED8CE48C204E7291002F1A5D /* CodableFont.swift in Sources */,
 				ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */,
 				ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */,
 				ED9EEEE8201F63E200C96CC1 /* OpenWorkspaceViewController.swift in Sources */,
 				EDDE608F203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */,
 				ED4EB9E6201DB71B00B4CBE7 /* Results+Extensions.swift in Sources */,
 				ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */,
+				ED8CE48A204E69F8002F1A5D /* Variable+Extensions.swift in Sources */,
+				ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */,
 				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,
 				ED4EB9E0201DA76000B4CBE7 /* OpenQuicklyTextField.swift in Sources */,
 				EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */,
