@@ -17,11 +17,13 @@ final class GeneralPreferenceViewController: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    FontManager.shared.font.map { $0.displayNameWithPoint }.bind(to: fontLabel.rx.text).disposed(by: bag)
-    GeneralPreferenceManager.shared.isHideEditorWhenUnfocused.asObservable().map { (isOn) -> NSControl.StateValue in
+    PreferenceManager.shared.general.map { $0.font.displayNameWithPoint }.distinctUntilChanged().bind(to: fontLabel.rx.text).disposed(by: bag)
+    PreferenceManager.shared.general.map { $0.isHideEditorWhenUnfocused }.map { (isOn) -> NSControl.StateValue in
       return isOn ? .on : .off
     }.bind(to: isHideEditorWhenUnfocusedCheckbox.rx.state).disposed(by: bag)
-    isHideEditorWhenUnfocusedCheckbox.rx.state.map { $0 == .on }.bind(to: GeneralPreferenceManager.shared.isHideEditorWhenUnfocused).disposed(by: bag)
+    isHideEditorWhenUnfocusedCheckbox.rx.state.map { $0 == .on }.subscribe(onNext: { (isHideEditorWhenUnfocused) in
+      PreferenceManager.shared.updateGeneral { (general) in general }
+    }).disposed(by: bag)
   }
 
   @IBAction private func presentFontPanel(_ sender: NSButton) {

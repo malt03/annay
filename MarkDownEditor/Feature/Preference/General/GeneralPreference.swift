@@ -8,27 +8,30 @@
 
 import Cocoa
 import RxSwift
+import Yams
 
-struct GeneralPreference: Codable {
-  var isHideEditorWhenUnfocused: Bool
-  var font: CodableFont
+final class GeneralPreference: YamlCodable {
+  static let shared = GeneralPreference.create()
   
-  mutating func convert(with manager: NSFontManager) {
-    font = CodableFont(manager.convert(font.font))
+  static var fileUrl: URL { return PreferenceManager.shared.generalUrl }
+  
+  let isHideEditorWhenUnfocused: Variable<Bool>
+  private var _font: Variable<CodableFont>
+
+  var font: Observable<NSFont> { return _font.asObservable().map { $0.font } }
+
+  func convert(with manager: NSFontManager) {
+    _font.value = CodableFont(manager.convert(_font.value.font))
   }
   
   func showFontPanel() {
     let fontPanel = NSFontPanel.shared
-    fontPanel.setPanelFont(font.font, isMultiple: false)
+    fontPanel.setPanelFont(_font.value.font, isMultiple: false)
     fontPanel.makeKeyAndOrderFront(nil)
   }
   
-  private init(isHideEditorWhenUnfocused: Bool, font: NSFont) {
-    self.isHideEditorWhenUnfocused = isHideEditorWhenUnfocused
-    self.font = CodableFont(font)
-  }
-  
-  static var `default`: GeneralPreference {
-    return GeneralPreference(isHideEditorWhenUnfocused: false, font: NSFont(name: "Osaka-Mono", size: 14) ?? .systemFont(ofSize: 14))
+  init() {
+    self.isHideEditorWhenUnfocused = Variable(false)
+    self._font = Variable(CodableFont(NSFont(name: "Osaka-Mono", size: 14) ?? .systemFont(ofSize: 14)))
   }
 }

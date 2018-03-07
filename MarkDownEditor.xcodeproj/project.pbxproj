@@ -50,6 +50,7 @@
 		ED598C59201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */; };
 		ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */; };
 		ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */; };
+		ED697FF72050014E00E766C7 /* YamlCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED697FF62050014E00E766C7 /* YamlCodable.swift */; };
 		ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710037204E16E90030CDFB /* PreferenceManager.swift */; };
 		ED710076204E4C340030CDFB /* Yams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED710074204E4C2F0030CDFB /* Yams.framework */; };
 		ED710077204E4C340030CDFB /* Yams.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED710074204E4C2F0030CDFB /* Yams.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -96,7 +97,6 @@
 		EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */; };
 		EDD0A2B9200F2B9E00D5E7BE /* WorkspacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A2B8200F2B9E00D5E7BE /* WorkspacesViewController.swift */; };
 		EDD4C743202E9AF70029FF4C /* GeneralPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4C742202E9AF70029FF4C /* GeneralPreferenceViewController.swift */; };
-		EDD4C745202E9B060029FF4C /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4C744202E9B060029FF4C /* FontManager.swift */; };
 		EDD4C747202EB0EB0029FF4C /* NSFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4C746202EB0EB0029FF4C /* NSFont+Extensions.swift */; };
 		EDD4C748202EBD470029FF4C /* GeneralPreference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDD4C74A202EBD470029FF4C /* GeneralPreference.storyboard */; };
 		EDD4CA6D203BB331003F8072 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD4CA6C203BB331003F8072 /* Quartz.framework */; };
@@ -106,7 +106,6 @@
 		EDDE608F203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */; };
 		EDDE6090203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */; };
 		EDDE6093203C65A500331A77 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE6091203C65A500331A77 /* WebView.swift */; };
-		EDDE6095203DD0C100331A77 /* GeneralPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE6094203DD0C100331A77 /* GeneralPreferenceManager.swift */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
 		EDEA58E220442B1700B1CA66 /* markdown.html in Resources */ = {isa = PBXBuildFile; fileRef = ED187FD120052D30002E51C0 /* markdown.html */; };
@@ -229,6 +228,7 @@
 		ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDirectoryWatcherManager.swift; sourceTree = "<group>"; };
 		ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
+		ED697FF62050014E00E766C7 /* YamlCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamlCodable.swift; sourceTree = "<group>"; };
 		ED710037204E16E90030CDFB /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
 		ED710074204E4C2F0030CDFB /* Yams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Yams.framework; path = Carthage/Build/Mac/Yams.framework; sourceTree = "<group>"; };
 		ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
@@ -279,7 +279,6 @@
 		EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavableInUserDefaults.swift; sourceTree = "<group>"; };
 		EDD0A2B8200F2B9E00D5E7BE /* WorkspacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesViewController.swift; sourceTree = "<group>"; };
 		EDD4C742202E9AF70029FF4C /* GeneralPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferenceViewController.swift; sourceTree = "<group>"; };
-		EDD4C744202E9B060029FF4C /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		EDD4C746202EB0EB0029FF4C /* NSFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFont+Extensions.swift"; sourceTree = "<group>"; };
 		EDD4C749202EBD470029FF4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GeneralPreference.storyboard; sourceTree = "<group>"; };
 		EDD4C74C202EBD7D0029FF4C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/GeneralPreference.strings; sourceTree = "<group>"; };
@@ -291,7 +290,6 @@
 		EDD4CA75203BB331003F8072 /* MarkDownEditorPreviewExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkDownEditorPreviewExtension.entitlements; sourceTree = "<group>"; };
 		EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CSSearchableIndex+Extensions.swift"; sourceTree = "<group>"; };
 		EDDE6091203C65A500331A77 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		EDDE6094203DD0C100331A77 /* GeneralPreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferenceManager.swift; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
 		EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkDownEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -378,6 +376,7 @@
 				EDEDA86C2044F32600260C1E /* Queue.swift */,
 				ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */,
 				ED8CE48B204E7291002F1A5D /* CodableFont.swift */,
+				ED697FF62050014E00E766C7 /* YamlCodable.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -605,8 +604,6 @@
 			children = (
 				EDD4C74A202EBD470029FF4C /* GeneralPreference.storyboard */,
 				EDD4C742202E9AF70029FF4C /* GeneralPreferenceViewController.swift */,
-				EDD4C744202E9B060029FF4C /* FontManager.swift */,
-				EDDE6094203DD0C100331A77 /* GeneralPreferenceManager.swift */,
 				ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */,
 			);
 			path = General;
@@ -852,6 +849,7 @@
 				ED57400F202D975800D844A3 /* PreferenceTabViewController.swift in Sources */,
 				ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */,
 				EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */,
+				ED697FF72050014E00E766C7 /* YamlCodable.swift in Sources */,
 				EDEDA8732045149F00260C1E /* SuperParentViewController.swift in Sources */,
 				ED8CE48E204E7773002F1A5D /* GeneralPreference.swift in Sources */,
 				ED840D29201A2AC000EF2C42 /* MoveWorkspaceViewController.swift in Sources */,
@@ -887,7 +885,6 @@
 				ED9CCA6D2025927600EB2F7C /* DateFormatter+Extensions.swift in Sources */,
 				ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */,
 				EDD0A28E200ED29400D5E7BE /* Util.swift in Sources */,
-				EDD4C745202E9B060029FF4C /* FontManager.swift in Sources */,
 				EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */,
 				ED598C39201F03E200072D8A /* NSAlert+Extensions.swift in Sources */,
 				ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */,
@@ -914,7 +911,6 @@
 				ED4EB9E0201DA76000B4CBE7 /* OpenQuicklyTextField.swift in Sources */,
 				EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */,
 				ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */,
-				EDDE6095203DD0C100331A77 /* GeneralPreferenceManager.swift in Sources */,
 				ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */,
 				EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */,
 				ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */,

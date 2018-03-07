@@ -16,7 +16,9 @@ final class PreferenceManager {
   
   static let shared = PreferenceManager()
   
-  let preference: Variable<Preference>
+  var generalUrl: URL {
+    return directoryUrl.appendingPathComponent("general.yml")
+  }
   
   private var directoryUrl: URL
   
@@ -29,14 +31,5 @@ final class PreferenceManager {
     } catch {
       NSAlert(error: error).runModal()
     }
-    
-    preference = Variable(Preference(from: directoryUrl.preferenceFile))
-    _ = preference.asObservable().subscribe(onNext: { (preference) in
-      preference.save(to: self.directoryUrl.preferenceFile)
-    })
   }
-}
-
-extension URL {
-  fileprivate var preferenceFile: URL { return appendingPathComponent("preference.yml") }
 }

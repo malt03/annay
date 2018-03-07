@@ -8,7 +8,7 @@
 
 import Cocoa
 
-struct CodableFont: Codable {
+struct CodableFont: Codable, Equatable {
   private let name: String
   private let size: CGFloat
   
