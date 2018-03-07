@@ -84,17 +84,21 @@ final class WorkspaceModel {
     _name.value = newName
   }
   
+  @discardableResult
   static func open(url: URL) -> Bool {
+    let workspace: WorkspaceModel
     if let index = WorkspaceModel.spaces.value.map({ $0.url.appendingPathComponent("x") }).index(of: url.appendingPathComponent("x")) {
-      WorkspaceModel.spaces.value[index].select()
+      workspace = WorkspaceModel.spaces.value[index]
     } else {
       do {
-        try WorkspaceModel(url: url).saveToUserDefaults()
+        workspace = try WorkspaceModel(url: url)
+        workspace.saveToUserDefaults()
       } catch {
         NSAlert(error: error).runModal()
         return false
       }
     }
+    workspace.select()
     return true
   }
 

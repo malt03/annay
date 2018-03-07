@@ -12,12 +12,13 @@ import CoreSpotlight
 
 @NSApplicationMain
 final class AppDelegate: NSObject, NSApplicationDelegate {
-  func application(_ sender: NSApplication, openFile filename: String) -> Bool {
-    return WorkspaceModel.open(url: URL(fileURLWithPath: filename))
-  }
-  
   func application(_ application: NSApplication, open urls: [URL]) {
     guard let url = urls.first else { return }
+    if url.isFileURL {
+      WorkspaceModel.open(url: url)
+      return
+    }
+
     if url.scheme != "annay" { return }
     let nodeId = url.lastPathComponent
     let workspaceUniqId = url.deletingLastPathComponent().lastPathComponent
