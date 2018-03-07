@@ -50,7 +50,6 @@
 		ED598C59201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */; };
 		ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */; };
 		ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */; };
-		ED697FF72050014E00E766C7 /* YamlCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED697FF62050014E00E766C7 /* YamlCodable.swift */; };
 		ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710037204E16E90030CDFB /* PreferenceManager.swift */; };
 		ED710076204E4C340030CDFB /* Yams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED710074204E4C2F0030CDFB /* Yams.framework */; };
 		ED710077204E4C340030CDFB /* Yams.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED710074204E4C2F0030CDFB /* Yams.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -228,7 +227,6 @@
 		ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDirectoryWatcherManager.swift; sourceTree = "<group>"; };
 		ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
-		ED697FF62050014E00E766C7 /* YamlCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamlCodable.swift; sourceTree = "<group>"; };
 		ED710037204E16E90030CDFB /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
 		ED710074204E4C2F0030CDFB /* Yams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Yams.framework; path = Carthage/Build/Mac/Yams.framework; sourceTree = "<group>"; };
 		ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
@@ -376,7 +374,6 @@
 				EDEDA86C2044F32600260C1E /* Queue.swift */,
 				ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */,
 				ED8CE48B204E7291002F1A5D /* CodableFont.swift */,
-				ED697FF62050014E00E766C7 /* YamlCodable.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -849,7 +846,6 @@
 				ED57400F202D975800D844A3 /* PreferenceTabViewController.swift in Sources */,
 				ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */,
 				EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */,
-				ED697FF72050014E00E766C7 /* YamlCodable.swift in Sources */,
 				EDEDA8732045149F00260C1E /* SuperParentViewController.swift in Sources */,
 				ED8CE48E204E7773002F1A5D /* GeneralPreference.swift in Sources */,
 				ED840D29201A2AC000EF2C42 /* MoveWorkspaceViewController.swift in Sources */,

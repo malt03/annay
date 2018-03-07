@@ -7,25 +7,38 @@
 //
 
 import Cocoa
+import RxSwift
 import Yams
 
-struct Preference: Codable {
-  let general: GeneralPreference
-  
-  private init() {
-    general = .default
+protocol Preference: Codable {
+  static var fileUrl: URL { get }
+  init()
+  func save()
+  var changed: Observable<Void> { get }
+}
+
+extension Preference {
+  private func prepare() {
+    _ = changed.subscribe(onNext: { _ in self.save() })
   }
-  
-  init(from yaml: URL) {
-    self = (try? String(contentsOf: yaml)).flatMap({ try? YAMLDecoder().decode(Preference.self, from: $0) }) ?? Preference()
-  }
-  
-  func save(to yaml: URL) {
+
+  func save() {
     do {
-      let yamlString = try YAMLEncoder().encode(self)
-      try yamlString.write(to: yaml, atomically: true, encoding: .utf8)
+      let yaml = try YAMLEncoder().encode(self)
+      try yaml.write(to: Self.fileUrl, atomically: true, encoding: .utf8)
     } catch {
       NSAlert(error: error).runModal()
     }
+  }
+  
+  static func create() -> Self {
+    let preference: Self
+    if let saved = (try? String(contentsOf: fileUrl)).flatMap({ try? YAMLDecoder().decode(Self.self, from: $0) }) {
+      preference = saved
+    } else {
+      preference = Self.init()
+    }
+    preference.prepare()
+    return preference
   }
 }

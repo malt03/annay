@@ -10,13 +10,17 @@ import Cocoa
 import RxSwift
 import Yams
 
-final class GeneralPreference: YamlCodable {
+final class GeneralPreference: Preference {
   static let shared = GeneralPreference.create()
   
   static var fileUrl: URL { return PreferenceManager.shared.generalUrl }
   
   let isHideEditorWhenUnfocused: Variable<Bool>
   private var _font: Variable<CodableFont>
+  
+  var changed: Observable<Void> {
+    return Observable.combineLatest(isHideEditorWhenUnfocused.asObservable(), _font.asObservable(), resultSelector: { (_, _) in })
+  }
 
   var font: Observable<NSFont> { return _font.asObservable().map { $0.font } }
 

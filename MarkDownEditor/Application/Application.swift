@@ -41,7 +41,7 @@ final class Application: NSApplication {
   
   override func changeFont(_ sender: Any?) {
     guard let manager = sender as? NSFontManager else { return }
-    FontManager.shared.convert(with: manager)
+    GeneralPreference.shared.convert(with: manager)
   }
   
   private var workspaceMenus = [NSMenuItem]()
