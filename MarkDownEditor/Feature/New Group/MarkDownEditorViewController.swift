@@ -32,7 +32,7 @@ final class MarkDownEditorViewController: NSViewController {
     Observable.combineLatest(
       textView.isFirstResponder,
       webView.isFirstResponder,
-      GeneralPreferenceManager.shared.isHideEditorWhenUnfocused.asObservable(),
+      GeneralPreference.shared.isHideEditorWhenUnfocused.asObservable(),
       resultSelector: { !$0 && !$1 && $2 }
     ).subscribe(onNext: { [weak self] (isHideEditor) in
       guard let s = self else { return }
@@ -232,7 +232,7 @@ extension MarkDownEditorViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
     switch message.name {
     case "backgroundClicked":
-      if !textView.isFirstResponderValue && GeneralPreferenceManager.shared.isHideEditorWhenUnfocused.value { moveFocusToEditor() }
+      if !textView.isFirstResponderValue && GeneralPreference.shared.isHideEditorWhenUnfocused.value { moveFocusToEditor() }
     case "checkboxChanged":
       guard
         let note = NodeModel.selectedNode.value,

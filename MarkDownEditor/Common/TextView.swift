@@ -18,7 +18,7 @@ final class TextView: NSTextView {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    FontManager.shared.font.subscribe(onNext: { [weak self] (font) in
+    GeneralPreference.shared.font.subscribe(onNext: { [weak self] (font) in
       self?.font = font
     }).disposed(by: bag)
 
