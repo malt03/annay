@@ -22,7 +22,7 @@ extension URL {
   var isWorkspace: Bool {
     if isDirectory { return false }
     let uti = (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
-    return uti == "koji.murata.markdowneditor.workspace"
+    return uti == "com.annay.workspace"
   }
   
   func isEqualIgnoringLastSlash(_ url: URL) -> Bool {

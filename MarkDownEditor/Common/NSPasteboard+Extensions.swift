@@ -78,7 +78,7 @@ extension NSPasteboard {
     let notes = nodes.filter { !$0.isDirectory }
     if notes.count == 0 { return false }
     clearContents()
-    let linkTexts = notes.map { "[\($0.name)](markdowneditor:///\(parentWorkspaceId)/\($0.id))" }
+    let linkTexts = notes.map { "[\($0.name)](annay:///\(parentWorkspaceId)/\($0.id))" }
     writeObjects(linkTexts as [NSPasteboardWriting])
     return true
   }

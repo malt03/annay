@@ -15,7 +15,7 @@
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>koji.murata.markdowneditor.workspace</string>
+				<string>com.annay.workspace</string>
 			</array>
 		</dict>
 	</array>
@@ -40,7 +40,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>markdowneditor</string>
+				<string>annay</string>
 			</array>
 		</dict>
 	</array>
@@ -53,7 +53,7 @@
 	<key>NSMainStoryboardFile</key>
 	<string>Launch</string>
 	<key>NSPrincipalClass</key>
-	<string>MarkDownEditor.Application</string>
+	<string>Annay.Application</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -62,14 +62,14 @@
 				<string>com.pkware.zip-archive</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>MarkDownEditor Package</string>
+			<string>Annay Workspace</string>
 			<key>UTTypeIdentifier</key>
-			<string>koji.murata.markdowneditor.workspace</string>
+			<string>com.annay.workspace</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
-					<string>mdworkspace</string>
+					<string>annay</string>
 				</array>
 			</dict>
 		</dict>
