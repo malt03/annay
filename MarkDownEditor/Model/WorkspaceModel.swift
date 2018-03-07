@@ -13,7 +13,7 @@ import Zip
 import CoreSpotlight
 
 final class WorkspaceModel {
-  static var fileExtension: String { return "mdworkspace" }
+  static var fileExtension: String { return "annay" }
   
   private let bag = DisposeBag()
   

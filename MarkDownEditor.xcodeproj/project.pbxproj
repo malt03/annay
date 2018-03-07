@@ -91,7 +91,6 @@
 		EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */; };
 		EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */; };
 		EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A28B200CD90C00D5E7BE /* Array+Extensions.swift */; };
-		EDD0A28E200ED29400D5E7BE /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A28D200ED29400D5E7BE /* Util.swift */; };
 		EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A296200EF75300D5E7BE /* WorkspaceModel.swift */; };
 		EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */; };
 		EDD0A2B9200F2B9E00D5E7BE /* WorkspacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A2B8200F2B9E00D5E7BE /* WorkspacesViewController.swift */; };
@@ -101,7 +100,7 @@
 		EDD4CA6D203BB331003F8072 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD4CA6C203BB331003F8072 /* Quartz.framework */; };
 		EDD4CA70203BB331003F8072 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4CA6F203BB331003F8072 /* PreviewViewController.swift */; };
 		EDD4CA73203BB331003F8072 /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD4CA71203BB331003F8072 /* PreviewViewController.xib */; };
-		EDD4CA78203BB331003F8072 /* MarkDownEditorPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EDD4CA6B203BB331003F8072 /* MarkDownEditorPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EDD4CA78203BB331003F8072 /* AnnayPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EDD4CA6B203BB331003F8072 /* AnnayPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EDDE608F203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */; };
 		EDDE6090203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */; };
 		EDDE6093203C65A500331A77 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE6091203C65A500331A77 /* WebView.swift */; };
@@ -150,7 +149,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				EDD4CA78203BB331003F8072 /* MarkDownEditorPreviewExtension.appex in Embed App Extensions */,
+				EDD4CA78203BB331003F8072 /* AnnayPreviewExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,7 +271,6 @@
 		EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboardPasteboardType+Extensions.swift"; sourceTree = "<group>"; };
 		EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard+Extensions.swift"; sourceTree = "<group>"; };
 		EDD0A28B200CD90C00D5E7BE /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
-		EDD0A28D200ED29400D5E7BE /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		EDD0A296200EF75300D5E7BE /* WorkspaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceModel.swift; sourceTree = "<group>"; };
 		EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavableInUserDefaults.swift; sourceTree = "<group>"; };
 		EDD0A2B8200F2B9E00D5E7BE /* WorkspacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesViewController.swift; sourceTree = "<group>"; };
@@ -280,7 +278,7 @@
 		EDD4C746202EB0EB0029FF4C /* NSFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSFont+Extensions.swift"; sourceTree = "<group>"; };
 		EDD4C749202EBD470029FF4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GeneralPreference.storyboard; sourceTree = "<group>"; };
 		EDD4C74C202EBD7D0029FF4C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/GeneralPreference.strings; sourceTree = "<group>"; };
-		EDD4CA6B203BB331003F8072 /* MarkDownEditorPreviewExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MarkDownEditorPreviewExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDD4CA6B203BB331003F8072 /* AnnayPreviewExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AnnayPreviewExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDD4CA6C203BB331003F8072 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		EDD4CA6F203BB331003F8072 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		EDD4CA72203BB331003F8072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreviewViewController.xib; sourceTree = "<group>"; };
@@ -290,7 +288,7 @@
 		EDDE6091203C65A500331A77 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Extensions.swift"; sourceTree = "<group>"; };
-		EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkDownEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDEB7A572004EDF000F8C48A /* Annay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Annay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDEB7A612004EDF000F8C48A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Launch.storyboard; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 				EDD0A28B200CD90C00D5E7BE /* Array+Extensions.swift */,
 				EDA736D4200E3E6A000BC5DA /* SplitView.swift */,
 				ED55C4FC200E50E70070301A /* BackgroundSetableView.swift */,
-				EDD0A28D200ED29400D5E7BE /* Util.swift */,
 				EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */,
 				EDBFF25B2010868C005F3547 /* String+Extensions.swift */,
 				ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */,
@@ -641,8 +638,8 @@
 		EDEB7A582004EDF000F8C48A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */,
-				EDD4CA6B203BB331003F8072 /* MarkDownEditorPreviewExtension.appex */,
+				EDEB7A572004EDF000F8C48A /* Annay.app */,
+				EDD4CA6B203BB331003F8072 /* AnnayPreviewExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -683,9 +680,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EDD4CA6A203BB331003F8072 /* MarkDownEditorPreviewExtension */ = {
+		EDD4CA6A203BB331003F8072 /* AnnayPreviewExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EDD4CA7B203BB331003F8072 /* Build configuration list for PBXNativeTarget "MarkDownEditorPreviewExtension" */;
+			buildConfigurationList = EDD4CA7B203BB331003F8072 /* Build configuration list for PBXNativeTarget "AnnayPreviewExtension" */;
 			buildPhases = (
 				EDD4CA67203BB331003F8072 /* Sources */,
 				EDD4CA68203BB331003F8072 /* Frameworks */,
@@ -695,14 +692,14 @@
 			);
 			dependencies = (
 			);
-			name = MarkDownEditorPreviewExtension;
+			name = AnnayPreviewExtension;
 			productName = MarkDownEditorPreviewExtension;
-			productReference = EDD4CA6B203BB331003F8072 /* MarkDownEditorPreviewExtension.appex */;
+			productReference = EDD4CA6B203BB331003F8072 /* AnnayPreviewExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		EDEB7A562004EDF000F8C48A /* MarkDownEditor */ = {
+		EDEB7A562004EDF000F8C48A /* Annay */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EDEB7A672004EDF000F8C48A /* Build configuration list for PBXNativeTarget "MarkDownEditor" */;
+			buildConfigurationList = EDEB7A672004EDF000F8C48A /* Build configuration list for PBXNativeTarget "Annay" */;
 			buildPhases = (
 				EDEB7A532004EDF000F8C48A /* Sources */,
 				EDEB7A542004EDF000F8C48A /* Frameworks */,
@@ -715,9 +712,9 @@
 			dependencies = (
 				EDD4CA77203BB331003F8072 /* PBXTargetDependency */,
 			);
-			name = MarkDownEditor;
+			name = Annay;
 			productName = MarkDownEditor;
-			productReference = EDEB7A572004EDF000F8C48A /* MarkDownEditor.app */;
+			productReference = EDEB7A572004EDF000F8C48A /* Annay.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -771,8 +768,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EDEB7A562004EDF000F8C48A /* MarkDownEditor */,
-				EDD4CA6A203BB331003F8072 /* MarkDownEditorPreviewExtension */,
+				EDEB7A562004EDF000F8C48A /* Annay */,
+				EDD4CA6A203BB331003F8072 /* AnnayPreviewExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -880,7 +877,6 @@
 				EDFE82C620256BE700702C85 /* FileManager+Extensions.swift in Sources */,
 				ED9CCA6D2025927600EB2F7C /* DateFormatter+Extensions.swift in Sources */,
 				ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */,
-				EDD0A28E200ED29400D5E7BE /* Util.swift in Sources */,
 				EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */,
 				ED598C39201F03E200072D8A /* NSAlert+Extensions.swift in Sources */,
 				ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */,
@@ -920,7 +916,7 @@
 /* Begin PBXTargetDependency section */
 		EDD4CA77203BB331003F8072 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = EDD4CA6A203BB331003F8072 /* MarkDownEditorPreviewExtension */;
+			target = EDD4CA6A203BB331003F8072 /* AnnayPreviewExtension */;
 			targetProxy = EDD4CA76203BB331003F8072 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1062,7 +1058,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MarkDownEditorPreviewExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = koji.murata.MarkDownEditor.MarkDownEditorPreviewExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.annay.PreviewExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -1076,7 +1072,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MarkDownEditorPreviewExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = koji.murata.MarkDownEditor.MarkDownEditorPreviewExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.annay.PreviewExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -1215,7 +1211,7 @@
 					"$(PROJECT_DIR)/MarkDownEditor",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = koji.murata.MarkDownEditor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.annay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1243,7 +1239,7 @@
 					"$(PROJECT_DIR)/MarkDownEditor",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = koji.murata.MarkDownEditor;
+				PRODUCT_BUNDLE_IDENTIFIER = com.annay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
@@ -1253,7 +1249,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EDD4CA7B203BB331003F8072 /* Build configuration list for PBXNativeTarget "MarkDownEditorPreviewExtension" */ = {
+		EDD4CA7B203BB331003F8072 /* Build configuration list for PBXNativeTarget "AnnayPreviewExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EDD4CA79203BB331003F8072 /* Debug */,
@@ -1271,7 +1267,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EDEB7A672004EDF000F8C48A /* Build configuration list for PBXNativeTarget "MarkDownEditor" */ = {
+		EDEB7A672004EDF000F8C48A /* Build configuration list for PBXNativeTarget "Annay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EDEB7A682004EDF000F8C48A /* Debug */,

@@ -22,7 +22,7 @@ final class PreferenceManager {
   
   private var directoryUrl: URL
   
-  private static var defaultDirectoryUrl: URL { return  FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".markdowneditor", isDirectory: true) }
+  private static var defaultDirectoryUrl: URL { return  FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".annay", isDirectory: true) }
   
   private init() {
     directoryUrl = UserDefaults.standard.url(forKey: Key.DirectoryUrl) ?? PreferenceManager.defaultDirectoryUrl

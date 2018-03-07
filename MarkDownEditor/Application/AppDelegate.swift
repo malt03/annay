@@ -18,7 +18,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   
   func application(_ application: NSApplication, open urls: [URL]) {
     guard let url = urls.first else { return }
-    if url.scheme != "markdowneditor" { return }
+    if url.scheme != "annay" { return }
     let nodeId = url.lastPathComponent
     let workspaceUniqId = url.deletingLastPathComponent().lastPathComponent
     guard
