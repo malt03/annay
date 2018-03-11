@@ -16,26 +16,26 @@ final class GeneralPreference: Preference {
   static var fileUrl: URL { return PreferenceManager.shared.generalUrl }
   
   let isHideEditorWhenUnfocused: Variable<Bool>
-  private var _font: Variable<CodableFont>
+  private var font: Variable<CodableFont>
   
   var changed: Observable<Void> {
-    return Observable.combineLatest(isHideEditorWhenUnfocused.asObservable(), _font.asObservable(), resultSelector: { (_, _) in })
+    return Observable.combineLatest(isHideEditorWhenUnfocused.asObservable(), font.asObservable(), resultSelector: { (_, _) in })
   }
 
-  var font: Observable<NSFont> { return _font.asObservable().map { $0.font } }
+  var fontObservable: Observable<NSFont> { return font.asObservable().map { $0.font } }
 
   func convert(with manager: NSFontManager) {
-    _font.value = CodableFont(manager.convert(_font.value.font))
+    font.value = CodableFont(manager.convert(font.value.font))
   }
   
   func showFontPanel() {
     let fontPanel = NSFontPanel.shared
-    fontPanel.setPanelFont(_font.value.font, isMultiple: false)
+    fontPanel.setPanelFont(font.value.font, isMultiple: false)
     fontPanel.makeKeyAndOrderFront(nil)
   }
   
   init() {
     self.isHideEditorWhenUnfocused = Variable(false)
-    self._font = Variable(CodableFont(NSFont(name: "Osaka-Mono", size: 14) ?? .systemFont(ofSize: 14)))
+    self.font = Variable(CodableFont(NSFont(name: "Osaka-Mono", size: 14) ?? .systemFont(ofSize: 14)))
   }
 }

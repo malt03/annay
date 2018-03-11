@@ -17,7 +17,7 @@ final class GeneralPreferenceViewController: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    GeneralPreference.shared.font.asObservable().map { $0.displayNameWithPoint }.distinctUntilChanged().bind(to: fontLabel.rx.text).disposed(by: bag)
+    GeneralPreference.shared.fontObservable.asObservable().map { $0.displayNameWithPoint }.distinctUntilChanged().bind(to: fontLabel.rx.text).disposed(by: bag)
     GeneralPreference.shared.isHideEditorWhenUnfocused.asObservable().map { (isOn) -> NSControl.StateValue in
       return isOn ? .on : .off
     }.bind(to: isHideEditorWhenUnfocusedCheckbox.rx.state).disposed(by: bag)
