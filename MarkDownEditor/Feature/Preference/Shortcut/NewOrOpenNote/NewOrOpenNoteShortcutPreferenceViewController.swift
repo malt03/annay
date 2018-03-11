@@ -8,7 +8,7 @@
 
 import Cocoa
 import RxSwift
-import MASShortcut
+import KeyHolder
 import RealmSwift
 
 final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
@@ -17,7 +17,7 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
   
   private lazy var selectedWorkspace = Variable(NewOrOpenNoteShortcutManager.shared.workspace(for: kind) ?? WorkspaceModel.selected.value)
   
-  @IBOutlet private weak var shortcutView: MASShortcutView!
+  @IBOutlet private weak var shortcutView: RecordView!
   @IBOutlet private weak var popUpButton: NSPopUpButton!
   @IBOutlet private weak var outlineView: NSOutlineView!
   @IBOutlet private weak var outlineViewHightConstraint: NSLayoutConstraint!

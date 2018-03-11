@@ -8,7 +8,6 @@
 
 import Cocoa
 import RxSwift
-import Yams
 
 final class GeneralPreference: Preference {
   static let shared = GeneralPreference.create()

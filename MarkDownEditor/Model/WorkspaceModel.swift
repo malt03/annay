@@ -84,6 +84,10 @@ final class WorkspaceModel {
     _name.value = newName
   }
   
+  static func space(uniqId: String) -> WorkspaceModel? {
+    return spaces.value.first(where: { $0.uniqId == uniqId })
+  }
+  
   @discardableResult
   static func open(url: URL) -> Bool {
     let workspace: WorkspaceModel

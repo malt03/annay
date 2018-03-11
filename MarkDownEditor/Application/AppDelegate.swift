@@ -23,7 +23,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     let nodeId = url.lastPathComponent
     let workspaceUniqId = url.deletingLastPathComponent().lastPathComponent
     guard
-      let workspace = WorkspaceModel.spaces.value.first(where: { $0.uniqId == workspaceUniqId }),
+      let workspace = WorkspaceModel.space(uniqId: workspaceUniqId),
       let node = NodeModel.node(for: nodeId, for: workspace)
       else { return }
     workspace.select()
