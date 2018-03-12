@@ -34,6 +34,7 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
     super.viewDidLoad()
     
     shortcutView.keyCombo = ShortcutPreference.shared.keyCombo(for: kind)
+    shortcutView.tintColor = .textColor
     shortcutView.delegate = self
     
     WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] (spaces) in
