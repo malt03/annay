@@ -13,7 +13,6 @@ import Yams
 protocol Preference: Codable {
   static var fileUrl: URL { get }
   init()
-  func save()
   var changed: Observable<Void> { get }
 }
 

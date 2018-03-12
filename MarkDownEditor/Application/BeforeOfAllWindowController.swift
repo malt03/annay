@@ -18,7 +18,7 @@ final class BeforeOfAllWindowController: NSWindowController {
       WorkspaceDirectoryWatcherManager.shared.prepare()
       NodeModel.createFirstDirectoryIfNeeded()
       
-      NewOrOpenNoteShortcutManager.shared.prepare()
+      ShortcutPreference.shared.prepare()
       
       for workspace in WorkspaceModel.spaces.value { workspace.saveToUserDefaults() }
 
