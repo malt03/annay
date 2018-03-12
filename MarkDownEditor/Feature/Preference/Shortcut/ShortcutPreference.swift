@@ -61,8 +61,8 @@ final class ShortcutPreference: Preference {
     return Observable.combineLatest(newNote.changed, openNote.changed, resultSelector: { _, _ in })
   }
   
-  let newNote: ShortcutPreferenceNodeParameters
-  let openNote: ShortcutPreferenceNodeParameters
+  private let newNote: ShortcutPreferenceNodeParameters
+  private let openNote: ShortcutPreferenceNodeParameters
   
   private var allParameters: [ShortcutPreferenceNodeParameters] { return [newNote, openNote] }
   

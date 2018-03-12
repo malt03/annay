@@ -10,7 +10,8 @@ import Cocoa
 import Magnet
 import RxSwift
 
-final class ShortcutPreferenceNodeParameters: Codable {
+// NSObjectを継承しないと、ショートカットキーが何故か機能しない
+final class ShortcutPreferenceNodeParameters: NSObject, Codable {
   private let bag = DisposeBag()
   
   var kind: Kind
@@ -43,11 +44,12 @@ final class ShortcutPreferenceNodeParameters: Codable {
       guard let s = self else { return }
       HotKeyCenter.shared.unregisterHotKey(with: s.kind.rawValue)
       guard let keyCombo = keyCombo else { return }
-      HotKey(identifier: s.kind.rawValue, keyCombo: keyCombo, target: self as AnyObject, action: #selector(s.perform)).register()
+      let hotKey = HotKey(identifier: s.kind.rawValue, keyCombo: keyCombo, target: s, action: #selector(s.performHotKey))
+      hotKey.register()
     }).disposed(by: bag)
   }
   
-  @objc func perform() {
+  @objc private func performHotKey() {
     guard
       let workspace = node.value?.workspace,
       let node = node.value?.node
