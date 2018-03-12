@@ -8,31 +8,34 @@
 
 import Cocoa
 import RxSwift
-import MASShortcut
+import KeyHolder
+import Magnet
 import RealmSwift
 
 final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
   private let bag = DisposeBag()
   private var refreshNodesToken: NotificationToken?
   
-  private lazy var selectedWorkspace = Variable(NewOrOpenNoteShortcutManager.shared.workspace(for: kind) ?? WorkspaceModel.selected.value)
+  private lazy var selectedWorkspace = Variable(ShortcutPreference.shared.node(for: kind)?.workspace ?? WorkspaceModel.selected.value)
   
-  @IBOutlet private weak var shortcutView: MASShortcutView!
+  @IBOutlet private weak var shortcutView: RecordView!
   @IBOutlet private weak var popUpButton: NSPopUpButton!
   @IBOutlet private weak var outlineView: NSOutlineView!
   @IBOutlet private weak var outlineViewHightConstraint: NSLayoutConstraint!
   @IBOutlet private weak var descriptionLabel: NSTextField!
   
-  private var kind: NewOrOpenNoteShortcutManager.Kind!
+  private var kind: ShortcutPreferenceNodeParameters.Kind!
   
-  func prepare(kind: NewOrOpenNoteShortcutManager.Kind) {
+  func prepare(kind: ShortcutPreferenceNodeParameters.Kind) {
     self.kind = kind
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    shortcutView.associatedUserDefaultsKey = NewOrOpenNoteShortcutManager.Key.ShortcutKey(for: kind)
+    shortcutView.keyCombo = ShortcutPreference.shared.keyCombo(for: kind)
+    shortcutView.tintColor = .textColor
+    shortcutView.delegate = self
     
     WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] (spaces) in
       guard let s = self else { return }
@@ -57,8 +60,8 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
     }).disposed(by: bag)
     
     switch kind! {
-    case .new:  descriptionLabel.stringValue = Localized("Parent directory or group")
-    case .open: descriptionLabel.stringValue = Localized("Note")
+    case .newNote:  descriptionLabel.stringValue = Localized("Parent directory or group")
+    case .openNote: descriptionLabel.stringValue = Localized("Note")
     }
   }
   
@@ -76,7 +79,7 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
   }
   
   private func selectSelectedDirectory() {
-    let row = outlineView.row(forItem: NewOrOpenNoteShortcutManager.shared.node(for: kind))
+    let row = outlineView.row(forItem: ShortcutPreference.shared.node(for: kind)?.node)
     if row > 0 {
       outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
     }
@@ -98,23 +101,23 @@ extension NewOrOpenNoteShortcutPreferenceViewController: NSOutlineViewDelegate, 
       return NodeModel.roots(query: nil, for: selectedWorkspace.value).count
     }
     switch kind! {
-    case .new:  return node.sortedDirectoryChildren.count
-    case .open: return node.sortedChildren(query: nil).count
+    case .newNote:  return node.sortedDirectoryChildren.count
+    case .openNote: return node.sortedChildren(query: nil).count
     }
   }
   
   func outlineView(_ outlineView: NSOutlineView, shouldSelectItem item: Any) -> Bool {
     switch kind! {
-    case .new:  return true
-    case .open: return !(item as! NodeModel).isDirectory
+    case .newNote:  return true
+    case .openNote: return !(item as! NodeModel).isDirectory
     }
   }
   
   func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
     let node = item as! NodeModel
     switch kind! {
-    case .new:  return node.sortedDirectoryChildren.count > 0
-    case .open: return node.isDirectory
+    case .newNote:  return node.sortedDirectoryChildren.count > 0
+    case .openNote: return node.isDirectory
     }
   }
   
@@ -123,15 +126,15 @@ extension NewOrOpenNoteShortcutPreferenceViewController: NSOutlineViewDelegate, 
       return NodeModel.roots(query: nil, for: selectedWorkspace.value)[index]
     }
     switch kind! {
-    case .new:  return node.sortedDirectoryChildren[index]
-    case .open: return node.sortedChildren(query: nil)[index]
+    case .newNote:  return node.sortedDirectoryChildren[index]
+    case .openNote: return node.sortedChildren(query: nil)[index]
     }
-    
   }
   
   func outlineViewSelectionDidChange(_ notification: Notification) {
-    NewOrOpenNoteShortcutManager.shared.setWorkspace(selectedWorkspace.value, for: kind)
-    NewOrOpenNoteShortcutManager.shared.setNode((outlineView.item(atRow: outlineView.selectedRow) as? NodeModel), for: kind)
+    let node = outlineView.item(atRow: outlineView.selectedRow) as? NodeModel
+    let workspace = selectedWorkspace.value
+    ShortcutPreference.shared.set(node: node, workspace: workspace, for: kind)
   }
   
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
@@ -140,5 +143,19 @@ extension NewOrOpenNoteShortcutPreferenceViewController: NSOutlineViewDelegate, 
     let nodeCell = outlineView.makeView(withIdentifier: identifier, owner: self) as! NodeTableCellView
     nodeCell.prepare(node: node, inPreference: true)
     return nodeCell
+  }
+}
+
+extension NewOrOpenNoteShortcutPreferenceViewController: RecordViewDelegate {
+  func recordViewShouldBeginRecording(_ recordView: RecordView) -> Bool { return true }
+  func recordView(_ recordView: RecordView, canRecordKeyCombo keyCombo: KeyCombo) -> Bool { return true }
+  func recordViewDidEndRecording(_ recordView: RecordView) {}
+
+  func recordViewDidClearShortcut(_ recordView: RecordView) {
+    ShortcutPreference.shared.set(keyCombo: nil, for: kind)
+  }
+  
+  func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
+    ShortcutPreference.shared.set(keyCombo: keyCombo, for: kind)
   }
 }

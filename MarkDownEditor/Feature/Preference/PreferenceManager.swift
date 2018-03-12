@@ -16,9 +16,8 @@ final class PreferenceManager {
   
   static let shared = PreferenceManager()
   
-  var generalUrl: URL {
-    return directoryUrl.appendingPathComponent("general.yml")
-  }
+  var generalUrl: URL { return directoryUrl.appendingPathComponent("general.yml") }
+  var shortcutUrl: URL { return directoryUrl.appendingPathComponent("shortcut.yml") }
   
   private var directoryUrl: URL
   

@@ -80,9 +80,9 @@ final class SidebarViewController: NSViewController {
       self?.outlineView.reloadData()
     }).disposed(by: bag)
     
-    NewOrOpenNoteShortcutManager.shared.addInsertNodeHandler { [weak self] (node) in
+    ShortcutPreference.shared.insertNode.subscribe(onNext: { [weak self] (node) in
       self?.insert(node: node, in: node.parent)
-    }
+    }).disposed(by: bag)
     
     DispatchQueue.main.async {
       self.moveFocusToSidebar()

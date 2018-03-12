@@ -16,17 +16,15 @@ class BackgroundSetableView: NSView {
   @IBInspectable var borderColor: NSColor?
 
   override func draw(_ dirtyRect: NSRect) {
-    var flag = false
+    let path = NSBezierPath(roundedRect: dirtyRect, xRadius: cornerRadius, yRadius: cornerRadius)
     if let backgroundColor = backgroundColor {
-      flag = true
       backgroundColor.setFill()
+      path.fill()
     }
     if let borderColor = borderColor {
-      flag = true
       borderColor.setStroke()
-    }
-    if flag {
-      NSBezierPath(roundedRect: dirtyRect, xRadius: cornerRadius, yRadius: cornerRadius).fill()
+      path.lineWidth = 1
+      path.stroke()
     }
 
     super.draw(dirtyRect)

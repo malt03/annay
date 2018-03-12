@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="7wa-Mx-I7f">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14105" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="7wa-Mx-I7f">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14105"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
@@ -9,31 +9,46 @@
         <!--New Or Open Note Shortcut Preference View Controller-->
         <scene sceneID="Km4-mX-HLD">
             <objects>
-                <viewController id="7wa-Mx-I7f" customClass="NewOrOpenNoteShortcutPreferenceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7wa-Mx-I7f" customClass="NewOrOpenNoteShortcutPreferenceViewController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="GnK-3f-DUR">
                         <rect key="frame" x="0.0" y="0.0" width="496" height="289"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E71-OM-elJ">
-                                <rect key="frame" x="32" y="149" width="120" height="108"/>
+                                <rect key="frame" x="32" y="148" width="120" height="109"/>
                                 <subviews>
                                     <stackView distribution="fillProportionally" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NVt-ML-Tb7">
-                                        <rect key="frame" x="0.0" y="62" width="120" height="46"/>
+                                        <rect key="frame" x="0.0" y="62" width="120" height="47"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="n3g-KD-UZH">
-                                                <rect key="frame" x="-2" y="29" width="27" height="17"/>
+                                                <rect key="frame" x="-2" y="30" width="27" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Key" id="mtC-z4-tHm">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="4G5-rU-jYC" customClass="MASShortcutView">
-                                                <rect key="frame" x="0.0" y="0.0" width="120" height="21"/>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="4G5-rU-jYC" customClass="RecordView" customModule="KeyHolder">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="3oL-CZ-CCW"/>
-                                                    <constraint firstAttribute="height" constant="21" id="EUV-y5-RdC"/>
+                                                    <constraint firstAttribute="height" constant="22" id="EUV-y5-RdC"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsClearButton" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" red="0.77254901960784317" green="0.77254901960784317" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </customView>
                                         </subviews>
                                         <visibilityPriorities>
@@ -124,7 +139,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="directory" id="35h-1J-xEc" customClass="NodeTableCellView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                        <tableCellView identifier="directory" id="35h-1J-xEc" customClass="NodeTableCellView" customModule="Annay" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="275" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -160,7 +175,7 @@
                                                                 <outlet property="textField" destination="HqW-Kl-vag" id="aZc-iz-4o0"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="note" id="OhN-p7-nXn" customClass="NodeTableCellView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                        <tableCellView identifier="note" id="OhN-p7-nXn" customClass="NodeTableCellView" customModule="Annay" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="20" width="275" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -213,6 +228,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="5U4-bF-LAC" firstAttribute="leading" secondItem="E71-OM-elJ" secondAttribute="trailing" constant="32" id="6Da-OW-edA"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5U4-bF-LAC" secondAttribute="trailing" constant="20" symbolic="YES" id="BaP-5P-KRz"/>
                             <constraint firstItem="GZB-V0-5XJ" firstAttribute="top" secondItem="5U4-bF-LAC" secondAttribute="bottom" constant="8" id="JkW-Kp-jor"/>
                             <constraint firstAttribute="trailing" secondItem="GZB-V0-5XJ" secondAttribute="trailing" constant="32" id="LMw-A3-NNP"/>
                             <constraint firstItem="E71-OM-elJ" firstAttribute="top" secondItem="GnK-3f-DUR" secondAttribute="top" constant="32" id="PAh-fX-Kgq"/>
