@@ -23,7 +23,6 @@
 		ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15AD200666B1003D55A3 /* NodeModel.swift */; };
 		ED431FFC205628A30042078C /* CodableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED431FFB205628A30042078C /* CodableNode.swift */; };
 		ED43200020562B460042078C /* ShortcutPreferenceNodeParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED431FFF20562B460042078C /* ShortcutPreferenceNodeParameters.swift */; };
-		ED43200220562F230042078C /* ShortcutPreferenceParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED43200120562F230042078C /* ShortcutPreferenceParameters.swift */; };
 		ED43202420564C0E0042078C /* Magnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED43202320564C0E0042078C /* Magnet.framework */; };
 		ED43202620564C170042078C /* KeyHolder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED43202520564C170042078C /* KeyHolder.framework */; };
 		ED43202720564C1C0042078C /* KeyHolder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED43202520564C170042078C /* KeyHolder.framework */; };
@@ -93,7 +92,6 @@
 		EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25B2010868C005F3547 /* String+Extensions.swift */; };
 		EDC25C85203BCC9F00C8F38E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDC25C82203BCC9F00C8F38E /* Localizable.strings */; };
 		EDC72BC0205575090048D310 /* ShortcutPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC72BBF205575090048D310 /* ShortcutPreference.swift */; };
-		EDC72BC4205578BB0048D310 /* ObservableType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC72BC3205578BB0048D310 /* ObservableType+Extensions.swift */; };
 		EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */ = {isa = PBXBuildFile; fileRef = EDCED8C42005DAD100C514B1 /* monokai-sublime.css */; };
 		EDD0805A202B12210021895A /* NewOrOpenNoteShortcutPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD08058202B12210021895A /* NewOrOpenNoteShortcutPreferenceViewController.swift */; };
 		EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */; };
@@ -202,7 +200,6 @@
 		ED2E15AD200666B1003D55A3 /* NodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeModel.swift; sourceTree = "<group>"; };
 		ED431FFB205628A30042078C /* CodableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableNode.swift; sourceTree = "<group>"; };
 		ED431FFF20562B460042078C /* ShortcutPreferenceNodeParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreferenceNodeParameters.swift; sourceTree = "<group>"; };
-		ED43200120562F230042078C /* ShortcutPreferenceParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreferenceParameters.swift; sourceTree = "<group>"; };
 		ED43202320564C0E0042078C /* Magnet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Magnet.framework; path = Carthage/Build/Mac/Magnet.framework; sourceTree = "<group>"; };
 		ED43202520564C170042078C /* KeyHolder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeyHolder.framework; path = Carthage/Build/Mac/KeyHolder.framework; sourceTree = "<group>"; };
 		ED434F0220079DBD00C2357D /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
@@ -279,7 +276,6 @@
 		EDC25C83203BCC9F00C8F38E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EDC25C84203BCC9F00C8F38E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EDC72BBF205575090048D310 /* ShortcutPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreference.swift; sourceTree = "<group>"; };
-		EDC72BC3205578BB0048D310 /* ObservableType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extensions.swift"; sourceTree = "<group>"; };
 		EDCED8C42005DAD100C514B1 /* monokai-sublime.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.css"; sourceTree = "<group>"; };
 		EDD08058202B12210021895A /* NewOrOpenNoteShortcutPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrOpenNoteShortcutPreferenceViewController.swift; sourceTree = "<group>"; };
 		EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboardPasteboardType+Extensions.swift"; sourceTree = "<group>"; };
@@ -388,7 +384,6 @@
 				EDEDA86C2044F32600260C1E /* Queue.swift */,
 				ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */,
 				ED8CE48B204E7291002F1A5D /* CodableFont.swift */,
-				EDC72BC3205578BB0048D310 /* ObservableType+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -520,7 +515,6 @@
 				ED574000202C3F9100D844A3 /* ShortcutPreferenceViewController.swift */,
 				EDC72BBF205575090048D310 /* ShortcutPreference.swift */,
 				ED431FFF20562B460042078C /* ShortcutPreferenceNodeParameters.swift */,
-				ED43200120562F230042078C /* ShortcutPreferenceParameters.swift */,
 				ED431FFB205628A30042078C /* CodableNode.swift */,
 				ED9703FF202C2FDF004B4367 /* NewOrOpenNote */,
 			);
@@ -902,7 +896,6 @@
 				EDFE82C620256BE700702C85 /* FileManager+Extensions.swift in Sources */,
 				ED9CCA6D2025927600EB2F7C /* DateFormatter+Extensions.swift in Sources */,
 				ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */,
-				EDC72BC4205578BB0048D310 /* ObservableType+Extensions.swift in Sources */,
 				EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */,
 				ED598C39201F03E200072D8A /* NSAlert+Extensions.swift in Sources */,
 				ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */,
@@ -913,7 +906,6 @@
 				ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */,
 				EDB601492022C06A00EDF59C /* Application.swift in Sources */,
 				EDD0805A202B12210021895A /* NewOrOpenNoteShortcutPreferenceViewController.swift in Sources */,
-				ED43200220562F230042078C /* ShortcutPreferenceParameters.swift in Sources */,
 				ED55C62E203BB51900827140 /* HtmlDataStore.swift in Sources */,
 				EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */,
 				ED8CE48C204E7291002F1A5D /* CodableFont.swift in Sources */,

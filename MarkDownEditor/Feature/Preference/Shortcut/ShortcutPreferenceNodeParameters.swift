@@ -8,29 +8,49 @@
 
 import Cocoa
 import Magnet
+import RxSwift
 
-final class ShortcutPreferenceNodeParameters: Codable, ShortcutPreferenceParameters {
+final class ShortcutPreferenceNodeParameters: Codable {
+  private let bag = DisposeBag()
+  
   var kind: Kind
-  var keyCombo: KeyCombo?
-  var node: CodableNode?
+  var keyCombo: Variable<KeyCombo?>
+  var node: Variable<CodableNode?>
+  
+  var changed: Observable<Void> {
+    return Observable.combineLatest(keyCombo.asObservable(), node.asObservable(), resultSelector: { _, _ in })
+  }
+  
+  private enum CodingKeys: CodingKey {
+    case kind
+    case keyCombo
+    case node
+  }
   
   enum Kind: String, Codable {
     case newNote
     case openNote
   }
   
-  var kindRawValue: String { return kind.rawValue }
-  
   init(kind: Kind) {
     self.kind = kind
-    keyCombo = nil
-    node = nil
+    keyCombo = Variable(nil)
+    node = Variable(nil)
   }
   
-  func perform() {
+  func prepare() {
+    keyCombo.asObservable().subscribe(onNext: { [weak self] (keyCombo) in
+      guard let s = self else { return }
+      HotKeyCenter.shared.unregisterHotKey(with: s.kind.rawValue)
+      guard let keyCombo = keyCombo else { return }
+      HotKey(identifier: s.kind.rawValue, keyCombo: keyCombo, target: self as AnyObject, action: #selector(s.perform)).register()
+    }).disposed(by: bag)
+  }
+  
+  @objc func perform() {
     guard
-      let workspace = node?.workspace,
-      let node = node?.node
+      let workspace = node.value?.workspace,
+      let node = node.value?.node
       else {
         NSAlert(localizedMessageText: "No parent directory was selected.").runModal()
         return

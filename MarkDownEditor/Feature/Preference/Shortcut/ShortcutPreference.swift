@@ -15,15 +15,15 @@ final class ShortcutPreference: Preference {
   
   func node(for kind: ShortcutPreferenceNodeParameters.Kind) -> CodableNode? {
     switch kind {
-    case .newNote:  return newNote.value.node
-    case .openNote: return openNote.value.node
+    case .newNote:  return newNote.node.value
+    case .openNote: return openNote.node.value
     }
   }
   
   func keyCombo(for kind: ShortcutPreferenceNodeParameters.Kind) -> KeyCombo? {
     switch kind {
-    case .newNote:  return newNote.value.keyCombo
-    case .openNote: return openNote.value.keyCombo
+    case .newNote:  return newNote.keyCombo.value
+    case .openNote: return openNote.keyCombo.value
     }
   }
   
@@ -35,15 +35,15 @@ final class ShortcutPreference: Preference {
       codableNode = nil
     }
     switch kind {
-    case .newNote:  newNote.value.node = codableNode
-    case .openNote: openNote.value.node = codableNode
+    case .newNote:  newNote.node.value = codableNode
+    case .openNote: openNote.node.value = codableNode
     }
   }
   
   func set(keyCombo: KeyCombo?, for kind: ShortcutPreferenceNodeParameters.Kind) {
     switch kind {
-    case .newNote:  newNote.value.keyCombo = keyCombo
-    case .openNote: openNote.value.keyCombo = keyCombo
+    case .newNote:  newNote.keyCombo.value = keyCombo
+    case .openNote: openNote.keyCombo.value = keyCombo
     }
   }
 
@@ -51,20 +51,20 @@ final class ShortcutPreference: Preference {
   
   func prepare() {
     for parameters in allParameters {
-      parameters.register()
+      parameters.prepare()
     }
   }
   
   static var fileUrl: URL { return PreferenceManager.shared.shortcutUrl }
   
   var changed: Observable<Void> {
-    return Observable.combineLatest(newNote.asObservable(), openNote.asObservable(), resultSelector: { _, _ in })
+    return Observable.combineLatest(newNote.changed, openNote.changed, resultSelector: { _, _ in })
   }
   
-  let newNote: Variable<ShortcutPreferenceNodeParameters>
-  let openNote: Variable<ShortcutPreferenceNodeParameters>
+  let newNote: ShortcutPreferenceNodeParameters
+  let openNote: ShortcutPreferenceNodeParameters
   
-  private var allParameters: [ShortcutPreferenceParameters] { return [newNote.value, openNote.value] }
+  private var allParameters: [ShortcutPreferenceNodeParameters] { return [newNote, openNote] }
   
   private enum CodingKeys: CodingKey {
     case newNote
@@ -72,7 +72,7 @@ final class ShortcutPreference: Preference {
   }
   
   init() {
-    newNote = Variable(ShortcutPreferenceNodeParameters(kind: .newNote))
-    openNote = Variable(ShortcutPreferenceNodeParameters(kind: .openNote))
+    newNote = ShortcutPreferenceNodeParameters(kind: .newNote)
+    openNote = ShortcutPreferenceNodeParameters(kind: .openNote)
   }
 }
