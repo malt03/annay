@@ -68,6 +68,8 @@ extension AppDelegate {
   @IBAction private func deleteNote(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .DeleteNote, object: nil) }
   @IBAction private func deleteNoteImmediately(_ sender: NSMenuItem)    { NotificationCenter.default.post(name: .DeleteNoteImmediately, object: nil) }
   @IBAction private func putBackNote(_ sender: NSMenuItem)              { NotificationCenter.default.post(name: .PutBackNote, object: nil) }
+  @IBAction func emptyTrash(_ sender: NSMenuItem) { NotificationCenter.default.post(name: .EmptyTrash, object: nil) }
+
 
   @IBAction private func openQuickly(_ sender: NSMenuItem) {
     OpenQuicklyWindowController.toggle()
@@ -100,4 +102,5 @@ extension Notification.Name {
   static let DeleteNote = Notification.Name(rawValue: "AppDelegate/DeleteNote")
   static let DeleteNoteImmediately = Notification.Name(rawValue: "AppDelegate/DeleteNoteImmediately")
   static let PutBackNote = Notification.Name(rawValue: "AppDelegate/PutBackNote")
+  static let EmptyTrash = Notification.Name(rawValue: "AppDelegate/EmptyTrash")
 }

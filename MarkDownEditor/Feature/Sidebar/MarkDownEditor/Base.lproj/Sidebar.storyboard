@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="PrQ-Do-4mD">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14105" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="PrQ-Do-4mD">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14105"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -11,12 +11,12 @@
         <scene sceneID="fia-sR-oQH">
             <objects>
                 <customObject id="nUK-jq-m9X" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController id="PrQ-Do-4mD" customClass="SidebarViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PrQ-Do-4mD" customClass="SidebarViewController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="68f-Wd-hUG">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="730"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Xsw-qJ-WBe" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Xsw-qJ-WBe" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="700" width="280" height="30"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uSu-Ym-9Sq">
@@ -73,7 +73,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="280" height="602"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveColumns="NO" rowHeight="24" viewBased="YES" floatsGroupRows="NO" indentationPerLevel="14" autosaveExpandedItems="YES" outlineTableColumn="hkY-av-AqO" id="SgN-Px-bBE" customClass="SidebarOutlineView" customModule="MarkDownEditor" customModuleProvider="target">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveColumns="NO" rowHeight="24" viewBased="YES" floatsGroupRows="NO" indentationPerLevel="14" autosaveExpandedItems="YES" outlineTableColumn="hkY-av-AqO" id="SgN-Px-bBE" customClass="SidebarOutlineView" customModule="Annay" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="280" height="602"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -92,7 +92,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="note" id="JNK-gA-qZk" customClass="NodeTableCellView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                        <tableCellView identifier="note" id="JNK-gA-qZk" customClass="NodeTableCellView" customModule="Annay" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="280" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -118,7 +118,7 @@
                                                                 <outlet property="textField" destination="1TI-PZ-Ak0" id="evE-7f-X6R"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="directory" id="ILB-Nn-9P7" customClass="NodeTableCellView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                        <tableCellView identifier="directory" id="ILB-Nn-9P7" customClass="NodeTableCellView" customModule="Annay" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="24" width="280" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -186,7 +186,7 @@
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ggo-HV-esS">
                                         <rect key="frame" x="14" y="13" width="228" height="19"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="NkE-8o-Pfx">
-                                            <customFormatter key="formatter" id="SMd-Qy-PpH" customClass="WorkspaceNameFormatter" customModule="MarkDownEditor" customModuleProvider="target"/>
+                                            <customFormatter key="formatter" id="SMd-Qy-PpH" customClass="WorkspaceNameFormatter" customModule="Annay" customModuleProvider="target"/>
                                             <font key="font" metaFont="system" size="16"/>
                                             <color key="textColor" name="Text"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -195,7 +195,7 @@
                                             <outlet property="delegate" destination="PrQ-Do-4mD" id="tz4-Z4-rEj"/>
                                         </connections>
                                     </textField>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="FwV-rs-jxT" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="FwV-rs-jxT" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
                                         <rect key="frame" x="256" y="19" width="8" height="8"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="8" id="Kcf-DZ-gAR"/>
@@ -352,7 +352,7 @@ CA
                         <menuItem title="Empty" keyEquivalent="e" id="anD-R4-sHh">
                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                             <connections>
-                                <action selector="emptyTrash:" target="PrQ-Do-4mD" id="U6O-Op-Dzp"/>
+                                <action selector="emptyTrashWrapper:" target="PrQ-Do-4mD" id="ARa-P9-AWP"/>
                             </connections>
                         </menuItem>
                     </items>

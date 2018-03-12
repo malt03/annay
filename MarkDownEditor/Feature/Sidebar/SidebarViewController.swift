@@ -101,7 +101,8 @@ final class SidebarViewController: NSViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar),           name: .MoveFocusToSidebar,    object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(deleteNote),                   name: .DeleteNote,            object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(deleteNoteImmediately),        name: .DeleteNoteImmediately, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(putBackNote),                  name: .PutBackNote, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(putBackNote),                  name: .PutBackNote,           object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(emptyTrash),                   name: .EmptyTrash,            object: nil)
   }
   
   override func viewWillDisappear() {
@@ -236,7 +237,7 @@ final class SidebarViewController: NSViewController {
     }
   }
   
-  @IBAction private func emptyTrash(_ sender: NSMenuItem) {
+  @IBAction private func emptyTrashWrapper(_ sender: NSMenuItem) {
     emptyTrash()
   }
   
@@ -255,7 +256,7 @@ final class SidebarViewController: NSViewController {
     NodeModelExporter(type: type, nodes: nodes).export()
   }
   
-  private func emptyTrash() {
+  @objc private func emptyTrash() {
     let alert = NSAlert()
     alert.messageText = Localized("This operation cannot be undone.")
     alert.addButton(withTitle: Localized("Cancel"))

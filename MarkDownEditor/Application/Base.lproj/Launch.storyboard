@@ -8,7 +8,7 @@
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
-                <application id="hnw-xV-0zn" customClass="Application" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <application id="hnw-xV-0zn" customClass="Application" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
                             <menuItem title="Annay" id="1Xt-HY-uBw">
@@ -123,9 +123,15 @@ CA
                                                         <string key="keyEquivalent" base64-UTF8="YES">
 CA
 </string>
-                                                        <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                                                        <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                                         <connections>
                                                             <action selector="putBackNote:" target="Voe-Tx-rLC" id="O4N-FJ-BQb"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Empty the Trash" keyEquivalent="e" id="UiM-Qd-yqK">
+                                                        <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                                        <connections>
+                                                            <action selector="emptyTrash:" target="Voe-Tx-rLC" id="sDj-Gq-kAu"/>
                                                         </connections>
                                                     </menuItem>
                                                 </items>
@@ -362,7 +368,7 @@ GQ
                         <outlet property="navigateMenu" destination="3St-bZ-rvp" id="ihY-nu-iIM"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MarkDownEditor" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Annay" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -371,7 +377,7 @@ GQ
         <!--Window Controller-->
         <scene sceneID="cIi-QE-cpz">
             <objects>
-                <windowController id="rHw-0N-ZGZ" customClass="BeforeOfAllWindowController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController id="rHw-0N-ZGZ" customClass="BeforeOfAllWindowController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Zbh-1p-pcE">
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="0.0" height="0.0"/>
