@@ -213,6 +213,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="5U4-bF-LAC" firstAttribute="leading" secondItem="E71-OM-elJ" secondAttribute="trailing" constant="32" id="6Da-OW-edA"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5U4-bF-LAC" secondAttribute="trailing" constant="20" symbolic="YES" id="6Eu-sO-tPC"/>
                             <constraint firstItem="GZB-V0-5XJ" firstAttribute="top" secondItem="5U4-bF-LAC" secondAttribute="bottom" constant="8" id="JkW-Kp-jor"/>
                             <constraint firstAttribute="trailing" secondItem="GZB-V0-5XJ" secondAttribute="trailing" constant="32" id="LMw-A3-NNP"/>
                             <constraint firstItem="E71-OM-elJ" firstAttribute="top" secondItem="GnK-3f-DUR" secondAttribute="top" constant="32" id="PAh-fX-Kgq"/>
