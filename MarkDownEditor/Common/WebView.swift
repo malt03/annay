@@ -11,6 +11,8 @@ import WebKit
 import RxSwift
 
 final class WebView: WKWebView {
+  private let bag = DisposeBag()
+  
   private var finishHandler: (() -> Void)!
   private var firstNavigation = true
   private var hideWhenDragged = false
@@ -23,8 +25,7 @@ final class WebView: WKWebView {
     firstNavigation = true
     self.finishHandler = finishHandler
 
-    createHtmlFilesIfNeeded()
-    loadFileURL(htmlFileUrl, allowingReadAccessTo: URL(fileURLWithPath: "/"))
+    loadHtmlFile()
     
     navigationDelegate = self
     setValue(false, forKey: "drawsBackground")
@@ -46,15 +47,11 @@ final class WebView: WKWebView {
   private var baseDirectory: URL { return FileManager.default.applicationWeb }
   private var htmlFileUrl: URL { return baseDirectory.appendingPathComponent("index").appendingPathExtension("html") }
   
-  private func createHtmlFilesIfNeeded() {
-    if FileManager.default.fileExists(atPath: baseDirectory.path) { return }
-    
-    let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
-    let styleHighlight = Bundle.main.url(forResource: "monokai-sublime", withExtension: "css")!
-    let style = Bundle.main.url(forResource: "swiss", withExtension: "css")!
-    let html = try! String(contentsOfFile: url.path)
-      .replacingOccurrences(of: "{{style-highlight}}", with: try! String(contentsOfFile: styleHighlight.path))
-      .replacingOccurrences(of: "{{style}}", with: try! String(contentsOfFile: style.path))
+  private func loadHtmlFile() {
+    if FileManager.default.fileExists(atPath: baseDirectory.path) {
+      try! FileManager.default.removeItem(at: baseDirectory)
+    }
+
     try! FileManager.default.createDirectory(at: baseDirectory, withIntermediateDirectories: true, attributes: nil)
     
     let scriptNames = [
@@ -72,8 +69,24 @@ final class WebView: WKWebView {
     for name in scriptNames {
       try! FileManager.default.copyItem(at: Bundle.main.url(forResource: name, withExtension: nil)!, to: baseDirectory.appendingPathComponent(name))
     }
-    
-    try! html.write(to: htmlFileUrl, atomically: false, encoding: .utf8)
+
+    StyleSheetManager.shared.selected.asObservable().subscribe(onNext: { [weak self] (styleSheet) in
+      guard let s = self else { return }
+      let style: String
+      if let styleSheet = styleSheet {
+        style = styleSheet.css
+      } else {
+        style = try! String(contentsOf: Bundle.main.url(forResource: "swiss", withExtension: "css")!)
+      }
+      let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
+      let styleHighlight = Bundle.main.url(forResource: "monokai-sublime", withExtension: "css")!
+      let html = try! String(contentsOf: url)
+        .replacingOccurrences(of: "{{style-highlight}}", with: try! String(contentsOf: styleHighlight))
+        .replacingOccurrences(of: "{{style}}", with: style)
+      try! html.write(to: s.htmlFileUrl, atomically: false, encoding: .utf8)
+      s.firstNavigation = true
+      s.loadFileURL(s.htmlFileUrl, allowingReadAccessTo: URL(fileURLWithPath: "/"))
+    }).disposed(by: bag)
   }
   
   private var lastMarkdown: String?
