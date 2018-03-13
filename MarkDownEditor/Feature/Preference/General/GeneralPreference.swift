@@ -16,9 +16,15 @@ final class GeneralPreference: Preference {
   
   let isHideEditorWhenUnfocused: Variable<Bool>
   private var font: Variable<CodableFont>
-  
+  let styleSheetName: Variable<String?>
+
   var changed: Observable<Void> {
-    return Observable.combineLatest(isHideEditorWhenUnfocused.asObservable(), font.asObservable(), resultSelector: { (_, _) in })
+    return Observable.combineLatest(
+      isHideEditorWhenUnfocused.asObservable(),
+      font.asObservable(),
+      styleSheetName.asObservable(),
+      resultSelector: { (_, _, _) in }
+    )
   }
 
   var fontObservable: Observable<NSFont> { return font.asObservable().map { $0.font } }
@@ -36,5 +42,6 @@ final class GeneralPreference: Preference {
   init() {
     self.isHideEditorWhenUnfocused = Variable(false)
     self.font = Variable(CodableFont(NSFont(name: "Osaka-Mono", size: 14) ?? .systemFont(ofSize: 14)))
+    self.styleSheetName = Variable(nil)
   }
 }

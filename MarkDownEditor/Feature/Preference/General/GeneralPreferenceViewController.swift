@@ -14,6 +14,7 @@ final class GeneralPreferenceViewController: NSViewController {
   
   @IBOutlet private weak var fontLabel: NSTextField!
   @IBOutlet private weak var isHideEditorWhenUnfocusedCheckbox: NSButton!
+  @IBOutlet private weak var styleSheetPopupButton: NSPopUpButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,6 +23,22 @@ final class GeneralPreferenceViewController: NSViewController {
       return isOn ? .on : .off
     }.bind(to: isHideEditorWhenUnfocusedCheckbox.rx.state).disposed(by: bag)
     isHideEditorWhenUnfocusedCheckbox.rx.state.map { $0 == .on }.bind(to: GeneralPreference.shared.isHideEditorWhenUnfocused).disposed(by: bag)
+
+    StyleSheetManager.shared.all.asObservable().subscribe(onNext: { [weak self] (styleSheets) in
+      guard let s = self else { return }
+      s.styleSheetPopupButton.removeAllItems()
+      s.styleSheetPopupButton.addItems(withTitles: styleSheets.map { $0.name })
+    }).disposed(by: bag)
+    
+    StyleSheetManager.shared.selected.asObservable().subscribe(onNext: { [weak self] (styleSheet) in
+      guard let s = self, let styleSheet = styleSheet else { return }
+      s.styleSheetPopupButton.selectItem(withTitle: styleSheet.name)
+    }).disposed(by: bag)
+    
+    styleSheetPopupButton.rx.controlEvent.subscribe(onNext: { [weak self] _ in
+      guard let s = self else { return }
+      StyleSheetManager.shared.all.value[s.styleSheetPopupButton.indexOfSelectedItem].select()
+    }).disposed(by: bag)
   }
 
   @IBAction private func presentFontPanel(_ sender: NSButton) {
