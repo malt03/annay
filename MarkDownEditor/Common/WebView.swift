@@ -85,7 +85,9 @@ final class WebView: WKWebView {
         .replacingOccurrences(of: "{{style}}", with: style)
       try! html.write(to: s.htmlFileUrl, atomically: false, encoding: .utf8)
       s.firstNavigation = true
-      s.loadFileURL(s.htmlFileUrl, allowingReadAccessTo: URL(fileURLWithPath: "/"))
+      DispatchQueue.main.async {
+        s.loadFileURL(s.htmlFileUrl, allowingReadAccessTo: URL(fileURLWithPath: "/"))
+      }
     }).disposed(by: bag)
   }
   
