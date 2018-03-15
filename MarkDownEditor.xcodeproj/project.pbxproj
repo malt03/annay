@@ -29,6 +29,7 @@
 		ED43202820564C1C0042078C /* KeyHolder.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED43202520564C170042078C /* KeyHolder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED43202920564C1C0042078C /* Magnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED43202320564C0E0042078C /* Magnet.framework */; };
 		ED43202A20564C1C0042078C /* Magnet.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED43202320564C0E0042078C /* Magnet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED432032205756280042078C /* StyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED432031205756280042078C /* StyleSheet.swift */; };
 		ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED434F0220079DBD00C2357D /* LocalizedString.swift */; };
 		ED47CC85201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */; };
 		ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */; };
@@ -107,6 +108,8 @@
 		EDD4CA70203BB331003F8072 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4CA6F203BB331003F8072 /* PreviewViewController.swift */; };
 		EDD4CA73203BB331003F8072 /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDD4CA71203BB331003F8072 /* PreviewViewController.xib */; };
 		EDD4CA78203BB331003F8072 /* AnnayPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EDD4CA6B203BB331003F8072 /* AnnayPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EDD93C492057881600CA6627 /* StyleSheetFileWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD93C482057881600CA6627 /* StyleSheetFileWatcher.swift */; };
+		EDD93C4B20578ACC00CA6627 /* StyleSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD93C4A20578ACC00CA6627 /* StyleSheetManager.swift */; };
 		EDDE608F203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */; };
 		EDDE6090203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */; };
 		EDDE6093203C65A500331A77 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE6091203C65A500331A77 /* WebView.swift */; };
@@ -202,6 +205,7 @@
 		ED431FFF20562B460042078C /* ShortcutPreferenceNodeParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreferenceNodeParameters.swift; sourceTree = "<group>"; };
 		ED43202320564C0E0042078C /* Magnet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Magnet.framework; path = Carthage/Build/Mac/Magnet.framework; sourceTree = "<group>"; };
 		ED43202520564C170042078C /* KeyHolder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeyHolder.framework; path = Carthage/Build/Mac/KeyHolder.framework; sourceTree = "<group>"; };
+		ED432031205756280042078C /* StyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSheet.swift; sourceTree = "<group>"; };
 		ED434F0220079DBD00C2357D /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrOpenWorkspaceTabViewController.swift; sourceTree = "<group>"; };
 		ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorError.swift; sourceTree = "<group>"; };
@@ -294,6 +298,8 @@
 		EDD4CA72203BB331003F8072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreviewViewController.xib; sourceTree = "<group>"; };
 		EDD4CA74203BB331003F8072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDD4CA75203BB331003F8072 /* MarkDownEditorPreviewExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkDownEditorPreviewExtension.entitlements; sourceTree = "<group>"; };
+		EDD93C482057881600CA6627 /* StyleSheetFileWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSheetFileWatcher.swift; sourceTree = "<group>"; };
+		EDD93C4A20578ACC00CA6627 /* StyleSheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSheetManager.swift; sourceTree = "<group>"; };
 		EDDE608E203C63B100331A77 /* CSSearchableIndex+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CSSearchableIndex+Extensions.swift"; sourceTree = "<group>"; };
 		EDDE6091203C65A500331A77 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		EDDED6FA20050C0B0079F3D0 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
@@ -447,6 +453,16 @@
 				ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		ED432030205756160042078C /* StyleSheet */ = {
+			isa = PBXGroup;
+			children = (
+				ED432031205756280042078C /* StyleSheet.swift */,
+				EDD93C482057881600CA6627 /* StyleSheetFileWatcher.swift */,
+				EDD93C4A20578ACC00CA6627 /* StyleSheetManager.swift */,
+			);
+			path = StyleSheet;
 			sourceTree = "<group>";
 		};
 		ED47CC81201ECEEF0052D6EF /* CreateOrOpenWorkspace */ = {
@@ -611,6 +627,7 @@
 		EDD4C73F202E98DE0029FF4C /* General */ = {
 			isa = PBXGroup;
 			children = (
+				ED432030205756160042078C /* StyleSheet */,
 				EDD4C74A202EBD470029FF4C /* GeneralPreference.storyboard */,
 				EDD4C742202E9AF70029FF4C /* GeneralPreferenceViewController.swift */,
 				ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */,
@@ -877,6 +894,7 @@
 				ED598C59201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift in Sources */,
 				ED099FFF201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift in Sources */,
 				ED55C5132013146F0070301A /* CreateWorkspaceViewController.swift in Sources */,
+				EDD93C4B20578ACC00CA6627 /* StyleSheetManager.swift in Sources */,
 				EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */,
 				EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */,
 				ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */,
@@ -910,9 +928,11 @@
 				EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */,
 				ED8CE48C204E7291002F1A5D /* CodableFont.swift in Sources */,
 				ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */,
+				ED432032205756280042078C /* StyleSheet.swift in Sources */,
 				ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */,
 				ED9EEEE8201F63E200C96CC1 /* OpenWorkspaceViewController.swift in Sources */,
 				EDDE608F203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */,
+				EDD93C492057881600CA6627 /* StyleSheetFileWatcher.swift in Sources */,
 				ED4EB9E6201DB71B00B4CBE7 /* Results+Extensions.swift in Sources */,
 				ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */,
 				ED8CE48A204E69F8002F1A5D /* Variable+Extensions.swift in Sources */,

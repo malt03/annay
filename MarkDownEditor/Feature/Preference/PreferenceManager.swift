@@ -18,6 +18,7 @@ final class PreferenceManager {
   
   var generalUrl: URL { return directoryUrl.appendingPathComponent("general.yml") }
   var shortcutUrl: URL { return directoryUrl.appendingPathComponent("shortcut.yml") }
+  var styleSheetsUrl: URL { return directoryUrl.appendingPathComponent("stylesheets", isDirectory: true) }
   
   private var directoryUrl: URL
   
