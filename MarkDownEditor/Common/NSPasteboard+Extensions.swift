@@ -73,6 +73,12 @@ extension NSPasteboard {
     return false
   }
   
+  func becomeOnlyPlaneText() {
+    let planeText = string(forType: .string) ?? ""
+    clearContents()
+    setString(planeText, forType: .string)
+  }
+  
   func replaceNoteToMarkdown() -> Bool {
     guard let parentWorkspaceId = string(forType: .parentWorkspaceModel) else { return false }
     let notes = nodes.filter { !$0.isDirectory }

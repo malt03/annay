@@ -43,7 +43,12 @@ final class TextView: NSTextView {
       return super.performDragOperation(sender)
     }
 
+    sender.draggingPasteboard().becomeOnlyPlaneText()
     return super.performDragOperation(sender)
+  }
+  
+  override func paste(_ sender: Any?) {
+    pasteAsPlainText(sender)
   }
   
   private func writeImages(_ imagesData: [Data], fileExtension: String, sender: NSDraggingInfo) -> Bool {
