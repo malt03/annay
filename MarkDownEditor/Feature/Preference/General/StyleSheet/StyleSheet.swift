@@ -9,7 +9,7 @@
 import Foundation
 
 struct StyleSheet: Hashable {
-  let css: String
+  private(set) var css: String
   let name: String
   
   let fileUrl: URL
@@ -20,11 +20,17 @@ struct StyleSheet: Hashable {
     GeneralPreference.shared.styleSheetName.value = name
   }
   
+  mutating func reload() {
+    do {
+      css = try String(contentsOf: fileUrl)
+    } catch {}
+  }
+  
   init?(file: URL) {
     if file.pathExtension != "css" { return nil }
     fileUrl = file
     do {
-      name = file.deletingPathExtension().lastPathComponent
+      name = file.lastPathComponent
       css = try String(contentsOf: file)
     } catch {
       return nil

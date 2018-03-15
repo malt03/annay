@@ -10,9 +10,9 @@ import Cocoa
 import RxSwift
 
 final class StyleSheetFileWatcher: NSObject, NSFilePresenter {
-  private let _fileAdded = PublishSubject<URL>()
+  private let _fileAddedOrChanged = PublishSubject<URL>()
   private let _fileDeleted = PublishSubject<URL>()
-  var fileAdded: Observable<URL> { return _fileAdded }
+  var fileAddedOrChanged: Observable<URL> { return _fileAddedOrChanged }
   var fileDeleted: Observable<URL> { return _fileDeleted }
   
   override init() {
@@ -27,10 +27,12 @@ final class StyleSheetFileWatcher: NSObject, NSFilePresenter {
   let presentedItemOperationQueue = OperationQueue()
   
   func presentedSubitemDidChange(at url: URL) {
-    if FileManager.default.fileExists(atPath: url.path) {
-      _fileAdded.onNext(url)
-    } else {
-      _fileDeleted.onNext(url)
+    DispatchQueue.main.async {
+      if FileManager.default.fileExists(atPath: url.path) {
+        self._fileAddedOrChanged.onNext(url)
+      } else {
+        self._fileDeleted.onNext(url)
+      }
     }
   }
 }

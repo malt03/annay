@@ -41,7 +41,22 @@ final class GeneralPreferenceViewController: NSViewController {
     }).disposed(by: bag)
   }
 
+  @IBAction private func openDirecotry(_ sender: NSButton) {
+    let url = StyleSheetManager.directoryUrl
+    NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: url.path)
+  }
+  
   @IBAction private func presentFontPanel(_ sender: NSButton) {
     GeneralPreference.shared.showFontPanel()
+  }
+  @IBAction private func resetDefaultStyleSheet(_ sender: NSButton) {
+    let alert = NSAlert()
+    alert.messageText = Localized("This operation cannot be undone.")
+    alert.addButton(withTitle: Localized("Cancel"))
+    alert.addButton(withTitle: Localized("Reset"))
+    let response = alert.runModal()
+    if response == .alertSecondButtonReturn {
+      StyleSheetManager.createDefaultCss()
+    }
   }
 }

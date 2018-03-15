@@ -19,6 +19,9 @@ final class StyleSheetManager {
   
   static func createDefaultCss() {
     do {
+      if FileManager.default.fileExists(atPath: defaultCss.path) {
+        try FileManager.default.removeItem(at: defaultCss)
+      }
       let bundleCss = Bundle.main.url(forResource: "swiss", withExtension: "css")!
       try FileManager.default.copyItem(at: bundleCss, to: defaultCss)
     } catch {}
@@ -30,7 +33,7 @@ final class StyleSheetManager {
     }
   }
   
-  private static var directoryUrl: URL { return PreferenceManager.shared.styleSheetsUrl }
+  static var directoryUrl: URL { return PreferenceManager.shared.styleSheetsUrl }
   private static var defaultCss: URL { return directoryUrl.appendingPathComponent("default.css") }
   
   private init() {
@@ -51,10 +54,21 @@ final class StyleSheetManager {
       return s.all.value.first(where: { $0.name == name })
     }).bind(to: selected).disposed(by: bag)
     
-    fileWatcher.fileAdded.subscribe(onNext: { [weak self] (url) in
+    fileWatcher.fileAddedOrChanged.subscribe(onNext: { [weak self] (url) in
       guard let s = self, let styleSheet = StyleSheet(file: url) else { return }
+      defer {
+        if s.selected.value == nil { styleSheet.select() }
+      }
+      for i in 0..<s.all.value.count {
+        if s.all.value[i].fileUrl == url {
+          s.all.value[i].reload()
+          if s.all.value[i].fileUrl == s.selected.value?.fileUrl {
+            s.selected.value?.reload()
+          }
+          return
+        }
+      }
       s.all.value.append(styleSheet)
-      if s.selected.value == nil { styleSheet.select() }
     }).disposed(by: bag)
     fileWatcher.fileDeleted.subscribe(onNext: { [weak self] (url) in
       guard let s = self, let index = s.all.value.index(where: { $0.fileUrl == url }) else { return }
