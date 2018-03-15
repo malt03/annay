@@ -82,6 +82,10 @@ extension AppDelegate {
   @IBAction private func saveWorkspace(_ sender: NSMenuItem) {
     WorkspaceModel.selected.value.save()
   }
+
+  @IBAction private func joinSlack(_ sender: NSMenuItem) {
+    NSWorkspace.shared.open(URL(string: "https://join.slack.com/t/annay/shared_invite/enQtMzMwNTE3OTQ1MzY0LTI2YmMyZjNiNzZhNjBhOWEzNTlkYTU0ZGU2ODE5N2FhMjE1MWZjMmY1OTMzM2ZhMWJiMzVhNTMwNDU5MmNmNDI")!)
+  }
 }
 
 extension Notification.Name {
