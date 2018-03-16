@@ -63,6 +63,7 @@ extension NSPasteboard {
         let name = item.string(forType: NSPasteboard.PasteboardType("public.url-name")),
         let url = URL(string: item.string(forType: .string) ?? "")
         else { return nil }
+      if name == url.absoluteString { return "<\(name)>" }
       return "[\(name)](\(url.absoluteString))"
     }
     if linkTexts.count > 0 {
