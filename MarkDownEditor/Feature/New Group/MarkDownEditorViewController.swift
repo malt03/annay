@@ -156,14 +156,13 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
     case #selector(textView.insertNewline(_:)):
       textView.insertNewline(nil)
       let selectedRange = textView.selectedRange()
-      let text = textView.string
-      let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
-      let line = text.lineRange(for: index...index)
-      
-      if String(text[line]).match(with: "^\\s*(([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|)|>+) $") != nil {
-        textView.insertText("", replacementRange: text.oldRange(from: line))
+      let text = textView.string as NSString
+      let line = text.lineRange(for: NSRange(location: selectedRange.location - 1, length: 1))
+
+      if String(text.substring(with: line)).match(with: "^\\s*(([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|)|>+) $") != nil {
+        textView.insertText("", replacementRange: line)
         textView.insertNewline(nil)
-      } else if let match = String(text[line]).match(with: "^\\s*(([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|)|>+) ") {
+      } else if let match = text.substring(with: line).match(with: "^\\s*(([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|)|>+) ") {
         var replaced = match.replacingOccurrences(of: "[x]", with: "[ ]")
         if let number = replaced.match(with: "\\d+") {
           replaced = replaced.replacingOccurrences(of: number, with: "\(Int(number)! + 1)")
@@ -173,24 +172,22 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
       return true
     case #selector(textView.insertTab(_:)):
       let selectedRange = textView.selectedRange()
-      let text = textView.string
+      let text = textView.string as NSString
 
       if selectedRange.length > 0 {
-        let range = text.lineRange(for: text.range(from: selectedRange))
-        let lineText = text[range]
+        let range = text.lineRange(for: selectedRange)
+        let lineText = text.substring(with: range)
         let replacedLineText = lineText
           .replacingOccurrences(of: "^", with: "\t", options: .regularExpression)
           .replacingOccurrences(of: "\n", with: "\n\t", options: .regularExpression)
           .replacingOccurrences(of: "\t$", with: "", options: .regularExpression)
-        textView.insertText(replacedLineText, replacementRange: text.oldRange(from: range))
-        let selectedRange = text.oldRange(from: range)
-        textView.setSelectedRange(NSRange(location: selectedRange.location, length: selectedRange.length + replacedLineText.oldRanges(with: "\n").count))
+        textView.insertText(replacedLineText, replacementRange: range)
+        textView.setSelectedRange(NSRange(location: range.location, length: range.length + replacedLineText.split(separator: "\n").count))
       } else {
-        let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
-        let line = text.lineRange(for: index...index)
-        let lineText = String(text[line])
+        let line = text.lineRange(for: NSRange(location: selectedRange.location - 1, length: 1))
+        let lineText = text.substring(with: line)
         if lineText.match(with: "^\\s*([\\-\\+\\*]|\\d+\\.)( \\[[x ]\\]|) $") != nil {
-          textView.insertText("\t\(lineText)", replacementRange: text.oldRange(from: line))
+          textView.insertText("\t\(lineText)", replacementRange: line)
           textView.moveLeft(nil)
           textView.moveToEndOfLine(nil)
         } else {
@@ -200,23 +197,21 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
       return true
     case #selector(textView.insertBacktab(_:)):
       let selectedRange = textView.selectedRange()
-      let text = textView.string
+      let text = textView.string as NSString
       if selectedRange.length > 0 {
-        let range = text.lineRange(for: text.range(from: selectedRange))
-        let lineText = text[range]
+        let range = text.lineRange(for: selectedRange)
+        let lineText = text.substring(with: range)
         if String(lineText).oldRanges(with: "^\t").count == 0 && String(lineText).oldRanges(with: "\n\t").count == 0 { return true }
         let replacedLineText = lineText
           .replacingOccurrences(of: "^\t", with: "", options: .regularExpression)
           .replacingOccurrences(of: "\n\t", with: "\n", options: .regularExpression)
-        textView.insertText(replacedLineText, replacementRange: text.oldRange(from: range))
-        let selectedRange = text.oldRange(from: range)
-        textView.setSelectedRange(NSRange(location: selectedRange.location, length: selectedRange.length - replacedLineText.oldRanges(with: "\n").count))
+        textView.insertText(replacedLineText, replacementRange: range)
+        textView.setSelectedRange(NSRange(location: range.location, length: range.length - replacedLineText.oldRanges(with: "\n").count))
       } else {
-        let index = text.index(text.startIndex, offsetBy: selectedRange.location - 1)
-        let line = text.lineRange(for: index...index)
+        let line = text.lineRange(for: NSRange(location: selectedRange.location - 1, length: 1))
         
-        if String(text[line]).match(with: "^\t+") != nil {
-          textView.insertText("", replacementRange: text.oldRange(from: line.lowerBound...text.index(after: line.lowerBound)))
+        if text.substring(with: line).match(with: "^\t+") != nil {
+          textView.insertText("", replacementRange: NSRange(location: line.location, length: 1))
         } else {
           textView.insertBacktab(nil)
         }
