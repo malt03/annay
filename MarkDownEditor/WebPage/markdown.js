@@ -22,7 +22,8 @@ function update(markdown) {
         .use(window.markdownitSub)
         .use(window.markdownitSup)
         .use(window.markdownitFootnote)
-        .use(window.markdownitEmoji);
+        .use(window.markdownitEmoji)
+        .use(window.markdownitAnchorSpan);
   
     var tokens = md.parse(markdown, {});
     var map = new Map();
@@ -52,6 +53,8 @@ function update(markdown) {
         };
         window.webkit.messageHandlers.checkboxChanged.postMessage(json);
     });
+  
+  document.getElementById("scroll").scrollIntoView(true);
  
     return document.documentElement.outerHTML;
 }

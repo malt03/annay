@@ -127,11 +127,18 @@ final class MarkDownEditorViewController: NSViewController {
   }
   
   private func updateWebView(note: NodeModel? = NodeModel.selectedNode.value) {
-    let markDown = (note?.body ?? "")
-      .replacingOccurrences(of: "\\", with: "\\\\")
+    var markDown = (note?.body ?? "")
+    if view.window?.firstResponder == textView {
+      let markDownNSString = NSMutableString(string: markDown)
+      markDownNSString.insert("{|scroll|}", at: textView.selectedRange().location)
+      markDown = markDownNSString as String
+    }
+    markDown = markDown.replacingOccurrences(of: "\\", with: "\\\\")
       .replacingOccurrences(of: "\n", with: "\\n")
       .replacingOccurrences(of: "\"", with: "\\\"")
+
     webView.update(markdown: markDown, completionHandler: { (html) in
+      print(html)
       guard let nodeId = note?.id else { return }
       HtmlDataStore.shared.set(nodeId: nodeId, html: html)
     })
