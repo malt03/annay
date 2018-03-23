@@ -22,8 +22,7 @@ function update(markdown) {
         .use(window.markdownitSub)
         .use(window.markdownitSup)
         .use(window.markdownitFootnote)
-        .use(window.markdownitEmoji)
-        .use(window.markdownitAnchorSpan);
+        .use(window.markdownitEmoji);
   
     var tokens = md.parse(markdown, {});
     var map = new Map();
@@ -41,7 +40,7 @@ function update(markdown) {
         indexMap.set(value, index);
     });
   
-    var html = md.render(markdown);
+    var html = md.render(markdown).replace('$$$$scroll$$$$', '<span id="scroll"></span>');
     document.getElementById("render").innerHTML = html;
   
     $("input:checkbox").on('change', function(event) {
@@ -54,7 +53,8 @@ function update(markdown) {
         window.webkit.messageHandlers.checkboxChanged.postMessage(json);
     });
   
-  document.getElementById("scroll").scrollIntoView(true);
+    var scroll = document.getElementById("scroll");
+    if (scroll) { scroll.scrollIntoView(true); }
  
     return document.documentElement.outerHTML;
 }

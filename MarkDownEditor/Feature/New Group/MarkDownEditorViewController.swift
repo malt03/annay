@@ -130,7 +130,7 @@ final class MarkDownEditorViewController: NSViewController {
     var markDown = (note?.body ?? "")
     if view.window?.firstResponder == textView {
       let markDownNSString = NSMutableString(string: markDown)
-      markDownNSString.insert("{|scroll|}", at: textView.selectedRange().location)
+      markDownNSString.insert("$$$$scroll$$$$", at: textView.selectedRange().location)
       markDown = markDownNSString as String
     }
     markDown = markDown.replacingOccurrences(of: "\\", with: "\\\\")
