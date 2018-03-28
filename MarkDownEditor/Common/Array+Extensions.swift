@@ -9,6 +9,12 @@
 import Foundation
 import RealmSwift
 
+extension Array where Element: Hashable {
+  var uniq: [Element] {
+    return Array(Set(self))
+  }
+}
+
 extension Array where Element: Equatable {
   func index(of object: Element) -> Int? {
     return index { $0 == object }

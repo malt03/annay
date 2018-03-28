@@ -134,7 +134,8 @@ final class NodeModel: Object {
   static func emptyTrash() throws {
     try Realm.transaction { (realm) in
       let deletedNodes = realm.objects(NodeModel.self).filter("isDeleted = true and workspace = %@", WorkspaceModel.selectedValue)
-      
+      let parentNodes = deletedNodes.compactMap { $0.parent }.uniq
+
       let deletedNodeIds: [String] = deletedNodes.flatMap { [$0.id] + $0.descendants.map { $0.id } }
       CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: deletedNodeIds)
       for node in deletedNodes {
@@ -143,6 +144,8 @@ final class NodeModel: Object {
         try FileManager.default.removeItem(at: node.url)
       }
       realm.delete(deletedNodes)
+      
+      for node in parentNodes { try node.save() }
     }
   }
   
@@ -163,7 +166,7 @@ final class NodeModel: Object {
     node.workspace = parent.workspace!
     node.parent = parent
     node.isDirectory = isDirectory
-    node.index = parent.children.count
+    node.index = (parent.sortedChildren(query: nil).last?.index ?? -1) + 1
     realm.add(node)
     return node
   }
