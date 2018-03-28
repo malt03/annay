@@ -74,7 +74,9 @@ extension AppDelegate {
   }
 
   @IBAction func saveNote(_ sender: NSMenuItem) {
-    alertError { try NodeModel.selectedNode.value?.save() }
+    Realm.transaction { _ in
+      alertError { try NodeModel.selectedNode.value?.save() }
+    }
   }
 
   @IBAction private func joinSlack(_ sender: NSMenuItem) {

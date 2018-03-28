@@ -56,7 +56,7 @@ final class NodeTableCellView: NSTableCellView {
   
   @IBAction private func edited(_ sender: NSTextField) {
     Realm.transaction { _ in
-      self.node.name = sender.stringValue
+      alertError { try self.node.setDirectoryName(sender.stringValue) }
     }
   }
 }

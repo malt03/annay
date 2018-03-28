@@ -57,7 +57,7 @@ extension Array where Element == URL {
       index += 1
       
       if isDirectory {
-        node.name = url.name
+        try node.setDirectoryName(url.name)
         realm.add(node)
         try FileManager.default.contentsOfDirectory(atPath: url.path).map {
           url.appendingPathComponent($0)

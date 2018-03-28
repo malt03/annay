@@ -282,8 +282,10 @@ final class SidebarViewController: NSViewController {
   }
   
   private func createDirectory(parent: NodeModel) {
-    let insertedNode = NodeModel.createDirectory(parent: parent)
-    insert(node: insertedNode, in: parent)
+    alertError {
+      let insertedNode = try NodeModel.createDirectory(parent: parent)
+      insert(node: insertedNode, in: parent)
+    }
   }
   
   @objc private func createNoteWithoutMenu() {
@@ -309,12 +311,14 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func createGroupWithoutMenu() {
-    let group = NodeModel.createDirectory(name: Localized("New Group"), parent: nil)
-    outlineView.reloadData() // アニメーション走らせると表示がバグる
-    let row = outlineView.row(forItem: group)
-    if row >= 0 {
-      outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-      outlineView.editColumn(0, row: row, with: nil, select: true)
+    alertError {
+      let group = try NodeModel.createDirectory(name: Localized("New Group"), parent: nil)
+      outlineView.reloadData() // アニメーション走らせると表示がバグる
+      let row = outlineView.row(forItem: group)
+      if row >= 0 {
+        outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+        outlineView.editColumn(0, row: row, with: nil, select: true)
+      }
     }
   }
   
@@ -338,7 +342,9 @@ final class SidebarViewController: NSViewController {
     Realm.transaction { _ in
       for node in nodes {
         let index = outlineView.childIndex(forItem: node)
-        if !node.delete() { continue }
+        var successDelete = false
+        alertError { successDelete = try node.delete() }
+        if !successDelete { continue }
         outlineView.removeItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .slideLeft)
       }
     }
@@ -401,7 +407,9 @@ final class SidebarViewController: NSViewController {
     Realm.transaction { _ in
       for node in nodes {
         let beforeIndex = outlineView.childIndex(forItem: node)
-        if !node.putBack() { continue }
+        var successPutBack = false
+        alertError { successPutBack = try node.putBack() }
+        if !successPutBack { continue }
         putBackNodes.append(node)
         outlineView.removeItems(at: IndexSet(integer: beforeIndex), inParent: NodeModel.trash, withAnimation: .slideLeft)
       }

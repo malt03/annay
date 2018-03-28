@@ -20,7 +20,7 @@ final class NodeModel: Object {
   @objc dynamic var parent: NodeModel?
   @objc dynamic var index = -1
   
-  @objc dynamic var name = ""
+  @objc dynamic private(set) var name = ""
   @objc dynamic var lastUpdatedAt = Date(timeIntervalSince1970: 0)
   
   @objc dynamic var isDirectory = true
@@ -204,18 +204,20 @@ final class NodeModel: Object {
     NodeModel.selectedNode.value = self
   }
   
-  func delete() -> Bool {
+  func delete() throws -> Bool {
     if isDeleted { return false }
     isDeleted = true
     deletedAt = Date()
+    try save()
     return true
   }
   
-  func putBack() -> Bool {
+  func putBack() throws -> Bool {
     if !isDeleted { return false }
     if hasDeletedAncestor { return false }
     isDeleted = false
     deletedAt = nil
+    try save()
     return true
   }
   
@@ -271,6 +273,7 @@ extension NodeModel {
     var node = NodeModel()
     Realm.transaction { (realm) in
       node = create(id: UUID().uuidString, parent: directory, isDirectory: false, realm: realm)
+      node.name = Localized("New Note")
     }
     return node
   }
@@ -341,12 +344,18 @@ extension NodeModel {
     return children.filter("isDeleted = %@ and index >= %@ and isDirectory = %@", false, 0, true).sorted(byKeyPath: "index")
   }
   
+  func setDirectoryName(_ name: String) throws {
+    self.name = name
+    try save()
+  }
+  
   @discardableResult
-  static func createDirectory(name: String = Localized("New Directory"), parent: NodeModel?) -> NodeModel {
+  static func createDirectory(name: String = Localized("New Directory"), parent: NodeModel?) throws -> NodeModel {
     var node = NodeModel()
-    Realm.transaction { (realm) in
+    try Realm.transaction { (realm) in
       let parent = parent ?? root()
-      node = create(id: UUID().uuidString, parent: parent, isDirectory: false, realm: realm)
+      node = create(id: UUID().uuidString, parent: parent, isDirectory: true, realm: realm)
+      try node.save()
     }
     return node
   }
