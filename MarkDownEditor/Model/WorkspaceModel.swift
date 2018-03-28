@@ -29,6 +29,7 @@ final class WorkspaceModel: Object {
   var nameObservable: Observable<String> { return nameSubject }
   var nameValue: String { return directoryUrl.deletingPathExtension().lastPathComponent }
   func setName(_ name: String) throws {
+    if nameValue == name { return }
     try setDirectoryUrl(directoryUrl.deletingLastPathComponent().appendingPathComponent(name).appendingPathExtension(WorkspaceModel.fileExtension))
   }
   
@@ -77,8 +78,15 @@ final class WorkspaceModel: Object {
     }
   }
   
-  static func createDefault() -> WorkspaceModel {
+  private static func createDefault() -> WorkspaceModel {
     return WorkspaceModel(name: Localized("Default Workspace"), parentDirectory: FileManager.default.applicationSupport)
+  }
+  
+  static func createDefaultIfNeeded() throws {
+    if spaces.count == 0 {
+      let workspace = createDefault()
+      try Realm.transaction { try workspace.updateIndex(realm: $0) }
+    }
   }
   
   private lazy var directoryUrlSubject = BehaviorSubject<URL>(value: directoryUrl)
@@ -118,7 +126,7 @@ final class WorkspaceModel: Object {
   }
   
   func updateIndex(confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }, realm: Realm) throws {
-    try NodeModel.root(for: self).updateIndexIfNeeded(confirmUpdateNote: confirmUpdateNote, realm: realm)
+    try NodeModel.root(for: self, realm: realm).updateIndexIfNeeded(confirmUpdateNote: confirmUpdateNote, realm: realm)
     detectChange.onNext(())
   }
   
@@ -132,4 +140,5 @@ final class WorkspaceModel: Object {
   }
   
   override class func primaryKey() -> String? { return "directoryPath" }
+  override class func ignoredProperties() -> [String] { return ["nameSubject", "directoryUrlSubject"] }
 }

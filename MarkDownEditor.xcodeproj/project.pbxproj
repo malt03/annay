@@ -1112,7 +1112,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MarkDownEditorPreviewExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.annay.PreviewExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.annay.PreviewExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -1126,7 +1126,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MarkDownEditorPreviewExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.annay.PreviewExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.annay.PreviewExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -1265,7 +1265,7 @@
 					"$(PROJECT_DIR)/MarkDownEditor",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.annay;
+				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1293,7 +1293,7 @@
 					"$(PROJECT_DIR)/MarkDownEditor",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.annay;
+				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;

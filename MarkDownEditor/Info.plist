@@ -15,7 +15,7 @@
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.annay.workspace</string>
+				<string>org.annay.workspace</string>
 			</array>
 		</dict>
 	</array>
@@ -59,12 +59,12 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>com.pkware.zip-archive</string>
+				<string>com.apple.package</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Annay Workspace</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.annay.workspace</string>
+			<string>org.annay.workspace</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

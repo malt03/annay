@@ -13,10 +13,13 @@ import RealmSwift
 final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
   private let bag = DisposeBag()
   
-  private let workspace: WorkspaceModel
+  private let workspaceId: String
+  private var workspace: WorkspaceModel {
+    return Realm.instance.objects(WorkspaceModel.self).first!
+  }
   
   init(workspace: WorkspaceModel) {
-    self.workspace = workspace
+    self.workspaceId = workspace.id
     super.init()
     
     workspace.directoryUrlObservable.subscribe(onNext: { [weak self] _ in

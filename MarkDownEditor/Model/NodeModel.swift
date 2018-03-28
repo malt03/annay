@@ -61,7 +61,7 @@ final class NodeModel: Object {
     } else {
       return Array(
         children.filter("isDeleted = false and index >= 0")
-          .sorted(by: ["index", "createdAt"])
+          .sorted(byKeyPath: "index")
       )
     }
   }
@@ -313,15 +313,20 @@ extension NodeModel {
     return parent?.parent == nil
   }
   
-  static func root(for workspace: WorkspaceModel = .selectedValue) -> NodeModel {
+  static func root(for workspace: WorkspaceModel = .selectedValue, realm: Realm? = nil) -> NodeModel {
     if let root = workspace.nodes.filter("parent = nil").first {
       return root
     }
     let root = NodeModel()
     root.workspace = workspace
     root.isDirectory = true
-    Realm.transaction { (realm) in
+    
+    if let realm = realm {
       realm.add(root)
+    } else {
+      Realm.transaction { (realm) in
+        realm.add(root)
+      }
     }
     return root
   }
@@ -333,7 +338,7 @@ extension NodeModel {
   }
   
   var sortedDirectoryChildren: Results<NodeModel> {
-    return children.filter("isDeleted = %@ and index >= %@ and isDirectory = %@", false, 0, true).sorted(by: ["index", "createdAt"])
+    return children.filter("isDeleted = %@ and index >= %@ and isDirectory = %@", false, 0, true).sorted(byKeyPath: "index")
   }
   
   @discardableResult

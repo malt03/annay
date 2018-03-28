@@ -23,6 +23,8 @@ final class BeforeOfAllWindowController: NSWindowController {
         try confirm(alert.runModal() == .alertFirstButtonReturn)
       })
       
+      alertError { try WorkspaceModel.createDefaultIfNeeded() }
+      
       ShortcutPreference.shared.prepare()
       
       (Application.shared as! Application).prepareForWorkspaces()
