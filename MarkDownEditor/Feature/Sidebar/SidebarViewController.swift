@@ -396,9 +396,13 @@ final class SidebarViewController: NSViewController {
           outlineView.removeItems(at: index, inParent: node, withAnimation: .effectFade)
         }
         outlineView.removeItems(at: deletingIndexForRoot, inParent: nil, withAnimation: .effectFade)
+        let parents = nodes.compactMap { $0.parent }.uniq
         for node in nodes {
           if node.isInvalidated { continue }
           alertError { try node.deleteImmediately(realm: realm, workspace: workspace) }
+        }
+        for parent in parents {
+          alertError { try parent.save() }
         }
       }
     }
