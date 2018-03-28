@@ -51,7 +51,7 @@ final class ShortcutPreferenceNodeParameters: NSObject, Codable {
   
   @objc private func performHotKey() {
     guard
-      let workspace = node.value?.workspace,
+      let workspace = node.value?.node?.workspace,
       let node = node.value?.node
       else {
         NSAlert(localizedMessageText: "No parent directory was selected.").runModal()
@@ -66,7 +66,7 @@ final class ShortcutPreferenceNodeParameters: NSObject, Codable {
       ShortcutPreference.shared.insertNode.onNext(note)
     case .openNote: note = node
     }
-    note.selected()
+    note.select()
 
     NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
     Application.shared.activate(ignoringOtherApps: true)

@@ -16,10 +16,12 @@ final class WorkspaceDirectoryWatcherManager {
   
   static let shared = WorkspaceDirectoryWatcherManager()
   
+  private(set) var confirm: NodeModel.ConfirmUpdateNote?
   private var watchers = [WorkspaceDirectoryWatcher]()
   
-  func prepare() {
-    WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] (models) in
+  func prepare(confirm: @escaping NodeModel.ConfirmUpdateNote) {
+    self.confirm = confirm
+    WorkspaceModel.observableSpaces.subscribe(onNext: { [weak self] (models) in
       guard let s = self else { return }
       for oldWatcher in s.watchers { oldWatcher.destroy() }
       s.watchers = models.map { WorkspaceDirectoryWatcher(workspace: $0) }

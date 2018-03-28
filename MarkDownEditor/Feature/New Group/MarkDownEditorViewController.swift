@@ -148,9 +148,8 @@ final class MarkDownEditorViewController: NSViewController {
 extension MarkDownEditorViewController: NSTextViewDelegate {
   func textDidChange(_ notification: Notification) {
     if let note = NodeModel.selectedNode.value {
-      let workspace = WorkspaceModel.selected.value
       Realm.transaction { _ in
-        note.setBody(textView.string, workspace: workspace)
+        note.setBody(textView.string)
       }
     }
     updateWebView()

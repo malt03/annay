@@ -1,4 +1,5 @@
-github "ReactiveX/RxSwift" ~> 4.0
+github "ReactiveX/RxSwift"
+github "RxSwiftCommunity/RxRealm"
 github "realm/realm-cocoa"
 github "marmelroy/Zip"
 github "Clipy/KeyHolder"

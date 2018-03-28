@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import RealmSwift
 
 final class WorkspacesViewController: NSViewController {
   private let bag = DisposeBag()
@@ -24,7 +25,7 @@ final class WorkspacesViewController: NSViewController {
     tableView.registerForDraggedTypes([.workspaceModel, .nodeModel])
     tableView.setDraggingSourceOperationMask([.move], forLocal: true)
     
-    WorkspaceModel.spaces.asObservable().distinctUntilChanged().subscribe(onNext: { [weak self] _ in
+    WorkspaceModel.observableSpaces.subscribe(onNext: { [weak self] _ in
       self?.tableView.reloadData()
       DispatchQueue.main.async {
         self?.tableView.selectRowIndexes(IndexSet(integer: WorkspaceModel.selectedIndex), byExtendingSelection: false)
@@ -65,19 +66,19 @@ final class WorkspacesViewController: NSViewController {
   }
   
   @objc private func selectNextWorkspace() {
-    let row = tableView.selectedRow == WorkspaceModel.spaces.value.count - 1 ? 0 : tableView.selectedRow + 1
+    let row = tableView.selectedRow == WorkspaceModel.spaces.count - 1 ? 0 : tableView.selectedRow + 1
     tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
   }
   
   @objc private func selectPreviousWorkspace() {
-    let row = tableView.selectedRow == 0 ? WorkspaceModel.spaces.value.count - 1 : tableView.selectedRow - 1
+    let row = tableView.selectedRow == 0 ? WorkspaceModel.spaces.count - 1 : tableView.selectedRow - 1
     tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
   }
   
   override func viewDidAppear() {
     super.viewDidAppear()
 
-    WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] _ in
+    WorkspaceModel.selectedObservable.subscribe(onNext: { [weak self] _ in
       guard let s = self else { return }
       if s.tableView.selectedRow == WorkspaceModel.selectedIndex { return }
       self?.tableView.selectRowIndexes(IndexSet(integer: WorkspaceModel.selectedIndex), byExtendingSelection: false)
@@ -89,7 +90,7 @@ final class WorkspacesViewController: NSViewController {
     case let wc as WindowController:
       switch wc.contentViewController {
       case let vc as MoveWorkspaceViewController:
-        vc.prepare(workspace: WorkspaceModel.spaces.value[tableView.selectedRow])
+        vc.prepare(workspace: WorkspaceModel.spaces[tableView.selectedRow])
       case let vc as CreateOrOpenWorkspaceTabViewController:
         vc.prepare(segment: createOrOpenWorkspaceSegment)
       default: break
@@ -101,14 +102,15 @@ final class WorkspacesViewController: NSViewController {
   
   @IBAction private func showInFinder(_ sender: NSMenuItem) {
     guard let row = tableView.rowForMenu else { return }
-    let url = WorkspaceModel.spaces.value[row].url
+    let url = WorkspaceModel.spaces[row].directoryUrl
     NSWorkspace.shared.selectFile(url.path, inFileViewerRootedAtPath: url.deletingLastPathComponent().path)
   }
 
   @IBAction private func delete(_ sender: NSMenuItem) {
     guard let row = tableView.rowForMenu else { return }
-    WorkspaceModel.spaces.value[row].deleteFromSearchableIndex()
-    WorkspaceModel.spaces.value.remove(at: row)
+    let workspace = WorkspaceModel.spaces[row]
+    workspace.deleteFromSearchableIndex()
+    Realm.transaction { $0.delete(workspace) }
   }
   
   @IBAction private func moveTheWorkspaceFile(_ sender: NSMenuItem) {
@@ -118,7 +120,7 @@ final class WorkspacesViewController: NSViewController {
 
 extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
   func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-    if row == WorkspaceModel.spaces.value.count {
+    if row == WorkspaceModel.spaces.count {
       createWorkspace()
       return false
     }
@@ -129,11 +131,11 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
     defer { lastSelectionRow = tableView.selectedRow }
     guard let lastSelectionRow = lastSelectionRow else { return }
     if lastSelectionRow == tableView.selectedRow { return }
-    WorkspaceModel.spaces.value[safe: tableView.selectedRow]?.select()
+    WorkspaceModel.spaces[safe: tableView.selectedRow]?.select()
   }
   
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return WorkspaceModel.spaces.value.count + 1
+    return WorkspaceModel.spaces.count + 1
   }
   
   func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
@@ -141,18 +143,18 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
   }
   
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    if row == WorkspaceModel.spaces.value.count {
+    if row == WorkspaceModel.spaces.count {
       let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("CreateWorkspacesTableCellView"), owner: self)
       return cell
     }
-    let workspace = WorkspaceModel.spaces.value[row]
+    let workspace = WorkspaceModel.spaces[row]
     let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("WorkspacesTableCellView"), owner: self) as! WorkspacesTableCellView
     cell.prepare(workspace: workspace)
     return cell
   }
   
   func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-    if row == WorkspaceModel.spaces.value.count { return nil }
+    if row == WorkspaceModel.spaces.count { return nil }
     let item = NSPasteboardItem()
     item.setString("\(row)", forType: .workspaceModel)
     return item
@@ -161,14 +163,14 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
     let nodes = info.draggingPasteboard().nodes
     if nodes.count > 0 {
-      if dropOperation == .on { WorkspaceModel.spaces.value[row].select() }
+      if dropOperation == .on { WorkspaceModel.spaces[row].select() }
       return []
     }
 
     if dropOperation == .on { return [] }
     guard let draggingRow = Int(info.draggingPasteboard().string(forType: .workspaceModel) ?? "") else { return [] }
     if draggingRow == row || draggingRow == row - 1 { return [] }
-    if row == WorkspaceModel.spaces.value.count + 1 { return [] }
+    if row == WorkspaceModel.spaces.count + 1 { return [] }
     return [.move]
   }
   

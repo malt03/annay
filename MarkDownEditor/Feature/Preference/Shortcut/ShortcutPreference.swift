@@ -27,10 +27,10 @@ final class ShortcutPreference: Preference {
     }
   }
   
-  func set(node: NodeModel?, workspace: WorkspaceModel?, for kind: ShortcutPreferenceNodeParameters.Kind) {
+  func set(node: NodeModel?, for kind: ShortcutPreferenceNodeParameters.Kind) {
     let codableNode: CodableNode?
-    if let node = node, let workspace = workspace {
-      codableNode = CodableNode(node: node, workspace: workspace)
+    if let node = node {
+      codableNode = CodableNode(node: node)
     } else {
       codableNode = nil
     }

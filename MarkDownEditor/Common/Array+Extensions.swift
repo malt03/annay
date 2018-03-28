@@ -64,7 +64,7 @@ extension Array where Element == URL {
         }.createNodes(parent: node, startIndex: 0, realm: realm, workspace: workspace)
         return node
       } else {
-        node.setBody(try String(contentsOfFile: url.path), workspace: workspace)
+        node.setBody(try String(contentsOfFile: url.path))
         realm.add(node)
         return node
       }

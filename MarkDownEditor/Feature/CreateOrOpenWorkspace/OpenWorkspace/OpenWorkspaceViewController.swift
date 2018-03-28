@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import RealmSwift
 
 final class OpenWorkspaceViewController: NSViewController {
   private let bag = DisposeBag()
@@ -57,9 +58,11 @@ final class OpenWorkspaceViewController: NSViewController {
   
   @IBAction func openWorkspace(_ sender: NSButton) {
     let path = workspaceFileTextField.stringValue.replacingTildeToHomePath
-    if WorkspaceModel.open(url: URL(fileURLWithPath: path)) {
-      view.window?.close()
+    let workspace = WorkspaceModel(directoryUrl: URL(fileURLWithPath: path))
+    Realm.transaction { (realm) in
+      alertError { try workspace.updateIndex(realm: realm) }
     }
+    view.window?.close()
   }
   
   override func dismiss(_ sender: Any?) {

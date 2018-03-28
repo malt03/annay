@@ -16,7 +16,7 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
   private let bag = DisposeBag()
   private var refreshNodesToken: NotificationToken?
   
-  private lazy var selectedWorkspace = Variable(ShortcutPreference.shared.node(for: kind)?.workspace ?? WorkspaceModel.selected.value)
+  private lazy var selectedWorkspace = Variable(ShortcutPreference.shared.node(for: kind)?.node?.workspace ?? WorkspaceModel.selectedValue)
   
   @IBOutlet private weak var shortcutView: RecordView!
   @IBOutlet private weak var popUpButton: NSPopUpButton!
@@ -37,10 +37,10 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
     shortcutView.tintColor = .textColor
     shortcutView.delegate = self
     
-    WorkspaceModel.spaces.asObservable().subscribe(onNext: { [weak self] (spaces) in
+    WorkspaceModel.observableSpaces.subscribe(onNext: { [weak self] (spaces) in
       guard let s = self else { return }
       s.popUpButton.removeAllItems()
-      s.popUpButton.addItems(withTitles: spaces.map { $0.name })
+      s.popUpButton.addItems(withTitles: spaces.map { $0.nameValue })
       s.popUpButton.selectItem(at: spaces.index(of: s.selectedWorkspace.value) ?? 0)
     }).disposed(by: bag)
     
@@ -51,12 +51,11 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
       s.reloadData()
       
       s.refreshNodesToken?.invalidate()
-      s.refreshNodesToken = NodeModel.roots(query: nil, for: workspace).observe { [weak self] _ in self?.reloadData() }
     }).disposed(by: bag)
     
     popUpButton.rx.controlEvent.subscribe(onNext: { [weak self] _ in
       guard let s = self else { return }
-      s.selectedWorkspace.value = WorkspaceModel.spaces.value[s.popUpButton.indexOfSelectedItem]
+      s.selectedWorkspace.value = WorkspaceModel.spaces[s.popUpButton.indexOfSelectedItem]
     }).disposed(by: bag)
     
     switch kind! {
@@ -93,7 +92,7 @@ extension NewOrOpenNoteShortcutPreferenceViewController: NSOutlineViewDelegate, 
   
   func outlineView(_ outlineView: NSOutlineView, itemForPersistentObject object: Any) -> Any? {
     guard let id = object as? String else { return nil }
-    return NodeModel.node(for: id, for: selectedWorkspace.value)
+    return NodeModel.node(for: id)
   }
   
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
@@ -133,8 +132,7 @@ extension NewOrOpenNoteShortcutPreferenceViewController: NSOutlineViewDelegate, 
   
   func outlineViewSelectionDidChange(_ notification: Notification) {
     let node = outlineView.item(atRow: outlineView.selectedRow) as? NodeModel
-    let workspace = selectedWorkspace.value
-    ShortcutPreference.shared.set(node: node, workspace: workspace, for: kind)
+    ShortcutPreference.shared.set(node: node, for: kind)
   }
   
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {

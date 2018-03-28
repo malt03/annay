@@ -42,11 +42,13 @@ final class NodeModelExporter {
     openPanel.begin { [unowned self] (result) in
       if result != .OK { return }
       guard let url = openPanel.url else { return }
-      for node in self.nodes {
-        node.export(in: url, type: self.exportType, selectAndWriteQueue: &self.selectAndWriteQueue)
+      alertError {
+        for node in self.nodes {
+          try node.export(in: url, type: self.exportType, selectAndWriteQueue: &self.selectAndWriteQueue)
+        }
+        (NSApplication.shared as! Application).isEnabled.value = false
+        self.performSelectAndWrite()
       }
-      (NSApplication.shared as! Application).isEnabled.value = false
-      self.performSelectAndWrite()
     }
   }
   
@@ -69,7 +71,7 @@ final class NodeModelExporter {
     )
     
     DispatchQueue.main.async {
-      node.selected()
+      node.select()
     }
   }
   

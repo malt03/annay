@@ -15,36 +15,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   func application(_ application: NSApplication, open urls: [URL]) {
     guard let url = urls.first else { return }
     if url.isFileURL {
-      WorkspaceModel.open(url: url)
+      Realm.transaction { (realm) in
+        let workspace = WorkspaceModel(directoryUrl: url)
+        alertError { try workspace.updateIndex(realm: realm) }
+      }
       return
     }
 
     if url.scheme != "annay" { return }
     let nodeId = url.lastPathComponent
-    let workspaceUniqId = url.deletingLastPathComponent().lastPathComponent
     guard
-      let workspace = WorkspaceModel.space(uniqId: workspaceUniqId),
-      let node = NodeModel.node(for: nodeId, for: workspace)
+      let node = NodeModel.node(for: nodeId)
       else { return }
-    workspace.select()
-    node.selected()
-  }
-  
-  @IBAction private func resetWorkspace(_ sender: NSMenuItem) {
-    WorkspaceModel.selected.value.reset()
+    node.workspace?.select()
+    node.select()
   }
   
   func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]) -> Void) -> Bool {
     if userActivity.activityType == CSSearchableItemActionType {
       guard
-        let ids = (userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String)?.split(separator: "/"),
-        let workspaceId = ids[safe: 0],
-        let nodeId = ids[safe: 1],
-        let workspace = WorkspaceModel.spaces.value.first(where: { $0.id == workspaceId }),
-        let node = NodeModel.node(for: String(nodeId), for: workspace)
+        let nodeId = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+        let node = NodeModel.node(for: nodeId)
         else { return false }
-      workspace.select()
-      node.selected()
+      node.workspace?.select()
+      node.select()
     }
     return true
   }
@@ -79,8 +73,8 @@ extension AppDelegate {
     PreferenceWindowController.show()
   }
 
-  @IBAction private func saveWorkspace(_ sender: NSMenuItem) {
-    WorkspaceModel.selected.value.save()
+  @IBAction func saveNote(_ sender: NSMenuItem) {
+    alertError { try NodeModel.selectedNode.value?.save() }
   }
 
   @IBAction private func joinSlack(_ sender: NSMenuItem) {

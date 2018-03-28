@@ -52,4 +52,6 @@ extension URL {
   func isConformsToUTI(_ uti: String) -> Bool {
     return UTTypeConformsTo(self.uti, uti as CFString)
   }
+  
+  var infoFile: URL { return appendingPathComponent("info.json") }
 }

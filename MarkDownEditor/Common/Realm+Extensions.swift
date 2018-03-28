@@ -11,71 +11,15 @@ import Foundation
 
 extension Realm {
   static var instance: Realm {
-    return instance(for: WorkspaceModel.selected.value)
-  }
-  
-  static func instance(for workspace: WorkspaceModel) -> Realm {
-    return try! Realm(configuration: configuration(for: workspace))
-  }
-  
-  private static func configuration(for workspace: WorkspaceModel) -> Realm.Configuration {
-    let fileUrl = directory(for: workspace).realmFile
-    return Realm.Configuration(fileURL: fileUrl, encryptionKey: encryptionKey(for: workspace), deleteRealmIfMigrationNeeded: true)
-  }
-  
-  private static func encryptionKey(for workspace: WorkspaceModel) -> Data {
-    if let encryptionKey = encryptionKeys[workspace] { return encryptionKey }
-    var savedKeyArray = [UInt8](repeating: 0, count: 32)
-    var applicationKeyArray = [UInt8](repeating: 0, count: 32)
-    savedKey(for: workspace).copyBytes(to: &savedKeyArray, count: 32)
-    applicationKey.copyBytes(to: &applicationKeyArray, count: 32)
-    let key = Data(bytes: savedKeyArray + applicationKeyArray)
-    encryptionKeys[workspace] = key
-    return key
-  }
-  
-  private static var encryptionKeys = [WorkspaceModel: Data]()
-  
-  private static var applicationKey: Data {
-    return Data(base64Encoded: "30nUkxK0xrcWu5/PQTtynETnHuoZVGGldnxibpKUeH4=")!
-  }
-  
-  private static func savedKey(for workspace: WorkspaceModel) -> Data {
-    let fileUrl = directory(for: workspace).secretKeyFile
-    if let key = try? Data(contentsOf: fileUrl) {
-      return key
-    } else {
-      let key = createRandomKey()
-      try! key.write(to: fileUrl)
-      return key
-    }
-  }
-  
-  private static func createRandomKey() -> Data {
-    var key = Data(count: 32)
-    _ = key.withUnsafeMutableBytes { (bytes) in
-      SecRandomCopyBytes(kSecRandomDefault, 32, bytes)
-    }
-    return key
-  }
-  
-  private static func directory(for workspace: WorkspaceModel) -> URL {
-    return workspace.workspaceDirectory
+    return try! Realm()
   }
   
   static func transaction(_ block: (_ realm: Realm) throws -> Void) rethrows {
     let realm = instance
     try! realm.write { try block(realm) }
-    WorkspaceModel.selected.value.update()
   }
   
   static func add(_ object: Object, update: Bool = false) {
     transaction { $0.add(object, update: update) }
-  }
-}
-
-extension Object {
-  func save() {
-    Realm.add(self, update: true)
   }
 }

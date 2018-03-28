@@ -9,19 +9,8 @@
 import CoreSpotlight
 
 extension CSSearchableIndex {
-  func deleteSearchableItemsWithDataStore(nodeIds: [String], workspaceId: String) {
+  func deleteSearchableItemsWithDataStore(with nodeIds: [String]) {
     HtmlDataStore.shared.remove(nodeIds: nodeIds)
-    let identifiers = nodeIds.map { CSSearchableIndex.identifier(nodeId: $0, workspaceId: workspaceId) }
-    deleteSearchableItems(withIdentifiers: identifiers, completionHandler: nil)
-  }
-  
-  func deleteSearchableItemsWithDataStore(with identifiers: [String]) {
-    let nodeIds = identifiers.compactMap { $0.split(separator: "/").last.flatMap { String($0) } }
-    HtmlDataStore.shared.remove(nodeIds: nodeIds)
-    deleteSearchableItems(withIdentifiers: identifiers, completionHandler: nil)
-  }
-  
-  static func identifier(nodeId: String, workspaceId: String) -> String {
-    return "\(workspaceId)/\(nodeId)"
+    deleteSearchableItems(withIdentifiers: nodeIds, completionHandler: nil)
   }
 }

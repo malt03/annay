@@ -21,10 +21,10 @@ final class ResourceManager {
     }
   }
   
-  static func save(data: Data, fileExtension: String, in workspace: WorkspaceModel = WorkspaceModel.selected.value) throws -> URL {
+  static func save(data: Data, fileExtension: String, in workspace: WorkspaceModel = WorkspaceModel.selectedValue) throws -> URL {
     let fileName = UUID().uuidString + "." + fileExtension
 
-    let workspaceSourceDirectory = workspace.workspaceDirectory.resourceDirectory
+    let workspaceSourceDirectory = workspace.directoryUrl.resourceDirectory
     try FileManager.default.createDirectoryIfNeeded(url: workspaceSourceDirectory)
     try data.write(to: workspaceSourceDirectory.appendingPathExtension(fileName))
 

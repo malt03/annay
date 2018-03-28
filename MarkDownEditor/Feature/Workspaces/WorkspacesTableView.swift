@@ -20,7 +20,7 @@ final class WorkspacesTableView: NSTableView {
   override func menu(for event: NSEvent) -> NSMenu? {
     let location = convert(event.locationInWindow, from: nil)
     let clickedRow = row(at: location)
-    if clickedRow == -1 || clickedRow == WorkspaceModel.spaces.value.count {
+    if clickedRow == -1 || clickedRow == WorkspaceModel.spaces.count {
       menu = nil
       rowForMenu = nil
     } else {

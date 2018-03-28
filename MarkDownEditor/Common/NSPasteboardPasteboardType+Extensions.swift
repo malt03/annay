@@ -10,6 +10,5 @@ import Cocoa
 
 extension NSPasteboard.PasteboardType {
   static let nodeModel = NSPasteboard.PasteboardType("com.annay.nodeModel")
-  static let parentWorkspaceModel = NSPasteboard.PasteboardType("com.annay.parentWorkspaceModel")
   static let workspaceModel = NSPasteboard.PasteboardType("com.annay.workspaceModel")
 }
