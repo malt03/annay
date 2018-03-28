@@ -345,7 +345,8 @@ final class SidebarViewController: NSViewController {
         var successDelete = false
         alertError { successDelete = try node.delete() }
         if !successDelete { continue }
-        outlineView.removeItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .slideLeft)
+        let parent = node.isRoot ? nil : node.parent
+        outlineView.removeItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .slideLeft)
       }
     }
     let afterCount = NodeModel.deleted.count
@@ -379,11 +380,22 @@ final class SidebarViewController: NSViewController {
       let workspace = WorkspaceModel.selectedValue
       Realm.transaction { (realm) in
         let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
+        var deletingIndexes = [NodeModel: IndexSet]()
+        var deletingIndexForRoot = IndexSet()
         for node in nodes {
           let index = outlineView.childIndex(forItem: node)
-          let parent = node.isDeleted ? NodeModel.trash : node.parent
-          outlineView.removeItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .effectFade)
+          if node.isDeleted || !node.isRoot {
+            let parent = node.isDeleted ? NodeModel.trash : node.parent
+            if deletingIndexes[parent!] == nil { deletingIndexes[parent!] = IndexSet() }
+            deletingIndexes[parent!]?.insert(index)
+          } else {
+            deletingIndexForRoot.insert(index)
+          }
         }
+        for (node, index) in deletingIndexes {
+          outlineView.removeItems(at: index, inParent: node, withAnimation: .effectFade)
+        }
+        outlineView.removeItems(at: deletingIndexForRoot, inParent: nil, withAnimation: .effectFade)
         for node in nodes {
           if node.isInvalidated { continue }
           alertError { try node.deleteImmediately(realm: realm, workspace: workspace) }
@@ -419,7 +431,8 @@ final class SidebarViewController: NSViewController {
         outlineView.reloadData()
         break
       }
-      outlineView.insertItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .slideLeft)
+      let parent = node.isRoot ? nil : node.parent
+      outlineView.insertItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .slideLeft)
       for ancestor in node.ancestors.reversed() {
         outlineView.expandItem(ancestor)
       }
