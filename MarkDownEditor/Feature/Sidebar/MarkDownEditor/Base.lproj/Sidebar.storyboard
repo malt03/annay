@@ -331,7 +331,7 @@ CA
                             <string key="keyEquivalent" base64-UTF8="YES">
 CA
 </string>
-                            <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             <connections>
                                 <action selector="putBackFromTrash:" target="PrQ-Do-4mD" id="GOj-gF-N3x"/>
                             </connections>

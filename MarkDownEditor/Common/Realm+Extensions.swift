@@ -14,9 +14,17 @@ extension Realm {
     return try! Realm()
   }
   
+  private static var writingInstance: Realm?
+  
   static func transaction(_ block: (_ realm: Realm) throws -> Void) rethrows {
-    let realm = instance
-    try! realm.write { try block(realm) }
+    if let realm = writingInstance, realm.isInWriteTransaction {
+      try! block(realm)
+    } else {
+      let realm = instance
+      writingInstance = realm
+      try! realm.write { try block(realm) }
+      writingInstance = nil
+    }
   }
   
   static func add(_ object: Object, update: Bool = false) {
