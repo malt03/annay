@@ -90,7 +90,9 @@ final class NodeModel: Object {
     parent = node
     workspace = node.workspace
     let newUrl = url
-    try FileManager.default.moveItem(at: oldUrl, to: newUrl)
+    if FileManager.default.fileExists(atPath: oldUrl.path) {
+      try FileManager.default.moveItem(at: oldUrl, to: newUrl)
+    }
     try oldParent?.save()
     try parent?.save()
   }
@@ -188,8 +190,10 @@ final class NodeModel: Object {
   
   func createCopy(realm: Realm, parent: NodeModel, index: Int) throws {
     let node = copied
-    try node.move(in: parent)
+    node.parent = parent
+    node.workspace = parent.workspace
     node.index = index
+    try node.save()
     realm.add(node)
     
     for (index, child) in sortedChildren(query: nil).enumerated() {
