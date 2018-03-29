@@ -42,6 +42,7 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
       s.popUpButton.removeAllItems()
       s.popUpButton.addItems(withTitles: spaces.map { $0.nameValue })
       s.popUpButton.selectItem(at: spaces.index(of: s.selectedWorkspace.value) ?? 0)
+      s.outlineView.reloadData()
     }).disposed(by: bag)
     
     selectedWorkspace.asObservable().subscribe(onNext: { [weak self] (workspace) in
