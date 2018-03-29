@@ -70,9 +70,17 @@ extension AppDelegate {
     PreferenceWindowController.show()
   }
 
-  @IBAction func saveNote(_ sender: NSMenuItem) {
+  @IBAction private func saveNote(_ sender: NSMenuItem) {
     Realm.transaction { _ in
       alertError { try NodeModel.selectedNode.value?.save() }
+    }
+  }
+
+  @IBAction private func saveAllNotes(_ sender: NSMenuItem) {
+    Realm.transaction { _ in
+      alertError {
+        for note in NodeModel.unsaved { try note.save() }
+      }
     }
   }
 

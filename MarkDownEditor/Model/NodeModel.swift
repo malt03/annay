@@ -112,6 +112,10 @@ final class NodeModel: Object {
       .sorted(byKeyPath: "deletedAt")
   }
   
+  static var unsaved: Results<NodeModel> {
+    return Realm.instance.objects(NodeModel.self).filter("isBodySaved = false")
+  }
+  
   private static var _trash: NodeModel?
   
   static var trash: NodeModel {

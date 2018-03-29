@@ -164,6 +164,12 @@ CA
                                                 <action selector="saveNote:" target="Voe-Tx-rLC" id="oPX-BM-tGc"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Save All Notes" keyEquivalent="S" id="UnT-Fe-ZDw">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="saveAllNotes:" target="Voe-Tx-rLC" id="BI3-Eu-j5k"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
