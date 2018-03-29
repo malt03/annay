@@ -111,8 +111,10 @@ final class WorkspacesViewController: NSViewController {
     let workspace = WorkspaceModel.spaces[row]
     workspace.deleteFromSearchableIndex()
     Realm.transaction { (realm) in
-      realm.delete(workspace.nodes)
+      let nodes = workspace.nodes
+      for node in nodes { node.prepareDelete() }
       realm.delete(workspace)
+      realm.delete(nodes)
     }
   }
   

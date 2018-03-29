@@ -58,7 +58,9 @@ final class SidebarViewController: NSViewController {
     )
     
     WorkspaceModel.selectedObservable.subscribe(onNext: { [weak self] (workspace) in
-      self?.reloadWorkspace(workspace)
+      DispatchQueue.main.async {
+        self?.reloadWorkspace(workspace)
+      }
     }).disposed(by: bag)
     
     Observable.combineLatest(isSearching.asObservable(), searchField.rx.text) { (isSearching, searchText) -> String? in

@@ -15,7 +15,7 @@ final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
   
   private let workspaceId: String
   private var workspace: WorkspaceModel {
-    return Realm.instance.objects(WorkspaceModel.self).first!
+    return Realm.instance.objects(WorkspaceModel.self).filter("id = %@", workspaceId).first!
   }
   
   init(workspace: WorkspaceModel) {

@@ -248,6 +248,10 @@ final class NodeModel: Object {
     }
   }
   
+  func prepareDelete() {
+    workspace = nil
+  }
+  
   override class func primaryKey() -> String? {
     return "id"
   }

@@ -64,7 +64,7 @@ final class WorkspaceModel: Object {
   
   static func move(from fromIndex: Int, to toIndex: Int) {
     Realm.transaction { (realm) in
-      let workspaces = realm.objects(WorkspaceModel.self).filter("index >= 0").sorted(byKeyPath: "index")
+      let workspaces = realm.objects(WorkspaceModel.self).sorted(byKeyPath: "index")
       let moveWorkspace = workspaces[fromIndex]
       moveWorkspace.index = -1
       for (index, workspace) in workspaces.enumerated() {
