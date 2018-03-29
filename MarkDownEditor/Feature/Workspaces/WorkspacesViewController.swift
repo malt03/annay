@@ -173,7 +173,7 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
     let nodes = info.draggingPasteboard().nodes
     if nodes.count > 0 {
-      if dropOperation == .on { WorkspaceModel.spaces[row].select() }
+      if dropOperation == .on { WorkspaceModel.spaces[safe: row]?.select() }
       return []
     }
 
