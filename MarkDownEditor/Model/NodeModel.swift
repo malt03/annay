@@ -276,6 +276,7 @@ extension NodeModel {
     var node = NodeModel()
     Realm.transaction { (realm) in
       node = create(id: UUID().uuidString, parent: directory, isDirectory: false, realm: realm)
+      node.isBodySaved = false
       node.name = Localized("New Note")
     }
     return node
