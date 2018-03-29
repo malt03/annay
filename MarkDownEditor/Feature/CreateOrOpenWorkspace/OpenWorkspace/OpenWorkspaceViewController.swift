@@ -58,10 +58,7 @@ final class OpenWorkspaceViewController: NSViewController {
   
   @IBAction func openWorkspace(_ sender: NSButton) {
     let path = workspaceFileTextField.stringValue.replacingTildeToHomePath
-    let workspace = WorkspaceModel(directoryUrl: URL(fileURLWithPath: path))
-    Realm.transaction { (realm) in
-      alertError { try workspace.updateIndex(realm: realm) }
-    }
+    alertError { try WorkspaceModel.create(directoryUrl: URL(fileURLWithPath: path)) }
     view.window?.close()
   }
   

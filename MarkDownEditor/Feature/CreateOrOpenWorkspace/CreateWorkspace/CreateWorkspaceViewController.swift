@@ -63,10 +63,7 @@ final class CreateWorkspaceViewController: NSViewController {
   @IBAction func createWorkspace(_ sender: NSButton) {
     let path = workspaceDirectoryTextField.stringValue.replacingTildeToHomePath
     let url = URL(fileURLWithPath: path, isDirectory: true)
-    Realm.transaction { (realm) in
-      let workspace = WorkspaceModel(name: workspaceNameTextField.stringValue, parentDirectory: url)
-      realm.add(workspace)
-    }
+    alertError { try WorkspaceModel.create(name: workspaceNameTextField.stringValue, parentDirectory: url) }
     view.window?.close()
   }
   

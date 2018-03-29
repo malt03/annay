@@ -55,7 +55,7 @@ final class WorkspaceModel: Object {
   
   static func getSelected() -> WorkspaceModel {
     if let selected = spaces[safe: selectedIndex] ?? spaces.first { return selected }
-    return createDefault()
+    return try! createDefault()
   }
   
   func select() {
@@ -78,15 +78,13 @@ final class WorkspaceModel: Object {
     }
   }
   
-  private static func createDefault() -> WorkspaceModel {
-    return WorkspaceModel(name: Localized("Default Workspace"), parentDirectory: FileManager.default.applicationSupport)
+  @discardableResult
+  private static func createDefault() throws -> WorkspaceModel {
+    return try create(name: Localized("Default Workspace"), parentDirectory: FileManager.default.applicationSupport)
   }
   
   static func createDefaultIfNeeded() throws {
-    if spaces.count == 0 {
-      let workspace = createDefault()
-      try Realm.transaction { try workspace.updateIndex(realm: $0) }
-    }
+    if spaces.count == 0 { try createDefault() }
   }
   
   private lazy var directoryUrlSubject = BehaviorSubject<URL>(value: directoryUrl)
@@ -116,16 +114,26 @@ final class WorkspaceModel: Object {
   
   let nodes = LinkingObjects(fromType: NodeModel.self, property: "workspace")
   
-  convenience init(name: String, parentDirectory: URL) {
-    self.init(directoryUrl: parentDirectory.appendingPathComponent(name).appendingPathExtension(WorkspaceModel.fileExtension))
+  @discardableResult
+  static func create(name: String, parentDirectory: URL, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
+    return try create(
+      directoryUrl: parentDirectory.appendingPathComponent(name).appendingPathExtension(WorkspaceModel.fileExtension),
+      confirmUpdateNote: confirmUpdateNote
+    )
   }
   
-  convenience init(directoryUrl: URL) {
-    self.init()
-    self.directoryUrl = directoryUrl
+  @discardableResult
+  static func create(directoryUrl: URL, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
+    let workspace = WorkspaceModel()
+    workspace.directoryUrl = directoryUrl
+    workspace.index = (spaces.last?.index ?? -1) + 1
+    try Realm.transaction { (realm) in
+      try workspace.updateIndex(confirmUpdateNote: confirmUpdateNote, realm: realm)
+    }
+    return workspace
   }
   
-  func updateIndex(confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }, realm: Realm) throws {
+  func updateIndex(confirmUpdateNote: NodeModel.ConfirmUpdateNote, realm: Realm) throws {
     try NodeModel.root(for: self, realm: realm).updateIndexIfNeeded(confirmUpdateNote: confirmUpdateNote, realm: realm)
     detectChange.onNext(())
   }

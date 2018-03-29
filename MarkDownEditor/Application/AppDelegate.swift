@@ -15,10 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   func application(_ application: NSApplication, open urls: [URL]) {
     guard let url = urls.first else { return }
     if url.isFileURL {
-      Realm.transaction { (realm) in
-        let workspace = WorkspaceModel(directoryUrl: url)
-        alertError { try workspace.updateIndex(realm: realm) }
-      }
+      alertError { try WorkspaceModel.create(directoryUrl: url) }
       return
     }
 
