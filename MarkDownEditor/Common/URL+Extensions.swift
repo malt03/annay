@@ -20,7 +20,7 @@ extension URL {
   }
   
   var isWorkspace: Bool {
-    if isDirectory { return false }
+    if !isDirectory { return false }
     let uti = (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
     return uti == "org.annay.workspace"
   }
