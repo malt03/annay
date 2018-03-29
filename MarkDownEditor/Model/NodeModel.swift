@@ -141,7 +141,9 @@ final class NodeModel: Object {
       for node in deletedNodes {
         if node.isInvalidated { continue }
         realm.delete(node.descendants)
-        try FileManager.default.removeItem(at: node.url)
+        if FileManager.default.fileExists(atPath: node.url.path) {
+          try FileManager.default.removeItem(at: node.url)
+        }
       }
       realm.delete(deletedNodes)
       
@@ -233,7 +235,9 @@ final class NodeModel: Object {
   func deleteImmediately(realm: Realm, workspace: WorkspaceModel) throws {
     let nodeIds = descendants.map { $0.id } + [id]
     CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: nodeIds)
-    try FileManager.default.removeItem(at: url)
+    if FileManager.default.fileExists(atPath: url.path) {
+      try FileManager.default.removeItem(at: url)
+    }
     realm.delete(descendants)
     realm.delete(self)
   }
