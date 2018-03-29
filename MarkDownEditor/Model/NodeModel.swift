@@ -215,6 +215,7 @@ final class NodeModel: Object {
   }
   
   func delete() throws -> Bool {
+    if isTrash { return false }
     if isDeleted { return false }
     isDeleted = true
     deletedAt = Date()
