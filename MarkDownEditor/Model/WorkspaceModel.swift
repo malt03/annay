@@ -126,12 +126,18 @@ final class WorkspaceModel: Object {
   
   @discardableResult
   static func create(directoryUrl: URL, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
-    let workspace = WorkspaceModel()
-    workspace.directoryUrl = directoryUrl
-    workspace.index = (spaces.last?.index ?? -1) + 1
-    try Realm.transaction { (realm) in
-      try workspace.updateIndex(confirmUpdateNote: confirmUpdateNote, realm: realm)
+    let workspace: WorkspaceModel
+    if let saved = Realm.instance.object(ofType: WorkspaceModel.self, forPrimaryKey: directoryUrl.path) {
+      workspace = saved
+    } else {
+      workspace = WorkspaceModel()
+      workspace.directoryUrl = directoryUrl
+      workspace.index = (spaces.last?.index ?? -1) + 1
+      try Realm.transaction { (realm) in
+        try workspace.updateIndex(confirmUpdateNote: confirmUpdateNote, realm: realm)
+      }
     }
+    workspace.select()
     return workspace
   }
   
