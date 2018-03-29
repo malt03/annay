@@ -341,6 +341,13 @@ CA
                                 <action selector="exportAsHtml:" target="PrQ-Do-4mD" id="Rbh-4S-jDl"/>
                             </connections>
                         </menuItem>
+                        <menuItem isSeparatorItem="YES" id="jlM-VB-bJH"/>
+                        <menuItem title="Show in Finder" id="O0n-Ib-ah6">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showInFinder:" target="PrQ-Do-4mD" id="tFE-FL-nUq"/>
+                            </connections>
+                        </menuItem>
                     </items>
                 </menu>
                 <menu id="AB4-Zv-pQo">

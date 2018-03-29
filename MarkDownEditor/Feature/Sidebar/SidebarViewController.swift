@@ -255,6 +255,15 @@ final class SidebarViewController: NSViewController {
     NodeModelExporter(type: type, nodes: nodes).export()
   }
   
+  @IBAction private func showInFinder(_ sender: NSMenuItem) {
+    guard let indexes = outlineView.indexesForMenu else { return }
+    for index in indexes {
+      let node = outlineView.item(atRow: index) as! NodeModel
+      if node.isTrash { continue }
+      NSWorkspace.shared.selectFile(node.url.path, inFileViewerRootedAtPath: node.url.deletingLastPathComponent().path)
+    }
+  }
+  
   @objc private func emptyTrash() {
     let alert = NSAlert()
     alert.messageText = Localized("This operation cannot be undone.")
