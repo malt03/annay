@@ -14,21 +14,21 @@ import RxSwift
 final class NodeModel: Object {
   private static var trashId: String { return "trash" }
 
-  @objc dynamic var id = UUID().uuidString
-  @objc dynamic var workspace: WorkspaceModel?
+  @objc private(set) dynamic var id = UUID().uuidString
+  @objc private(set) dynamic var workspace: WorkspaceModel?
   
   @objc dynamic var parent: NodeModel?
   @objc dynamic var index = -1
   
-  @objc dynamic private(set) var name = ""
-  @objc dynamic var lastUpdatedAt = Date(timeIntervalSince1970: 0)
+  @objc private(set) dynamic var name = ""
+  @objc private(set) dynamic var lastUpdatedAt = Date(timeIntervalSince1970: 0)
   
   @objc dynamic var isDirectory = true
-  @objc dynamic var body = ""
-  @objc dynamic var isBodySaved = true
+  @objc private(set) dynamic var body = ""
+  @objc private(set) dynamic var isBodySaved = true
   
   @objc dynamic var isDeleted = false
-  @objc dynamic var deletedAt: Date?
+  @objc private dynamic var deletedAt: Date?
   
   var ancestors: [NodeModel] {
     guard let parent = parent else { return [] }

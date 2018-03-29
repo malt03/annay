@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gIM-Og-53C">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14105" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gIM-Og-53C">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14105"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,8 +10,8 @@
         <!--Workspaces View Controller-->
         <scene sceneID="Tfa-ZC-Fxa">
             <objects>
-                <viewController id="gIM-Og-53C" customClass="WorkspacesViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="H46-uq-id9" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                <viewController id="gIM-Og-53C" customClass="WorkspacesViewController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="H46-uq-id9" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="68" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -21,7 +21,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="68" height="270"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="52" viewBased="YES" id="5TB-xv-gAB" customClass="WorkspacesTableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="52" viewBased="YES" id="5TB-xv-gAB" customClass="WorkspacesTableView" customModule="Annay" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="68" height="270"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -44,7 +44,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="68" height="52"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="4qV-6l-iYQ" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="4qV-6l-iYQ" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
                                                                     <rect key="frame" x="16" y="8" width="36" height="36"/>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
@@ -76,11 +76,11 @@
                                                                 <outlet property="textField" destination="6rV-3A-r8F" id="IHR-kw-toH"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="WorkspacesTableCellView" id="5ZL-ub-f8W" customClass="WorkspacesTableCellView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                        <tableCellView identifier="WorkspacesTableCellView" id="5ZL-ub-f8W" customClass="WorkspacesTableCellView" customModule="Annay" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="52" width="68" height="52"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ggv-hC-A4I" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ggv-hC-A4I" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
                                                                     <rect key="frame" x="16" y="8" width="36" height="36"/>
                                                                     <subviews>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hk9-Qc-qIe">
@@ -111,10 +111,10 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </customView>
-                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="uSX-Cf-e47" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="uSX-Cf-e47" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
                                                                     <rect key="frame" x="44" y="36" width="16" height="16"/>
                                                                     <subviews>
-                                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Zue-SP-MB3" customClass="BackgroundSetableView" customModule="MarkDownEditor" customModuleProvider="target">
+                                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Zue-SP-MB3" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
                                                                             <rect key="frame" x="4" y="4" width="8" height="8"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="8" id="n6q-jS-hqg"/>
@@ -125,7 +125,7 @@
                                                                                     <real key="value" value="4"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                                                    <color key="value" name="Focus"/>
+                                                                                    <color key="value" name="Edited"/>
                                                                                 </userDefinedRuntimeAttribute>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </customView>
@@ -247,11 +247,11 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="Edited">
+            <color red="0.5" green="0.75" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="EditorBackground">
             <color red="0.22499999400000001" green="0.2619999945" blue="0.30000001189999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Focus">
-            <color red="0.25" green="0.375" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Text">
             <color red="0.94900000095367432" green="0.97500002384185791" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
