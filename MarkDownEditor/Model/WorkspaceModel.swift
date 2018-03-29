@@ -59,7 +59,9 @@ final class WorkspaceModel: Object {
   }
   
   func select() {
-    WorkspaceModel.selectedIndex = WorkspaceModel.spaces.index(of: self) ?? 0
+    if WorkspaceModel.selectedIndex != WorkspaceModel.spaces.index(of: self) {
+      WorkspaceModel.selectedIndex = WorkspaceModel.spaces.index(of: self) ?? 0
+    }
   }
   
   static func move(from fromIndex: Int, to toIndex: Int) {

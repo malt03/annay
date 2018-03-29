@@ -206,6 +206,7 @@ final class NodeModel: Object {
   
   func select() {
     if isDirectory { return }
+    workspace?.select()
     NodeModel.selectedNode.value = self
   }
   
@@ -298,7 +299,7 @@ extension NodeModel {
     let update = { [weak self] (isUpdate: Bool) in
       guard let s = self else { return }
       if isUpdate {
-        s.body = try String(contentsOf: s.url)
+        s.setBody(try String(contentsOf: s.url))
         s.isBodySaved = true
         s.lastUpdatedAt = date
       } else {
