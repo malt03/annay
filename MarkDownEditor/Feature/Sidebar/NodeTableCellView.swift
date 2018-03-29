@@ -13,6 +13,7 @@ import RxRealm
 
 final class NodeTableCellView: NSTableCellView {
   private let bag = DisposeBag()
+  private let nodeDisposable = SerialDisposable()
   
   override func draw(_ dirtyRect: NSRect) {
     super.draw(dirtyRect)
@@ -41,7 +42,7 @@ final class NodeTableCellView: NSTableCellView {
   }
   
   private func observeNode() {
-    Observable.from(object: node).subscribe { [weak self] (change) in
+    nodeDisposable.disposable = Observable.from(object: node).subscribe { [weak self] (change) in
       guard let s = self else { return }
       switch change {
       case .next(let node):
@@ -49,7 +50,8 @@ final class NodeTableCellView: NSTableCellView {
         s.editedView?.isHidden = node.isBodySaved
       default: break
       }
-    }.disposed(by: bag)
+    }
+    nodeDisposable.disposed(by: bag)
   }
   
   @IBAction private func edited(_ sender: NSTextField) {
