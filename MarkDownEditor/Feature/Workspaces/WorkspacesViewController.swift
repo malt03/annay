@@ -110,7 +110,10 @@ final class WorkspacesViewController: NSViewController {
     guard let row = tableView.rowForMenu else { return }
     let workspace = WorkspaceModel.spaces[row]
     workspace.deleteFromSearchableIndex()
-    Realm.transaction { $0.delete(workspace) }
+    Realm.transaction { (realm) in
+      realm.delete(workspace.nodes)
+      realm.delete(workspace)
+    }
   }
   
   @IBAction private func moveTheWorkspaceFile(_ sender: NSMenuItem) {
