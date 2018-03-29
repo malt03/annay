@@ -110,11 +110,16 @@ final class WorkspacesViewController: NSViewController {
     guard let row = tableView.rowForMenu else { return }
     let workspace = WorkspaceModel.spaces[row]
     workspace.deleteFromSearchableIndex()
+    let nodes = [NodeModel](workspace.nodes)
     Realm.transaction { (realm) in
-      let nodes = workspace.nodes
       for node in nodes { node.prepareDelete() }
       realm.delete(workspace)
-      realm.delete(nodes)
+    }
+    // ワークスペース削除よりもタイミングを遅らせるとreloaddata出来るようになる
+    DispatchQueue.main.async {
+      Realm.transaction { (realm) in
+        realm.delete(nodes)
+      }
     }
   }
   
