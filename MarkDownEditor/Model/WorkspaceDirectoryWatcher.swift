@@ -40,10 +40,8 @@ final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
   let presentedItemOperationQueue = OperationQueue()
   
   func presentedSubitemDidChange(at url: URL) {
-    if !url.isEqualIgnoringLastSlash(workspace.directoryUrl) { return }
-    if !FileManager.default.fileExists(atPath: url.path) { return }
-    // メインスレッドで動かす
     guard let confirm = WorkspaceDirectoryWatcherManager.shared.confirm else { return }
+    // メインスレッドで動かす
     DispatchQueue.main.async {
       Realm.transaction { (realm) in
         alertError { try self.workspace.updateIndex(confirmUpdateNote: confirm, realm: realm) }

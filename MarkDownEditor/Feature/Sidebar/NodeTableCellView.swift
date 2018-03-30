@@ -42,15 +42,11 @@ final class NodeTableCellView: NSTableCellView {
   }
   
   private func observeNode() {
-    nodeDisposable.disposable = Observable.from(object: node).subscribe { [weak self] (change) in
+    nodeDisposable.disposable = Observable.from(object: node).subscribe(onNext: { [weak self] (node) in
       guard let s = self else { return }
-      switch change {
-      case .next(let node):
-        s.textField?.stringValue = node.name
-        s.editedView?.isHidden = node.isBodySaved
-      default: break
-      }
-    }
+      s.textField?.stringValue = node.name
+      s.editedView?.isHidden = node.isBodySaved
+    })
     nodeDisposable.disposed(by: bag)
   }
   

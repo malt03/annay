@@ -122,6 +122,10 @@ final class MarkDownEditorViewController: NSViewController {
       self.noteChangeNotificationToken = note?.observe { [weak self] (change) in
         guard let s = self else { return }
         switch change {
+        case .change(let properties):
+          for property in properties {
+            if property.name == "body" { s.updateNote() }
+          }
         case .deleted: s.updateNote(note: nil)
         default: break
         }
