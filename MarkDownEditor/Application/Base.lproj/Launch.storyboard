@@ -152,7 +152,7 @@ CA
                                                 <action selector="openWorkspace:" target="Voe-Tx-rLC" id="r7u-54-fIv"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Open Quickly..." keyEquivalent="O" id="pT4-6r-lB5">
+                                        <menuItem title="Open Note Quickly..." keyEquivalent="O" id="pT4-6r-lB5">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                             <connections>
                                                 <action selector="openQuickly:" target="Voe-Tx-rLC" id="egM-gh-TtT"/>
