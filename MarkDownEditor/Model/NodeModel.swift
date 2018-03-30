@@ -252,10 +252,40 @@ final class NodeModel: Object {
     realm.delete(self)
   }
   
-  func export(in url: URL, type: NodeModelExporter.ExportType, selectAndWriteQueue: inout NodeModelExporter.SelectAndWriteQueue) throws {
-    try write(to: url.appendingPathComponent(name), as: type) { (node, url) in
+  func export(in url: URL, type: NodeModelExporter.ExportType, selectAndWriteQueue: inout NodeModelExporter.SelectAndWriteQueue) throws -> URL? {
+    return try write(to: url.appendingPathComponent(name), as: type) { (node, url) in
       selectAndWriteQueue.enqueue((node, url))
     }
+  }
+  
+  @discardableResult
+  func write(
+    to url: URL,
+    as type: NodeModelExporter.ExportType,
+    selectAndWriteEnqueueHandler: ((NodeModelExporter.QueueItem) -> Void) = { _ in }
+  ) throws -> URL? {
+    let writeUrl: URL
+    if isDirectory {
+      try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+      for child in sortedChildren(query: nil) {
+        try child.write(to: url.appendingPathComponent(child.name), as: type, selectAndWriteEnqueueHandler: selectAndWriteEnqueueHandler)
+      }
+      writeUrl = url
+    } else {
+      switch type {
+      case .html:
+        guard let html = HtmlDataStore.shared.html(for: id) else {
+          selectAndWriteEnqueueHandler((self, url))
+          return nil
+        }
+        writeUrl = url.appendingPathExtension("html")
+        try html.write(to: writeUrl, atomically: true, encoding: .utf8)
+      case .text:
+        writeUrl = url.appendingPathExtension("md")
+        try (body.data(using: .utf8) ?? Data()).write(to: writeUrl)
+      }
+    }
+    return writeUrl
   }
   
   func prepareDelete() {

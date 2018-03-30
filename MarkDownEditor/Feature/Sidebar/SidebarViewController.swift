@@ -256,7 +256,9 @@ final class SidebarViewController: NSViewController {
     guard let indexes = outlineView.indexesForMenu else { return }
     let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
     if nodes.count == 0 { return }
-    NodeModelExporter(type: type, nodes: nodes).export()
+    NodeModelExporter(type: type, nodes: nodes, completionHandler: { (urls) in
+      NSWorkspace.shared.activateFileViewerSelecting(urls)
+    }).export()
   }
   
   @IBAction private func showInFinder(_ sender: NSMenuItem) {
@@ -264,7 +266,7 @@ final class SidebarViewController: NSViewController {
     for index in indexes {
       let node = outlineView.item(atRow: index) as! NodeModel
       if node.isTrash { continue }
-      NSWorkspace.shared.selectFile(node.url.path, inFileViewerRootedAtPath: node.url.deletingLastPathComponent().path)
+      NSWorkspace.shared.activateFileViewerSelecting([node.url])
     }
   }
   

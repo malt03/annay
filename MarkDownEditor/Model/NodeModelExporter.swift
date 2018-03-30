@@ -16,18 +16,26 @@ final class NodeModelExporter {
   
   typealias SelectAndWriteQueue = Queue<QueueItem>
   typealias QueueItem = (NodeModel, URL)
+  typealias CompletionHandler = (_ urls: [URL]) -> Void
   
   private var selectAndWriteQueue = SelectAndWriteQueue()
   private var lastDequeuedItem: QueueItem?
   
   private let exportType: ExportType
   private let nodes: [NodeModel]
+  private let completionHandler: CompletionHandler
   
   private var strongSelf: NodeModelExporter?
+  private var urls = [URL]()
 
-  init(type: ExportType, nodes: [NodeModel]) {
+  init(type: ExportType, nodes: [NodeModel], completionHandler: @escaping CompletionHandler) {
     exportType = type
     self.nodes = nodes
+    self.completionHandler = completionHandler
+  }
+  
+  deinit {
+    completionHandler(urls)
   }
 
   func export() {
@@ -44,7 +52,9 @@ final class NodeModelExporter {
       guard let url = openPanel.url else { return }
       alertError {
         for node in self.nodes {
-          try node.export(in: url, type: self.exportType, selectAndWriteQueue: &self.selectAndWriteQueue)
+          if let url = try node.export(in: url, type: self.exportType, selectAndWriteQueue: &self.selectAndWriteQueue) {
+            self.urls.append(url)
+          }
         }
         (NSApplication.shared as! Application).isEnabled.value = false
         self.performSelectAndWrite()

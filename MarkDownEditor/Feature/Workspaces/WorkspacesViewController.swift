@@ -103,7 +103,7 @@ final class WorkspacesViewController: NSViewController {
   @IBAction private func showInFinder(_ sender: NSMenuItem) {
     guard let row = tableView.rowForMenu else { return }
     let url = WorkspaceModel.spaces[row].directoryUrl
-    NSWorkspace.shared.selectFile(url.path, inFileViewerRootedAtPath: url.deletingLastPathComponent().path)
+    NSWorkspace.shared.activateFileViewerSelecting([url])
   }
 
   @IBAction private func delete(_ sender: NSMenuItem) {
