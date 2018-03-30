@@ -8,8 +8,13 @@
 
 import Cocoa
 import RealmSwift
+import RxSwift
+import RxRealm
 
 final class NodeTableCellView: NSTableCellView {
+  private let bag = DisposeBag()
+  private let nodeDisposable = SerialDisposable()
+  
   override func draw(_ dirtyRect: NSRect) {
     super.draw(dirtyRect)
     if inPreference { return }
@@ -19,7 +24,8 @@ final class NodeTableCellView: NSTableCellView {
     dirtyRect.fill()
   }
   
-  private var token: NotificationToken?
+  @IBOutlet private weak var editedView: BackgroundSetableView?
+  
   private var node: NodeModel!
   private var inPreference = false
   
@@ -28,35 +34,25 @@ final class NodeTableCellView: NSTableCellView {
     self.inPreference = inPreference
     
     textField?.textColor = inPreference ? .textColor : .text
-    textField?.isEditable = !inPreference && node.isDirectory && !node.isDeleted
+    textField?.isEditable = !inPreference && node.isDirectory && !node.isDeleted && !node.isTrash
     textField?.font = NSFont.systemFont(ofSize: 14)
     imageView?.image = NSImage(named: .folder)
-    textField?.stringValue = node.name
-
+    
     observeNode()
   }
   
   private func observeNode() {
-    token?.invalidate()
-    token = nil
-    if node.isTrash { return }
-    token = node.observe { [weak self] (change) in
+    nodeDisposable.disposable = Observable.from(object: node).subscribe(onNext: { [weak self] (node) in
       guard let s = self else { return }
-      switch change {
-      case .change(let propertyChanges):
-        for propertyChange in propertyChanges {
-          if propertyChange.name == "name" {
-            s.textField?.stringValue = propertyChange.newValue as! String
-          }
-        }
-      default: break
-      }
-    }
+      s.textField?.stringValue = node.name
+      s.editedView?.isHidden = node.isBodySaved
+    })
+    nodeDisposable.disposed(by: bag)
   }
   
   @IBAction private func edited(_ sender: NSTextField) {
     Realm.transaction { _ in
-      self.node.name = sender.stringValue
+      alertError { try self.node.setDirectoryName(sender.stringValue) }
     }
   }
 }

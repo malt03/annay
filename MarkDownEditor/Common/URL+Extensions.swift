@@ -20,9 +20,9 @@ extension URL {
   }
   
   var isWorkspace: Bool {
-    if isDirectory { return false }
+    if !isDirectory { return false }
     let uti = (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
-    return uti == "com.annay.workspace"
+    return uti == "org.annay.workspace"
   }
   
   func isEqualIgnoringLastSlash(_ url: URL) -> Bool {
@@ -52,4 +52,6 @@ extension URL {
   func isConformsToUTI(_ uti: String) -> Bool {
     return UTTypeConformsTo(self.uti, uti as CFString)
   }
+  
+  var infoFile: URL { return appendingPathComponent("info.json") }
 }

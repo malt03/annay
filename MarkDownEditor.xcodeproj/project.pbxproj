@@ -11,6 +11,29 @@
 		ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09A000201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift */; };
 		ED187FD420053206002E51C0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED187FD320053206002E51C0 /* WebView.swift */; };
 		ED19084B201F6EC0009497EE /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19084A201F6EC0009497EE /* ContainerView.swift */; };
+		ED2DEB16206B4148008E5F1E /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB13206B4147008E5F1E /* NodeModel.swift */; };
+		ED2DEB17206B4148008E5F1E /* DirectoryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB14206B4147008E5F1E /* DirectoryInfo.swift */; };
+		ED2DEB18206B4148008E5F1E /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB15206B4148008E5F1E /* WorkspaceModel.swift */; };
+		ED2DEB46206B49E4008E5F1E /* KeyHolder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB3C206B49D8008E5F1E /* KeyHolder.framework */; };
+		ED2DEB47206B49E4008E5F1E /* KeyHolder.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB3C206B49D8008E5F1E /* KeyHolder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2DEB48206B49E4008E5F1E /* Magnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB36206B49D8008E5F1E /* Magnet.framework */; };
+		ED2DEB49206B49E4008E5F1E /* Magnet.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB36206B49D8008E5F1E /* Magnet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2DEB4A206B49E4008E5F1E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB38206B49D8008E5F1E /* Realm.framework */; };
+		ED2DEB4B206B49E4008E5F1E /* Realm.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB38206B49D8008E5F1E /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2DEB4C206B49E4008E5F1E /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB3A206B49D8008E5F1E /* RealmSwift.framework */; };
+		ED2DEB4D206B49E4008E5F1E /* RealmSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB3A206B49D8008E5F1E /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2DEB4E206B49E4008E5F1E /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB34206B49D7008E5F1E /* RxCocoa.framework */; };
+		ED2DEB4F206B49E4008E5F1E /* RxCocoa.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB34206B49D7008E5F1E /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2DEB50206B49E4008E5F1E /* RxRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB37206B49D8008E5F1E /* RxRealm.framework */; };
+		ED2DEB51206B49E4008E5F1E /* RxRealm.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB37206B49D8008E5F1E /* RxRealm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2DEB52206B49E4008E5F1E /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB39206B49D8008E5F1E /* RxSwift.framework */; };
+		ED2DEB53206B49E4008E5F1E /* RxSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB39206B49D8008E5F1E /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2DEB54206B49E4008E5F1E /* Yams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB35206B49D7008E5F1E /* Yams.framework */; };
+		ED2DEB55206B49E4008E5F1E /* Yams.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB35206B49D7008E5F1E /* Yams.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED2DEB5B206B4FC5008E5F1E /* NodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB5A206B4FC5008E5F1E /* NodeInfo.swift */; };
+		ED2DEB5D206B69CC008E5F1E /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB5C206B69CC008E5F1E /* Util.swift */; };
+		ED2DEB5F206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB5E206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift */; };
+		ED2DEB61206B7FC9008E5F1E /* NodeModel+NSPasteboardWriting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB60206B7FC9008E5F1E /* NodeModel+NSPasteboardWriting.swift */; };
 		ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149120055548003D55A3 /* markdown-it-task-checkbox.min.js */; };
 		ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149320055563003D55A3 /* markdown-it.min.js */; };
 		ED2E1496200555A5003D55A3 /* markdown-it-sub.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E1495200555A5003D55A3 /* markdown-it-sub.min.js */; };
@@ -20,15 +43,8 @@
 		ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149F20055B87003D55A3 /* highlight.pack.js */; };
 		ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */; };
 		ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */; };
-		ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15AD200666B1003D55A3 /* NodeModel.swift */; };
 		ED431FFC205628A30042078C /* CodableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED431FFB205628A30042078C /* CodableNode.swift */; };
 		ED43200020562B460042078C /* ShortcutPreferenceNodeParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED431FFF20562B460042078C /* ShortcutPreferenceNodeParameters.swift */; };
-		ED43202420564C0E0042078C /* Magnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED43202320564C0E0042078C /* Magnet.framework */; };
-		ED43202620564C170042078C /* KeyHolder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED43202520564C170042078C /* KeyHolder.framework */; };
-		ED43202720564C1C0042078C /* KeyHolder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED43202520564C170042078C /* KeyHolder.framework */; };
-		ED43202820564C1C0042078C /* KeyHolder.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED43202520564C170042078C /* KeyHolder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED43202920564C1C0042078C /* Magnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED43202320564C0E0042078C /* Magnet.framework */; };
-		ED43202A20564C1C0042078C /* Magnet.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED43202320564C0E0042078C /* Magnet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED432032205756280042078C /* StyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED432031205756280042078C /* StyleSheet.swift */; };
 		ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED434F0220079DBD00C2357D /* LocalizedString.swift */; };
 		ED47CC85201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */; };
@@ -60,8 +76,6 @@
 		ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */; };
 		ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */; };
 		ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710037204E16E90030CDFB /* PreferenceManager.swift */; };
-		ED710076204E4C340030CDFB /* Yams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED710074204E4C2F0030CDFB /* Yams.framework */; };
-		ED710077204E4C340030CDFB /* Yams.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED710074204E4C2F0030CDFB /* Yams.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */; };
 		ED83F7152036EB350038D96B /* Workspaces.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED83F7172036EB350038D96B /* Workspaces.storyboard */; };
 		ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED840D1E201A217300EF2C42 /* WorkspacesTableView.swift */; };
@@ -98,7 +112,6 @@
 		EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */; };
 		EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */; };
 		EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A28B200CD90C00D5E7BE /* Array+Extensions.swift */; };
-		EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A296200EF75300D5E7BE /* WorkspaceModel.swift */; };
 		EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */; };
 		EDD0A2B9200F2B9E00D5E7BE /* WorkspacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A2B8200F2B9E00D5E7BE /* WorkspacesViewController.swift */; };
 		EDD4C743202E9AF70029FF4C /* GeneralPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD4C742202E9AF70029FF4C /* GeneralPreferenceViewController.swift */; };
@@ -126,19 +139,7 @@
 		EDEDA8732045149F00260C1E /* SuperParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEDA8722045149F00260C1E /* SuperParentViewController.swift */; };
 		EDF6A7E7202B082000B85B2C /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */; };
 		EDFAC7F12035A339002BB3C9 /* NSTextStorage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFAC7F02035A339002BB3C9 /* NSTextStorage+Extensions.swift */; };
-		EDFE82B920256AEC00702C85 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B320256AE500702C85 /* Realm.framework */; };
-		EDFE82BA20256AEC00702C85 /* Realm.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B320256AE500702C85 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EDFE82BB20256AEC00702C85 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B520256AE500702C85 /* RealmSwift.framework */; };
-		EDFE82BC20256AEC00702C85 /* RealmSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B520256AE500702C85 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EDFE82BD20256AEC00702C85 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B120256AE400702C85 /* RxBlocking.framework */; };
-		EDFE82BE20256AEC00702C85 /* RxBlocking.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B120256AE400702C85 /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EDFE82BF20256AEC00702C85 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B020256AE400702C85 /* RxCocoa.framework */; };
-		EDFE82C020256AEC00702C85 /* RxCocoa.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B020256AE400702C85 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EDFE82C120256AEC00702C85 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82B420256AE500702C85 /* RxSwift.framework */; };
-		EDFE82C220256AEC00702C85 /* RxSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82B420256AE500702C85 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EDFE82C620256BE700702C85 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFE82C520256BE700702C85 /* FileManager+Extensions.swift */; };
-		EDFE82CE202583DF00702C85 /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDFE82CD202583DD00702C85 /* Zip.framework */; };
-		EDFE82CF202583DF00702C85 /* Zip.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EDFE82CD202583DD00702C85 /* Zip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,15 +170,14 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				EDFE82BA20256AEC00702C85 /* Realm.framework in Embed Libraries */,
-				ED43202A20564C1C0042078C /* Magnet.framework in Embed Libraries */,
-				EDFE82C220256AEC00702C85 /* RxSwift.framework in Embed Libraries */,
-				EDFE82BC20256AEC00702C85 /* RealmSwift.framework in Embed Libraries */,
-				EDFE82C020256AEC00702C85 /* RxCocoa.framework in Embed Libraries */,
-				ED710077204E4C340030CDFB /* Yams.framework in Embed Libraries */,
-				EDFE82CF202583DF00702C85 /* Zip.framework in Embed Libraries */,
-				ED43202820564C1C0042078C /* KeyHolder.framework in Embed Libraries */,
-				EDFE82BE20256AEC00702C85 /* RxBlocking.framework in Embed Libraries */,
+				ED2DEB4B206B49E4008E5F1E /* Realm.framework in Embed Libraries */,
+				ED2DEB49206B49E4008E5F1E /* Magnet.framework in Embed Libraries */,
+				ED2DEB53206B49E4008E5F1E /* RxSwift.framework in Embed Libraries */,
+				ED2DEB4D206B49E4008E5F1E /* RealmSwift.framework in Embed Libraries */,
+				ED2DEB55206B49E4008E5F1E /* Yams.framework in Embed Libraries */,
+				ED2DEB4F206B49E4008E5F1E /* RxCocoa.framework in Embed Libraries */,
+				ED2DEB51206B49E4008E5F1E /* RxRealm.framework in Embed Libraries */,
+				ED2DEB47206B49E4008E5F1E /* KeyHolder.framework in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,6 +190,21 @@
 		ED187FD120052D30002E51C0 /* markdown.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = markdown.html; sourceTree = "<group>"; };
 		ED187FD320053206002E51C0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ED19084A201F6EC0009497EE /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		ED2DEB13206B4147008E5F1E /* NodeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeModel.swift; sourceTree = "<group>"; };
+		ED2DEB14206B4147008E5F1E /* DirectoryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryInfo.swift; sourceTree = "<group>"; };
+		ED2DEB15206B4148008E5F1E /* WorkspaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModel.swift; sourceTree = "<group>"; };
+		ED2DEB34206B49D7008E5F1E /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
+		ED2DEB35206B49D7008E5F1E /* Yams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Yams.framework; path = Carthage/Build/Mac/Yams.framework; sourceTree = "<group>"; };
+		ED2DEB36206B49D8008E5F1E /* Magnet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Magnet.framework; path = Carthage/Build/Mac/Magnet.framework; sourceTree = "<group>"; };
+		ED2DEB37206B49D8008E5F1E /* RxRealm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRealm.framework; path = Carthage/Build/Mac/RxRealm.framework; sourceTree = "<group>"; };
+		ED2DEB38206B49D8008E5F1E /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
+		ED2DEB39206B49D8008E5F1E /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
+		ED2DEB3A206B49D8008E5F1E /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
+		ED2DEB3C206B49D8008E5F1E /* KeyHolder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeyHolder.framework; path = Carthage/Build/Mac/KeyHolder.framework; sourceTree = "<group>"; };
+		ED2DEB5A206B4FC5008E5F1E /* NodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeInfo.swift; sourceTree = "<group>"; };
+		ED2DEB5C206B69CC008E5F1E /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		ED2DEB5E206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeModel+NSFilePromiseProviderDelegate.swift"; sourceTree = "<group>"; };
+		ED2DEB60206B7FC9008E5F1E /* NodeModel+NSPasteboardWriting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NodeModel+NSPasteboardWriting.swift"; sourceTree = "<group>"; };
 		ED2E149120055548003D55A3 /* markdown-it-task-checkbox.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it-task-checkbox.min.js"; sourceTree = "<group>"; };
 		ED2E149320055563003D55A3 /* markdown-it.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it.min.js"; sourceTree = "<group>"; };
 		ED2E1495200555A5003D55A3 /* markdown-it-sub.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "markdown-it-sub.min.js"; sourceTree = "<group>"; };
@@ -200,11 +215,8 @@
 		ED2E159A20056621003D55A3 /* markdown.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = markdown.js; sourceTree = "<group>"; };
 		ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Extensions.swift"; sourceTree = "<group>"; };
 		ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
-		ED2E15AD200666B1003D55A3 /* NodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeModel.swift; sourceTree = "<group>"; };
 		ED431FFB205628A30042078C /* CodableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableNode.swift; sourceTree = "<group>"; };
 		ED431FFF20562B460042078C /* ShortcutPreferenceNodeParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreferenceNodeParameters.swift; sourceTree = "<group>"; };
-		ED43202320564C0E0042078C /* Magnet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Magnet.framework; path = Carthage/Build/Mac/Magnet.framework; sourceTree = "<group>"; };
-		ED43202520564C170042078C /* KeyHolder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeyHolder.framework; path = Carthage/Build/Mac/KeyHolder.framework; sourceTree = "<group>"; };
 		ED432031205756280042078C /* StyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSheet.swift; sourceTree = "<group>"; };
 		ED434F0220079DBD00C2357D /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrOpenWorkspaceTabViewController.swift; sourceTree = "<group>"; };
@@ -242,7 +254,6 @@
 		ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
 		ED710037204E16E90030CDFB /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
-		ED710074204E4C2F0030CDFB /* Yams.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Yams.framework; path = Carthage/Build/Mac/Yams.framework; sourceTree = "<group>"; };
 		ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
 		ED83F7142036E7290038D96B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = MarkDownEditor/ja.lproj/Sidebar.strings; sourceTree = "<group>"; };
 		ED83F7162036EB350038D96B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Workspaces.storyboard; sourceTree = "<group>"; };
@@ -285,7 +296,6 @@
 		EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboardPasteboardType+Extensions.swift"; sourceTree = "<group>"; };
 		EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboard+Extensions.swift"; sourceTree = "<group>"; };
 		EDD0A28B200CD90C00D5E7BE /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
-		EDD0A296200EF75300D5E7BE /* WorkspaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceModel.swift; sourceTree = "<group>"; };
 		EDD0A298200EF81800D5E7BE /* SavableInUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavableInUserDefaults.swift; sourceTree = "<group>"; };
 		EDD0A2B8200F2B9E00D5E7BE /* WorkspacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesViewController.swift; sourceTree = "<group>"; };
 		EDD4C742202E9AF70029FF4C /* GeneralPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreferenceViewController.swift; sourceTree = "<group>"; };
@@ -316,13 +326,7 @@
 		EDEDA8722045149F00260C1E /* SuperParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperParentViewController.swift; sourceTree = "<group>"; };
 		EDF6A7E6202B082000B85B2C /* PreferenceWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceWindowController.swift; sourceTree = "<group>"; };
 		EDFAC7F02035A339002BB3C9 /* NSTextStorage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Extensions.swift"; sourceTree = "<group>"; };
-		EDFE82B020256AE400702C85 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
-		EDFE82B120256AE400702C85 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/Mac/RxBlocking.framework; sourceTree = "<group>"; };
-		EDFE82B320256AE500702C85 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
-		EDFE82B420256AE500702C85 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
-		EDFE82B520256AE500702C85 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
 		EDFE82C520256BE700702C85 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
-		EDFE82CD202583DD00702C85 /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = Carthage/Build/Mac/Zip.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,17 +342,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED43202620564C170042078C /* KeyHolder.framework in Frameworks */,
-				ED43202420564C0E0042078C /* Magnet.framework in Frameworks */,
-				ED710076204E4C340030CDFB /* Yams.framework in Frameworks */,
-				EDFE82B920256AEC00702C85 /* Realm.framework in Frameworks */,
-				ED43202720564C1C0042078C /* KeyHolder.framework in Frameworks */,
-				ED43202920564C1C0042078C /* Magnet.framework in Frameworks */,
-				EDFE82C120256AEC00702C85 /* RxSwift.framework in Frameworks */,
-				EDFE82BB20256AEC00702C85 /* RealmSwift.framework in Frameworks */,
-				EDFE82BF20256AEC00702C85 /* RxCocoa.framework in Frameworks */,
-				EDFE82CE202583DF00702C85 /* Zip.framework in Frameworks */,
-				EDFE82BD20256AEC00702C85 /* RxBlocking.framework in Frameworks */,
+				ED2DEB4A206B49E4008E5F1E /* Realm.framework in Frameworks */,
+				ED2DEB48206B49E4008E5F1E /* Magnet.framework in Frameworks */,
+				ED2DEB52206B49E4008E5F1E /* RxSwift.framework in Frameworks */,
+				ED2DEB4C206B49E4008E5F1E /* RealmSwift.framework in Frameworks */,
+				ED2DEB54206B49E4008E5F1E /* Yams.framework in Frameworks */,
+				ED2DEB4E206B49E4008E5F1E /* RxCocoa.framework in Frameworks */,
+				ED2DEB50206B49E4008E5F1E /* RxRealm.framework in Frameworks */,
+				ED2DEB46206B49E4008E5F1E /* KeyHolder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +391,7 @@
 				EDEDA86C2044F32600260C1E /* Queue.swift */,
 				ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */,
 				ED8CE48B204E7291002F1A5D /* CodableFont.swift */,
+				ED2DEB5C206B69CC008E5F1E /* Util.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -446,11 +448,15 @@
 		ED2E15B0200669C8003D55A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ED2E15AD200666B1003D55A3 /* NodeModel.swift */,
+				ED2DEB14206B4147008E5F1E /* DirectoryInfo.swift */,
+				ED2DEB5A206B4FC5008E5F1E /* NodeInfo.swift */,
+				ED2DEB13206B4147008E5F1E /* NodeModel.swift */,
+				ED2DEB15206B4148008E5F1E /* WorkspaceModel.swift */,
 				EDEDA86E2044F6A700260C1E /* NodeModelExporter.swift */,
-				EDD0A296200EF75300D5E7BE /* WorkspaceModel.swift */,
 				ED598C56201F20D500072D8A /* WorkspaceDirectoryWatcher.swift */,
 				ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */,
+				ED2DEB5E206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift */,
+				ED2DEB60206B7FC9008E5F1E /* NodeModel+NSPasteboardWriting.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -697,15 +703,14 @@
 		EDFE82AF20256AD900702C85 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
-				ED43202520564C170042078C /* KeyHolder.framework */,
-				ED43202320564C0E0042078C /* Magnet.framework */,
-				ED710074204E4C2F0030CDFB /* Yams.framework */,
-				EDFE82CD202583DD00702C85 /* Zip.framework */,
-				EDFE82B320256AE500702C85 /* Realm.framework */,
-				EDFE82B520256AE500702C85 /* RealmSwift.framework */,
-				EDFE82B120256AE400702C85 /* RxBlocking.framework */,
-				EDFE82B020256AE400702C85 /* RxCocoa.framework */,
-				EDFE82B420256AE500702C85 /* RxSwift.framework */,
+				ED2DEB3C206B49D8008E5F1E /* KeyHolder.framework */,
+				ED2DEB36206B49D8008E5F1E /* Magnet.framework */,
+				ED2DEB38206B49D8008E5F1E /* Realm.framework */,
+				ED2DEB3A206B49D8008E5F1E /* RealmSwift.framework */,
+				ED2DEB34206B49D7008E5F1E /* RxCocoa.framework */,
+				ED2DEB37206B49D8008E5F1E /* RxRealm.framework */,
+				ED2DEB39206B49D8008E5F1E /* RxSwift.framework */,
+				ED2DEB35206B49D7008E5F1E /* Yams.framework */,
 			);
 			name = Carthage;
 			sourceTree = "<group>";
@@ -883,7 +888,10 @@
 				EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */,
 				ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */,
 				EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */,
+				ED2DEB18206B4148008E5F1E /* WorkspaceModel.swift in Sources */,
 				ED8CE490204E7798002F1A5D /* Preference.swift in Sources */,
+				ED2DEB5D206B69CC008E5F1E /* Util.swift in Sources */,
+				ED2DEB5B206B4FC5008E5F1E /* NodeInfo.swift in Sources */,
 				ED47CC8D201EFBED0052D6EF /* WorkspaceNameFormatter.swift in Sources */,
 				ED598C57201F20D500072D8A /* WorkspaceDirectoryWatcher.swift in Sources */,
 				ED574001202C3F9100D844A3 /* ShortcutPreferenceViewController.swift in Sources */,
@@ -891,6 +899,7 @@
 				ED43200020562B460042078C /* ShortcutPreferenceNodeParameters.swift in Sources */,
 				ED841BD8200B256B0097996A /* WindowController.swift in Sources */,
 				EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */,
+				ED2DEB61206B7FC9008E5F1E /* NodeModel+NSPasteboardWriting.swift in Sources */,
 				ED598C59201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift in Sources */,
 				ED099FFF201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift in Sources */,
 				ED55C5132013146F0070301A /* CreateWorkspaceViewController.swift in Sources */,
@@ -899,6 +908,7 @@
 				EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */,
 				ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */,
 				ED19084B201F6EC0009497EE /* ContainerView.swift in Sources */,
+				ED2DEB5F206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift in Sources */,
 				ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */,
 				ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */,
 				ED187FD420053206002E51C0 /* WebView.swift in Sources */,
@@ -909,16 +919,15 @@
 				EDFAC7F12035A339002BB3C9 /* NSTextStorage+Extensions.swift in Sources */,
 				ED840D2F201C5AB600EF2C42 /* NSView+Extensions.swift in Sources */,
 				EDEDA86D2044F32600260C1E /* Queue.swift in Sources */,
-				ED2E15AE200666B1003D55A3 /* NodeModel.swift in Sources */,
 				ED5569E2202DDC4C00D92A75 /* ResourceManager.swift in Sources */,
 				EDFE82C620256BE700702C85 /* FileManager+Extensions.swift in Sources */,
 				ED9CCA6D2025927600EB2F7C /* DateFormatter+Extensions.swift in Sources */,
 				ED4EB9E2201DAA1700B4CBE7 /* OpenQuicklyViewController.swift in Sources */,
-				EDD0A297200EF75300D5E7BE /* WorkspaceModel.swift in Sources */,
 				ED598C39201F03E200072D8A /* NSAlert+Extensions.swift in Sources */,
 				ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */,
 				ED840D2B201A2DF400EF2C42 /* URL+Extensions.swift in Sources */,
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
+				ED2DEB16206B4148008E5F1E /* NodeModel.swift in Sources */,
 				EDD4C743202E9AF70029FF4C /* GeneralPreferenceViewController.swift in Sources */,
 				EDF6A7E7202B082000B85B2C /* PreferenceWindowController.swift in Sources */,
 				ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */,
@@ -942,6 +951,7 @@
 				EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */,
 				ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */,
 				ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */,
+				ED2DEB17206B4148008E5F1E /* DirectoryInfo.swift in Sources */,
 				EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */,
 				ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */,
 				EDEDA86F2044F6A700260C1E /* NodeModelExporter.swift in Sources */,
@@ -1096,7 +1106,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MarkDownEditorPreviewExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.annay.PreviewExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.annay.PreviewExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -1110,7 +1120,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MarkDownEditorPreviewExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.annay.PreviewExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = org.annay.PreviewExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -1249,7 +1259,7 @@
 					"$(PROJECT_DIR)/MarkDownEditor",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.annay;
+				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1277,7 +1287,7 @@
 					"$(PROJECT_DIR)/MarkDownEditor",
 					"$(PROJECT_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.annay;
+				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;

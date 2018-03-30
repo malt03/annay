@@ -10,22 +10,17 @@ import Foundation
 
 final class CodableNode: Codable, Equatable {
   static func == (lhs: CodableNode, rhs: CodableNode) -> Bool {
-    return lhs.nodeId == rhs.nodeId && lhs.workspaceId == rhs.workspaceId
+    return lhs.nodeId == rhs.nodeId
   }
   
   private let nodeId: String
-  private let workspaceId: String
   
-  private(set) lazy var workspace = WorkspaceModel.space(uniqId: workspaceId)
   private(set) lazy var node: NodeModel? = {
-    guard let workspace = workspace else { return nil }
-    return NodeModel.node(for: nodeId, for: workspace)
+    return NodeModel.node(for: nodeId)
   }()
   
-  init(node: NodeModel, workspace: WorkspaceModel) {
+  init(node: NodeModel) {
     nodeId = node.id
-    workspaceId = workspace.uniqId
     self.node = node
-    self.workspace = workspace
   }
 }

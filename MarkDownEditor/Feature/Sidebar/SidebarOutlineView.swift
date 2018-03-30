@@ -51,4 +51,21 @@ final class SidebarOutlineView: NSOutlineView {
     }
     return super.menu(for: event)
   }
+  
+  private var isPreparedReloadData = false
+  
+  // outlineviewはreloaddataの時にitemを参照してしまうため、realmの削除済みデータを参照してクラッシュする
+  func prepareReloadData() -> Bool {
+    if isPreparedReloadData { return false }
+    defer { isPreparedReloadData = true }
+    guard let rootItemCount = dataSource?.outlineView?(self, numberOfChildrenOfItem: nil) else { return false }
+    let indexSet = IndexSet(0..<rootItemCount)
+    removeItems(at: indexSet, inParent: nil, withAnimation: [])
+    return true
+  }
+  
+  override func reloadData() {
+    isPreparedReloadData = false
+    super.reloadData()
+  }
 }

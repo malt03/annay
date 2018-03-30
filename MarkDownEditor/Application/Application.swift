@@ -47,10 +47,10 @@ final class Application: NSApplication {
   private var workspaceMenus = [NSMenuItem]()
   
   func prepareForWorkspaces() {
-    _ = WorkspaceModel.spaces.asObservable().subscribe(onNext: { (spaces) in
+    _ = WorkspaceModel.observableSpaces.subscribe(onNext: { (spaces) in
       var newWorkspaceMenus = spaces.enumerated().compactMap { (index, space) -> NSMenuItem? in
         if index >= 9 { return nil }
-        let title = String(format: Localized("Select \"%@\""), space.name)
+        let title = String(format: Localized("Select \"%@\""), space.nameValue)
         let item = NSMenuItem(title: title, action: #selector(self.selectWorkspace(_:)), keyEquivalent: "\(index + 1)")
         item.keyEquivalentModifierMask = .command
         item.tag = index
@@ -64,6 +64,6 @@ final class Application: NSApplication {
   }
   
   @objc private func selectWorkspace(_ sender: NSMenuItem) {
-    WorkspaceModel.spaces.value[sender.tag].select()
+    WorkspaceModel.spaces[sender.tag].select()
   }
 }

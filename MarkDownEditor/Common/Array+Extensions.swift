@@ -9,6 +9,12 @@
 import Foundation
 import RealmSwift
 
+extension Array where Element: Hashable {
+  var uniq: [Element] {
+    return Array(Set(self))
+  }
+}
+
 extension Array where Element: Equatable {
   func index(of object: Element) -> Int? {
     return index { $0 == object }
@@ -57,14 +63,14 @@ extension Array where Element == URL {
       index += 1
       
       if isDirectory {
-        node.name = url.name
+        try node.setDirectoryName(url.name)
         realm.add(node)
         try FileManager.default.contentsOfDirectory(atPath: url.path).map {
           url.appendingPathComponent($0)
         }.createNodes(parent: node, startIndex: 0, realm: realm, workspace: workspace)
         return node
       } else {
-        node.setBody(try String(contentsOfFile: url.path), workspace: workspace)
+        node.setBody(try String(contentsOfFile: url.path))
         realm.add(node)
         return node
       }

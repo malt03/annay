@@ -108,13 +108,31 @@
                                                                         <outlet property="delegate" destination="PrQ-Do-4mD" id="9JI-Eh-myx"/>
                                                                     </connections>
                                                                 </textField>
+                                                                <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2th-CM-Xsg" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
+                                                                    <rect key="frame" x="264" y="8" width="8" height="8"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="8" id="Kdb-bl-aGo"/>
+                                                                        <constraint firstAttribute="height" constant="8" id="Ll5-WQ-UwZ"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="4"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                                            <color key="value" name="Edited"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </customView>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="1TI-PZ-Ak0" firstAttribute="centerY" secondItem="JNK-gA-qZk" secondAttribute="centerY" id="FrD-kC-mUE"/>
                                                                 <constraint firstItem="1TI-PZ-Ak0" firstAttribute="leading" secondItem="JNK-gA-qZk" secondAttribute="leading" constant="2" id="FvX-6X-YMf"/>
+                                                                <constraint firstAttribute="trailing" secondItem="2th-CM-Xsg" secondAttribute="trailing" constant="8" id="XB7-i8-57b"/>
                                                                 <constraint firstAttribute="trailing" secondItem="1TI-PZ-Ak0" secondAttribute="trailing" constant="2" id="g6y-0w-Yew"/>
+                                                                <constraint firstItem="2th-CM-Xsg" firstAttribute="centerY" secondItem="JNK-gA-qZk" secondAttribute="centerY" id="iu7-Cn-Q7K"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="editedView" destination="2th-CM-Xsg" id="9Cb-m4-AGg"/>
                                                                 <outlet property="textField" destination="1TI-PZ-Ak0" id="evE-7f-X6R"/>
                                                             </connections>
                                                         </tableCellView>
@@ -206,7 +224,7 @@
                                                 <real key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                <color key="value" name="Focus"/>
+                                                <color key="value" name="Edited"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </customView>
@@ -323,6 +341,13 @@ CA
                                 <action selector="exportAsHtml:" target="PrQ-Do-4mD" id="Rbh-4S-jDl"/>
                             </connections>
                         </menuItem>
+                        <menuItem isSeparatorItem="YES" id="jlM-VB-bJH"/>
+                        <menuItem title="Show in Finder" id="O0n-Ib-ah6">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showInFinder:" target="PrQ-Do-4mD" id="tFE-FL-nUq"/>
+                            </connections>
+                        </menuItem>
                     </items>
                 </menu>
                 <menu id="AB4-Zv-pQo">
@@ -331,7 +356,7 @@ CA
                             <string key="keyEquivalent" base64-UTF8="YES">
 CA
 </string>
-                            <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
+                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             <connections>
                                 <action selector="putBackFromTrash:" target="PrQ-Do-4mD" id="GOj-gF-N3x"/>
                             </connections>
@@ -373,8 +398,11 @@ CA
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <namedColor name="Focus">
-            <color red="0.25" green="0.375" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Edited">
+            <color red="0.5" green="0.75" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Edited">
+            <color red="0.5" green="0.75" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Placeholder">
             <color red="0.47499999403953552" green="0.48800000548362732" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

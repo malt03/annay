@@ -116,12 +116,15 @@ final class MarkDownEditorViewController: NSViewController {
     textView.textStorage?.highlightMarkdownSyntax()
     updateWebView(note: note)
     
-    noteChangeNotificationToken?.invalidate()
-    noteChangeNotificationToken = note?.observe { [weak self] (change) in
-      guard let s = self else { return }
-      switch change {
-      case .deleted: s.updateNote(note: nil)
-      default: break
+    // select()のタイミングがtransaction内になっちゃうので
+    DispatchQueue.main.async {
+      self.noteChangeNotificationToken?.invalidate()
+      self.noteChangeNotificationToken = note?.observe { [weak self] (change) in
+        guard let s = self else { return }
+        switch change {
+        case .deleted: s.updateNote(note: nil)
+        default: break
+        }
       }
     }
   }
@@ -148,9 +151,8 @@ final class MarkDownEditorViewController: NSViewController {
 extension MarkDownEditorViewController: NSTextViewDelegate {
   func textDidChange(_ notification: Notification) {
     if let note = NodeModel.selectedNode.value {
-      let workspace = WorkspaceModel.selected.value
       Realm.transaction { _ in
-        note.setBody(textView.string, workspace: workspace)
+        note.setBody(textView.string)
       }
     }
     updateWebView()

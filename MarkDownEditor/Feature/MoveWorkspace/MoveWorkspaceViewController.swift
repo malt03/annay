@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import RealmSwift
 
 final class MoveWorkspaceViewController: NSViewController {
   private let bag = DisposeBag()
@@ -20,7 +21,7 @@ final class MoveWorkspaceViewController: NSViewController {
   
   func prepare(workspace: WorkspaceModel) {
     self.workspace = workspace
-    workspaceDirectoryTextField.stringValue = workspace.url.deletingLastPathComponent().replacingHomePath
+    workspaceDirectoryTextField.stringValue = workspace.directoryUrl.deletingLastPathComponent().replacingHomePath
   }
   
   override func viewDidLoad() {
@@ -38,7 +39,7 @@ final class MoveWorkspaceViewController: NSViewController {
       if directory == "" { return false }
       var isDirectory = ObjCBool(booleanLiteral: false)
       let path = directory.replacingTildeToHomePath
-      let oldUrl = s.workspace.url
+      let oldUrl = s.workspace.directoryUrl
       if URL(fileURLWithPath: path).appendingPathComponent(oldUrl.lastPathComponent).isEqualIgnoringLastSlash(oldUrl) {
         return false
       }
@@ -56,7 +57,7 @@ final class MoveWorkspaceViewController: NSViewController {
     openPanel.canChooseDirectories = true
     openPanel.canCreateDirectories = true
     openPanel.canChooseFiles = false
-    openPanel.directoryURL = workspace.url
+    openPanel.directoryURL = workspace.directoryUrl
     openPanel.beginSheetModal(for: window) { [weak self] (result) in
       guard let s = self else { return }
       if result != .OK { return }
@@ -68,8 +69,10 @@ final class MoveWorkspaceViewController: NSViewController {
   @IBAction func moveWorkspace(_ sender: NSButton) {
     let path = workspaceDirectoryTextField.stringValue.replacingTildeToHomePath
     do {
-      let url = URL(fileURLWithPath: path, isDirectory: true).appendingPathComponent(workspace.url.lastPathComponent)
-      try workspace.setUrl(url)
+      let url = URL(fileURLWithPath: path, isDirectory: true).appendingPathComponent(workspace.directoryUrl.lastPathComponent)
+      try Realm.transaction { _ in
+        try workspace.setDirectoryUrl(url)
+      }
       view.window?.close()
     } catch {
       NSAlert(error: error).runModal()

@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import RealmSwift
 
 final class CreateWorkspaceViewController: NSViewController {
   private let bag = DisposeBag()
@@ -61,14 +62,9 @@ final class CreateWorkspaceViewController: NSViewController {
   
   @IBAction func createWorkspace(_ sender: NSButton) {
     let path = workspaceDirectoryTextField.stringValue.replacingTildeToHomePath
-    do {
-      let url = URL(fileURLWithPath: path, isDirectory: true)
-      try WorkspaceModel(name: workspaceNameTextField.stringValue, parentDirectoryUrl: url).saveToUserDefaults()
-      view.window?.close()
-    } catch {
-      let alert = NSAlert(error: error)
-      alert.runModal()
-    }
+    let url = URL(fileURLWithPath: path, isDirectory: true)
+    alertError { try WorkspaceModel.create(name: workspaceNameTextField.stringValue, parentDirectory: url) }
+    view.window?.close()
   }
   
   override func dismiss(_ sender: Any?) {

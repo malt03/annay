@@ -10,16 +10,10 @@ import Cocoa
 
 extension NSPasteboard {
   var nodes: [NodeModel] {
-    guard let workspace = parentWorkspace else { return [] }
     return (pasteboardItems ?? []).compactMap { (item) -> NodeModel? in
       guard let id = item.string(forType: .nodeModel) else { return nil }
-      return NodeModel.node(for: id, for: workspace)
+      return NodeModel.node(for: id)
     }
-  }
-  
-  var parentWorkspace: WorkspaceModel? {
-    guard let workspaceUniqId = string(forType: .parentWorkspaceModel) else { return nil }
-    return WorkspaceModel.spaces.value.first(where: { $0.uniqId == workspaceUniqId })
   }
   
   func relaceLinkToMarkdown() -> Bool {
@@ -81,11 +75,10 @@ extension NSPasteboard {
   }
   
   func replaceNoteToMarkdown() -> Bool {
-    guard let parentWorkspaceId = string(forType: .parentWorkspaceModel) else { return false }
     let notes = nodes.filter { !$0.isDirectory }
     if notes.count == 0 { return false }
     clearContents()
-    let linkTexts = notes.map { "[\($0.name)](annay:///\(parentWorkspaceId)/\($0.id))" }
+    let linkTexts = notes.map { "[\($0.name)](annay:///\($0.id))" }
     writeObjects(linkTexts as [NSPasteboardWriting])
     return true
   }

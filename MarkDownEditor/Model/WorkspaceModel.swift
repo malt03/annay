@@ -1,423 +1,166 @@
 //
 //  WorkspaceModel.swift
-//  MarkDownEditor
+//  ModelExample
 //
-//  Created by Koji Murata on 2018/01/17.
+//  Created by Koji Murata on 2018/03/23.
 //  Copyright © 2018年 Koji Murata. All rights reserved.
 //
 
-import RxSwift
-import RealmSwift
-import Cocoa
-import Zip
+import Foundation
 import CoreSpotlight
+import RealmSwift
+import RxSwift
+import RxRealm
 
-final class WorkspaceModel {
+final class WorkspaceModel: Object {
+  private struct Key {
+    static let SelectedIndex = "WorkspaceModel/SelectedIndex"
+  }
   static var fileExtension: String { return "annay" }
   
   private let bag = DisposeBag()
   
-  let id: String
-  private(set) var uniqId = ""
-  private(set) var workspaceDirectoryName: String
-  private let _url: Variable<URL>
-  private let _name: Variable<String>
-  private let _updatedAt: Variable<Date>
-  private let updatedAtFormatter = DateFormatter(dateStyle: .short, timeStyle: .short)
-  private let updateId: Variable<String>
-  private let lastSavedUpdateId: Variable<String>
-  private let _detectChange = PublishSubject<Void>()
-
-  private static var uniqIdKey: String { return "uniqId" }
-  private static var updatedAtKey: String { return "updatedAt" }
-  fileprivate static var updateIdKey: String { return "updatedId" }
+  @objc dynamic private(set) var id = UUID().uuidString
+  @objc dynamic private var directoryPath = ""
+  @objc dynamic private var index = -1
+  @objc dynamic var selectedNode: NodeModel?
   
-  private var info: [String: Any] {
-    didSet {
-      do {
-        let data = try JSONSerialization.data(withJSONObject: info, options: [])
-        try data.write(to: workspaceDirectory.infoFile)
-      } catch {}
-    }
+  private lazy var nameSubject = BehaviorSubject<String>(value: nameValue)
+  var nameObservable: Observable<String> { return nameSubject }
+  var nameValue: String { return directoryUrl.deletingPathExtension().lastPathComponent }
+  func setName(_ name: String) throws {
+    if nameValue == name { return }
+    try setDirectoryUrl(directoryUrl.deletingLastPathComponent().appendingPathComponent(name).appendingPathExtension(WorkspaceModel.fileExtension))
   }
   
-  var urlObservable: Observable<URL> { return _url.asObservable() }
-  var url: URL { return _url.value }
-  var nameObservable: Observable<String> { return _name.asObservable() }
-  var name: String { return _name.value }
-  var updatedAtObservable: Observable<Date> { return _updatedAt.asObservable() }
   var savedObservable: Observable<Bool> {
-    return Observable.combineLatest(updateId.asObservable(), lastSavedUpdateId.asObservable(), resultSelector: { $0 == $1 })
-  }
-  var detectChange: Observable<Void> { return _detectChange }
-  
-  private var isSaved: Bool { return updateId.value == lastSavedUpdateId.value }
-  
-  private static func workspaceDirectory(for name: String) -> URL {
-    return FileManager.default.applicationWorkspace.appendingPathComponent(name, isDirectory: true)
+    return Observable.collection(from: nodes.filter("isBodySaved = false")).map { $0.count == 0 }
   }
   
-  static func conflictMessage(for name: String) -> String {
-    return String(format: Localized("File update for '%@' was detected.\nWhich one should take priority?"), name)
-  }
+  static let spaces = Realm.instance.objects(WorkspaceModel.self).sorted(byKeyPath: "index")
+  static let observableSpaces = Observable.collection(from: spaces)
   
-  var workspaceDirectory: URL {
-    return WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
-  }
-  
-  func setUrl(_ newUrl: URL) throws {
-    if url == newUrl { return }
-    if FileManager.default.fileExists(atPath: newUrl.path) { throw MarkDownEditorError.fileExists(oldUrl: url) }
-    if FileManager.default.fileExists(atPath: url.path) { try FileManager.default.moveItem(at: url, to: newUrl) }
-    _url.value = newUrl
-    saveToUserDefaults()
-  }
-  
-  func setName(_ newName: String) throws {
-    if name == newName { return }
-    let newUrl = url
-      .deletingPathExtension()
-      .deletingLastPathComponent()
-      .appendingPathComponent(newName)
-      .appendingPathExtension(WorkspaceModel.fileExtension)
-    try setUrl(newUrl)
-    _name.value = newName
-  }
-  
-  static func space(uniqId: String) -> WorkspaceModel? {
-    return spaces.value.first(where: { $0.uniqId == uniqId })
-  }
-  
-  @discardableResult
-  static func open(url: URL) -> Bool {
-    let workspace: WorkspaceModel
-    if let index = WorkspaceModel.spaces.value.map({ $0.url.appendingPathComponent("x") }).index(of: url.appendingPathComponent("x")) {
-      workspace = WorkspaceModel.spaces.value[index]
-    } else {
-      do {
-        workspace = try WorkspaceModel(url: url)
-        workspace.saveToUserDefaults()
-      } catch {
-        NSAlert(error: error).runModal()
-        return false
-      }
-    }
-    workspace.select()
-    return true
-  }
-
-  private init(id: String, url: URL, lastSavedUpdateId: String?, workspaceDirectoryName: String) throws {
-    self.id = id
-    _url = Variable(url)
-    _name = Variable(url.name)
-    self.workspaceDirectoryName = workspaceDirectoryName
-    
-    let tmpLastSavedUpdateId = try WorkspaceModel.changeDetected(
-      at: url,
-      workspaceDirectoryName: &self.workspaceDirectoryName,
-      lastSavedUpdateId: lastSavedUpdateId
-    )
-    
-    let workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
-    info = try workspaceDirectory.getInfoData()
-    
-    _updatedAt = Variable<Date>(Date())
-    updateId = Variable("")
-    self.lastSavedUpdateId = Variable("")
-    
-    reloadInfo(lastSavedUpdateId: tmpLastSavedUpdateId ?? lastSavedUpdateId)
-
-    selectedNodeId = UserDefaults.standard.string(forKey: Key.SelectedNodeId(for: self))
-    try FileManager.default.createDirectoryIfNeeded(url: workspaceDirectory.resourceDirectory)
-  }
-  
-  convenience init(name: String, parentDirectoryUrl: URL) throws {
-    let url = parentDirectoryUrl.appendingPathComponent(name).appendingPathExtension(WorkspaceModel.fileExtension)
-    if FileManager.default.fileExists(atPath: url.path) {
-      throw MarkDownEditorError.fileExists(oldUrl: nil)
-    }
-    try self.init(id: UUID().uuidString, url: url, lastSavedUpdateId: nil, workspaceDirectoryName: UUID().uuidString)
-    _name.value = name
-  }
-  
-  convenience init(url: URL) throws {
-    try self.init(id: UUID().uuidString, url: url, lastSavedUpdateId: nil, workspaceDirectoryName: UUID().uuidString)
-  }
-  
-  private func reloadInfo(lastSavedUpdateId: String?) {
-    _updatedAt.value = updatedAtFormatter.date(from: info[WorkspaceModel.updatedAtKey] as? String ?? "") ?? Date()
-    let updateId = info[WorkspaceModel.updateIdKey] as? String ?? ""
-    self.updateId.value = updateId
-    self.lastSavedUpdateId.value = lastSavedUpdateId ?? updateId
-    self.uniqId = info[WorkspaceModel.uniqIdKey] as? String ?? UUID().uuidString
-  }
-  
-  private struct Key {
-    static let Spaces = "WorkspaceModel/Spaces"
-    static let SelectedIndex = "WorkspaceModel/SelectedIndex"
-    static func SelectedNodeId(for workspace: WorkspaceModel) -> String {
-      return "WorkspaceModel/\(workspace.id)/SelectedNodeId"
-    }
-  }
-  
-  static var spaces: Variable<[WorkspaceModel]> = {
-    var spaces: [WorkspaceModel] = UserDefaults.standard.savableObjectArray(forKey: Key.Spaces) ?? []
-    let variable = Variable(spaces)
-    _ = variable.asObservable().subscribe(onNext: { (workspaces) in
-      let ud = UserDefaults.standard
-      ud.set(workspaces, forKey: Key.Spaces)
-      ud.synchronize()
-    })
-    
-    if spaces.count == 0 {
-      do {
-        variable.value = [try createDefault()]
-      } catch {
-        NSAlert(error: error).runModal()
-      }
-    }
-    return variable
-  }()
-  
+  static private let selected = Variable(getSelected())
+  static var selectedObservable: Observable<WorkspaceModel> { return selected.asObservable() }
+  static var selectedValue: WorkspaceModel { return selected.value }
   static var selectedIndex: Int {
-    get {
-      let index = UserDefaults.standard.integer(forKey: Key.SelectedIndex)
-      if spaces.value.count <= index { return 0 }
-      return index
-    }
+    get { return UserDefaults.standard.integer(forKey: Key.SelectedIndex) }
     set {
       let ud = UserDefaults.standard
       ud.set(newValue, forKey: Key.SelectedIndex)
       ud.synchronize()
-      selected.value = spaces.value[newValue]
+      selected.value = getSelected()
     }
   }
   
-  static let selected = Variable<WorkspaceModel>(spaces.value[safe: selectedIndex] ?? spaces.value[0])
+  static func getSelected() -> WorkspaceModel {
+    if let selected = spaces[safe: selectedIndex] ?? spaces.first { return selected }
+    return try! createDefault()
+  }
   
   func select() {
-    WorkspaceModel.selectedIndex = WorkspaceModel.spaces.value.index(of: self) ?? 0
-    NodeModel.createFirstDirectoryIfNeeded()
+    if WorkspaceModel.selectedIndex != WorkspaceModel.spaces.index(of: self) {
+      WorkspaceModel.selectedIndex = WorkspaceModel.spaces.index(of: self) ?? 0
+    }
   }
   
-  private var detectedChangeForSave = true
-  
-  func changeDetected() {
-    if !detectedChangeForSave {
-      detectedChangeForSave = true
-      return
-    }
-    do {
-      if let lastSavedUpdateId = try WorkspaceModel.changeDetected(
-        at: url,
-        workspaceDirectoryName: &workspaceDirectoryName,
-        lastSavedUpdateId: lastSavedUpdateId.value
-      ) {
-        self.lastSavedUpdateId.value = lastSavedUpdateId
-        info = try workspaceDirectory.getInfoData()
-        saveToUserDefaults()
-        reloadInfo(lastSavedUpdateId: nil)
-        _detectChange.onNext(())
+  static func move(from fromIndex: Int, to toIndex: Int) {
+    Realm.transaction { (realm) in
+      let workspaces = realm.objects(WorkspaceModel.self).sorted(byKeyPath: "index")
+      let moveWorkspace = workspaces[fromIndex]
+      moveWorkspace.index = -1
+      for (index, workspace) in workspaces.enumerated() {
+        if index < toIndex {
+          workspace.index = index
+        } else {
+          workspace.index = index + 1
+        }
       }
-    } catch {
-      NSAlert(error: error).runModal()
+      moveWorkspace.index = toIndex
     }
   }
   
   @discardableResult
-  static func changeDetected(at url: URL, workspaceDirectoryName: inout String, lastSavedUpdateId: String?) throws -> String? {
-    var workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
-    
-    var tmpLastSavedUpdateId: String? = nil
+  private static func createDefault() throws -> WorkspaceModel {
+    return try create(name: Localized("Default Workspace"), parentDirectory: FileManager.default.applicationSupport)
+  }
+  
+  static func createDefaultIfNeeded() throws {
+    if spaces.count == 0 { try createDefault() }
+  }
+  
+  private lazy var directoryUrlSubject = BehaviorSubject<URL>(value: directoryUrl)
+  var directoryUrlObservable: Observable<URL> { return directoryUrlSubject }
+  
+  func setDirectoryUrl(_ url: URL) throws {
+    if directoryUrl == url { return }
+    if FileManager.default.fileExists(atPath: url.path) { throw MarkDownEditorError.fileExists(oldUrl: url) }
+    if FileManager.default.fileExists(atPath: directoryUrl.path) { try FileManager.default.moveItem(at: directoryUrl, to: url) }
+    directoryUrl = url
+  }
+  
+  var updatedAtObservable: Observable<Date> {
+    return Observable.collection(from: nodes.sorted(byKeyPath: "lastUpdatedAt", ascending: false)).map { $0.first?.lastUpdatedAt ?? Date() }
+  }
+  
+  static var detectChanges = [String: PublishSubject<Void>]()
+  var detectChange: PublishSubject<Void> {
+    if let subject = WorkspaceModel.detectChanges[id] { return subject }
+    let subject = PublishSubject<Void>()
+    WorkspaceModel.detectChanges[id] = subject
+    return subject
+  }
 
-    let fileManager = FileManager.default
-    if fileManager.fileExists(atPath: url.path) {
-      Zip.addCustomFileExtension(WorkspaceModel.fileExtension)
-      
-      if fileManager.fileExists(atPath: workspaceDirectory.path) {
-        let tmpDirectory = fileManager.applicationTmp.appendingPathComponent(workspaceDirectoryName)
-        try Zip.unzipFile(url, destination: tmpDirectory, overwrite: true, password: nil)
-        let oldLastSavedUpdatedId = lastSavedUpdateId ?? workspaceDirectory.updateId ?? ""
-        if tmpDirectory.updateId != oldLastSavedUpdatedId {
-          
-          let moveTmpToNewWorkspace = { (workspaceDirectoryName: inout String) in
-            try fileManager.removeItem(at: workspaceDirectory)
-            workspaceDirectoryName = UUID().uuidString
-            workspaceDirectory = WorkspaceModel.workspaceDirectory(for: workspaceDirectoryName)
-            try fileManager.moveItem(at: tmpDirectory, to: workspaceDirectory)
-            tmpLastSavedUpdateId = workspaceDirectory.updateId
-            try ResourceManager.copy(from: workspaceDirectory.resourceDirectory)
-          }
-          
-          if workspaceDirectory.updateId == oldLastSavedUpdatedId {
-            try moveTmpToNewWorkspace(&workspaceDirectoryName)
-          } else {
-            let alert = NSAlert()
-            alert.messageText = WorkspaceModel.conflictMessage(for: url.name)
-            alert.addButton(withTitle: Localized("File"))
-            alert.addButton(withTitle: Localized("Editing Data"))
-            if alert.runModal() == .alertFirstButtonReturn {
-              try moveTmpToNewWorkspace(&workspaceDirectoryName)
-            }
-          }
-        }
-      } else {
-        try Zip.unzipFile(url, destination: workspaceDirectory, overwrite: true, password: nil)
-        try ResourceManager.copy(from: workspaceDirectory.resourceDirectory)
-      }
-    } else {
-      try fileManager.createDirectoryIfNeeded(url: workspaceDirectory)
+  private(set) var directoryUrl: URL {
+    get { return URL(fileURLWithPath: directoryPath) }
+    set {
+      directoryPath = newValue.path
+      nameSubject.onNext(nameValue)
+      directoryUrlSubject.onNext(newValue)
     }
-    return tmpLastSavedUpdateId
+  }
+  
+  let nodes = LinkingObjects(fromType: NodeModel.self, property: "workspace")
+  
+  @discardableResult
+  static func create(name: String, parentDirectory: URL, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
+    return try create(
+      directoryUrl: parentDirectory.appendingPathComponent(name).appendingPathExtension(WorkspaceModel.fileExtension),
+      confirmUpdateNote: confirmUpdateNote
+    )
+  }
+  
+  @discardableResult
+  static func create(directoryUrl: URL, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
+    let workspace: WorkspaceModel
+    if let saved = Realm.instance.object(ofType: WorkspaceModel.self, forPrimaryKey: directoryUrl.path) {
+      workspace = saved
+    } else {
+      workspace = WorkspaceModel()
+      workspace.directoryUrl = directoryUrl
+      workspace.index = (spaces.last?.index ?? -1) + 1
+      try Realm.transaction { (realm) in
+        try workspace.updateIndex(confirmUpdateNote: confirmUpdateNote, realm: realm)
+      }
+    }
+    workspace.select()
+    return workspace
+  }
+  
+  func updateIndex(confirmUpdateNote: NodeModel.ConfirmUpdateNote, realm: Realm) throws {
+    detectChange.onNext(()) // この行を先にしておかないと、note削除時にクラッシュする
+    try NodeModel.root(for: self, realm: realm).updateIndexIfNeeded(confirmUpdateNote: confirmUpdateNote, realm: realm)
+  }
+  
+  var notesUrl: URL {
+    return directoryUrl.appendingPathComponent("notes", isDirectory: true)
   }
   
   func deleteFromSearchableIndex() {
-    let nodeIds = [String](Realm.instance(for: self).objects(NodeModel.self).filter("isDirectory = false").map { $0.id })
-    CSSearchableIndex.default().deleteSearchableItemsWithDataStore(nodeIds: nodeIds, workspaceId: id)
+    let nodeIds = [String](Realm.instance.objects(NodeModel.self).filter("workspace = %@ and isDirectory = false", self).map { $0.id })
+    CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: nodeIds)
   }
   
-  func save() {
-    detectedChangeForSave = false
-    do {
-      let urls = [
-        workspaceDirectory.realmFile,
-        workspaceDirectory.secretKeyFile,
-        workspaceDirectory.infoFile,
-        workspaceDirectory.resourceDirectory,
-      ]
-      try FileManager.default.createDirectoryIfNeeded(url: url.deletingLastPathComponent())
-      try Zip.zipFiles(paths: urls, zipFilePath: url, password: nil, compression: .BestSpeed, progress: nil)
-    } catch {
-      NSAlert(error: error).runModal()
-    }
-    lastSavedUpdateId.value = updateId.value
-    saveToUserDefaults()
-  }
-  
-  func reset() {
-    if isSaved { return }
-    let alert = NSAlert()
-    alert.messageText = Localized("Reset Workspace")
-    alert.informativeText = Localized("Data being edited will be lost")
-    alert.addButton(withTitle: Localized("Reset"))
-    alert.addButton(withTitle: Localized("Cancel"))
-    if alert.runModal() == .alertFirstButtonReturn {
-      do {
-        try FileManager.default.removeItem(at: workspaceDirectory)
-
-        workspaceDirectoryName = UUID().uuidString
-        try Zip.unzipFile(url, destination: workspaceDirectory, overwrite: true, password: nil)
-        try ResourceManager.copy(from: workspaceDirectory.resourceDirectory)
-
-        info = try workspaceDirectory.getInfoData()
-        saveToUserDefaults()
-        reloadInfo(lastSavedUpdateId: nil)
-        _detectChange.onNext(())
-      } catch {
-        NSAlert(error: error).runModal()
-      }
-    }
-  }
-  
-  func update() {
-    _updatedAt.value = Date()
-    updateId.value = UUID().uuidString
-    info = [
-      WorkspaceModel.updateIdKey: updateId.value,
-      WorkspaceModel.updatedAtKey: updatedAtFormatter.string(from: _updatedAt.value),
-      WorkspaceModel.uniqIdKey: uniqId,
-    ]
-    saveToUserDefaults()
-  }
-  
-  func saveToUserDefaults() {
-    if let index = WorkspaceModel.spaces.value.index(of: self) {
-      WorkspaceModel.spaces.value[index] = self
-    } else {
-      WorkspaceModel.spaces.value.append(self)
-    }
-  }
-
-  static func move(from fromIndex: Int, to toIndex: Int) {
-    var tmpSpaces = spaces.value
-    let space = tmpSpaces[fromIndex]
-    tmpSpaces.remove(at: fromIndex)
-    var fixedToIndex = toIndex
-    if fromIndex < toIndex {
-      fixedToIndex -= 1
-    }
-    tmpSpaces.insert(space, at: fixedToIndex)
-    spaces.value = tmpSpaces
-    space.select()
-  }
-  
-  private static func createDefault() throws -> WorkspaceModel {
-    return try WorkspaceModel(name: Localized("Default Workspace"), parentDirectoryUrl: FileManager.default.applicationSupport)
-  }
-  
-  var selectedNodeId: String? {
-    didSet {
-      let ud = UserDefaults.standard
-      ud.set(selectedNodeId, forKey: Key.SelectedNodeId(for: self))
-      ud.synchronize()
-    }
-  }
-}
-
-extension WorkspaceModel: SavableInUserDefaults {
-  var dictionary: [String : Any] {
-    return [
-      "id": id,
-      "url": url.absoluteString,
-      "lastSavedUpdateId": lastSavedUpdateId.value,
-      "workspaceDirectoryName": workspaceDirectoryName,
-    ]
-  }
-  
-  convenience init?(dictionary: [String : Any]) {
-    guard
-      let id = dictionary["id"] as? String,
-      let urlString = dictionary["url"] as? String,
-      let url = URL(string: urlString),
-      let lastSavedUpdateId = dictionary["lastSavedUpdateId"] as? String,
-      let workspaceDirectoryName = dictionary["workspaceDirectoryName"] as? String
-      else { return nil }
-    do {
-      try self.init(id: id, url: url, lastSavedUpdateId: lastSavedUpdateId, workspaceDirectoryName: workspaceDirectoryName)
-    } catch {
-      NSAlert(error: error).runModal()
-      return nil
-    }
-  }
-}
-
-extension WorkspaceModel: Equatable {
-  static func ==(lhs: WorkspaceModel, rhs: WorkspaceModel) -> Bool {
-    return lhs.id == rhs.id
-  }
-}
-
-extension WorkspaceModel: Hashable {
-  var hashValue: Int { return id.hashValue }
-}
-
-extension URL {
-  fileprivate var infoFile: URL {
-    return appendingPathComponent("info.json")
-  }
-  
-  fileprivate var updateId: String? {
-    guard let info = try? getInfoData() else { return nil }
-    return info[WorkspaceModel.updateIdKey] as? String
-  }
-  
-  fileprivate func getInfoData() throws -> [String: Any] {
-    let url = infoFile
-    if FileManager.default.fileExists(atPath: url.path) {
-      let infoData = try Data(contentsOf: url)
-      return try JSONSerialization.jsonObject(with: infoData, options: []) as? [String: Any] ?? [:]
-    } else {
-      return [:]
-    }
-  }
+  override class func primaryKey() -> String? { return "directoryPath" }
+  override class func ignoredProperties() -> [String] { return ["nameSubject", "directoryUrlSubject"] }
 }

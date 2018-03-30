@@ -6,19 +6,23 @@
 //  Copyright © 2018年 Koji Murata. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 import RxSwift
+import RealmSwift
 
 final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
   private let bag = DisposeBag()
   
-  private let workspace: WorkspaceModel
+  private let workspaceId: String
+  private var workspace: WorkspaceModel {
+    return Realm.instance.objects(WorkspaceModel.self).filter("id = %@", workspaceId).first!
+  }
   
   init(workspace: WorkspaceModel) {
-    self.workspace = workspace
+    self.workspaceId = workspace.id
     super.init()
     
-    workspace.urlObservable.subscribe(onNext: { [weak self] _ in
+    workspace.directoryUrlObservable.subscribe(onNext: { [weak self] _ in
       guard let s = self else { return }
       NSFileCoordinator.removeFilePresenter(s)
       NSFileCoordinator.addFilePresenter(s)
@@ -30,16 +34,18 @@ final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
   }
   
   var presentedItemURL: URL? {
-    // workspace.urlだと上手く検知できないっぽい
-    return workspace.url.deletingLastPathComponent()
+    return workspace.directoryUrl
   }
   
   let presentedItemOperationQueue = OperationQueue()
   
   func presentedSubitemDidChange(at url: URL) {
-    if !url.isEqualIgnoringLastSlash(workspace.url) { return }
-    if !FileManager.default.fileExists(atPath: url.path) { return }
+    guard let confirm = WorkspaceDirectoryWatcherManager.shared.confirm else { return }
     // メインスレッドで動かす
-    DispatchQueue.main.async { self.workspace.changeDetected() }
+    DispatchQueue.main.async {
+      Realm.transaction { (realm) in
+        alertError { try self.workspace.updateIndex(confirmUpdateNote: confirm, realm: realm) }
+      }
+    }
   }
 }

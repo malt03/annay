@@ -12,7 +12,7 @@ import RxSwift
 
 extension NSTableView.AutosaveName {
   static var Sidebar: NSTableView.AutosaveName {
-    let id = WorkspaceModel.selected.value.id
+    let id = WorkspaceModel.selectedValue.id
     return NSTableView.AutosaveName("Sidebar/\(id)")
   }
 }
@@ -57,7 +57,7 @@ final class SidebarViewController: NSViewController {
       backgroundMenu: backgroundMenu
     )
     
-    WorkspaceModel.selected.asObservable().subscribe(onNext: { [weak self] (workspace) in
+    WorkspaceModel.selectedObservable.subscribe(onNext: { [weak self] (workspace) in
       self?.reloadWorkspace(workspace)
     }).disposed(by: bag)
     
@@ -203,8 +203,12 @@ final class SidebarViewController: NSViewController {
     workspaceDetectChangeDisposable.disposable = workspace.detectChange.subscribe(onNext: { [weak self] _ in
       guard let s = self else { return }
       let indexes = s.outlineView.selectedRowIndexes
-      s.reloadWorkspace(workspace)
-      s.outlineView.selectRowIndexes(indexes, byExtendingSelection: false)
+      if s.outlineView.prepareReloadData() {
+        DispatchQueue.main.async {
+          s.reloadWorkspace(workspace)
+          s.outlineView.selectRowIndexes(indexes, byExtendingSelection: false)
+        }
+      }
     })
     
     workspaceNameDisposable.disposed(by: bag)
@@ -213,7 +217,6 @@ final class SidebarViewController: NSViewController {
     workspaceUpdatedAtDisposable.disposed(by: bag)
     workspaceDetectChangeDisposable.disposed(by: bag)
     
-    NodeModel.createFirstDirectoryIfNeeded()
     outlineView.autosaveName = nil // 一度変更するとautosaveがきちんと効く。謎だけどワークアラウンド
     outlineView.autosaveName = .Sidebar
     outlineView.reloadData()
@@ -232,7 +235,7 @@ final class SidebarViewController: NSViewController {
         outlineView.expandItem(clickedItem)
       }
     } else {
-      clickedItem.selected()
+      clickedItem.select()
       moveFocusToEditor()
     }
   }
@@ -253,7 +256,18 @@ final class SidebarViewController: NSViewController {
     guard let indexes = outlineView.indexesForMenu else { return }
     let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
     if nodes.count == 0 { return }
-    NodeModelExporter(type: type, nodes: nodes).export()
+    NodeModelExporter(type: type, nodes: nodes, completionHandler: { (urls) in
+      NSWorkspace.shared.activateFileViewerSelecting(urls)
+    }).export()
+  }
+  
+  @IBAction private func showInFinder(_ sender: NSMenuItem) {
+    guard let indexes = outlineView.indexesForMenu else { return }
+    for index in indexes {
+      let node = outlineView.item(atRow: index) as! NodeModel
+      if node.isTrash { continue }
+      NSWorkspace.shared.activateFileViewerSelecting([node.url])
+    }
   }
   
   @objc private func emptyTrash() {
@@ -265,7 +279,7 @@ final class SidebarViewController: NSViewController {
     if response == .alertSecondButtonReturn {
       let count = NodeModel.deleted.count
       outlineView.removeItems(at: IndexSet(integersIn: 0..<count), inParent: NodeModel.trash, withAnimation: .effectFade)
-      NodeModel.emptyTrash()
+      alertError { try NodeModel.emptyTrash() }
     }
   }
   
@@ -283,8 +297,10 @@ final class SidebarViewController: NSViewController {
   }
   
   private func createDirectory(parent: NodeModel) {
-    let insertedNode = NodeModel.createDirectory(parent: parent)
-    insert(node: insertedNode, in: parent)
+    alertError {
+      let insertedNode = try NodeModel.createDirectory(parent: parent)
+      insert(node: insertedNode, in: parent)
+    }
   }
   
   @objc private func createNoteWithoutMenu() {
@@ -310,12 +326,14 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func createGroupWithoutMenu() {
-    let group = NodeModel.createDirectory(name: Localized("New Group"), parent: nil)
-    outlineView.reloadData() // アニメーション走らせると表示がバグる
-    let row = outlineView.row(forItem: group)
-    if row >= 0 {
-      outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-      outlineView.editColumn(0, row: row, with: nil, select: true)
+    alertError {
+      let group = try NodeModel.createDirectory(name: Localized("New Group"), parent: nil)
+      outlineView.reloadData() // アニメーション走らせると表示がバグる
+      let row = outlineView.row(forItem: group)
+      if row >= 0 {
+        outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+        outlineView.editColumn(0, row: row, with: nil, select: true)
+      }
     }
   }
   
@@ -339,8 +357,11 @@ final class SidebarViewController: NSViewController {
     Realm.transaction { _ in
       for node in nodes {
         let index = outlineView.childIndex(forItem: node)
-        if !node.delete() { continue }
-        outlineView.removeItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .slideLeft)
+        var successDelete = false
+        alertError { successDelete = try node.delete() }
+        if !successDelete { continue }
+        let parent = node.isRoot ? nil : node.parent
+        outlineView.removeItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .slideLeft)
       }
     }
     let afterCount = NodeModel.deleted.count
@@ -371,17 +392,32 @@ final class SidebarViewController: NSViewController {
     alert.addButton(withTitle: Localized("Delete"))
     let response = alert.runModal()
     if response == .alertSecondButtonReturn {
-      let workspace = WorkspaceModel.selected.value
+      let workspace = WorkspaceModel.selectedValue
       Realm.transaction { (realm) in
         let nodes = indexes.map { outlineView.item(atRow: $0) as! NodeModel }.deletingDescendants
+        var deletingIndexes = [NodeModel: IndexSet]()
+        var deletingIndexForRoot = IndexSet()
         for node in nodes {
           let index = outlineView.childIndex(forItem: node)
-          let parent = node.isDeleted ? NodeModel.trash : node.parent
-          outlineView.removeItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .effectFade)
+          if node.isDeleted || !node.isRoot {
+            let parent = node.isDeleted ? NodeModel.trash : node.parent
+            if deletingIndexes[parent!] == nil { deletingIndexes[parent!] = IndexSet() }
+            deletingIndexes[parent!]?.insert(index)
+          } else {
+            deletingIndexForRoot.insert(index)
+          }
         }
+        for (node, index) in deletingIndexes {
+          outlineView.removeItems(at: index, inParent: node, withAnimation: .effectFade)
+        }
+        outlineView.removeItems(at: deletingIndexForRoot, inParent: nil, withAnimation: .effectFade)
+        let parents = nodes.compactMap { $0.parent }.uniq
         for node in nodes {
           if node.isInvalidated { continue }
-          node.deleteImmediately(realm: realm, workspace: workspace)
+          alertError { try node.deleteImmediately(realm: realm, workspace: workspace) }
+        }
+        for parent in parents {
+          alertError { try parent.save() }
         }
       }
     }
@@ -402,7 +438,9 @@ final class SidebarViewController: NSViewController {
     Realm.transaction { _ in
       for node in nodes {
         let beforeIndex = outlineView.childIndex(forItem: node)
-        if !node.putBack() { continue }
+        var successPutBack = false
+        alertError { successPutBack = try node.putBack() }
+        if !successPutBack { continue }
         putBackNodes.append(node)
         outlineView.removeItems(at: IndexSet(integer: beforeIndex), inParent: NodeModel.trash, withAnimation: .slideLeft)
       }
@@ -412,7 +450,8 @@ final class SidebarViewController: NSViewController {
         outlineView.reloadData()
         break
       }
-      outlineView.insertItems(at: IndexSet(integer: index), inParent: node.parent, withAnimation: .slideLeft)
+      let parent = node.isRoot ? nil : node.parent
+      outlineView.insertItems(at: IndexSet(integer: index), inParent: parent, withAnimation: .slideLeft)
       for ancestor in node.ancestors.reversed() {
         outlineView.expandItem(ancestor)
       }
@@ -453,7 +492,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineViewSelectionDidChange(_ notification: Notification) {
-    (outlineView.item(atRow: outlineView.selectedRow) as? NodeModel)?.selected()
+    (outlineView.item(atRow: outlineView.selectedRow) as? NodeModel)?.select()
   }
   
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
@@ -503,7 +542,6 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     let filePromiseProviders = nodes.map { NSFilePromiseProvider(fileType: kUTTypePlainText as String, delegate: $0) }
     let objects = (nodes as [NSPasteboardWriting]) + (filePromiseProviders as [NSPasteboardWriting])
     pasteboard.writeObjects(objects)
-    pasteboard.setString(WorkspaceModel.selected.value.uniqId, forType: .parentWorkspaceModel)
     return true
   }
   
@@ -536,7 +574,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
       return []
     }
     
-    if info.draggingPasteboard().parentWorkspace == WorkspaceModel.selected.value {
+    if info.draggingPasteboard().nodes.first?.workspace?.id == WorkspaceModel.selectedValue.id {
       for node in nodes {
         if node == parentNode { return [] }
         if node.descendants.contains(parentNode) { return [] }
@@ -560,11 +598,11 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
       }
     }
 
-    let parent = item as? NodeModel
+    let parent = (item as? NodeModel) ?? NodeModel.root()
 
     var fixedIndex: Int
     if index < 0 {
-      fixedIndex = parent == nil ? NodeModel.roots(query: queryText.value).count : 0
+      fixedIndex = parent.isRoot ? NodeModel.roots(query: queryText.value).count : 0
     } else {
       fixedIndex = index
     }
@@ -573,10 +611,10 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     let fileURLs = items.compactMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
     if fileURLs.count > 0 {
       do {
-        let workspace = WorkspaceModel.selected.value
+        let workspace = WorkspaceModel.selectedValue
         try Realm.transaction { (realm) in
           let creatableCount = fileURLs.creatableRootNodesCount
-          for (i, child) in (parent?.sortedChildren(query: queryText.value) ?? NodeModel.roots(query: queryText.value)).enumerated() {
+          for (i, child) in parent.sortedChildren(query: queryText.value).enumerated() {
             if fixedIndex > i {
               child.index = i
             } else {
@@ -595,7 +633,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     let movedNodes = info.draggingPasteboard().nodes
     if movedNodes.count == 0 { return false }
     
-    if info.draggingPasteboard().parentWorkspace == WorkspaceModel.selected.value {
+    if info.draggingPasteboard().nodes.first?.workspace?.id == WorkspaceModel.selectedValue.id {
       fixedIndex -= movedNodes.filter { !$0.isDeleted && $0.parent == parent }.map { outlineView.childIndex(forItem: $0) }.filter { $0 < fixedIndex }.count
       
       Realm.transaction { _ in
@@ -605,7 +643,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
           }
         } else {
           for node in movedNodes { node.index = -1 }
-          for (i, child) in (parent?.sortedChildren(query: queryText.value) ?? NodeModel.roots(query: queryText.value)).enumerated() {
+          for (i, child) in parent.sortedChildren(query: queryText.value).enumerated() {
             if fixedIndex > i {
               child.index = i
             } else {
@@ -614,7 +652,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
           }
           for (i, node) in movedNodes.enumerated() {
             node.index = i + fixedIndex
-            node.setParent(parent)
+            alertError { try node.move(in: parent) }
             node.isDeleted = false
           }
         }
@@ -622,7 +660,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     } else {
       Realm.transaction { (realm) in
         let count = movedNodes.count
-        for (i, child) in (parent?.sortedChildren(query: queryText.value) ?? NodeModel.roots(query: queryText.value)).enumerated() {
+        for (i, child) in parent.sortedChildren(query: queryText.value).enumerated() {
           if fixedIndex > i {
             child.index = i
           } else {
@@ -630,7 +668,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
           }
         }
         for (index, node) in movedNodes.enumerated() {
-          node.createCopy(realm: realm, parent: parent, index: fixedIndex + index)
+          alertError { try node.createCopy(realm: realm, parent: parent, index: fixedIndex + index) }
         }
       }
     }
