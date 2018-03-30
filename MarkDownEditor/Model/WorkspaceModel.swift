@@ -103,8 +103,14 @@ final class WorkspaceModel: Object {
     return Observable.collection(from: nodes.sorted(byKeyPath: "lastUpdatedAt", ascending: false)).map { $0.first?.lastUpdatedAt ?? Date() }
   }
   
-  let detectChange = PublishSubject<Void>()
-  
+  static var detectChanges = [String: PublishSubject<Void>]()
+  var detectChange: PublishSubject<Void> {
+    if let subject = WorkspaceModel.detectChanges[id] { return subject }
+    let subject = PublishSubject<Void>()
+    WorkspaceModel.detectChanges[id] = subject
+    return subject
+  }
+
   private(set) var directoryUrl: URL {
     get { return URL(fileURLWithPath: directoryPath) }
     set {
@@ -142,8 +148,8 @@ final class WorkspaceModel: Object {
   }
   
   func updateIndex(confirmUpdateNote: NodeModel.ConfirmUpdateNote, realm: Realm) throws {
+    detectChange.onNext(()) // この行を先にしておかないと、note削除時にクラッシュする
     try NodeModel.root(for: self, realm: realm).updateIndexIfNeeded(confirmUpdateNote: confirmUpdateNote, realm: realm)
-    detectChange.onNext(())
   }
   
   var notesUrl: URL {

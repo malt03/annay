@@ -203,8 +203,12 @@ final class SidebarViewController: NSViewController {
     workspaceDetectChangeDisposable.disposable = workspace.detectChange.subscribe(onNext: { [weak self] _ in
       guard let s = self else { return }
       let indexes = s.outlineView.selectedRowIndexes
-      s.reloadWorkspace(workspace)
-      s.outlineView.selectRowIndexes(indexes, byExtendingSelection: false)
+      if s.outlineView.prepareReloadData() {
+        DispatchQueue.main.async {
+          s.reloadWorkspace(workspace)
+          s.outlineView.selectRowIndexes(indexes, byExtendingSelection: false)
+        }
+      }
     })
     
     workspaceNameDisposable.disposed(by: bag)
