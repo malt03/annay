@@ -1,6 +1,5 @@
 github "ReactiveX/RxSwift"
 github "RxSwiftCommunity/RxRealm"
 github "realm/realm-cocoa"
-github "marmelroy/Zip"
 github "Clipy/KeyHolder"
 github "jpsim/Yams"

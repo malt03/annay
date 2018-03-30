@@ -30,8 +30,6 @@
 		ED2DEB53206B49E4008E5F1E /* RxSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB39206B49D8008E5F1E /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED2DEB54206B49E4008E5F1E /* Yams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB35206B49D7008E5F1E /* Yams.framework */; };
 		ED2DEB55206B49E4008E5F1E /* Yams.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB35206B49D7008E5F1E /* Yams.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED2DEB56206B49E4008E5F1E /* Zip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB3B206B49D8008E5F1E /* Zip.framework */; };
-		ED2DEB57206B49E4008E5F1E /* Zip.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB3B206B49D8008E5F1E /* Zip.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED2DEB5B206B4FC5008E5F1E /* NodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB5A206B4FC5008E5F1E /* NodeInfo.swift */; };
 		ED2DEB5D206B69CC008E5F1E /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB5C206B69CC008E5F1E /* Util.swift */; };
 		ED2DEB5F206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB5E206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift */; };
@@ -173,7 +171,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				ED2DEB4B206B49E4008E5F1E /* Realm.framework in Embed Libraries */,
-				ED2DEB57206B49E4008E5F1E /* Zip.framework in Embed Libraries */,
 				ED2DEB49206B49E4008E5F1E /* Magnet.framework in Embed Libraries */,
 				ED2DEB53206B49E4008E5F1E /* RxSwift.framework in Embed Libraries */,
 				ED2DEB4D206B49E4008E5F1E /* RealmSwift.framework in Embed Libraries */,
@@ -203,7 +200,6 @@
 		ED2DEB38206B49D8008E5F1E /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/Mac/Realm.framework; sourceTree = "<group>"; };
 		ED2DEB39206B49D8008E5F1E /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
 		ED2DEB3A206B49D8008E5F1E /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/Mac/RealmSwift.framework; sourceTree = "<group>"; };
-		ED2DEB3B206B49D8008E5F1E /* Zip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Zip.framework; path = Carthage/Build/Mac/Zip.framework; sourceTree = "<group>"; };
 		ED2DEB3C206B49D8008E5F1E /* KeyHolder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeyHolder.framework; path = Carthage/Build/Mac/KeyHolder.framework; sourceTree = "<group>"; };
 		ED2DEB5A206B4FC5008E5F1E /* NodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeInfo.swift; sourceTree = "<group>"; };
 		ED2DEB5C206B69CC008E5F1E /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -347,7 +343,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED2DEB4A206B49E4008E5F1E /* Realm.framework in Frameworks */,
-				ED2DEB56206B49E4008E5F1E /* Zip.framework in Frameworks */,
 				ED2DEB48206B49E4008E5F1E /* Magnet.framework in Frameworks */,
 				ED2DEB52206B49E4008E5F1E /* RxSwift.framework in Frameworks */,
 				ED2DEB4C206B49E4008E5F1E /* RealmSwift.framework in Frameworks */,
@@ -716,7 +711,6 @@
 				ED2DEB37206B49D8008E5F1E /* RxRealm.framework */,
 				ED2DEB39206B49D8008E5F1E /* RxSwift.framework */,
 				ED2DEB35206B49D7008E5F1E /* Yams.framework */,
-				ED2DEB3B206B49D8008E5F1E /* Zip.framework */,
 			);
 			name = Carthage;
 			sourceTree = "<group>";
