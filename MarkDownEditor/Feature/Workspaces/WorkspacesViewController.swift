@@ -119,6 +119,7 @@ final class WorkspacesViewController: NSViewController {
       for node in nodes { node.prepareDelete() }
       realm.delete(workspace)
     }
+    WorkspaceModel.reloadSelected()
     // ワークスペース削除よりもタイミングを遅らせるとreloaddata出来るようになる
     DispatchQueue.main.async {
       Realm.transaction { (realm) in

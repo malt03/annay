@@ -53,9 +53,13 @@ final class WorkspaceModel: Object {
     }
   }
   
-  static func getSelected() -> WorkspaceModel {
+  static private func getSelected() -> WorkspaceModel {
     if let selected = spaces[safe: selectedIndex] ?? spaces.first { return selected }
     return try! createDefault()
+  }
+  
+  static func reloadSelected() {
+    getSelected().select()
   }
   
   func select() {
