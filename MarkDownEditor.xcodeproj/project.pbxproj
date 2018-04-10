@@ -50,6 +50,7 @@
 		ED47CC85201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */; };
 		ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */; };
 		ED47CC8D201EFBED0052D6EF /* WorkspaceNameFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC8C201EFBED0052D6EF /* WorkspaceNameFormatter.swift */; };
+		ED4EB332207C3F5E00CFEBEB /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB331207C3F5E00CFEBEB /* MainWindow.swift */; };
 		ED4EB9D2201C814100B4CBE7 /* swiss.css in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D1201C803800B4CBE7 /* swiss.css */; };
 		ED4EB9D7201D61E200B4CBE7 /* OpenQuickly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */; };
 		ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */; };
@@ -222,6 +223,7 @@
 		ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrOpenWorkspaceTabViewController.swift; sourceTree = "<group>"; };
 		ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorError.swift; sourceTree = "<group>"; };
 		ED47CC8C201EFBED0052D6EF /* WorkspaceNameFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceNameFormatter.swift; sourceTree = "<group>"; };
+		ED4EB331207C3F5E00CFEBEB /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		ED4EB9D1201C803800B4CBE7 /* swiss.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = swiss.css; sourceTree = "<group>"; };
 		ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenQuickly.storyboard; sourceTree = "<group>"; };
 		ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyWindowController.swift; sourceTree = "<group>"; };
@@ -606,6 +608,7 @@
 				EDB601482022C06A00EDF59C /* Application.swift */,
 				EDEDA8722045149F00260C1E /* SuperParentViewController.swift */,
 				ED9CCA722026189B00EB2F7C /* BeforeOfAllWindowController.swift */,
+				ED4EB331207C3F5E00CFEBEB /* MainWindow.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -945,6 +948,7 @@
 				ED4EB9E6201DB71B00B4CBE7 /* Results+Extensions.swift in Sources */,
 				ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */,
 				ED8CE48A204E69F8002F1A5D /* Variable+Extensions.swift in Sources */,
+				ED4EB332207C3F5E00CFEBEB /* MainWindow.swift in Sources */,
 				ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */,
 				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,
 				ED4EB9E0201DA76000B4CBE7 /* OpenQuicklyTextField.swift in Sources */,

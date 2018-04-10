@@ -27,4 +27,10 @@ extension NSView {
     addConstraints(constraints)
     return constraints
   }
+  
+  func searchSuperviews(_ view: NSView) -> Bool {
+    guard let superview = superview else { return false }
+    if superview == view { return true }
+    return superview.searchSuperviews(view)
+  }
 }

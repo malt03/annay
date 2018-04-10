@@ -22,6 +22,17 @@ final class MarkDownEditorViewController: NSViewController {
   @IBOutlet private weak var editorHidingProgressIndicator: NSProgressIndicator!
   private var webView: WebView!
   private var editorHidingWebView: WebView!
+  
+  private var isFocusEditor: Observable<Bool> {
+    return (view.window as! MainWindow).firstResponderObservable.map { [weak self] (responder) -> Bool in
+      guard let s = self else { return false }
+      if responder == s.webView { return true }
+      if let textView = responder as? NSTextView {
+        return textView.searchSuperviews(s.view)
+      }
+      return false
+    }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,16 +40,6 @@ final class MarkDownEditorViewController: NSViewController {
     prepareWebView()
     prepareEditorHidingWebView()
     
-    Observable.combineLatest(
-      textView.isFirstResponder,
-      webView.isFirstResponder,
-      GeneralPreference.shared.isHideEditorWhenUnfocused.asObservable(),
-      resultSelector: { !$0 && !$1 && $2 }
-    ).subscribe(onNext: { [weak self] (isHideEditor) in
-      guard let s = self else { return }
-      s.editorHidingWebParentView.isHidden = !isHideEditor
-    }).disposed(by: bag)
-
     NodeModel.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
       self?.updateNote(note: node)
     }).disposed(by: bag)
@@ -78,6 +79,18 @@ final class MarkDownEditorViewController: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToEditor), name: .MoveFocusToEditor, object: nil)
+  }
+  
+  override func viewDidAppear() {
+    super.viewDidAppear()
+    Observable.combineLatest(
+      isFocusEditor,
+      GeneralPreference.shared.isHideEditorWhenUnfocused.asObservable(),
+      resultSelector: { !$0 && $1 }
+    ).subscribe(onNext: { [weak self] (isHideEditor) in
+      guard let s = self else { return }
+      s.editorHidingWebParentView.isHidden = !isHideEditor
+    }).disposed(by: bag)
   }
   
   override func viewWillDisappear() {
