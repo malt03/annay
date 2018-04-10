@@ -180,6 +180,14 @@ final class SidebarViewController: NSViewController {
   }
   
   private func reloadWorkspace(_ workspace: WorkspaceModel) {
+    rebindWorkspaceObservables(workspace)
+    
+    outlineView.autosaveName = nil // 一度変更するとautosaveがきちんと効く。謎だけどワークアラウンド
+    outlineView.autosaveName = .Sidebar
+    outlineView.reloadData()
+  }
+  
+  private func rebindWorkspaceObservables(_ workspace: WorkspaceModel) {
     workspaceNameDisposable.disposable = workspace.nameObservable.bind(to: workspaceNameTextField.rx.text)
     workspaceNameEditDisposable.disposable = workspaceNameTextField.rx.text.map { $0 ?? "" }.subscribe(onNext: { [weak self] (name) in
       do {
@@ -216,10 +224,6 @@ final class SidebarViewController: NSViewController {
     workspaceEditedDisposable.disposed(by: bag)
     workspaceUpdatedAtDisposable.disposed(by: bag)
     workspaceDetectChangeDisposable.disposed(by: bag)
-    
-    outlineView.autosaveName = nil // 一度変更するとautosaveがきちんと効く。謎だけどワークアラウンド
-    outlineView.autosaveName = .Sidebar
-    outlineView.reloadData()
   }
   
   @IBAction private func finishSearch(_ sender: NSButton) {

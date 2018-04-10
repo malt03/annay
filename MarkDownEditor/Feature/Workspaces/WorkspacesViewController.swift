@@ -17,6 +17,7 @@ final class WorkspacesViewController: NSViewController {
   
   private var createOrOpenWorkspaceSegment = CreateOrOpenWorkspaceTabViewController.Segment.create
   private var lastSelectionRow: Int?
+  private var selecteSuppression = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,6 +27,9 @@ final class WorkspacesViewController: NSViewController {
     tableView.setDraggingSourceOperationMask([.move], forLocal: true)
     
     WorkspaceModel.observableSpaces.map { $0.map { $0.id } }.distinctUntilChanged().subscribe(onNext: { [weak self] _ in
+      // reloadするときはworkspace.select()をしない。
+      // writabletransaction内であるせいで、realm関連クラッシュがおきるため
+      self?.selecteSuppression = true
       self?.tableView.reloadData()
       DispatchQueue.main.async {
         self?.tableView.selectRowIndexes(IndexSet(integer: WorkspaceModel.selectedIndex), byExtendingSelection: false)
@@ -139,6 +143,10 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
   
   func tableViewSelectionDidChange(_ notification: Notification) {
     defer { lastSelectionRow = tableView.selectedRow }
+    if selecteSuppression {
+      selecteSuppression = false
+      return
+    }
     guard let lastSelectionRow = lastSelectionRow else { return }
     if lastSelectionRow == tableView.selectedRow { return }
     WorkspaceModel.spaces[safe: tableView.selectedRow]?.select()
