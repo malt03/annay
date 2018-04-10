@@ -56,24 +56,26 @@ extension Array where Element == URL {
       let isDirectory = url.isDirectory
       if !isDirectory && !url.isConformsToUTI("public.plain-text") { return nil }
       
-      let node = NodeModel()
-      node.isDirectory = url.isDirectory
-      node.parent = parent
-      node.index = index
-      index += 1
-      
+      let node: NodeModel
       if isDirectory {
-        try node.setDirectoryName(url.name)
-        realm.add(node)
+        node = try NodeModel.createDirectory(name: url.name, parent: parent)
+      } else {
+        guard let parent = parent else { return nil }
+        node = NodeModel.createNote(in: parent)
+        node.setBody(try String(contentsOfFile: url.path))
+      }
+      node.index = index
+      realm.add(node)
+
+      index += 1
+
+      if isDirectory {
         try FileManager.default.contentsOfDirectory(atPath: url.path).map {
           url.appendingPathComponent($0)
         }.createNodes(parent: node, startIndex: 0, realm: realm, workspace: workspace)
-        return node
-      } else {
-        node.setBody(try String(contentsOfFile: url.path))
-        realm.add(node)
-        return node
       }
+      try node.save()
+      return node
     }
   }
 }

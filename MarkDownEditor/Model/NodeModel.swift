@@ -407,6 +407,7 @@ extension NodeModel {
     try Realm.transaction { (realm) in
       let parent = parent ?? root()
       node = create(id: UUID().uuidString, parent: parent, isDirectory: true, realm: realm)
+      node.name = name
       try node.save()
     }
     return node
