@@ -75,6 +75,25 @@
 				</array>
 			</dict>
 		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.folder</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Annay Folder Workspace</string>
+			<key>UTTypeIconFile</key>
+			<string>FolderWorkspaceIcon</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.annay.folderworkspace</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>annayf</string>
+				</array>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>
