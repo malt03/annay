@@ -19,10 +19,12 @@ extension URL {
     return isDirectory.boolValue
   }
   
+  private var workspaceUtis: Set<String> { return ["org.annay.workspace", "org.annay.folderworkspace"] }
+  
   var isWorkspace: Bool {
     if !isDirectory { return false }
-    let uti = (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
-    return uti == "org.annay.workspace"
+    guard let uti = (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier else { return false }
+    return workspaceUtis.contains(uti)
   }
   
   func isEqualIgnoringLastSlash(_ url: URL) -> Bool {

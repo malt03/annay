@@ -43,7 +43,7 @@ final class OpenWorkspaceViewController: NSViewController {
     guard let window = view.window else { return }
     let openPanel = NSOpenPanel()
     openPanel.allowsMultipleSelection = false
-    openPanel.canChooseDirectories = false
+    openPanel.canChooseDirectories = true
     openPanel.canCreateDirectories = false
     openPanel.canChooseFiles = true
     
