@@ -299,13 +299,14 @@ final class NodeModel: Object {
 
 // ノート
 extension NodeModel {
-  func updateCheckbox(content: String, index: Int, isChecked: Bool) {
+  func updateCheckbox(content: String, index: Int, isChecked: Bool) throws {
     if isDirectory { return }
     guard let range = body.ranges(of: content)[safe: index] else { return }
     let from = isChecked ? "[ ]" : "[x]"
     let to = isChecked ? "[x]" : "[ ]"
-    Realm.transaction { _ in
+    try Realm.transaction { _ in
       self.setBody(body.replacingOccurrences(of: from, with: to, options: [], range: range))
+      try self.save()
     }
   }
   
@@ -413,10 +414,24 @@ extension NodeModel {
     return node
   }
   
-  private func updateDirectoryIndexIfNeeded(confirmUpdateNote: ConfirmUpdateNote, realm: Realm) throws {
+  func getDirectoryInfo() throws -> DirectoryInfo {
     try FileManager.default.createDirectoryIfNeeded(url: url)
-    let info = DirectoryInfo(directoryUrl: url)
-    let isNeedUpdate = info.lastUpdatedAt > lastUpdatedAt
+    return DirectoryInfo(directoryUrl: url)
+  }
+  
+  func getDirectoryIsNeedUpdate(info: DirectoryInfo? = nil) throws -> Bool {
+    let tmp: DirectoryInfo
+    if let info = info {
+      tmp = info
+    } else {
+      tmp = try getDirectoryInfo()
+    }
+    return tmp.lastUpdatedAt > lastUpdatedAt
+  }
+  
+  private func updateDirectoryIndexIfNeeded(confirmUpdateNote: ConfirmUpdateNote, realm: Realm) throws {
+    let info = try getDirectoryInfo()
+    let isNeedUpdate = try getDirectoryIsNeedUpdate(info: info)
     if !isNeedUpdate { return }
     lastUpdatedAt = info.lastUpdatedAt
     name = info.name

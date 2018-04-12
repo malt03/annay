@@ -152,8 +152,10 @@ final class WorkspaceModel: Object {
   }
   
   func updateIndex(confirmUpdateNote: NodeModel.ConfirmUpdateNote, realm: Realm) throws {
+    let root = NodeModel.root(for: self, realm: realm)
+    if !(try root.getDirectoryIsNeedUpdate()) { return }
     detectChange.onNext(()) // この行を先にしておかないと、note削除時にクラッシュする
-    try NodeModel.root(for: self, realm: realm).updateIndexIfNeeded(confirmUpdateNote: confirmUpdateNote, realm: realm)
+    try root.updateIndexIfNeeded(confirmUpdateNote: confirmUpdateNote, realm: realm)
   }
   
   var notesUrl: URL {
