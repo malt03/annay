@@ -257,7 +257,7 @@ extension MarkDownEditorViewController: WKScriptMessageHandler {
         let index = dict["index"] as? Int,
         let isChecked = dict["isChecked"] as? Int
         else { return }
-      note.updateCheckbox(content: content, index: index, isChecked: isChecked == 1)
+      alertError { try note.updateCheckbox(content: content, index: index, isChecked: isChecked == 1) }
       updateNote(note: note)
     default: break
     }
