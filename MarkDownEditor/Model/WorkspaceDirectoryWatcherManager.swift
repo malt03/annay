@@ -21,7 +21,7 @@ final class WorkspaceDirectoryWatcherManager {
   
   func prepare(confirm: @escaping NodeModel.ConfirmUpdateNote) {
     self.confirm = confirm
-    WorkspaceModel.observableSpaces.subscribe(onNext: { [weak self] (models) in
+    WorkspaceModel.observableSpaces.distinctUntilChanged({ Set($0.map { $0.id }) == Set($1.map { $0.id }) }).subscribe(onNext: { [weak self] (models) in
       guard let s = self else { return }
       for oldWatcher in s.watchers { oldWatcher.destroy() }
       s.watchers = models.map { WorkspaceDirectoryWatcher(workspace: $0) }
