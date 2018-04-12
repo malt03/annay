@@ -37,8 +37,12 @@ final class WorkspaceModel: Object {
     return Observable.collection(from: nodes.filter("isBodySaved = false")).map { $0.count == 0 }
   }
   
-  static let spaces = Realm.instance.objects(WorkspaceModel.self).sorted(byKeyPath: "index")
+  static let spaces = getSpaces()
   static let observableSpaces = Observable.collection(from: spaces)
+  
+  static func getSpaces() -> Results<WorkspaceModel> {
+    return Realm.instance.objects(WorkspaceModel.self).sorted(byKeyPath: "index")
+  }
   
   static private let selected = Variable(getSelected())
   static var selectedObservable: Observable<WorkspaceModel> { return selected.asObservable() }

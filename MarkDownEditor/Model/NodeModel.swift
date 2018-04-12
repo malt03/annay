@@ -65,6 +65,12 @@ final class NodeModel: Object {
       )
     }
   }
+  
+  static func containsBody(_ body: String, in workspace: WorkspaceModel) -> Bool {
+    return Realm.instance.objects(NodeModel.self)
+      .filter("workspace = %@ and body contains %@", workspace, body)
+      .count > 0
+  }
 
   var url: URL {
     guard let parent = parent else { return workspace!.notesUrl }
