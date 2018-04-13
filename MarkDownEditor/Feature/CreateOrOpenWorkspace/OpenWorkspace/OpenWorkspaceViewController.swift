@@ -47,7 +47,7 @@ final class OpenWorkspaceViewController: NSViewController {
     openPanel.canCreateDirectories = false
     openPanel.canChooseFiles = true
     
-    openPanel.allowedFileTypes = [WorkspaceModel.fileExtension]
+    openPanel.allowedFileTypes = Array(URL.workspaceUtis)
     openPanel.beginSheetModal(for: window) { [weak self] (result) in
       guard let s = self else { return }
       if result != .OK { return }
