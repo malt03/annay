@@ -65,8 +65,8 @@
 		ED55C5132013146F0070301A /* CreateWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C5112013146F0070301A /* CreateWorkspaceViewController.swift */; };
 		ED55C62E203BB51900827140 /* HtmlDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C62D203BB51900827140 /* HtmlDataStore.swift */; };
 		ED55C62F203BB51900827140 /* HtmlDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55C62D203BB51900827140 /* HtmlDataStore.swift */; };
-		ED55CD70207F63C8000AB810 /* WorkspacePreference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55CD6F207F63C8000AB810 /* WorkspacePreference.storyboard */; };
 		ED55CD72207F6930000AB810 /* WorkspacePreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED55CD71207F6930000AB810 /* WorkspacePreferenceViewController.swift */; };
+		ED55CD7320808366000AB810 /* WorkspacePreference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED55CD7520808366000AB810 /* WorkspacePreference.storyboard */; };
 		ED574001202C3F9100D844A3 /* ShortcutPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED574000202C3F9100D844A3 /* ShortcutPreferenceViewController.swift */; };
 		ED574002202D950E00D844A3 /* CreateOrOpenWorkspace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED574004202D950E00D844A3 /* CreateOrOpenWorkspace.storyboard */; };
 		ED574007202D955E00D844A3 /* ShortcutPreference.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED574009202D955E00D844A3 /* ShortcutPreference.storyboard */; };
@@ -242,8 +242,9 @@
 		ED55C5102013125A0070301A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CreateWorkspace.strings; sourceTree = "<group>"; };
 		ED55C5112013146F0070301A /* CreateWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkspaceViewController.swift; sourceTree = "<group>"; };
 		ED55C62D203BB51900827140 /* HtmlDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlDataStore.swift; sourceTree = "<group>"; };
-		ED55CD6F207F63C8000AB810 /* WorkspacePreference.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WorkspacePreference.storyboard; sourceTree = "<group>"; };
 		ED55CD71207F6930000AB810 /* WorkspacePreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePreferenceViewController.swift; sourceTree = "<group>"; };
+		ED55CD7420808366000AB810 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/WorkspacePreference.storyboard; sourceTree = "<group>"; };
+		ED55CD77208083EC000AB810 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/WorkspacePreference.strings; sourceTree = "<group>"; };
 		ED574000202C3F9100D844A3 /* ShortcutPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreferenceViewController.swift; sourceTree = "<group>"; };
 		ED574003202D950E00D844A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CreateOrOpenWorkspace.storyboard; sourceTree = "<group>"; };
 		ED574006202D950F00D844A3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CreateOrOpenWorkspace.strings; sourceTree = "<group>"; };
@@ -526,7 +527,7 @@
 		ED55CD6E207F63B0000AB810 /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
-				ED55CD6F207F63C8000AB810 /* WorkspacePreference.storyboard */,
+				ED55CD7520808366000AB810 /* WorkspacePreference.storyboard */,
 				ED55CD71207F6930000AB810 /* WorkspacePreferenceViewController.swift */,
 			);
 			path = Workspace;
@@ -851,7 +852,7 @@
 				ED2E149A20055650003D55A3 /* markdown-it-footnote.min.js in Resources */,
 				EDD4C748202EBD470029FF4C /* GeneralPreference.storyboard in Resources */,
 				ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */,
-				ED55CD70207F63C8000AB810 /* WorkspacePreference.storyboard in Resources */,
+				ED55CD7320808366000AB810 /* WorkspacePreference.storyboard in Resources */,
 				ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */,
 				EDB8575E207D0D920096651C /* FolderWorkspaceIcon.icns in Resources */,
 				EDB8575C207D048F0096651C /* WorkspaceIcon.icns in Resources */,
@@ -1014,6 +1015,15 @@
 				ED55C5102013125A0070301A /* ja */,
 			);
 			name = CreateWorkspace.storyboard;
+			sourceTree = "<group>";
+		};
+		ED55CD7520808366000AB810 /* WorkspacePreference.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED55CD7420808366000AB810 /* Base */,
+				ED55CD77208083EC000AB810 /* ja */,
+			);
+			name = WorkspacePreference.storyboard;
 			sourceTree = "<group>";
 		};
 		ED574004202D950E00D844A3 /* CreateOrOpenWorkspace.storyboard */ = {

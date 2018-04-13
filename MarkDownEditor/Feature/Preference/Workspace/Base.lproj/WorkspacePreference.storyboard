@@ -69,12 +69,12 @@
                                                         </textField>
                                                         <popUpButton horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Gck-nb-bPs">
                                                             <rect key="frame" x="64" y="-3" width="89" height="26"/>
-                                                            <popUpButtonCell key="cell" type="push" title="Package" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="IUC-QL-GdA" id="NN3-Wt-0Sf">
+                                                            <popUpButtonCell key="cell" type="push" title="Package" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="IUC-QL-GdA" id="NN3-Wt-0Sf">
                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="Lfj-tD-j6P">
                                                                     <items>
-                                                                        <menuItem title="Package" id="IUC-QL-GdA">
+                                                                        <menuItem title="Package" state="on" id="IUC-QL-GdA">
                                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                                         </menuItem>
                                                                         <menuItem title="Folder" id="ac0-ey-mzV">
@@ -130,6 +130,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="fileTypePopUpButton" destination="Gck-nb-bPs" id="gE6-4n-sCA"/>
                         <outlet property="workspacePopUpButton" destination="ccD-UO-iWT" id="G0U-fI-PGu"/>
                     </connections>
                 </viewController>
