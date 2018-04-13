@@ -16,7 +16,6 @@ final class WorkspaceModel: Object {
   private struct Key {
     static let SelectedIndex = "WorkspaceModel/SelectedIndex"
   }
-  static var defaultFileExtension: String { return "annay" }
   
   private let bag = DisposeBag()
   
@@ -38,6 +37,20 @@ final class WorkspaceModel: Object {
     if nameValue == name { return }
     let pathExtension = directoryUrl.pathExtension
     try setDirectoryUrl(directoryUrl.deletingLastPathComponent().appendingPathComponent(name).appendingPathExtension(pathExtension))
+  }
+  
+  var isFolderUrl: Bool {
+    return directoryUrl.isWorkspaceAsFolder
+  }
+  
+  func setIsFolderUrl(_ isFolderUrl: Bool) throws {
+    var url = directoryUrl.deletingPathExtension()
+    if isFolderUrl {
+      url.appendPathExtension(URL.folderWorkspaceExtension)
+    } else {
+      url.appendPathExtension(URL.workspaceExtension)
+    }
+    try setDirectoryUrl(url)
   }
   
   var savedObservable: Observable<Bool> {
@@ -142,7 +155,7 @@ final class WorkspaceModel: Object {
   @discardableResult
   static func create(name: String, parentDirectory: URL, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
     return try create(
-      directoryUrl: parentDirectory.appendingPathComponent(name).appendingPathExtension(WorkspaceModel.defaultFileExtension),
+      directoryUrl: parentDirectory.appendingPathComponent(name).appendingPathExtension(URL.workspaceExtension),
       confirmUpdateNote: confirmUpdateNote
     )
   }
