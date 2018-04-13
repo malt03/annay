@@ -105,9 +105,9 @@
 		EDA736CD200E256D000BC5DA /* MarkDownEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */; };
 		EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */; };
 		EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D4200E3E6A000BC5DA /* SplitView.swift */; };
+		EDAE6A4020808F2E00E7658B /* FolderWorkspaceIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6A3F20808F2E00E7658B /* FolderWorkspaceIcon.icns */; };
+		EDAE6A4220808FA100E7658B /* WorkspaceIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6A4120808FA100E7658B /* WorkspaceIcon.icns */; };
 		EDB601492022C06A00EDF59C /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB601482022C06A00EDF59C /* Application.swift */; };
-		EDB8575C207D048F0096651C /* WorkspaceIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EDB8575B207D048F0096651C /* WorkspaceIcon.icns */; };
-		EDB8575E207D0D920096651C /* FolderWorkspaceIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EDB8575D207D0D920096651C /* FolderWorkspaceIcon.icns */; };
 		EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */; };
 		EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25B2010868C005F3547 /* String+Extensions.swift */; };
 		EDC25C85203BCC9F00C8F38E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDC25C82203BCC9F00C8F38E /* Localizable.strings */; };
@@ -293,9 +293,9 @@
 		EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MarkDownEditor.storyboard; sourceTree = "<group>"; };
 		EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		EDA736D4200E3E6A000BC5DA /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
+		EDAE6A3F20808F2E00E7658B /* FolderWorkspaceIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = FolderWorkspaceIcon.icns; sourceTree = "<group>"; };
+		EDAE6A4120808FA100E7658B /* WorkspaceIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = WorkspaceIcon.icns; sourceTree = "<group>"; };
 		EDB601482022C06A00EDF59C /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
-		EDB8575B207D048F0096651C /* WorkspaceIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = WorkspaceIcon.icns; sourceTree = "<group>"; };
-		EDB8575D207D0D920096651C /* FolderWorkspaceIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = FolderWorkspaceIcon.icns; sourceTree = "<group>"; };
 		EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableCellView.swift; sourceTree = "<group>"; };
 		EDBFF25B2010868C005F3547 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		EDC25C7F203BCC3C00C8F38E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PreviewViewController.strings; sourceTree = "<group>"; };
@@ -621,8 +621,8 @@
 		EDB601472022C05800EDF59C /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				EDB8575D207D0D920096651C /* FolderWorkspaceIcon.icns */,
-				EDB8575B207D048F0096651C /* WorkspaceIcon.icns */,
+				EDAE6A3F20808F2E00E7658B /* FolderWorkspaceIcon.icns */,
+				EDAE6A4120808FA100E7658B /* WorkspaceIcon.icns */,
 				ED57401B202D9D3200D844A3 /* Main.storyboard */,
 				EDEB7A602004EDF000F8C48A /* Launch.storyboard */,
 				EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */,
@@ -854,9 +854,9 @@
 				ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */,
 				ED55CD7320808366000AB810 /* WorkspacePreference.storyboard in Resources */,
 				ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */,
-				EDB8575E207D0D920096651C /* FolderWorkspaceIcon.icns in Resources */,
-				EDB8575C207D048F0096651C /* WorkspaceIcon.icns in Resources */,
+				EDAE6A4220808FA100E7658B /* WorkspaceIcon.icns in Resources */,
 				EDEA58E320442B1B00B1CA66 /* markdown.js in Resources */,
+				EDAE6A4020808F2E00E7658B /* FolderWorkspaceIcon.icns in Resources */,
 				EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */,
 				EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */,
 				ED83F7152036EB350038D96B /* Workspaces.storyboard in Resources */,
