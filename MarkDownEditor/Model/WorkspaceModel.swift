@@ -25,7 +25,13 @@ final class WorkspaceModel: Object {
   @objc dynamic private var index = -1
   @objc dynamic var selectedNode: NodeModel?
   
-  private lazy var nameSubject = BehaviorSubject<String>(value: nameValue)
+  private static var nameSubjects = [String: BehaviorSubject<String>]()
+  private lazy var nameSubject: BehaviorSubject<String> = {
+    if let subject = WorkspaceModel.nameSubjects[id] { return subject }
+    let subject = BehaviorSubject<String>(value: nameValue)
+    WorkspaceModel.nameSubjects[id] = subject
+    return subject
+  }()
   var nameObservable: Observable<String> { return nameSubject }
   var nameValue: String { return directoryUrl.deletingPathExtension().lastPathComponent }
   func setName(_ name: String) throws {
