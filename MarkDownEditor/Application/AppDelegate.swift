@@ -39,6 +39,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     return true
   }
+  
 }
 
 extension AppDelegate {
@@ -59,7 +60,10 @@ extension AppDelegate {
   @IBAction private func deleteNote(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .DeleteNote, object: nil) }
   @IBAction private func deleteNoteImmediately(_ sender: NSMenuItem)    { NotificationCenter.default.post(name: .DeleteNoteImmediately, object: nil) }
   @IBAction private func putBackNote(_ sender: NSMenuItem)              { NotificationCenter.default.post(name: .PutBackNote, object: nil) }
-  @IBAction func emptyTrash(_ sender: NSMenuItem) { NotificationCenter.default.post(name: .EmptyTrash, object: nil) }
+  @IBAction private func emptyTrash(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .EmptyTrash, object: nil) }
+  @IBAction private func actualSize(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .ActualSize, object: nil) }
+  @IBAction private func zoomIn(_ sender: NSMenuItem)                   { NotificationCenter.default.post(name: .ZoomIn, object: nil) }
+  @IBAction private func zoomOut(_ sender: NSMenuItem)                  { NotificationCenter.default.post(name: .ZoomOut, object: nil) }
 
 
   @IBAction private func openQuickly(_ sender: NSMenuItem) {
@@ -108,4 +112,7 @@ extension Notification.Name {
   static let DeleteNoteImmediately = Notification.Name(rawValue: "AppDelegate/DeleteNoteImmediately")
   static let PutBackNote = Notification.Name(rawValue: "AppDelegate/PutBackNote")
   static let EmptyTrash = Notification.Name(rawValue: "AppDelegate/EmptyTrash")
+  static let ActualSize = Notification.Name(rawValue: "AppDelegate/ActualSize")
+  static let ZoomIn = Notification.Name(rawValue: "AppDelegate/ZoomIn")
+  static let ZoomOut = Notification.Name(rawValue: "AppDelegate/ZoomOut")
 }

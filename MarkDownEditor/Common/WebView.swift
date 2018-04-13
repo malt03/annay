@@ -119,6 +119,36 @@ final class WebView: WKWebView {
     if should { _isFirstResponder.value = false }
     return should
   }
+  
+  override func viewDidMoveToWindow() {
+    super.viewDidMoveToWindow()
+    if window != nil {
+      NotificationCenter.default.addObserver(self, selector: #selector(actualSize), name: .ActualSize, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(zoomIn),     name: .ZoomIn,     object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(zoomOut),    name: .ZoomOut,    object: nil)
+    }
+  }
+  
+  override func viewWillMove(toWindow newWindow: NSWindow?) {
+    super.viewWillMove(toWindow: newWindow)
+    if newWindow == nil {
+      NotificationCenter.default.removeObserver(self)
+    }
+  }
+}
+
+extension WebView {
+  @objc private func actualSize() {
+    evaluateJavaScript("actualSize()", completionHandler: nil)
+  }
+  
+  @objc private func zoomIn() {
+    evaluateJavaScript("zoomIn()", completionHandler: nil)
+  }
+  
+  @objc private func zoomOut() {
+    evaluateJavaScript("zoomOut()", completionHandler: nil)
+  }
 }
 
 extension WebView: WKNavigationDelegate {

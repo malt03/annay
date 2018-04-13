@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14105" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHw-0N-ZGZ">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHw-0N-ZGZ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14105"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -212,6 +212,28 @@ CA
                                         <menuItem title="Select All" keyEquivalent="a" id="Ruw-6m-B2m">
                                             <connections>
                                                 <action selector="selectAll:" target="Ady-hI-5gd" id="VNm-Mi-diN"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="View" id="hhF-kb-Nhc">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="View" id="HNV-BJ-ft6">
+                                    <items>
+                                        <menuItem title="Actual Size" keyEquivalent="0" id="Nx7-gn-EOc">
+                                            <connections>
+                                                <action selector="actualSize:" target="Voe-Tx-rLC" id="RvW-CF-AjF"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom In" keyEquivalent="+" id="dfj-HK-eov">
+                                            <connections>
+                                                <action selector="zoomIn:" target="Voe-Tx-rLC" id="5aa-op-1q8"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom Out" keyEquivalent="-" id="P8h-PK-Ywu">
+                                            <connections>
+                                                <action selector="zoomOut:" target="Voe-Tx-rLC" id="exf-WN-xvk"/>
                                             </connections>
                                         </menuItem>
                                     </items>
