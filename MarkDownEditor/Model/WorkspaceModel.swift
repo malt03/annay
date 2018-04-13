@@ -122,7 +122,9 @@ final class WorkspaceModel: Object {
   private(set) var directoryUrl: URL {
     get { return URL(fileURLWithPath: directoryPath) }
     set {
-      directoryPath = newValue.path
+      Realm.transaction { _ in
+        self.directoryPath = newValue.path
+      }
       nameSubject.onNext(nameValue)
       directoryUrlSubject.onNext(newValue)
     }
@@ -171,6 +173,6 @@ final class WorkspaceModel: Object {
     CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: nodeIds)
   }
   
-  override class func primaryKey() -> String? { return "directoryPath" }
+  override class func primaryKey() -> String? { return "id" }
   override class func ignoredProperties() -> [String] { return ["nameSubject", "directoryUrlSubject"] }
 }
