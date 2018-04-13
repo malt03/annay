@@ -107,6 +107,11 @@
 		EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D4200E3E6A000BC5DA /* SplitView.swift */; };
 		EDAE6A4020808F2E00E7658B /* FolderWorkspaceIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6A3F20808F2E00E7658B /* FolderWorkspaceIcon.icns */; };
 		EDAE6A4220808FA100E7658B /* WorkspaceIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6A4120808FA100E7658B /* WorkspaceIcon.icns */; };
+		EDAE6A9E20809CEE00E7658B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE6A9D20809CEE00E7658B /* AppDelegate.swift */; };
+		EDAE6AA020809CEE00E7658B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE6A9F20809CEE00E7658B /* ViewController.swift */; };
+		EDAE6AA320809CEE00E7658B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6AA120809CEE00E7658B /* Main.storyboard */; };
+		EDAE6AA520809CEF00E7658B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6AA420809CEF00E7658B /* Assets.xcassets */; };
+		EDAE6AA820809CEF00E7658B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6AA620809CEF00E7658B /* LaunchScreen.storyboard */; };
 		EDB601492022C06A00EDF59C /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB601482022C06A00EDF59C /* Application.swift */; };
 		EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */; };
 		EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25B2010868C005F3547 /* String+Extensions.swift */; };
@@ -295,6 +300,13 @@
 		EDA736D4200E3E6A000BC5DA /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
 		EDAE6A3F20808F2E00E7658B /* FolderWorkspaceIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = FolderWorkspaceIcon.icns; sourceTree = "<group>"; };
 		EDAE6A4120808FA100E7658B /* WorkspaceIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = WorkspaceIcon.icns; sourceTree = "<group>"; };
+		EDAE6A9B20809CEE00E7658B /* Annay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Annay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDAE6A9D20809CEE00E7658B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EDAE6A9F20809CEE00E7658B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EDAE6AA220809CEE00E7658B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EDAE6AA420809CEF00E7658B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EDAE6AA720809CEF00E7658B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EDAE6AA920809CEF00E7658B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDB601482022C06A00EDF59C /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableCellView.swift; sourceTree = "<group>"; };
 		EDBFF25B2010868C005F3547 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -341,6 +353,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EDAE6A9820809CEE00E7658B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDD4CA68203BB331003F8072 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -618,6 +637,19 @@
 			path = Preference;
 			sourceTree = "<group>";
 		};
+		EDAE6A9C20809CEE00E7658B /* MarkDownEditor-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				EDAE6A9D20809CEE00E7658B /* AppDelegate.swift */,
+				EDAE6A9F20809CEE00E7658B /* ViewController.swift */,
+				EDAE6AA120809CEE00E7658B /* Main.storyboard */,
+				EDAE6AA420809CEF00E7658B /* Assets.xcassets */,
+				EDAE6AA620809CEF00E7658B /* LaunchScreen.storyboard */,
+				EDAE6AA920809CEF00E7658B /* Info.plist */,
+			);
+			path = "MarkDownEditor-iOS";
+			sourceTree = "<group>";
+		};
 		EDB601472022C05800EDF59C /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -692,6 +724,7 @@
 				ED55C62C203BB50400827140 /* Shared */,
 				EDEB7A592004EDF000F8C48A /* MarkDownEditor */,
 				EDD4CA6E203BB331003F8072 /* MarkDownEditorPreviewExtension */,
+				EDAE6A9C20809CEE00E7658B /* MarkDownEditor-iOS */,
 				EDEB7A582004EDF000F8C48A /* Products */,
 				EDDED73A20051B880079F3D0 /* Frameworks */,
 			);
@@ -702,6 +735,7 @@
 			children = (
 				EDEB7A572004EDF000F8C48A /* Annay.app */,
 				EDD4CA6B203BB331003F8072 /* AnnayPreviewExtension.appex */,
+				EDAE6A9B20809CEE00E7658B /* Annay.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -742,6 +776,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EDAE6A9A20809CEE00E7658B /* Annay-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDAE6AAC20809CEF00E7658B /* Build configuration list for PBXNativeTarget "Annay-iOS" */;
+			buildPhases = (
+				EDAE6A9720809CEE00E7658B /* Sources */,
+				EDAE6A9820809CEE00E7658B /* Frameworks */,
+				EDAE6A9920809CEE00E7658B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Annay-iOS";
+			productName = "MarkDownEditor-iOS";
+			productReference = EDAE6A9B20809CEE00E7658B /* Annay.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EDD4CA6A203BB331003F8072 /* AnnayPreviewExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EDD4CA7B203BB331003F8072 /* Build configuration list for PBXNativeTarget "AnnayPreviewExtension" */;
@@ -785,10 +836,14 @@
 		EDEB7A4F2004EDF000F8C48A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Koji Murata";
 				TargetAttributes = {
+					EDAE6A9A20809CEE00E7658B = {
+						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Manual;
+					};
 					EDD4CA6A203BB331003F8072 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -832,11 +887,22 @@
 			targets = (
 				EDEB7A562004EDF000F8C48A /* Annay */,
 				EDD4CA6A203BB331003F8072 /* AnnayPreviewExtension */,
+				EDAE6A9A20809CEE00E7658B /* Annay-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EDAE6A9920809CEE00E7658B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDAE6AA820809CEF00E7658B /* LaunchScreen.storyboard in Resources */,
+				EDAE6AA520809CEF00E7658B /* Assets.xcassets in Resources */,
+				EDAE6AA320809CEE00E7658B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDD4CA69203BB331003F8072 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -887,6 +953,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EDAE6A9720809CEE00E7658B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDAE6AA020809CEE00E7658B /* ViewController.swift in Sources */,
+				EDAE6A9E20809CEE00E7658B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EDD4CA67203BB331003F8072 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1098,6 +1173,22 @@
 			name = Sidebar.storyboard;
 			sourceTree = "<group>";
 		};
+		EDAE6AA120809CEE00E7658B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDAE6AA220809CEE00E7658B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EDAE6AA620809CEF00E7658B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDAE6AA720809CEF00E7658B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		EDC25C82203BCC9F00C8F38E /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1137,6 +1228,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EDAE6AAA20809CEF00E7658B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 582LEGWZJK;
+				INFOPLIST_FILE = "MarkDownEditor-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
+				PRODUCT_NAME = Annay;
+				PROVISIONING_PROFILE = "0ddf0cc6-e7aa-4fe3-a221-4accbcd3aef8";
+				PROVISIONING_PROFILE_SPECIFIER = "ent-*";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EDAE6AAB20809CEF00E7658B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "MarkDownEditor-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
+				PRODUCT_NAME = Annay;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		EDD4CA79203BB331003F8072 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1335,6 +1468,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EDAE6AAC20809CEF00E7658B /* Build configuration list for PBXNativeTarget "Annay-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDAE6AAA20809CEF00E7658B /* Debug */,
+				EDAE6AAB20809CEF00E7658B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EDD4CA7B203BB331003F8072 /* Build configuration list for PBXNativeTarget "AnnayPreviewExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
