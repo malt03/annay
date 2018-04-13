@@ -83,11 +83,11 @@ final class WorkspaceModel: Object {
   }
   
   static func reloadSelected() {
-    getSelected().select()
+    getSelected().select(force: true)
   }
   
-  func select() {
-    if WorkspaceModel.selectedIndex != WorkspaceModel.spaces.index(of: self) {
+  func select(force: Bool = false) {
+    if force || WorkspaceModel.selectedIndex != WorkspaceModel.spaces.index(of: self) {
       WorkspaceModel.selectedIndex = WorkspaceModel.spaces.index(of: self) ?? 0
     }
   }
