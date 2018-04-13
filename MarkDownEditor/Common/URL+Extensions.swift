@@ -19,11 +19,19 @@ extension URL {
     return isDirectory.boolValue
   }
   
-  static var workspaceUtis: Set<String> { return ["org.annay.workspace", "org.annay.folderworkspace"] }
+  static private var workspaceUti = "org.annay.workspace"
+  static private var folderWorkspaceUti = "org.annay.folderworkspace"
+  static var workspaceUtis: Set<String> { return [workspaceUti, folderWorkspaceUti] }
+  
+  static var workspaceExtension: String { return "annay" }
+  static var folderWorkspaceExtension: String { return "annayf" }
+  
+  var isWorkspaceAsFolder: Bool {
+    return uti == URL.folderWorkspaceUti
+  }
   
   var isWorkspace: Bool {
     if !isDirectory { return false }
-    guard let uti = (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier else { return false }
     return URL.workspaceUtis.contains(uti)
   }
   
@@ -47,12 +55,12 @@ extension URL {
     return appendingPathComponent("resource", isDirectory: true)
   }
   
-  var uti: CFString {
-    return ((try? resourceValues(forKeys: [.typeIdentifierKey]).typeIdentifier ?? "") ?? "") as CFString
+  var uti: String {
+    return ((try? resourceValues(forKeys: [.typeIdentifierKey]).typeIdentifier ?? "") ?? "")
   }
   
   func isConformsToUTI(_ uti: String) -> Bool {
-    return UTTypeConformsTo(self.uti, uti as CFString)
+    return UTTypeConformsTo(self.uti as CFString, uti as CFString)
   }
   
   var infoFile: URL { return appendingPathComponent("info.json") }

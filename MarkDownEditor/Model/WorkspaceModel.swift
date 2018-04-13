@@ -16,7 +16,6 @@ final class WorkspaceModel: Object {
   private struct Key {
     static let SelectedIndex = "WorkspaceModel/SelectedIndex"
   }
-  static var defaultFileExtension: String { return "annay" }
   
   private let bag = DisposeBag()
   
@@ -38,6 +37,20 @@ final class WorkspaceModel: Object {
     if nameValue == name { return }
     let pathExtension = directoryUrl.pathExtension
     try setDirectoryUrl(directoryUrl.deletingLastPathComponent().appendingPathComponent(name).appendingPathExtension(pathExtension))
+  }
+  
+  var isFolderUrl: Bool {
+    return directoryUrl.isWorkspaceAsFolder
+  }
+  
+  func setIsFolderUrl(_ isFolderUrl: Bool) throws {
+    var url = directoryUrl.deletingPathExtension()
+    if isFolderUrl {
+      url.appendPathExtension(URL.folderWorkspaceExtension)
+    } else {
+      url.appendPathExtension(URL.workspaceExtension)
+    }
+    try setDirectoryUrl(url)
   }
   
   var savedObservable: Observable<Bool> {
@@ -104,7 +117,13 @@ final class WorkspaceModel: Object {
     if spaces.count == 0 { try createDefault() }
   }
   
-  private lazy var directoryUrlSubject = BehaviorSubject<URL>(value: directoryUrl)
+  private static var directoryUrlSubjects = [String: BehaviorSubject<URL>]()
+  private lazy var directoryUrlSubject: BehaviorSubject<URL> = {
+    if let subject = WorkspaceModel.directoryUrlSubjects[id] { return subject }
+    let subject = BehaviorSubject<URL>(value: directoryUrl)
+    WorkspaceModel.directoryUrlSubjects[id] = subject
+    return subject
+  }()
   var directoryUrlObservable: Observable<URL> { return directoryUrlSubject }
   
   func setDirectoryUrl(_ url: URL) throws {
@@ -142,7 +161,7 @@ final class WorkspaceModel: Object {
   @discardableResult
   static func create(name: String, parentDirectory: URL, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
     return try create(
-      directoryUrl: parentDirectory.appendingPathComponent(name).appendingPathExtension(WorkspaceModel.defaultFileExtension),
+      directoryUrl: parentDirectory.appendingPathComponent(name).appendingPathExtension(URL.workspaceExtension),
       confirmUpdateNote: confirmUpdateNote
     )
   }
