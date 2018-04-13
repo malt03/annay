@@ -117,7 +117,13 @@ final class WorkspaceModel: Object {
     if spaces.count == 0 { try createDefault() }
   }
   
-  private lazy var directoryUrlSubject = BehaviorSubject<URL>(value: directoryUrl)
+  private static var directoryUrlSubjects = [String: BehaviorSubject<URL>]()
+  private lazy var directoryUrlSubject: BehaviorSubject<URL> = {
+    if let subject = WorkspaceModel.directoryUrlSubjects[id] { return subject }
+    let subject = BehaviorSubject<URL>(value: directoryUrl)
+    WorkspaceModel.directoryUrlSubjects[id] = subject
+    return subject
+  }()
   var directoryUrlObservable: Observable<URL> { return directoryUrlSubject }
   
   func setDirectoryUrl(_ url: URL) throws {
