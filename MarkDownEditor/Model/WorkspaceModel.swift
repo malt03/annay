@@ -187,9 +187,13 @@ final class WorkspaceModel: Object {
   
   func updateIndex(confirmUpdateNote: NodeModel.ConfirmUpdateNote, realm: Realm) throws {
     let root = NodeModel.root(for: self, realm: realm)
-    if !(try root.getDirectoryIsNeedUpdate()) { return }
-    detectChange.onNext(()) // この行を先にしておかないと、note削除時にクラッシュする
-    try root.updateIndexIfNeeded(confirmUpdateNote: confirmUpdateNote, realm: realm)
+    if !FileManager.default.fileExists(atPath: root.url.path) {
+      try NodeModel.saveAll(for: self)
+    } else {
+      if !(try root.getDirectoryIsNeedUpdate()) { return }
+      detectChange.onNext(()) // この行を先にしておかないと、note削除時にクラッシュする
+      try root.updateIndexIfNeeded(confirmUpdateNote: confirmUpdateNote, realm: realm)
+    }
   }
   
   var notesUrl: URL {
