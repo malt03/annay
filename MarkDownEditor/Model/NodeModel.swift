@@ -114,6 +114,12 @@ final class NodeModel: Object {
     }
   }
   
+  static func saveAll(for workspace: WorkspaceModel) throws {
+    for note in Realm.instance.objects(NodeModel.self).filter("workspace = %@", workspace) {
+      try note.save()
+    }
+  }
+  
   static var deleted: Results<NodeModel> {
     return Realm.instance.objects(NodeModel.self)
       .filter("isDeleted = true and workspace = %@ and index >= 0", WorkspaceModel.selectedValue)

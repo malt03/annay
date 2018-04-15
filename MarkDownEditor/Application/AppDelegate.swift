@@ -83,7 +83,7 @@ extension AppDelegate {
   @IBAction private func saveAllNotes(_ sender: NSMenuItem) {
     Realm.transaction { _ in
       alertError {
-        for note in NodeModel.unsaved { try note.save() }
+        try NodeModel.saveAll(for: WorkspaceModel.selectedValue)
       }
     }
   }
