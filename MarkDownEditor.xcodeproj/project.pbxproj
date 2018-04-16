@@ -78,6 +78,8 @@
 		ED598C59201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */; };
 		ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */; };
 		ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */; };
+		ED5E97A22084F2DD00C71ED5 /* fileIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = ED5E97A02084F2DD00C71ED5 /* fileIcon.icns */; };
+		ED5E97A32084F2DD00C71ED5 /* dirIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = ED5E97A12084F2DD00C71ED5 /* dirIcon.icns */; };
 		ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710037204E16E90030CDFB /* PreferenceManager.swift */; };
 		ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */; };
 		ED83F7152036EB350038D96B /* Workspaces.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED83F7172036EB350038D96B /* Workspaces.storyboard */; };
@@ -105,8 +107,6 @@
 		EDA736CD200E256D000BC5DA /* MarkDownEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */; };
 		EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */; };
 		EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D4200E3E6A000BC5DA /* SplitView.swift */; };
-		EDAE6A4020808F2E00E7658B /* FolderWorkspaceIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6A3F20808F2E00E7658B /* FolderWorkspaceIcon.icns */; };
-		EDAE6A4220808FA100E7658B /* WorkspaceIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6A4120808FA100E7658B /* WorkspaceIcon.icns */; };
 		EDAE6A9E20809CEE00E7658B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE6A9D20809CEE00E7658B /* AppDelegate.swift */; };
 		EDAE6AA020809CEE00E7658B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE6A9F20809CEE00E7658B /* ViewController.swift */; };
 		EDAE6AA320809CEE00E7658B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6AA120809CEE00E7658B /* Main.storyboard */; };
@@ -267,6 +267,8 @@
 		ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDirectoryWatcherManager.swift; sourceTree = "<group>"; };
 		ED59FDAD20132B8B0085D9F5 /* Collection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extensions.swift"; sourceTree = "<group>"; };
 		ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
+		ED5E97A02084F2DD00C71ED5 /* fileIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fileIcon.icns; sourceTree = "<group>"; };
+		ED5E97A12084F2DD00C71ED5 /* dirIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dirIcon.icns; sourceTree = "<group>"; };
 		ED710037204E16E90030CDFB /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
 		ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
 		ED83F7142036E7290038D96B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = MarkDownEditor/ja.lproj/Sidebar.strings; sourceTree = "<group>"; };
@@ -298,8 +300,6 @@
 		EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MarkDownEditor.storyboard; sourceTree = "<group>"; };
 		EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		EDA736D4200E3E6A000BC5DA /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
-		EDAE6A3F20808F2E00E7658B /* FolderWorkspaceIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = FolderWorkspaceIcon.icns; sourceTree = "<group>"; };
-		EDAE6A4120808FA100E7658B /* WorkspaceIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = WorkspaceIcon.icns; sourceTree = "<group>"; };
 		EDAE6A9B20809CEE00E7658B /* Annay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Annay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDAE6A9D20809CEE00E7658B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDAE6A9F20809CEE00E7658B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -653,8 +653,8 @@
 		EDB601472022C05800EDF59C /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				EDAE6A3F20808F2E00E7658B /* FolderWorkspaceIcon.icns */,
-				EDAE6A4120808FA100E7658B /* WorkspaceIcon.icns */,
+				ED5E97A12084F2DD00C71ED5 /* dirIcon.icns */,
+				ED5E97A02084F2DD00C71ED5 /* fileIcon.icns */,
 				ED57401B202D9D3200D844A3 /* Main.storyboard */,
 				EDEB7A602004EDF000F8C48A /* Launch.storyboard */,
 				EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */,
@@ -920,9 +920,7 @@
 				ED2E149220055548003D55A3 /* markdown-it-task-checkbox.min.js in Resources */,
 				ED55CD7320808366000AB810 /* WorkspacePreference.storyboard in Resources */,
 				ED55C4FE200E56F10070301A /* Preference.storyboard in Resources */,
-				EDAE6A4220808FA100E7658B /* WorkspaceIcon.icns in Resources */,
 				EDEA58E320442B1B00B1CA66 /* markdown.js in Resources */,
-				EDAE6A4020808F2E00E7658B /* FolderWorkspaceIcon.icns in Resources */,
 				EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */,
 				EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */,
 				ED83F7152036EB350038D96B /* Workspaces.storyboard in Resources */,
@@ -932,6 +930,7 @@
 				ED2E149C2005575A003D55A3 /* markdown-it-emoji.min.js in Resources */,
 				EDEA58E220442B1700B1CA66 /* markdown.html in Resources */,
 				ED2E1496200555A5003D55A3 /* markdown-it-sub.min.js in Resources */,
+				ED5E97A32084F2DD00C71ED5 /* dirIcon.icns in Resources */,
 				EDA736CD200E256D000BC5DA /* MarkDownEditor.storyboard in Resources */,
 				ED9EEEE2201F639B00C96CC1 /* OpenWorkspace.storyboard in Resources */,
 				EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */,
@@ -946,6 +945,7 @@
 				EDC25C85203BCC9F00C8F38E /* Localizable.strings in Resources */,
 				ED574010202D97C100D844A3 /* NewOrOpenNoteShortcutPreference.storyboard in Resources */,
 				ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */,
+				ED5E97A22084F2DD00C71ED5 /* fileIcon.icns in Resources */,
 				ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
