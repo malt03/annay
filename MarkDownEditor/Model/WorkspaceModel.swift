@@ -171,7 +171,8 @@ final class WorkspaceModel: Object {
   @discardableResult
   static func create(directoryUrl: URL, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
     let workspace: WorkspaceModel
-    if let saved = Realm.instance.object(ofType: WorkspaceModel.self, forPrimaryKey: directoryUrl.path) {
+    
+    if let saved = Realm.instance.objects(WorkspaceModel.self).filter("directoryPath = %@", directoryUrl.path).first {
       workspace = saved
     } else {
       workspace = WorkspaceModel()
