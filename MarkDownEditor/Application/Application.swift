@@ -40,8 +40,8 @@ final class Application: NSApplication, NSFontChanging {
   }
 
   func changeFont(_ sender: NSFontManager?) {
-    guard let manager = sender as? NSFontManager else { return }
-    GeneralPreference.shared.convert(with: manager)
+    guard let sender = sender else { return }
+    GeneralPreference.shared.convert(with: sender)
   }
   
   private var workspaceMenus = [NSMenuItem]()

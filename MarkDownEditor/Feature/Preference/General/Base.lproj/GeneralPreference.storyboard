@@ -130,8 +130,8 @@
                                                         </connections>
                                                     </button>
                                                     <button verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="we0-vl-f4g">
-                                                        <rect key="frame" x="-6" y="-7" width="180" height="32"/>
-                                                        <buttonCell key="cell" type="push" title="Reset default Style Sheets" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9n2-6C-ix2">
+                                                        <rect key="frame" x="24" y="-7" width="150" height="32"/>
+                                                        <buttonCell key="cell" type="push" title="Reset default CSS" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9n2-6C-ix2">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>

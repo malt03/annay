@@ -72,23 +72,3 @@ final class ShortcutPreferenceNodeParameters: NSObject, Codable {
     Application.shared.activate(ignoringOtherApps: true)
   }
 }
-
-extension KeyCombo: Codable {
-  private enum CodingKeys: CodingKey {
-    case keyCode
-    case modifiers
-  }
-  
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(keyCode, forKey: .keyCode)
-    try container.encode(modifiers, forKey: .modifiers)
-  }
-  
-  public convenience init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    let keyCode = try container.decode(Int.self, forKey: .keyCode)
-    let modifiers = try container.decode(Int.self, forKey: .modifiers)
-    self.init(keyCode: keyCode, carbonModifiers: modifiers)!
-  }
-}
