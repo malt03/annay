@@ -15,15 +15,6 @@ final class NodeTableCellView: NSTableCellView {
   private let bag = DisposeBag()
   private let nodeDisposable = SerialDisposable()
   
-  override func draw(_ dirtyRect: NSRect) {
-    super.draw(dirtyRect)
-    if inPreference { return }
-
-    guard let row = superview as? NodeTableRowView else { return }
-    row.fillColor.setFill()
-    dirtyRect.fill()
-  }
-  
   @IBOutlet private weak var editedView: BackgroundSetableView?
   
   private var node: NodeModel!

@@ -94,7 +94,6 @@
 		ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD42009CC0C0097996A /* KeyCode.swift */; };
 		ED841BD8200B256B0097996A /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD7200B256B0097996A /* WindowController.swift */; };
 		ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED841BD9200B2FD10097996A /* Colors.xcassets */; };
-		ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */; };
 		ED8CE48A204E69F8002F1A5D /* Variable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */; };
 		ED8CE48C204E7291002F1A5D /* CodableFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE48B204E7291002F1A5D /* CodableFont.swift */; };
 		ED8CE48E204E7773002F1A5D /* GeneralPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */; };
@@ -286,7 +285,6 @@
 		ED841BD42009CC0C0097996A /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		ED841BD7200B256B0097996A /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		ED841BD9200B2FD10097996A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableRowView.swift; sourceTree = "<group>"; };
 		ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Variable+Extensions.swift"; sourceTree = "<group>"; };
 		ED8CE48B204E7291002F1A5D /* CodableFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFont.swift; sourceTree = "<group>"; };
 		ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreference.swift; sourceTree = "<group>"; };
@@ -606,7 +604,6 @@
 				EDA736C8200E24F8000BC5DA /* Sidebar.storyboard */,
 				ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */,
 				ED841BD02008EC2B0097996A /* NodeTableCellView.swift */,
-				ED841BDD200B6D5B0097996A /* NodeTableRowView.swift */,
 				ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */,
 			);
 			path = Sidebar;
@@ -846,7 +843,7 @@
 					};
 					EDD4CA6A203BB331003F8072 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
 								enabled = 1;
@@ -859,7 +856,7 @@
 					EDEB7A562004EDF000F8C48A = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
 								enabled = 1;
@@ -1008,7 +1005,6 @@
 				EDD93C4B20578ACC00CA6627 /* StyleSheetManager.swift in Sources */,
 				EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */,
 				EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */,
-				ED841BDE200B6D5B0097996A /* NodeTableRowView.swift in Sources */,
 				ED19084B201F6EC0009497EE /* ContainerView.swift in Sources */,
 				ED2DEB5F206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift in Sources */,
 				ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */,
@@ -1274,11 +1270,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = MarkDownEditorPreviewExtension/MarkDownEditorPreviewExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 8AKT7PFJ2M;
 				INFOPLIST_FILE = MarkDownEditorPreviewExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.annay.PreviewExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = AnnayPreviewExtensionDevelopment;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 			};
@@ -1288,11 +1287,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = MarkDownEditorPreviewExtension/MarkDownEditorPreviewExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 8AKT7PFJ2M;
 				INFOPLIST_FILE = MarkDownEditorPreviewExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.annay.PreviewExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = AnnayPreviewExtensionDistribution;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 			};
@@ -1417,8 +1419,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MarkDownEditor/MarkDownEditor.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8AKT7PFJ2M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -1432,6 +1436,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = AnnayDevelopment;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -1445,8 +1450,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MarkDownEditor/MarkDownEditor.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8AKT7PFJ2M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -1460,6 +1467,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = AnnayDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 			};

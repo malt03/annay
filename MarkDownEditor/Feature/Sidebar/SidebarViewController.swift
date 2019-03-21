@@ -532,10 +532,6 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     return nodeCell
   }
   
-  func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
-    return NodeTableRowView()
-  }
-  
   func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
     let node = item as! NodeModel
     return node.isRoot && !node.isDeleted
