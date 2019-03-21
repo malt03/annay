@@ -55,7 +55,6 @@ final class WebView: WKWebView {
     try! FileManager.default.createDirectory(at: baseDirectory, withIntermediateDirectories: true, attributes: nil)
     
     let scriptNames = [
-      "highlight.pack.js",
       "jquery.min.js",
       "markdown-it.min.js",
       "markdown-it-task-checkbox.min.js",
@@ -66,20 +65,20 @@ final class WebView: WKWebView {
       "markdown.js",
     ]
     
-    for name in scriptNames {
-      try! FileManager.default.copyItem(at: Bundle.main.url(forResource: name, withExtension: nil)!, to: baseDirectory.appendingPathComponent(name))
-    }
-
     StyleSheetManager.shared.selected.asObservable().subscribe(onNext: { [weak self] (styleSheet) in
       guard let s = self else { return }
       let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
       let styleHighlight = Bundle.main.url(forResource: "monokai-sublime", withExtension: "css")!
-      let html = try! String(contentsOf: url)
+      var html = try! String(contentsOf: url)
         .replacingOccurrences(of: "{{style-highlight}}", with: try! String(contentsOf: styleHighlight))
         .replacingOccurrences(of: "{{style}}", with: styleSheet.css)
-      try! html.write(to: s.htmlFileUrl, atomically: false, encoding: .utf8)
+      
+      for scriptName in scriptNames {
+        let script = try! String(contentsOf: Bundle.main.url(forResource: scriptName, withExtension: nil)!)
+        html = html.replacingOccurrences(of: "{{\(scriptName)}}", with: script)
+      }
       s.firstNavigation = true
-      s.loadFileURL(s.htmlFileUrl, allowingReadAccessTo: URL(fileURLWithPath: "/"))
+      s.loadHTMLString(html, baseURL: s.baseDirectory)
     }).disposed(by: bag)
   }
   
@@ -165,6 +164,14 @@ extension WebView: WKNavigationDelegate {
     default:
       decisionHandler(.allow)
     }
+  }
+  
+  func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+    print(error)
+  }
+  
+  func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    print(error.localizedDescription)
   }
   
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
