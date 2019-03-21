@@ -31,7 +31,7 @@ final class GeneralPreferenceViewController: NSViewController {
     }).disposed(by: bag)
     
     StyleSheetManager.shared.selected.asObservable().subscribe(onNext: { [weak self] (styleSheet) in
-      guard let s = self, let styleSheet = styleSheet else { return }
+      guard let s = self else { return }
       s.styleSheetPopupButton.selectItem(withTitle: styleSheet.name)
     }).disposed(by: bag)
     
@@ -56,7 +56,7 @@ final class GeneralPreferenceViewController: NSViewController {
     alert.addButton(withTitle: Localized("Reset"))
     let response = alert.runModal()
     if response == .alertSecondButtonReturn {
-      StyleSheetManager.createDefaultCss()
+      StyleSheetManager.createDefaultCsses(force: true)
     }
   }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		ED099FFF201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */; };
 		ED157E29224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED157E28224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift */; };
+		ED157E2B224385FF00A56E19 /* light.css in Resources */ = {isa = PBXBuildFile; fileRef = ED157E2A224385FF00A56E19 /* light.css */; };
 		ED187FD420053206002E51C0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED187FD320053206002E51C0 /* WebView.swift */; };
 		ED19084B201F6EC0009497EE /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19084A201F6EC0009497EE /* ContainerView.swift */; };
 		ED2DEB16206B4148008E5F1E /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB13206B4147008E5F1E /* NodeModel.swift */; };
@@ -51,7 +52,7 @@
 		ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */; };
 		ED47CC8D201EFBED0052D6EF /* WorkspaceNameFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED47CC8C201EFBED0052D6EF /* WorkspaceNameFormatter.swift */; };
 		ED4EB332207C3F5E00CFEBEB /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB331207C3F5E00CFEBEB /* MainWindow.swift */; };
-		ED4EB9D2201C814100B4CBE7 /* swiss.css in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D1201C803800B4CBE7 /* swiss.css */; };
+		ED4EB9D2201C814100B4CBE7 /* dark.css in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D1201C803800B4CBE7 /* dark.css */; };
 		ED4EB9D7201D61E200B4CBE7 /* OpenQuickly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */; };
 		ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */; };
 		ED4EB9E0201DA76000B4CBE7 /* OpenQuicklyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4EB9DF201DA76000B4CBE7 /* OpenQuicklyTextField.swift */; };
@@ -193,6 +194,7 @@
 /* Begin PBXFileReference section */
 		ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableCellView.swift; sourceTree = "<group>"; };
 		ED157E28224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableRowView.swift; sourceTree = "<group>"; };
+		ED157E2A224385FF00A56E19 /* light.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = light.css; sourceTree = "<group>"; };
 		ED187FD120052D30002E51C0 /* markdown.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = markdown.html; sourceTree = "<group>"; };
 		ED187FD320053206002E51C0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ED19084A201F6EC0009497EE /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -229,7 +231,7 @@
 		ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDownEditorError.swift; sourceTree = "<group>"; };
 		ED47CC8C201EFBED0052D6EF /* WorkspaceNameFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceNameFormatter.swift; sourceTree = "<group>"; };
 		ED4EB331207C3F5E00CFEBEB /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
-		ED4EB9D1201C803800B4CBE7 /* swiss.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = swiss.css; sourceTree = "<group>"; };
+		ED4EB9D1201C803800B4CBE7 /* dark.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = dark.css; sourceTree = "<group>"; };
 		ED4EB9D6201D61E200B4CBE7 /* OpenQuickly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenQuickly.storyboard; sourceTree = "<group>"; };
 		ED4EB9DA201D650D00B4CBE7 /* OpenQuicklyWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyWindowController.swift; sourceTree = "<group>"; };
 		ED4EB9DF201DA76000B4CBE7 /* OpenQuicklyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyTextField.swift; sourceTree = "<group>"; };
@@ -425,7 +427,8 @@
 				ED840D2C201A364600EF2C42 /* jquery.min.js */,
 				ED2E159A20056621003D55A3 /* markdown.js */,
 				ED187FD120052D30002E51C0 /* markdown.html */,
-				ED4EB9D1201C803800B4CBE7 /* swiss.css */,
+				ED4EB9D1201C803800B4CBE7 /* dark.css */,
+				ED157E2A224385FF00A56E19 /* light.css */,
 			);
 			path = WebPage;
 			sourceTree = "<group>";
@@ -915,10 +918,11 @@
 				ED9EEEE2201F639B00C96CC1 /* OpenWorkspace.storyboard in Resources */,
 				EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */,
 				ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */,
-				ED4EB9D2201C814100B4CBE7 /* swiss.css in Resources */,
+				ED4EB9D2201C814100B4CBE7 /* dark.css in Resources */,
 				ED574002202D950E00D844A3 /* CreateOrOpenWorkspace.storyboard in Resources */,
 				ED574007202D955E00D844A3 /* ShortcutPreference.storyboard in Resources */,
 				ED4EB9D7201D61E200B4CBE7 /* OpenQuickly.storyboard in Resources */,
+				ED157E2B224385FF00A56E19 /* light.css in Resources */,
 				ED840D23201A2A7700EF2C42 /* MoveWorkspace.storyboard in Resources */,
 				ED2E1498200555C6003D55A3 /* markdown-it-sup.min.js in Resources */,
 				ED840D2D201A364600EF2C42 /* jquery.min.js in Resources */,

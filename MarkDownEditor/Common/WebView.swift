@@ -72,17 +72,11 @@ final class WebView: WKWebView {
 
     StyleSheetManager.shared.selected.asObservable().subscribe(onNext: { [weak self] (styleSheet) in
       guard let s = self else { return }
-      let style: String
-      if let styleSheet = styleSheet {
-        style = styleSheet.css
-      } else {
-        style = try! String(contentsOf: Bundle.main.url(forResource: "swiss", withExtension: "css")!)
-      }
       let url = Bundle.main.url(forResource: "markdown", withExtension: "html")!
       let styleHighlight = Bundle.main.url(forResource: "monokai-sublime", withExtension: "css")!
       let html = try! String(contentsOf: url)
         .replacingOccurrences(of: "{{style-highlight}}", with: try! String(contentsOf: styleHighlight))
-        .replacingOccurrences(of: "{{style}}", with: style)
+        .replacingOccurrences(of: "{{style}}", with: styleSheet.css)
       try! html.write(to: s.htmlFileUrl, atomically: false, encoding: .utf8)
       s.firstNavigation = true
       s.loadFileURL(s.htmlFileUrl, allowingReadAccessTo: URL(fileURLWithPath: "/"))

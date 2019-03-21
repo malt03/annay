@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Koji Murata. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import RxSwift
 
 final class StyleSheetManager {
@@ -14,56 +14,51 @@ final class StyleSheetManager {
   static let shared = StyleSheetManager()
   
   let all: Variable<[StyleSheet]>
-  let selected = Variable<StyleSheet?>(nil)
+  let selected: Variable<StyleSheet>
   private let fileWatcher = StyleSheetFileWatcher()
   
-  static func createDefaultCss() {
-    do {
-      if FileManager.default.fileExists(atPath: defaultCss.path) {
-        try FileManager.default.removeItem(at: defaultCss)
+  static func createDefaultCsses(force: Bool) {
+    for url in [darkCss, lightCss] {
+      if FileManager.default.fileExists(atPath: url.path) {
+        if !force { continue }
+        try! FileManager.default.removeItem(at: url)
       }
-      let bundleCss = Bundle.main.url(forResource: "swiss", withExtension: "css")!
-      try FileManager.default.copyItem(at: bundleCss, to: defaultCss)
-    } catch {}
-  }
-  
-  private static func createDefaultCssIfNeeded() {
-    if !FileManager.default.fileExists(atPath: defaultCss.path) {
-      createDefaultCss()
+      let bundleCss = Bundle.main.url(forResource: url.lastPathComponent, withExtension: nil)!
+      try! FileManager.default.copyItem(at: bundleCss, to: url)
     }
   }
   
   static var directoryUrl: URL { return PreferenceManager.shared.styleSheetsUrl }
-  private static var defaultCss: URL { return directoryUrl.appendingPathComponent("default.css") }
+  private static var darkCss: URL { return directoryUrl.appendingPathComponent("dark.css") }
+  private static var lightCss: URL { return directoryUrl.appendingPathComponent("light.css") }
   
   private init() {
-    do {
-      let fileManager = FileManager.default
-      try fileManager.createDirectoryIfNeeded(url: StyleSheetManager.directoryUrl)
-      StyleSheetManager.createDefaultCssIfNeeded()
+    let fileManager = FileManager.default
+    try! fileManager.createDirectoryIfNeeded(url: StyleSheetManager.directoryUrl)
+    StyleSheetManager.createDefaultCsses(force: false)
+    
+    let files = try! fileManager.contentsOfDirectory(at: StyleSheetManager.directoryUrl, includingPropertiesForKeys: [], options: [])
+    let styleSheets = files.compactMap { StyleSheet(file: $0) }
+    all = Variable(styleSheets)
 
-      let files = try fileManager.contentsOfDirectory(at: StyleSheetManager.directoryUrl, includingPropertiesForKeys: [], options: [])
-      let styleSheets = files.compactMap { StyleSheet(file: $0) }
-      all = Variable(styleSheets)
-    } catch {
-      all = Variable([])
+    if NSAppearance.current.name == .darkAqua {
+      selected = Variable<StyleSheet>(StyleSheet(file: StyleSheetManager.darkCss)!)
+    } else {
+      selected = Variable<StyleSheet>(StyleSheet(file: StyleSheetManager.lightCss)!)
     }
   
     GeneralPreference.shared.styleSheetName.asObservable().map({ [weak self] (name) -> StyleSheet? in
       guard let s = self, let name = name else { return nil }
       return s.all.value.first(where: { $0.name == name })
-    }).bind(to: selected).disposed(by: bag)
+    }).filter { $0 != nil }.map { $0! }.bind(to: selected).disposed(by: bag)
     
     fileWatcher.fileAddedOrChanged.subscribe(onNext: { [weak self] (url) in
       guard let s = self, let styleSheet = StyleSheet(file: url) else { return }
-      defer {
-        if s.selected.value == nil { styleSheet.select() }
-      }
       for i in 0..<s.all.value.count {
         if s.all.value[i].fileUrl == url {
           s.all.value[i].reload()
-          if s.all.value[i].fileUrl == s.selected.value?.fileUrl {
-            s.selected.value?.reload()
+          if s.all.value[i].fileUrl == s.selected.value.fileUrl {
+            s.selected.value.reload()
           }
           return
         }
