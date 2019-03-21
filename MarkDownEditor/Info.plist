@@ -64,7 +64,7 @@
 			<key>UTTypeDescription</key>
 			<string>Annay Workspace</string>
 			<key>UTTypeIconFile</key>
-			<string>WorkspaceIcon</string>
+			<string>fileIcon</string>
 			<key>UTTypeIdentifier</key>
 			<string>org.annay.workspace</string>
 			<key>UTTypeTagSpecification</key>
@@ -83,7 +83,7 @@
 			<key>UTTypeDescription</key>
 			<string>Annay Folder Workspace</string>
 			<key>UTTypeIconFile</key>
-			<string>FolderWorkspaceIcon</string>
+			<string>dirIcon</string>
 			<key>UTTypeIdentifier</key>
 			<string>org.annay.folderworkspace</string>
 			<key>UTTypeTagSpecification</key>

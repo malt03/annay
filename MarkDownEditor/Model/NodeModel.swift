@@ -479,7 +479,7 @@ extension NodeModel {
 extension NodeModel {
   private func updateSpotlight() {
     if isDirectory { return }
-    let attribute = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+    let attribute = CSSearchableItemAttributeSet(itemContentType: "org.annay.workspace")
     attribute.title = name
     attribute.contentDescription = body
     let item = CSSearchableItem(uniqueIdentifier: id, domainIdentifier: nil, attributeSet: attribute)
