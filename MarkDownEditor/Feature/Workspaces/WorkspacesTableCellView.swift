@@ -28,12 +28,4 @@ final class WorkspacesTableCellView: NSTableCellView {
     textDisposable.disposed(by: bag)
     editedDisposable.disposed(by: bag)
   }
-  
-  override var backgroundStyle: NSView.BackgroundStyle {
-    get { return super.backgroundStyle }
-    set {
-      super.backgroundStyle = newValue
-      backgroundView.backgroundColor = backgroundStyle == .dark ? .focus : .editorBackground
-    }
-  }
 }

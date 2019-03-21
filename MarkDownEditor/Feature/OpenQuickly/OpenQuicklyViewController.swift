@@ -25,10 +25,10 @@ final class OpenQuicklyViewController: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    imageView.image = #imageLiteral(resourceName: "Search").tinted(.text)
+    imageView.image = #imageLiteral(resourceName: "Search").tinted(.textColor)
     searchTextField.placeholderAttributedString = NSAttributedString(
       string: "Open Quickly",
-      attributes: [.foregroundColor: NSColor.placeholder, .font: NSFont.systemFont(ofSize: 20, weight: .thin)]
+      attributes: [.foregroundColor: NSColor.placeholderTextColor, .font: NSFont.systemFont(ofSize: 20, weight: .thin)]
     )
     
     searchTextField.rx.text.map { NodeModel.search(query: $0) }.bind(to: result).disposed(by: bag)
@@ -59,6 +59,10 @@ final class OpenQuicklyViewController: NSViewController {
     node.select()
     OpenQuicklyWindowController.hide()
   }
+  
+  func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+    return OpenQuicklyNodeTableRowView()
+  }
 }
 
 extension OpenQuicklyViewController: NSTableViewDataSource, NSTableViewDelegate {
@@ -70,10 +74,6 @@ extension OpenQuicklyViewController: NSTableViewDataSource, NSTableViewDelegate 
     let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("OpenQuicklyNodeTableCellView"), owner: self) as! OpenQuicklyNodeTableCellView
     cell.prepare(node: result.value[row])
     return cell
-  }
-  
-  func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-    return OpenQuicklyNodeTableRowView()
   }
 }
 

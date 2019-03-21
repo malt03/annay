@@ -10,7 +10,7 @@ import Cocoa
 
 final class SplitView: NSSplitView {
   override var dividerColor: NSColor {
-    get { return .sidebarBackground }
+    get { return .underPageBackgroundColor }
     set {}
   }
 }

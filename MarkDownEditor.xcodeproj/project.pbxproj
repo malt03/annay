@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ED099FFF201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */; };
-		ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED09A000201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift */; };
+		ED157E29224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED157E28224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift */; };
 		ED187FD420053206002E51C0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED187FD320053206002E51C0 /* WebView.swift */; };
 		ED19084B201F6EC0009497EE /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19084A201F6EC0009497EE /* ContainerView.swift */; };
 		ED2DEB16206B4148008E5F1E /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB13206B4147008E5F1E /* NodeModel.swift */; };
@@ -92,8 +92,6 @@
 		ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD02008EC2B0097996A /* NodeTableCellView.swift */; };
 		ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD22009217F0097996A /* NSEvent+Extensions.swift */; };
 		ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD42009CC0C0097996A /* KeyCode.swift */; };
-		ED841BD8200B256B0097996A /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD7200B256B0097996A /* WindowController.swift */; };
-		ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED841BD9200B2FD10097996A /* Colors.xcassets */; };
 		ED8CE48A204E69F8002F1A5D /* Variable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */; };
 		ED8CE48C204E7291002F1A5D /* CodableFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE48B204E7291002F1A5D /* CodableFont.swift */; };
 		ED8CE48E204E7773002F1A5D /* GeneralPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */; };
@@ -104,7 +102,6 @@
 		ED9EEEE8201F63E200C96CC1 /* OpenWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9EEEE7201F63E200C96CC1 /* OpenWorkspaceViewController.swift */; };
 		EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736C8200E24F8000BC5DA /* Sidebar.storyboard */; };
 		EDA736CD200E256D000BC5DA /* MarkDownEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */; };
-		EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */; };
 		EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA736D4200E3E6A000BC5DA /* SplitView.swift */; };
 		EDAE6A9E20809CEE00E7658B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE6A9D20809CEE00E7658B /* AppDelegate.swift */; };
 		EDAE6AA020809CEE00E7658B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAE6A9F20809CEE00E7658B /* ViewController.swift */; };
@@ -195,7 +192,7 @@
 
 /* Begin PBXFileReference section */
 		ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableCellView.swift; sourceTree = "<group>"; };
-		ED09A000201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableRowView.swift; sourceTree = "<group>"; };
+		ED157E28224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableRowView.swift; sourceTree = "<group>"; };
 		ED187FD120052D30002E51C0 /* markdown.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = markdown.html; sourceTree = "<group>"; };
 		ED187FD320053206002E51C0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ED19084A201F6EC0009497EE /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -283,8 +280,6 @@
 		ED841BD02008EC2B0097996A /* NodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableCellView.swift; sourceTree = "<group>"; };
 		ED841BD22009217F0097996A /* NSEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSEvent+Extensions.swift"; sourceTree = "<group>"; };
 		ED841BD42009CC0C0097996A /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
-		ED841BD7200B256B0097996A /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
-		ED841BD9200B2FD10097996A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Variable+Extensions.swift"; sourceTree = "<group>"; };
 		ED8CE48B204E7291002F1A5D /* CodableFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFont.swift; sourceTree = "<group>"; };
 		ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreference.swift; sourceTree = "<group>"; };
@@ -296,7 +291,6 @@
 		ED9EEEE7201F63E200C96CC1 /* OpenWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWorkspaceViewController.swift; sourceTree = "<group>"; };
 		EDA736C9200E24F8000BC5DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MarkDownEditor/Base.lproj/Sidebar.storyboard; sourceTree = "<group>"; };
 		EDA736CC200E256D000BC5DA /* MarkDownEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MarkDownEditor.storyboard; sourceTree = "<group>"; };
-		EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		EDA736D4200E3E6A000BC5DA /* SplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitView.swift; sourceTree = "<group>"; };
 		EDAE6A9B20809CEE00E7658B /* Annay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Annay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDAE6A9D20809CEE00E7658B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -394,7 +388,6 @@
 				ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */,
 				ED841BD22009217F0097996A /* NSEvent+Extensions.swift */,
 				ED841BD42009CC0C0097996A /* KeyCode.swift */,
-				EDA736D0200E291C000BC5DA /* NSColor+Extensions.swift */,
 				EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */,
 				ED47CC86201ED55A0052D6EF /* MarkDownEditorError.swift */,
 				EDD0A289200CD49800D5E7BE /* NSPasteboard+Extensions.swift */,
@@ -518,7 +511,7 @@
 				ED4EB9DF201DA76000B4CBE7 /* OpenQuicklyTextField.swift */,
 				ED4EB9E1201DAA1700B4CBE7 /* OpenQuicklyViewController.swift */,
 				ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */,
-				ED09A000201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift */,
+				ED157E28224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift */,
 			);
 			path = OpenQuickly;
 			sourceTree = "<group>";
@@ -557,14 +550,6 @@
 				ED840D28201A2AC000EF2C42 /* MoveWorkspaceViewController.swift */,
 			);
 			path = MoveWorkspace;
-			sourceTree = "<group>";
-		};
-		ED841BD6200B25500097996A /* Window */ = {
-			isa = PBXGroup;
-			children = (
-				ED841BD7200B256B0097996A /* WindowController.swift */,
-			);
-			path = Window;
 			sourceTree = "<group>";
 		};
 		ED86DCCB2029ED550096AB38 /* Shortcut */ = {
@@ -741,14 +726,12 @@
 			isa = PBXGroup;
 			children = (
 				EDC25C81203BCC9F00C8F38E /* Support */,
-				ED841BD6200B25500097996A /* Window */,
 				ED187FD82005396C002E51C0 /* WebPage */,
 				ED187FD72005395A002E51C0 /* Common */,
 				ED2E15AF200669B8003D55A3 /* Feature */,
 				ED2E15B0200669C8003D55A3 /* Model */,
 				EDB601472022C05800EDF59C /* Application */,
 				EDEB7A5E2004EDF000F8C48A /* Assets.xcassets */,
-				ED841BD9200B2FD10097996A /* Colors.xcassets */,
 				EDEB7A632004EDF000F8C48A /* Info.plist */,
 				EDEB7A642004EDF000F8C48A /* MarkDownEditor.entitlements */,
 			);
@@ -943,7 +926,6 @@
 				ED574010202D97C100D844A3 /* NewOrOpenNoteShortcutPreference.storyboard in Resources */,
 				ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */,
 				ED5E97A22084F2DD00C71ED5 /* fileIcon.icns in Resources */,
-				ED841BDA200B2FD10097996A /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,6 +959,7 @@
 				EDD0A2B9200F2B9E00D5E7BE /* WorkspacesViewController.swift in Sources */,
 				ED47CC85201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift in Sources */,
 				EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */,
+				ED157E29224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift in Sources */,
 				ED57400F202D975800D844A3 /* PreferenceTabViewController.swift in Sources */,
 				ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */,
 				EDD0A28C200CD90C00D5E7BE /* Array+Extensions.swift in Sources */,
@@ -996,7 +979,6 @@
 				ED574001202C3F9100D844A3 /* ShortcutPreferenceViewController.swift in Sources */,
 				ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */,
 				ED43200020562B460042078C /* ShortcutPreferenceNodeParameters.swift in Sources */,
-				ED841BD8200B256B0097996A /* WindowController.swift in Sources */,
 				EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */,
 				ED2DEB61206B7FC9008E5F1E /* NodeModel+NSPasteboardWriting.swift in Sources */,
 				ED598C59201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift in Sources */,
@@ -1011,7 +993,6 @@
 				ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */,
 				ED55CD72207F6930000AB810 /* WorkspacePreferenceViewController.swift in Sources */,
 				ED187FD420053206002E51C0 /* WebView.swift in Sources */,
-				EDA736D1200E291C000BC5DA /* NSColor+Extensions.swift in Sources */,
 				ED431FFC205628A30042078C /* CodableNode.swift in Sources */,
 				EDD4C747202EB0EB0029FF4C /* NSFont+Extensions.swift in Sources */,
 				ED4EB9E4201DAADD00B4CBE7 /* NSImage+Extensions.swift in Sources */,
@@ -1042,7 +1023,6 @@
 				EDDE608F203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */,
 				EDD93C492057881600CA6627 /* StyleSheetFileWatcher.swift in Sources */,
 				ED4EB9E6201DB71B00B4CBE7 /* Results+Extensions.swift in Sources */,
-				ED09A001201DF30B006F91E4 /* OpenQuicklyNodeTableRowView.swift in Sources */,
 				ED8CE48A204E69F8002F1A5D /* Variable+Extensions.swift in Sources */,
 				ED4EB332207C3F5E00CFEBEB /* MainWindow.swift in Sources */,
 				ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */,
@@ -1434,6 +1414,7 @@
 					"$(PROJECT_DIR)/MarkDownEditor",
 					"$(PROJECT_DIR)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = AnnayDevelopment;
@@ -1465,6 +1446,7 @@
 					"$(PROJECT_DIR)/MarkDownEditor",
 					"$(PROJECT_DIR)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = AnnayDistribution;

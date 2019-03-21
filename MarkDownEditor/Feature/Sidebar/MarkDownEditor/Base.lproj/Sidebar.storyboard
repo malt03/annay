@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="PrQ-Do-4mD">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="PrQ-Do-4mD">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Sidebar View Controller-->
@@ -12,7 +12,7 @@
             <objects>
                 <customObject id="nUK-jq-m9X" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="PrQ-Do-4mD" customClass="SidebarViewController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="68f-Wd-hUG">
+                    <view key="view" id="68f-Wd-hUG" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="730"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -63,7 +63,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                        <color key="value" red="0.058823529411764705" green="0.058823529411764705" blue="0.058823529411764705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </customView>
@@ -79,7 +79,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <color key="gridColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" width="280" minWidth="40" maxWidth="1000" id="hkY-av-AqO">
+                                                <tableColumn width="280" minWidth="40" maxWidth="1000" id="hkY-av-AqO">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -119,7 +119,7 @@
                                                                             <real key="value" value="4"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                                            <color key="value" name="Edited"/>
+                                                                            <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </customView>
@@ -189,11 +189,11 @@
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="3Ma-rp-ACN"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Gdv-iM-9Ja">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Gdv-iM-9Ja">
                                     <rect key="frame" x="-100" y="-100" width="280" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Ycd-CN-v0v">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Ycd-CN-v0v">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -206,7 +206,7 @@
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" id="NkE-8o-Pfx">
                                             <customFormatter key="formatter" id="SMd-Qy-PpH" customClass="WorkspaceNameFormatter" customModule="Annay" customModuleProvider="target"/>
                                             <font key="font" metaFont="system" size="16"/>
-                                            <color key="textColor" name="Text"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
@@ -224,7 +224,7 @@
                                                 <real key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                <color key="value" name="Edited"/>
+                                                <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </customView>
@@ -245,7 +245,7 @@
                                         <rect key="frame" x="-2" y="0.0" width="80" height="18"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Updated at " id="7Qa-W5-Vib">
                                             <font key="font" metaFont="system" size="14"/>
-                                            <color key="textColor" name="Placeholder"/>
+                                            <color key="textColor" name="placeholderTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -253,7 +253,7 @@
                                         <rect key="frame" x="74" y="0.0" width="40" height="18"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="izq-5O-gdY">
                                             <font key="font" metaFont="system" size="14"/>
-                                            <color key="textColor" name="Placeholder"/>
+                                            <color key="textColor" name="placeholderTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -282,6 +282,11 @@
                             <constraint firstAttribute="bottom" secondItem="zOJ-K0-MKD" secondAttribute="bottom" constant="16" id="yaH-SR-kgb"/>
                             <constraint firstAttribute="trailing" secondItem="Xsw-qJ-WBe" secondAttribute="trailing" id="zxN-u8-tDz"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                <color key="value" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="backgroundMenu" destination="1uH-t7-6Oj" id="mYb-Gf-6T5"/>
@@ -398,14 +403,5 @@ CA
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <namedColor name="Edited">
-            <color red="0.5" green="0.75" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Placeholder">
-            <color red="0.47499999403953552" green="0.48800000548362732" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Text">
-            <color red="0.94900000095367432" green="0.97500002384185791" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

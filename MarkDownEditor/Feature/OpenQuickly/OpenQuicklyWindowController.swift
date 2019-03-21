@@ -8,7 +8,7 @@
 
 import Cocoa
 
-final class OpenQuicklyWindowController: WindowController {
+final class OpenQuicklyWindowController: NSWindowController {
   private static let shared = NSStoryboard(name: NSStoryboard.Name(rawValue: "OpenQuickly"), bundle: .main).instantiateInitialController() as! OpenQuicklyWindowController
   
   static func show() {

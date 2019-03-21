@@ -24,7 +24,6 @@ final class NodeTableCellView: NSTableCellView {
     self.node = node
     self.inPreference = inPreference
     
-    textField?.textColor = inPreference ? .textColor : .text
     textField?.isEditable = !inPreference && node.isDirectory && !node.isDeleted && !node.isTrash
     textField?.font = NSFont.systemFont(ofSize: 14)
     imageView?.image = NSImage(named: .folder)

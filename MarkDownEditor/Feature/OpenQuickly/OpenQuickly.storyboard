@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14105" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ltM-Gp-cXE">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="ltM-Gp-cXE">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14105"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Window Controller-->
         <scene sceneID="ljw-n8-Mfq">
             <objects>
                 <windowController id="ltM-Gp-cXE" customClass="OpenQuicklyWindowController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="feU-Uh-aww">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="feU-Uh-aww">
                         <windowStyleMask key="styleMask" titled="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -34,7 +31,7 @@
         <scene sceneID="ooE-ZF-dDi">
             <objects>
                 <viewController id="Jhu-lC-NZR" customClass="OpenQuicklyViewController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="3rW-5G-ypx">
+                    <view key="view" id="3rW-5G-ypx" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="458" height="377"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -55,7 +52,7 @@
                                                 <rect key="frame" x="53" y="12" width="407" height="24"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Open Quickly" id="ncJ-DJ-mg2">
                                                     <font key="font" metaFont="systemThin" size="20"/>
-                                                    <color key="textColor" name="Text"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
@@ -84,7 +81,7 @@
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                                                <color key="value" name="WorkspacesBackground"/>
+                                                <color key="value" name="separatorColor" catalog="System" colorSpace="catalog"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </customView>
@@ -100,7 +97,7 @@
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn identifier="" width="458" minWidth="40" maxWidth="1000" id="eS1-iY-Pxv">
+                                                        <tableColumn width="458" minWidth="40" maxWidth="1000" id="eS1-iY-Pxv">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" enabled="NO" borderStyle="border">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -127,7 +124,7 @@
                                                                                             <rect key="frame" x="-2" y="13" width="114" height="19"/>
                                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="zIc-Uy-REv">
                                                                                                 <font key="font" metaFont="system" size="16"/>
-                                                                                                <color key="textColor" name="Text"/>
+                                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
                                                                                         </textField>
@@ -135,7 +132,7 @@
                                                                                             <rect key="frame" x="-2" y="0.0" width="26" height="11"/>
                                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="cSY-Xe-lZV">
                                                                                                 <font key="font" metaFont="system" size="8"/>
-                                                                                                <color key="textColor" name="Text"/>
+                                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
                                                                                         </textField>
@@ -153,7 +150,7 @@
                                                                                     <rect key="frame" x="402" y="11" width="26" height="11"/>
                                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Rv6-eo-Xw6">
                                                                                         <font key="font" metaFont="system" size="8"/>
-                                                                                        <color key="textColor" name="Text"/>
+                                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
                                                                                 </textField>
@@ -189,16 +186,17 @@
                                                     </connections>
                                                 </tableView>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         </clipView>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="330" id="ZGz-10-mkY"/>
                                             <constraint firstAttribute="height" priority="999" constant="1000" id="xpb-IP-Ca7"/>
                                         </constraints>
-                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="k3L-V4-fvi">
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="k3L-V4-fvi">
                                             <rect key="frame" x="0.0" y="314" width="458" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="xr4-z0-gcn">
+                                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="xr4-z0-gcn">
                                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -227,6 +225,11 @@
                             <constraint firstAttribute="trailing" secondItem="NtS-dl-LyD" secondAttribute="trailing" id="lcg-Qx-ome"/>
                             <constraint firstItem="NtS-dl-LyD" firstAttribute="top" secondItem="3rW-5G-ypx" secondAttribute="top" id="xPX-rN-5Ni"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                <color key="value" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="fhK-Vv-Wuy" id="dAI-Wx-xq4"/>
@@ -243,14 +246,5 @@
     </scenes>
     <resources>
         <image name="Search" width="20" height="20"/>
-        <namedColor name="Text">
-            <color red="0.94900000095367432" green="0.97500002384185791" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Text">
-            <color red="0.94900000100000004" green="0.97500002379999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="WorkspacesBackground">
-            <color red="0.075000002979999994" green="0.087999999519999997" blue="0.1000000015" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

@@ -91,7 +91,7 @@ final class WorkspacesViewController: NSViewController {
   
   override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
     switch segue.destinationController {
-    case let wc as WindowController:
+    case let wc as NSWindowController:
       switch wc.contentViewController {
       case let vc as MoveWorkspaceViewController:
         vc.prepare(workspace: WorkspaceModel.spaces[tableView.selectedRow])

@@ -22,9 +22,9 @@ final class TextView: NSTextView {
       self?.font = font
     }).disposed(by: bag)
 
-    textColor = .text
+    textColor = .textColor
     textContainerInset = NSSize(width: 10, height: 10)
-    insertionPointColor = .text
+    insertionPointColor = .textColor
     let style = NSMutableParagraphStyle()
     style.lineSpacing = 4
     defaultParagraphStyle = style

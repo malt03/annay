@@ -1,30 +1,16 @@
 //
 //  OpenQuicklyNodeTableRowView.swift
-//  MarkDownEditor
+//  Annay
 //
-//  Created by Koji Murata on 2018/01/28.
-//  Copyright © 2018年 Koji Murata. All rights reserved.
+//  Created by Koji Murata on 2019/03/21.
+//  Copyright © 2019 Koji Murata. All rights reserved.
 //
 
 import Cocoa
 
 final class OpenQuicklyNodeTableRowView: NSTableRowView {
-  override func drawSelection(in dirtyRect: NSRect) {}
-  
-  override func draw(_ dirtyRect: NSRect) {
-    if isSelected {
-      NSColor.selectedRow.setFill()
-      dirtyRect.fill()
-    }
-  }
-  
-  override var selectionHighlightStyle: NSTableView.SelectionHighlightStyle {
-    get { return .regular }
-    set { }
-  }
-  
-  override var backgroundColor: NSColor {
-    get { return .clear }
+  override var isEmphasized: Bool {
+    get { return true }
     set {}
   }
 }
