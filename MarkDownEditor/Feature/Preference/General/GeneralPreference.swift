@@ -22,6 +22,13 @@ final class GeneralPreference: Preference {
     checkAppearance()
   }
   
+
+  func copy(from preference: GeneralPreference) {
+    isHideEditorWhenUnfocused.value = preference.isHideEditorWhenUnfocused.value
+    font.value = preference.font.value
+    styleSheetName.value = preference.styleSheetName.value
+  }
+
   func checkAppearance() {
     if NSAppearance.effective.isDark {
       if styleSheetName.value == GeneralPreference.lightStyle {

@@ -13,6 +13,13 @@ import Magnet
 final class ShortcutPreference: Preference {
   static let shared = ShortcutPreference.create()
   
+  func copy(from preference: ShortcutPreference) {
+    set(node: preference.newNote.node.value?.node, for: .newNote)
+    set(keyCombo: preference.newNote.keyCombo.value, for: .newNote)
+    set(node: preference.openNote.node.value?.node, for: .openNote)
+    set(keyCombo: preference.openNote.keyCombo.value, for: .openNote)
+  }
+  
   func node(for kind: ShortcutPreferenceNodeParameters.Kind) -> CodableNode? {
     switch kind {
     case .newNote:  return newNote.node.value

@@ -15,6 +15,21 @@ final class GeneralPreferenceViewController: NSViewController {
   @IBOutlet private weak var fontLabel: NSTextField!
   @IBOutlet private weak var isHideEditorWhenUnfocusedCheckbox: NSButton!
   @IBOutlet private weak var styleSheetPopupButton: NSPopUpButton!
+  @IBOutlet private weak var preferenceDirectoryTextField: NSTextField!
+  
+  @IBAction private func changePreferenceDirectory(_ sender: NSButton) {
+    guard let window = view.window else { return }
+    let openPanel = NSOpenPanel()
+    openPanel.allowsMultipleSelection = false
+    openPanel.canChooseDirectories = true
+    openPanel.canCreateDirectories = true
+    openPanel.canChooseFiles = false
+    openPanel.beginSheetModal(for: window) { (result) in
+      if result != .OK { return }
+      guard let url = openPanel.url else { return }
+      PreferenceManager.shared.directoryUrl.value = url
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,6 +54,8 @@ final class GeneralPreferenceViewController: NSViewController {
       guard let s = self else { return }
       StyleSheetManager.shared.all.value[s.styleSheetPopupButton.indexOfSelectedItem].select()
     }).disposed(by: bag)
+    
+    PreferenceManager.shared.directoryUrl.asObservable().map { $0.path }.bind(to: preferenceDirectoryTextField.rx.text).disposed(by: bag)
   }
 
   @IBAction private func openDirecotry(_ sender: NSButton) {

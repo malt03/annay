@@ -15,6 +15,7 @@ protocol Preference: Codable {
   init()
   var changed: Observable<Void> { get }
   func didCreated()
+  func copy(from preference: Self)
 }
 
 extension Preference {
@@ -30,6 +31,12 @@ extension Preference {
       try yaml.write(to: Self.fileUrl, atomically: true, encoding: .utf8)
     } catch {
       NSAlert(error: error).runModal()
+    }
+  }
+  
+  func reload() {
+    if let saved = (try? String(contentsOf: Self.fileUrl)).flatMap({ try? YAMLDecoder().decode(Self.self, from: $0) }) {
+      copy(from: saved)
     }
   }
   
