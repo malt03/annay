@@ -55,9 +55,15 @@ final class NodeModel: Object {
   func sortedChildren(query: String?) -> [NodeModel] {
     if id == NodeModel.trashId { return Array(NodeModel.deleted) }
     if let query = query {
+      var ids = Set<String>()
       return Realm.instance.objects(NodeModel.self)
         .filter("workspace = %@ and body contains %@", WorkspaceModel.selectedValue, query)
         .compactMap { $0.ancestor(targetParent: self) }
+        .filter {
+          if ids.contains($0.id) { return false }
+          ids.insert($0.id)
+          return true
+        }
     } else {
       return Array(
         children.filter("isDeleted = false and index >= 0")
