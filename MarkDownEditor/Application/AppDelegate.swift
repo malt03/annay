@@ -39,7 +39,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     return true
   }
-  
 }
 
 extension AppDelegate {
@@ -88,8 +87,8 @@ extension AppDelegate {
     }
   }
 
-  @IBAction private func joinSlack(_ sender: NSMenuItem) {
-    NSWorkspace.shared.open(URL(string: "https://join.slack.com/t/annay/shared_invite/enQtMzMwNTE3OTQ1MzY0LTI2YmMyZjNiNzZhNjBhOWEzNTlkYTU0ZGU2ODE5N2FhMjE1MWZjMmY1OTMzM2ZhMWJiMzVhNTMwNDU5MmNmNDI")!)
+  @IBAction private func openTwitter(_ sender: NSMenuItem) {
+    NSWorkspace.shared.open(URL(string: "https://twitter.com/malt03")!)
   }
 }
 
