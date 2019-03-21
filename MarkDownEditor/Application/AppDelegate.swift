@@ -90,6 +90,10 @@ extension AppDelegate {
   @IBAction private func openTwitter(_ sender: NSMenuItem) {
     NSWorkspace.shared.open(URL(string: "https://twitter.com/malt03")!)
   }
+  
+  @IBAction func openGitHubIssues(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: "https://github.com/malt03/annay/issues")!)
+  }
 }
 
 extension Notification.Name {

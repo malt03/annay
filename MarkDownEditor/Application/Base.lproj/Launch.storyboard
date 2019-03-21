@@ -21,12 +21,6 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="I would like you to question or bug report via Twitter!" id="w5P-U4-tvK">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="openTwitter:" target="Voe-Tx-rLC" id="K8L-DZ-tk5"/>
-                                            </connections>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                                         <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
                                             <connections>
@@ -388,7 +382,13 @@ GQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="ss3-Al-8Wy">
                                     <items>
-                                        <menuItem title="I would like you to question or bug report via Twitter!" id="VV9-P0-S4p">
+                                        <menuItem title="Bug report on GitHub" id="ahS-Mb-OG7">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="openGitHubIssues:" target="Voe-Tx-rLC" id="w2I-O8-RD5"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Question by Twitter" id="VV9-P0-S4p">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="openTwitter:" target="Voe-Tx-rLC" id="pVA-fh-nag"/>
