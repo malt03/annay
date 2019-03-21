@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="IGo-9e-meJ">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="IGo-9e-meJ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Create Workspace View Controller-->
         <scene sceneID="idp-pF-1a6">
             <objects>
-                <viewController id="IGo-9e-meJ" customClass="CreateWorkspaceViewController" customModule="MarkDownEditor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="IGo-9e-meJ" customClass="CreateWorkspaceViewController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="VZU-gM-xyd">
                         <rect key="frame" x="0.0" y="0.0" width="577" height="187"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -25,8 +23,8 @@
                                                 <rect key="frame" x="-2" y="3" width="114" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Workspace Name:" id="DGm-pt-Fi5">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="Text"/>
-                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="raD-YY-mhS">
@@ -35,14 +33,14 @@
                                                     <constraint firstAttribute="width" constant="300" id="7PI-af-uue"/>
                                                 </constraints>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" id="WnY-eB-R7Q">
-                                                    <customFormatter key="formatter" id="Eir-Qx-dJn" customClass="WorkspaceNameFormatter" customModule="MarkDownEditor" customModuleProvider="target">
+                                                    <customFormatter key="formatter" id="Eir-Qx-dJn" customClass="WorkspaceNameFormatter" customModule="Annay" customModuleProvider="target">
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="allowEmpty" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </customFormatter>
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="Text"/>
-                                                    <color key="backgroundColor" name="EditorBackground"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                         </subviews>
@@ -65,8 +63,8 @@
                                                 <rect key="frame" x="-2" y="2" width="114" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Directory:" id="esB-Hc-9FC">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="Text"/>
-                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vxA-eL-tlj">
@@ -74,10 +72,10 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="300" id="cbP-sS-nbf"/>
                                                 </constraints>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" id="8bw-7o-cf0">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" id="8bw-7o-cf0">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="Text"/>
-                                                    <color key="backgroundColor" name="EditorBackground"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <button horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gRL-vO-1KS">
@@ -165,8 +163,8 @@ DQ
                                 <rect key="frame" x="14" y="154" width="124" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Create a workspace" id="BPW-Jv-e3M">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="Text"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                         </subviews>
@@ -193,12 +191,4 @@ DQ
             <point key="canvasLocation" x="795.5" y="983"/>
         </scene>
     </scenes>
-    <resources>
-        <namedColor name="EditorBackground">
-            <color red="0.22499999403953552" green="0.2630000114440918" blue="0.30000001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Text">
-            <color red="0.94900000095367432" green="0.97500002384185791" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>
