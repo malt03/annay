@@ -14,9 +14,12 @@ protocol Preference: Codable {
   static var fileUrl: URL { get }
   init()
   var changed: Observable<Void> { get }
+  func didCreated()
 }
 
 extension Preference {
+  func didCreated() {}
+  
   private func prepare() {
     _ = changed.subscribe(onNext: { _ in self.save() })
   }
@@ -38,6 +41,7 @@ extension Preference {
       preference = Self.init()
     }
     preference.prepare()
+    preference.didCreated()
     return preference
   }
 }

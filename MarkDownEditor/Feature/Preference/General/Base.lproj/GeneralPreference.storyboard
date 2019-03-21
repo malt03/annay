@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14105" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="4RZ-6S-0Dx">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="4RZ-6S-0Dx">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14105"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--General Preference View Controller-->
@@ -107,7 +106,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FUO-lQ-pHA">
-                                                <rect key="frame" x="79" y="26" width="37" height="26"/>
+                                                <rect key="frame" x="79" y="26" width="38" height="25"/>
                                                 <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="sGY-Nu-xcZ">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="menu"/>
@@ -115,7 +114,7 @@
                                                 </popUpButtonCell>
                                             </popUpButton>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="uF5-uZ-Pdn">
-                                                <rect key="frame" x="121" y="0.0" width="163" height="50"/>
+                                                <rect key="frame" x="122" y="0.0" width="162" height="50"/>
                                             </customView>
                                             <stackView distribution="fill" orientation="vertical" alignment="trailing" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nS-On-ct3">
                                                 <rect key="frame" x="292" y="0.0" width="168" height="50"/>
@@ -131,8 +130,8 @@
                                                         </connections>
                                                     </button>
                                                     <button verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="we0-vl-f4g">
-                                                        <rect key="frame" x="29" y="-7" width="145" height="32"/>
-                                                        <buttonCell key="cell" type="push" title="Reset default.css" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9n2-6C-ix2">
+                                                        <rect key="frame" x="-6" y="-7" width="180" height="32"/>
+                                                        <buttonCell key="cell" type="push" title="Reset default Style Sheets" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9n2-6C-ix2">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>

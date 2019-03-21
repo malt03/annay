@@ -83,6 +83,11 @@ final class WebView: WKWebView {
     }).disposed(by: bag)
   }
   
+  override func viewDidChangeEffectiveAppearance() {
+    super.viewDidChangeEffectiveAppearance()
+    GeneralPreference.shared.checkAppearance()
+  }
+  
   private var lastMarkdown: String?
   private var lastCompletionHandler: UpdateCompletion?
   

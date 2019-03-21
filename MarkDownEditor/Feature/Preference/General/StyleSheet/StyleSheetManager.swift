@@ -41,14 +41,14 @@ final class StyleSheetManager {
     let styleSheets = files.compactMap { StyleSheet(file: $0) }
     all = Variable(styleSheets)
 
-    if NSAppearance.current.name == .darkAqua {
+    if NSAppearance.effective.isDark {
       selected = Variable<StyleSheet>(StyleSheet(file: StyleSheetManager.darkCss)!)
     } else {
       selected = Variable<StyleSheet>(StyleSheet(file: StyleSheetManager.lightCss)!)
     }
   
     GeneralPreference.shared.styleSheetName.asObservable().map({ [weak self] (name) -> StyleSheet? in
-      guard let s = self, let name = name else { return nil }
+      guard let s = self else { return nil }
       return s.all.value.first(where: { $0.name == name })
     }).filter { $0 != nil }.map { $0! }.bind(to: selected).disposed(by: bag)
     

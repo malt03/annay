@@ -10,6 +10,7 @@
 		ED099FFF201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */; };
 		ED157E29224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED157E28224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift */; };
 		ED157E2B224385FF00A56E19 /* light.css in Resources */ = {isa = PBXBuildFile; fileRef = ED157E2A224385FF00A56E19 /* light.css */; };
+		ED157E2D2243AE6500A56E19 /* NSAppearance+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED157E2C2243AE6500A56E19 /* NSAppearance+Extensions.swift */; };
 		ED187FD420053206002E51C0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED187FD320053206002E51C0 /* WebView.swift */; };
 		ED19084B201F6EC0009497EE /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED19084A201F6EC0009497EE /* ContainerView.swift */; };
 		ED2DEB16206B4148008E5F1E /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB13206B4147008E5F1E /* NodeModel.swift */; };
@@ -195,6 +196,7 @@
 		ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableCellView.swift; sourceTree = "<group>"; };
 		ED157E28224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableRowView.swift; sourceTree = "<group>"; };
 		ED157E2A224385FF00A56E19 /* light.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = light.css; sourceTree = "<group>"; };
+		ED157E2C2243AE6500A56E19 /* NSAppearance+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAppearance+Extensions.swift"; sourceTree = "<group>"; };
 		ED187FD120052D30002E51C0 /* markdown.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = markdown.html; sourceTree = "<group>"; };
 		ED187FD320053206002E51C0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ED19084A201F6EC0009497EE /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */,
 				ED8CE48B204E7291002F1A5D /* CodableFont.swift */,
 				ED2DEB5C206B69CC008E5F1E /* Util.swift */,
+				ED157E2C2243AE6500A56E19 /* NSAppearance+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -993,6 +996,7 @@
 				EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */,
 				ED19084B201F6EC0009497EE /* ContainerView.swift in Sources */,
 				ED2DEB5F206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift in Sources */,
+				ED157E2D2243AE6500A56E19 /* NSAppearance+Extensions.swift in Sources */,
 				ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */,
 				ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */,
 				ED55CD72207F6930000AB810 /* WorkspacePreferenceViewController.swift in Sources */,

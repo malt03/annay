@@ -16,7 +16,23 @@ final class GeneralPreference: Preference {
   
   let isHideEditorWhenUnfocused: Variable<Bool>
   private var font: Variable<CodableFont>
-  let styleSheetName: Variable<String?>
+  let styleSheetName: Variable<String>
+  
+  func didCreated() {
+    checkAppearance()
+  }
+  
+  func checkAppearance() {
+    if NSAppearance.effective.isDark {
+      if styleSheetName.value == GeneralPreference.lightStyle {
+        styleSheetName.value = GeneralPreference.darkStyle
+      }
+    } else {
+      if styleSheetName.value == GeneralPreference.darkStyle {
+        styleSheetName.value = GeneralPreference.lightStyle
+      }
+    }
+  }
 
   var changed: Observable<Void> {
     return Observable.combineLatest(
@@ -39,9 +55,12 @@ final class GeneralPreference: Preference {
     fontPanel.makeKeyAndOrderFront(nil)
   }
   
+  static var darkStyle: String { return "dark.css" }
+  static var lightStyle: String { return "light.css" }
+  
   init() {
     self.isHideEditorWhenUnfocused = Variable(false)
     self.font = Variable(CodableFont(NSFont(name: "Osaka-Mono", size: 14) ?? .systemFont(ofSize: 14)))
-    self.styleSheetName = Variable(nil)
+    self.styleSheetName = Variable(NSAppearance.effective.isDark ? GeneralPreference.darkStyle : GeneralPreference.lightStyle)
   }
 }
