@@ -173,9 +173,10 @@ final class SidebarViewController: NSViewController {
   }
   
   override func keyDown(with event: NSEvent) {
-    super.keyDown(with: event)
-    if event.isPushed(KeyCode.returnKey) {
+    if event.isPushed(KeyCode.returnKey) || event.isPushed(KeyCode.escape) {
       moveFocusToEditor()
+    } else {
+      super.keyDown(with: event)
     }
   }
   
