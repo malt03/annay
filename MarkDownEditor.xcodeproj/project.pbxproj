@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,22 +16,6 @@
 		ED2DEB16206B4148008E5F1E /* NodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB13206B4147008E5F1E /* NodeModel.swift */; };
 		ED2DEB17206B4148008E5F1E /* DirectoryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB14206B4147008E5F1E /* DirectoryInfo.swift */; };
 		ED2DEB18206B4148008E5F1E /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB15206B4148008E5F1E /* WorkspaceModel.swift */; };
-		ED2DEB46206B49E4008E5F1E /* KeyHolder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB3C206B49D8008E5F1E /* KeyHolder.framework */; };
-		ED2DEB47206B49E4008E5F1E /* KeyHolder.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB3C206B49D8008E5F1E /* KeyHolder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED2DEB48206B49E4008E5F1E /* Magnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB36206B49D8008E5F1E /* Magnet.framework */; };
-		ED2DEB49206B49E4008E5F1E /* Magnet.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB36206B49D8008E5F1E /* Magnet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED2DEB4A206B49E4008E5F1E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB38206B49D8008E5F1E /* Realm.framework */; };
-		ED2DEB4B206B49E4008E5F1E /* Realm.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB38206B49D8008E5F1E /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED2DEB4C206B49E4008E5F1E /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB3A206B49D8008E5F1E /* RealmSwift.framework */; };
-		ED2DEB4D206B49E4008E5F1E /* RealmSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB3A206B49D8008E5F1E /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED2DEB4E206B49E4008E5F1E /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB34206B49D7008E5F1E /* RxCocoa.framework */; };
-		ED2DEB4F206B49E4008E5F1E /* RxCocoa.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB34206B49D7008E5F1E /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED2DEB50206B49E4008E5F1E /* RxRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB37206B49D8008E5F1E /* RxRealm.framework */; };
-		ED2DEB51206B49E4008E5F1E /* RxRealm.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB37206B49D8008E5F1E /* RxRealm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED2DEB52206B49E4008E5F1E /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB39206B49D8008E5F1E /* RxSwift.framework */; };
-		ED2DEB53206B49E4008E5F1E /* RxSwift.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB39206B49D8008E5F1E /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ED2DEB54206B49E4008E5F1E /* Yams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB35206B49D7008E5F1E /* Yams.framework */; };
-		ED2DEB55206B49E4008E5F1E /* Yams.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = ED2DEB35206B49D7008E5F1E /* Yams.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED2DEB5B206B4FC5008E5F1E /* NodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB5A206B4FC5008E5F1E /* NodeInfo.swift */; };
 		ED2DEB5D206B69CC008E5F1E /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB5C206B69CC008E5F1E /* Util.swift */; };
 		ED2DEB5F206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2DEB5E206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift */; };
@@ -136,6 +120,14 @@
 		EDDE6093203C65A500331A77 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDE6091203C65A500331A77 /* WebView.swift */; };
 		EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FA20050C0B0079F3D0 /* TextView.swift */; };
 		EDDED6FF2005138F0079F3D0 /* NSApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDED6FE2005138F0079F3D0 /* NSApplication+Extensions.swift */; };
+		EDE497082243E4CB009D5A0E /* KeyHolder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB3C206B49D8008E5F1E /* KeyHolder.framework */; };
+		EDE497092243E4CB009D5A0E /* Magnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB36206B49D8008E5F1E /* Magnet.framework */; };
+		EDE4970A2243E4CB009D5A0E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB38206B49D8008E5F1E /* Realm.framework */; };
+		EDE4970B2243E4CB009D5A0E /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB3A206B49D8008E5F1E /* RealmSwift.framework */; };
+		EDE4970C2243E4CB009D5A0E /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB34206B49D7008E5F1E /* RxCocoa.framework */; };
+		EDE4970D2243E4CB009D5A0E /* RxRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB37206B49D8008E5F1E /* RxRealm.framework */; };
+		EDE4970E2243E4CB009D5A0E /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB39206B49D8008E5F1E /* RxSwift.framework */; };
+		EDE4970F2243E4CB009D5A0E /* Yams.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2DEB35206B49D7008E5F1E /* Yams.framework */; };
 		EDEA58E220442B1700B1CA66 /* markdown.html in Resources */ = {isa = PBXBuildFile; fileRef = ED187FD120052D30002E51C0 /* markdown.html */; };
 		EDEA58E320442B1B00B1CA66 /* markdown.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E159A20056621003D55A3 /* markdown.js */; };
 		EDEB7A5B2004EDF000F8C48A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB7A5A2004EDF000F8C48A /* AppDelegate.swift */; };
@@ -170,24 +162,6 @@
 				EDD4CA78203BB331003F8072 /* AnnayPreviewExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EDDED73D20051BC10079F3D0 /* Embed Libraries */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				ED2DEB4B206B49E4008E5F1E /* Realm.framework in Embed Libraries */,
-				ED2DEB49206B49E4008E5F1E /* Magnet.framework in Embed Libraries */,
-				ED2DEB53206B49E4008E5F1E /* RxSwift.framework in Embed Libraries */,
-				ED2DEB4D206B49E4008E5F1E /* RealmSwift.framework in Embed Libraries */,
-				ED2DEB55206B49E4008E5F1E /* Yams.framework in Embed Libraries */,
-				ED2DEB4F206B49E4008E5F1E /* RxCocoa.framework in Embed Libraries */,
-				ED2DEB51206B49E4008E5F1E /* RxRealm.framework in Embed Libraries */,
-				ED2DEB47206B49E4008E5F1E /* KeyHolder.framework in Embed Libraries */,
-			);
-			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -368,14 +342,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED2DEB4A206B49E4008E5F1E /* Realm.framework in Frameworks */,
-				ED2DEB48206B49E4008E5F1E /* Magnet.framework in Frameworks */,
-				ED2DEB52206B49E4008E5F1E /* RxSwift.framework in Frameworks */,
-				ED2DEB4C206B49E4008E5F1E /* RealmSwift.framework in Frameworks */,
-				ED2DEB54206B49E4008E5F1E /* Yams.framework in Frameworks */,
-				ED2DEB4E206B49E4008E5F1E /* RxCocoa.framework in Frameworks */,
-				ED2DEB50206B49E4008E5F1E /* RxRealm.framework in Frameworks */,
-				ED2DEB46206B49E4008E5F1E /* KeyHolder.framework in Frameworks */,
+				EDE497082243E4CB009D5A0E /* KeyHolder.framework in Frameworks */,
+				EDE497092243E4CB009D5A0E /* Magnet.framework in Frameworks */,
+				EDE4970A2243E4CB009D5A0E /* Realm.framework in Frameworks */,
+				EDE4970B2243E4CB009D5A0E /* RealmSwift.framework in Frameworks */,
+				EDE4970C2243E4CB009D5A0E /* RxCocoa.framework in Frameworks */,
+				EDE4970D2243E4CB009D5A0E /* RxRealm.framework in Frameworks */,
+				EDE4970E2243E4CB009D5A0E /* RxSwift.framework in Frameworks */,
+				EDE4970F2243E4CB009D5A0E /* Yams.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,8 +777,8 @@
 				EDEB7A532004EDF000F8C48A /* Sources */,
 				EDEB7A542004EDF000F8C48A /* Frameworks */,
 				EDEB7A552004EDF000F8C48A /* Resources */,
-				EDDED73D20051BC10079F3D0 /* Embed Libraries */,
 				EDD4CA7C203BB331003F8072 /* Embed App Extensions */,
+				EDE497102243E4D7009D5A0E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -938,6 +912,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EDE497102243E4D7009D5A0E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/KeyHolder.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Magnet.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RxRealm.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Yams.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeyHolder.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Magnet.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Realm.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RealmSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRealm.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Yams.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EDAE6A9720809CEE00E7658B /* Sources */ = {
@@ -1223,7 +1233,10 @@
 				DEVELOPMENT_TEAM = 582LEGWZJK;
 				INFOPLIST_FILE = "MarkDownEditor-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
 				PRODUCT_NAME = Annay;
 				PROVISIONING_PROFILE = "0ddf0cc6-e7aa-4fe3-a221-4accbcd3aef8";
@@ -1244,7 +1257,10 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "MarkDownEditor-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.annay;
 				PRODUCT_NAME = Annay;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1263,7 +1279,11 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8AKT7PFJ2M;
 				INFOPLIST_FILE = MarkDownEditorPreviewExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.annay.PreviewExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = AnnayPreviewExtensionDevelopment;
@@ -1280,7 +1300,11 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8AKT7PFJ2M;
 				INFOPLIST_FILE = MarkDownEditorPreviewExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.annay.PreviewExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = AnnayPreviewExtensionDistribution;
@@ -1397,7 +1421,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -1417,7 +1442,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = MarkDownEditor/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MarkDownEditor",
@@ -1449,7 +1477,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = MarkDownEditor/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MarkDownEditor",
