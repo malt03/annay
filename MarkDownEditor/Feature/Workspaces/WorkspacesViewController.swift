@@ -66,7 +66,7 @@ final class WorkspacesViewController: NSViewController {
   }
   
   private func createOrOpenWorkspace() {
-    performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "createOrOpenWorkspace"), sender: nil)
+    performSegue(withIdentifier: "createOrOpenWorkspace", sender: nil)
   }
   
   @objc private func selectNextWorkspace() {
@@ -129,7 +129,7 @@ final class WorkspacesViewController: NSViewController {
   }
   
   @IBAction private func moveTheWorkspaceFile(_ sender: NSMenuItem) {
-    performSegue(withIdentifier: .init(rawValue: "moveWorkspace"), sender: nil)
+    performSegue(withIdentifier: "moveWorkspace", sender: nil)
   }
 }
 
@@ -180,21 +180,21 @@ extension WorkspacesViewController: NSTableViewDataSource, NSTableViewDelegate {
   }
   
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-    let nodes = info.draggingPasteboard().nodes
+    let nodes = info.draggingPasteboard.nodes
     if nodes.count > 0 {
       if dropOperation == .on { WorkspaceModel.spaces[safe: row]?.select() }
       return []
     }
 
     if dropOperation == .on { return [] }
-    guard let draggingRow = Int(info.draggingPasteboard().string(forType: .workspaceModel) ?? "") else { return [] }
+    guard let draggingRow = Int(info.draggingPasteboard.string(forType: .workspaceModel) ?? "") else { return [] }
     if draggingRow == row || draggingRow == row - 1 { return [] }
     if row == WorkspaceModel.spaces.count + 1 { return [] }
     return [.move]
   }
   
   func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-    guard let draggingRow = Int(info.draggingPasteboard().string(forType: .workspaceModel) ?? "") else { return false }
+    guard let draggingRow = Int(info.draggingPasteboard.string(forType: .workspaceModel) ?? "") else { return false }
     WorkspaceModel.move(from: draggingRow, to: row)
     return true
   }

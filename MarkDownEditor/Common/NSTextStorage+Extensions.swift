@@ -12,7 +12,7 @@ extension NSTextStorage {
   func highlightMarkdownSyntax() {
     let allRange = NSRange(location: 0, length: length)
     addAttribute(.foregroundColor, value: NSColor.textColor, range: allRange)
-    addAttribute(.underlineStyle, value: NSUnderlineStyle.styleNone.rawValue, range: allRange)
+    addAttribute(.underlineStyle, value: 0, range: allRange)
     highlightLinks()
     highlightLists()
     highlightHeads()
@@ -34,7 +34,7 @@ extension NSTextStorage {
   private func highlightLinks() {
     for range in string.oldRanges(with: "!?\\[[.[^\\]]]*\\]\\([.[^\\)\\n]]*\\)") {
       addAttribute(.underlineColor, value: NSColor.linkColor, range: range)
-      addAttribute(.underlineStyle, value: NSUnderlineStyle.patternDot.rawValue | NSUnderlineStyle.styleSingle.rawValue, range: range)
+      addAttribute(.underlineStyle, value: NSUnderlineStyle.patternDot.rawValue | NSUnderlineStyle.single.rawValue, range: range)
       addAttribute(.foregroundColor, value: NSColor.linkColor, range: range)
     }
   }

@@ -13,7 +13,7 @@ import RxSwift
 extension NSTableView.AutosaveName {
   static var Sidebar: NSTableView.AutosaveName {
     let id = WorkspaceModel.selectedValue.id
-    return NSTableView.AutosaveName("Sidebar/\(id)")
+    return "Sidebar/\(id)"
   }
 }
 
@@ -547,7 +547,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
-    let items = info.draggingPasteboard().pasteboardItems ?? []
+    let items = info.draggingPasteboard.pasteboardItems ?? []
     let fileURLs = items.compactMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
     if fileURLs.count > 0 {
       let containsCopyable = fileURLs.contains { $0.isDirectory || $0.isConformsToUTI(kUTTypePlainText as String) }
@@ -562,7 +562,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
       return [.copy]
     }
     
-    let nodes = info.draggingPasteboard().nodes
+    let nodes = info.draggingPasteboard.nodes
     if nodes.count == 0 { return [] }
     
     guard let parentNode = item as? NodeModel else {
@@ -575,7 +575,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
       return []
     }
     
-    if info.draggingPasteboard().nodes.first?.workspace?.id == WorkspaceModel.selectedValue.id {
+    if info.draggingPasteboard.nodes.first?.workspace?.id == WorkspaceModel.selectedValue.id {
       for node in nodes {
         if node == parentNode { return [] }
         if node.descendants.contains(parentNode) { return [] }
@@ -608,7 +608,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
       fixedIndex = index
     }
     
-    let items = info.draggingPasteboard().pasteboardItems ?? []
+    let items = info.draggingPasteboard.pasteboardItems ?? []
     let fileURLs = items.compactMap({ URL(string: $0.string(forType: .fileURL) ?? "") })
     if fileURLs.count > 0 {
       do {
@@ -631,10 +631,10 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
       return true
     }
     
-    let movedNodes = info.draggingPasteboard().nodes
+    let movedNodes = info.draggingPasteboard.nodes
     if movedNodes.count == 0 { return false }
     
-    if info.draggingPasteboard().nodes.first?.workspace?.id == WorkspaceModel.selectedValue.id {
+    if info.draggingPasteboard.nodes.first?.workspace?.id == WorkspaceModel.selectedValue.id {
       fixedIndex -= movedNodes.filter { !$0.isDeleted && $0.parent == parent }.map { outlineView.childIndex(forItem: $0) }.filter { $0 < fixedIndex }.count
       
       Realm.transaction { _ in

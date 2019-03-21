@@ -48,7 +48,7 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
     selectedWorkspace.asObservable().subscribe(onNext: { [weak self] (workspace) in
       guard let s = self else { return }
       s.outlineView.autosaveName = nil
-      s.outlineView.autosaveName = NSTableView.AutosaveName("NewNoteShortcutPreference/\(workspace.id)")
+      s.outlineView.autosaveName = "NewNoteShortcutPreference/\(workspace.id)"
       s.reloadData()
       
       s.refreshNodesToken?.invalidate()

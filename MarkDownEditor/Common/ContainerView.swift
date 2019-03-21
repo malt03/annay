@@ -20,7 +20,7 @@ final class ContainerView: BackgroundSetableView {
     isHidden = false
     
     removeCurrentViewController()
-    parent.addChildViewController(viewController)
+    parent.addChild(viewController)
     
     fillConstraints = addSubviewWithFillConstraints(viewController.view)
     self.viewController = viewController
@@ -39,7 +39,7 @@ final class ContainerView: BackgroundSetableView {
       fillConstraints = nil
     }
     viewController?.view.removeFromSuperview()
-    viewController?.removeFromParentViewController()
+    viewController?.removeFromParent()
     viewController = nil
   }
 }

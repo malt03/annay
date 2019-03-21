@@ -52,11 +52,11 @@ final class CreateOrOpenWorkspaceTabViewController: NSViewController {
   }
   
   private lazy var openWorkspaceViewController: OpenWorkspaceViewController = {
-    return NSStoryboard(name: .init(rawValue: "OpenWorkspace"), bundle: .main).instantiateInitialController() as! OpenWorkspaceViewController
+    return NSStoryboard(name: "OpenWorkspace", bundle: .main).instantiateInitialController() as! OpenWorkspaceViewController
   }()
   
   private lazy var createWorkspaceViewController: CreateWorkspaceViewController = {
-    return NSStoryboard(name: .init(rawValue: "CreateWorkspace"), bundle: .main).instantiateInitialController() as! CreateWorkspaceViewController
+    return NSStoryboard(name: "CreateWorkspace", bundle: .main).instantiateInitialController() as! CreateWorkspaceViewController
     
   }()
 }

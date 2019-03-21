@@ -31,19 +31,19 @@ final class TextView: NSTextView {
   }
 
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-    if sender.draggingPasteboard().replaceNoteToMarkdown() {
+    if sender.draggingPasteboard.replaceNoteToMarkdown() {
       return super.performDragOperation(sender)
     }
     
-    if sender.draggingPasteboard().replaceImagesToMarkdown() {
+    if sender.draggingPasteboard.replaceImagesToMarkdown() {
       return super.performDragOperation(sender)
     }
     
-    if sender.draggingPasteboard().relaceLinkToMarkdown() {
+    if sender.draggingPasteboard.relaceLinkToMarkdown() {
       return super.performDragOperation(sender)
     }
 
-    sender.draggingPasteboard().becomeOnlyPlaneText()
+    sender.draggingPasteboard.becomeOnlyPlaneText()
     return super.performDragOperation(sender)
   }
   
@@ -52,7 +52,7 @@ final class TextView: NSTextView {
   }
   
   private func writeImages(_ imagesData: [Data], fileExtension: String, sender: NSDraggingInfo) -> Bool {
-    let pasteboard = sender.draggingPasteboard()
+    let pasteboard = sender.draggingPasteboard
     do {
       let imageTexts: [String] = try imagesData.compactMap { (imageData) in
         let url = try ResourceManager.save(data: imageData, fileExtension: fileExtension)

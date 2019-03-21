@@ -9,7 +9,7 @@
 import Cocoa
 
 final class PreferenceWindowController: NSWindowController {
-  private static let shared = NSStoryboard(name: NSStoryboard.Name(rawValue: "Preference"), bundle: .main).instantiateInitialController() as! PreferenceWindowController
+  private static let shared = NSStoryboard(name: "Preference", bundle: .main).instantiateInitialController() as! PreferenceWindowController
   
   static func show() {
     shared.show()

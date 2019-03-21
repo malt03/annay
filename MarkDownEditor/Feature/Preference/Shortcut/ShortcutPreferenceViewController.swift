@@ -13,7 +13,7 @@ final class ShortcutPreferenceViewController: NSViewController {
     defer { super.prepare(for: segue, sender: sender) }
     
     guard let vc = segue.destinationController as? NewOrOpenNoteShortcutPreferenceViewController else { return }
-    switch segue.identifier?.rawValue ?? "" {
+    switch segue.identifier ?? "" {
     case "NewNote":  vc.prepare(kind: .newNote)
     case "OpenNote": vc.prepare(kind: .openNote)
     default: break

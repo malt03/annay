@@ -14,7 +14,7 @@ import CoreSpotlight
 class PreviewViewController: NSViewController, QLPreviewingController {
   
   override var nibName: NSNib.Name? {
-    return NSNib.Name("PreviewViewController")
+    return "PreviewViewController"
   }
   
   @IBOutlet private weak var webView: WKWebView!
@@ -22,7 +22,7 @@ class PreviewViewController: NSViewController, QLPreviewingController {
   
   private var completionHandler: QLPreviewItemLoadingBlock?
   
-  func preparePreviewOfSearchableItem(withIdentifier identifier: String, queryString: String, completionHandler handler: @escaping QLPreviewItemLoadingBlock) {
+  func preparePreviewOfSearchableItem(identifier: String, queryString: String?, completionHandler handler: @escaping QLPreviewItemLoadingBlock) {
     guard
       let nodeId = identifier.split(separator: "/").last,
       let html = HtmlDataStore.shared.html(for: String(nodeId))

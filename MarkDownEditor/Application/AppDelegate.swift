@@ -28,7 +28,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     node.select()
   }
   
-  func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]) -> Void) -> Bool {
+  func application(_ application: NSApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([NSUserActivityRestoring]) -> Void) -> Bool {
     if userActivity.activityType == CSSearchableItemActionType {
       guard
         let nodeId = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
