@@ -113,11 +113,7 @@ final class SidebarViewController: NSViewController {
   override func viewDidAppear() {
     super.viewDidAppear()
     NodeModel.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
-      guard let s = self, let node = node else { return }
-      let row = s.outlineView.row(forItem: node)
-      if row != -1 && !s.outlineView.selectedRowIndexes.contains(row) {
-        s.outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-      }
+      self?.revealInSidebar()
     }).disposed(by: bag)
   }
   

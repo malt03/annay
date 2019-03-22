@@ -118,6 +118,7 @@ final class WorkspaceModel: Object {
     try Realm.transaction { _ in
       example.setBody(try! String(contentsOf: Bundle.main.url(forResource: "Example", withExtension: "md")!))
       try example.save()
+      example.select()
     }
     return workspace
   }
