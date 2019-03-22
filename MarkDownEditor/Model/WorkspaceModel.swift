@@ -112,7 +112,14 @@ final class WorkspaceModel: Object {
   
   @discardableResult
   private static func createDefault() throws -> WorkspaceModel {
-    return try create(name: Localized("Default Workspace"), parentDirectory: FileManager.default.applicationSupport)
+    let workspace = try create(name: Localized("Default Workspace"), parentDirectory: FileManager.default.applicationSupport)
+    let examplesDirectory = try! NodeModel.createDirectory(name: "Examples", parent: nil)
+    let example = NodeModel.createNote(in: examplesDirectory)
+    try Realm.transaction { _ in
+      example.setBody(try! String(contentsOf: Bundle.main.url(forResource: "Example", withExtension: "md")!))
+      try example.save()
+    }
+    return workspace
   }
   
   static func createDefaultIfNeeded() throws {

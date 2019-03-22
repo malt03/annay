@@ -101,6 +101,7 @@
 		EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25B2010868C005F3547 /* String+Extensions.swift */; };
 		EDC25C85203BCC9F00C8F38E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDC25C82203BCC9F00C8F38E /* Localizable.strings */; };
 		EDC72BC0205575090048D310 /* ShortcutPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC72BBF205575090048D310 /* ShortcutPreference.swift */; };
+		EDCA0B1822455AF800026C15 /* Example.md in Resources */ = {isa = PBXBuildFile; fileRef = EDCA0B1722455AF800026C15 /* Example.md */; };
 		EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */ = {isa = PBXBuildFile; fileRef = EDCED8C42005DAD100C514B1 /* monokai-sublime.css */; };
 		EDD0805A202B12210021895A /* NewOrOpenNoteShortcutPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD08058202B12210021895A /* NewOrOpenNoteShortcutPreferenceViewController.swift */; };
 		EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */; };
@@ -288,6 +289,7 @@
 		EDC25C83203BCC9F00C8F38E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EDC25C84203BCC9F00C8F38E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EDC72BBF205575090048D310 /* ShortcutPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreference.swift; sourceTree = "<group>"; };
+		EDCA0B1722455AF800026C15 /* Example.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Example.md; sourceTree = "<group>"; };
 		EDCED8C42005DAD100C514B1 /* monokai-sublime.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.css"; sourceTree = "<group>"; };
 		EDD08058202B12210021895A /* NewOrOpenNoteShortcutPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrOpenNoteShortcutPreferenceViewController.swift; sourceTree = "<group>"; };
 		EDD0A287200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPasteboardPasteboardType+Extensions.swift"; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				ED598C58201F21BC00072D8A /* WorkspaceDirectoryWatcherManager.swift */,
 				ED2DEB5E206B7DE1008E5F1E /* NodeModel+NSFilePromiseProviderDelegate.swift */,
 				ED2DEB60206B7FC9008E5F1E /* NodeModel+NSPasteboardWriting.swift */,
+				EDCA0B1722455AF800026C15 /* Example.md */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -907,6 +910,7 @@
 				ED574007202D955E00D844A3 /* ShortcutPreference.storyboard in Resources */,
 				ED4EB9D7201D61E200B4CBE7 /* OpenQuickly.storyboard in Resources */,
 				ED157E2B224385FF00A56E19 /* light.css in Resources */,
+				EDCA0B1822455AF800026C15 /* Example.md in Resources */,
 				ED840D23201A2A7700EF2C42 /* MoveWorkspace.storyboard in Resources */,
 				ED2E1498200555C6003D55A3 /* markdown-it-sup.min.js in Resources */,
 				ED840D2D201A364600EF2C42 /* jquery.min.js in Resources */,

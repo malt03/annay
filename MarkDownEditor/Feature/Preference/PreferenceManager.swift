@@ -31,6 +31,9 @@ final class PreferenceManager {
   
   private init() {
     directoryUrl = Variable<URL>(UserDefaults.standard.url(forKey: Key.DirectoryUrl) ?? PreferenceManager.defaultDirectoryUrl)
+    BookmarkManager.shared.getBookmarkedURL(directoryUrl.value, fallback: { PreferenceManager.defaultDirectoryUrl }, handler: { (url) in
+      try! FileManager.default.createDirectoryIfNeeded(url: url)
+    })
     
     DispatchQueue.main.async {
       _ = self.directoryUrl.asObservable().subscribe(onNext: { (url) in
