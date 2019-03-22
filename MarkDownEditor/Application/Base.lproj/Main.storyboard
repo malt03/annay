@@ -24,7 +24,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="-86"/>
+            <point key="canvasLocation" x="357" y="-138"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="fUs-gK-hUv">
@@ -51,27 +51,27 @@
                 </splitViewController>
                 <customObject id="YB4-dE-hZF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="733"/>
+            <point key="canvasLocation" x="357" y="1164"/>
         </scene>
         <!--Super Parent View Controller-->
         <scene sceneID="Y7f-LQ-kg0">
             <objects>
                 <viewController id="MeC-WR-dsE" customClass="SuperParentViewController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="zrR-Z7-Ium">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1015" height="640"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="utm-l8-sUO">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1015" height="640"/>
                                 <connections>
                                     <segue destination="xTu-VI-k9j" kind="embed" id="Etz-qp-ALR"/>
                                 </connections>
                             </containerView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="bdV-Iq-Ypy" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1015" height="640"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="RGy-e2-bxW">
-                                        <rect key="frame" x="209" y="134" width="32" height="32"/>
+                                        <rect key="frame" x="492" y="304" width="32" height="32"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -103,7 +103,7 @@
                 </viewController>
                 <customObject id="VKm-V8-xcD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="318"/>
+            <point key="canvasLocation" x="357.5" y="488"/>
         </scene>
         <!--Workspaces-->
         <scene sceneID="xQ5-Hg-q63">
@@ -111,7 +111,7 @@
                 <controllerPlaceholder storyboardName="Workspaces" id="pfU-c3-pdr" sceneMemberID="viewController"/>
                 <customObject id="AJ4-f6-Y4B" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-154" y="1086"/>
+            <point key="canvasLocation" x="128" y="1517"/>
         </scene>
         <!--Sidebar-->
         <scene sceneID="czs-YL-EQV">
@@ -119,7 +119,7 @@
                 <controllerPlaceholder storyboardName="Sidebar" id="3Vm-IE-FLl" sceneMemberID="viewController"/>
                 <customObject id="7q6-CX-Cgp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="76" y="1086"/>
+            <point key="canvasLocation" x="358" y="1517"/>
         </scene>
         <!--MarkDownEditor-->
         <scene sceneID="QH0-Zf-a8M">
@@ -127,7 +127,7 @@
                 <controllerPlaceholder storyboardName="MarkDownEditor" id="wRX-vq-IFj" sceneMemberID="viewController"/>
                 <customObject id="QLC-zX-p2f" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="306" y="1086"/>
+            <point key="canvasLocation" x="588" y="1517"/>
         </scene>
     </scenes>
 </document>
