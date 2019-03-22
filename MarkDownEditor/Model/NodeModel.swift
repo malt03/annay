@@ -306,10 +306,18 @@ final class NodeModel: Object {
           selectAndWriteEnqueueHandler((self, url))
           return nil
         }
-        writeUrl = url.appendingPathExtension("html")
+        if url.pathExtension == "" {
+          writeUrl = url.appendingPathExtension("html")
+        } else {
+          writeUrl = url
+        }
         try html.write(to: writeUrl, atomically: true, encoding: .utf8)
       case .text:
-        writeUrl = url.appendingPathExtension("md")
+        if url.pathExtension == "" {
+          writeUrl = url.appendingPathExtension("md")
+        } else {
+          writeUrl = url
+        }
         try (body.data(using: .utf8) ?? Data()).write(to: writeUrl)
       }
     }

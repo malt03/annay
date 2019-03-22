@@ -538,12 +538,19 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
     return node.isRoot && !node.isDeleted
   }
 
-  func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
-    let nodes = items.compactMap { $0 as? NodeModel }.deletingDescendants
-    let filePromiseProviders = nodes.map { NSFilePromiseProvider(fileType: kUTTypePlainText as String, delegate: $0) }
-    let objects = (nodes as [NSPasteboardWriting])// + (filePromiseProviders as [NSPasteboardWriting])
-    pasteboard.writeObjects(objects)
-    return true
+  func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
+    guard let node = item as? NodeModel else { return nil }
+    if isSelectedParent(for: node) { return nil }
+    return NodeFilePromiseProvider(node: node)
+  }
+  
+  private func isSelectedParent(for item: Any) -> Bool {
+    guard let parentItem = outlineView.parent(forItem: item) else { return false }
+    let parentRow = outlineView.row(forItem: parentItem)
+    if parentRow >= 0 && outlineView.isRowSelected(parentRow) {
+      return true
+    }
+    return isSelectedParent(for: parentItem)
   }
   
   func outlineView(_ outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {

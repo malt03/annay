@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		ED099FFF201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */; };
 		ED11093A22442089009FEA26 /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11093922442089009FEA26 /* BookmarkManager.swift */; };
+		ED11095C2244B442009FEA26 /* NodeFilePromiseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED11095B2244B442009FEA26 /* NodeFilePromiseProvider.swift */; };
 		ED157E29224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED157E28224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift */; };
 		ED157E2B224385FF00A56E19 /* light.css in Resources */ = {isa = PBXBuildFile; fileRef = ED157E2A224385FF00A56E19 /* light.css */; };
 		ED157E2D2243AE6500A56E19 /* NSAppearance+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED157E2C2243AE6500A56E19 /* NSAppearance+Extensions.swift */; };
@@ -170,6 +171,7 @@
 /* Begin PBXFileReference section */
 		ED099FFE201DBB86006F91E4 /* OpenQuicklyNodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableCellView.swift; sourceTree = "<group>"; };
 		ED11093922442089009FEA26 /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
+		ED11095B2244B442009FEA26 /* NodeFilePromiseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeFilePromiseProvider.swift; sourceTree = "<group>"; };
 		ED157E28224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenQuicklyNodeTableRowView.swift; sourceTree = "<group>"; };
 		ED157E2A224385FF00A56E19 /* light.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = light.css; sourceTree = "<group>"; };
 		ED157E2C2243AE6500A56E19 /* NSAppearance+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAppearance+Extensions.swift"; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 				ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */,
 				ED841BD02008EC2B0097996A /* NodeTableCellView.swift */,
 				ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */,
+				ED11095B2244B442009FEA26 /* NodeFilePromiseProvider.swift */,
 			);
 			path = Sidebar;
 			sourceTree = "<group>";
@@ -1032,6 +1035,7 @@
 				EDEB7A6B2004F21800F8C48A /* MarkDownEditorViewController.swift in Sources */,
 				ED2DEB16206B4148008E5F1E /* NodeModel.swift in Sources */,
 				EDD4C743202E9AF70029FF4C /* GeneralPreferenceViewController.swift in Sources */,
+				ED11095C2244B442009FEA26 /* NodeFilePromiseProvider.swift in Sources */,
 				EDF6A7E7202B082000B85B2C /* PreferenceWindowController.swift in Sources */,
 				ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */,
 				EDB601492022C06A00EDF59C /* Application.swift in Sources */,
