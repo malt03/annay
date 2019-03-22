@@ -63,6 +63,7 @@ final class MoveWorkspaceViewController: NSViewController {
       if result != .OK { return }
       guard let url = openPanel.url else { return }
       s.setDirectory.onNext(url.replacingHomePath)
+      BookmarkManager.shared.bookmark(url: url)
     }
   }
   

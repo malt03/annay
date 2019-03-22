@@ -34,12 +34,19 @@ final class StyleSheetManager {
   
   private init() {
     let fileManager = FileManager.default
-    try! fileManager.createDirectoryIfNeeded(url: StyleSheetManager.directoryUrl)
-    StyleSheetManager.createDefaultCsses(force: false)
+    var all = [StyleSheet]()
     
-    let files = try! fileManager.contentsOfDirectory(at: StyleSheetManager.directoryUrl, includingPropertiesForKeys: [], options: [])
-    let styleSheets = files.compactMap { StyleSheet(file: $0) }
-    all = Variable(styleSheets)
+    BookmarkManager.shared.getBookmarkedURL(StyleSheetManager.directoryUrl, fallback: { () -> URL? in
+      PreferenceManager.shared.resetDirectory()
+      return StyleSheetManager.directoryUrl
+    }) { (bookmarkedDirectoryURL) in
+      try! fileManager.createDirectoryIfNeeded(url: bookmarkedDirectoryURL)
+      StyleSheetManager.createDefaultCsses(force: false)
+      let files = try! fileManager.contentsOfDirectory(at: bookmarkedDirectoryURL, includingPropertiesForKeys: [], options: [])
+      let styleSheets = files.compactMap { StyleSheet(file: $0) }
+      all = styleSheets
+    }
+    self.all = Variable(all)
 
     if NSAppearance.effective.isDark {
       selected = Variable<StyleSheet>(StyleSheet(file: StyleSheetManager.darkCss)!)

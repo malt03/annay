@@ -541,7 +541,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   func outlineView(_ outlineView: NSOutlineView, writeItems items: [Any], to pasteboard: NSPasteboard) -> Bool {
     let nodes = items.compactMap { $0 as? NodeModel }.deletingDescendants
     let filePromiseProviders = nodes.map { NSFilePromiseProvider(fileType: kUTTypePlainText as String, delegate: $0) }
-    let objects = (nodes as [NSPasteboardWriting]) + (filePromiseProviders as [NSPasteboardWriting])
+    let objects = (nodes as [NSPasteboardWriting])// + (filePromiseProviders as [NSPasteboardWriting])
     pasteboard.writeObjects(objects)
     return true
   }

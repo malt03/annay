@@ -37,3 +37,4 @@
 "Export" = "エクスポート";
 "Default" = "デフォルト";
 "Workspace" = "ワークスペース";
+"Could not access file." = "ファイルにアクセス出来ませんでした。";

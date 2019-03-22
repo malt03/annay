@@ -21,18 +21,25 @@ struct StyleSheet: Hashable {
   }
   
   mutating func reload() {
-    do {
-      css = try String(contentsOf: fileUrl)
-    } catch {}
+    var newCSS = css
+    BookmarkManager.shared.getBookmarkedURL(fileUrl, fallback: { fileUrl }) { (bookmarkedURL) in
+      newCSS = try! String(contentsOf: bookmarkedURL)
+    }
+    css = newCSS
   }
   
   init?(file: URL) {
     if file.pathExtension != "css" { return nil }
     fileUrl = file
-    do {
-      name = file.lastPathComponent
-      css = try String(contentsOf: file)
-    } catch {
+    name = file.lastPathComponent
+    
+    var savedCSS: String?
+    BookmarkManager.shared.getBookmarkedURL(file, fallback: { file }) { (bookmarkedURL) in
+      savedCSS = try! String(contentsOf: bookmarkedURL)
+    }
+    if let savedCSS = savedCSS {
+      css = savedCSS
+    } else {
       return nil
     }
   }

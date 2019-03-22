@@ -53,6 +53,7 @@ final class OpenWorkspaceViewController: NSViewController {
       if result != .OK { return }
       guard let url = openPanel.url else { return }
       s.setFile.onNext(url.replacingHomePath)
+      BookmarkManager.shared.bookmark(url: url)
     }
   }
   

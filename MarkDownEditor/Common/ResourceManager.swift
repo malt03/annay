@@ -15,9 +15,14 @@ final class ResourceManager {
     let fileName = UUID().uuidString + "." + fileExtension
 
     let workspaceSourceDirectory = workspace.directoryUrl.resourceDirectory
-    try FileManager.default.createDirectoryIfNeeded(url: workspaceSourceDirectory)
-    let url = workspaceSourceDirectory.appendingPathComponent(fileName)
-    try data.write(to: url)
+    
+    var url = URL(fileURLWithPath: "/")
+    
+    try BookmarkManager.shared.getBookmarkedURL(workspaceSourceDirectory, fallback: { workspaceSourceDirectory }) { (bookmarkedURL) in
+      try FileManager.default.createDirectoryIfNeeded(url: url)
+      url = bookmarkedURL.appendingPathComponent(fileName)
+      try data.write(to: url)
+    }
 
     return url
   }

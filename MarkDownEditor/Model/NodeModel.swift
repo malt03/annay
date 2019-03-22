@@ -102,8 +102,12 @@ final class NodeModel: Object {
     parent = node
     workspace = node.workspace
     let newUrl = url
-    if FileManager.default.fileExists(atPath: oldUrl.path) {
-      try FileManager.default.moveItem(at: oldUrl, to: newUrl)
+    try BookmarkManager.shared.getBookmarkedURL(oldUrl, fallback: { oldUrl }) { (bookmarkedOldUrl) in
+      if FileManager.default.fileExists(atPath: bookmarkedOldUrl.path) {
+        try BookmarkManager.shared.getBookmarkedURL(newUrl, fallback: { newUrl }) { (bookmarkedNewUrl) in
+          try FileManager.default.moveItem(at: bookmarkedOldUrl, to: bookmarkedNewUrl)
+        }
+      }
     }
     try oldParent?.save()
     try parent?.save()
@@ -165,8 +169,11 @@ final class NodeModel: Object {
       for node in deletedNodes {
         if node.isInvalidated { continue }
         realm.delete(node.descendants)
-        if FileManager.default.fileExists(atPath: node.url.path) {
-          try FileManager.default.removeItem(at: node.url)
+        
+        try BookmarkManager.shared.getBookmarkedURL(node.url, fallback: { node.url }) { (bookmarkedUrl) in
+          if FileManager.default.fileExists(atPath: bookmarkedUrl.path) {
+            try FileManager.default.removeItem(at: bookmarkedUrl)
+          }
         }
       }
       realm.delete(deletedNodes)
@@ -263,9 +270,12 @@ final class NodeModel: Object {
   func deleteImmediately(realm: Realm, workspace: WorkspaceModel) throws {
     let nodeIds = descendants.map { $0.id } + [id]
     CSSearchableIndex.default().deleteSearchableItemsWithDataStore(with: nodeIds)
-    if FileManager.default.fileExists(atPath: url.path) {
-      try FileManager.default.removeItem(at: url)
+    try BookmarkManager.shared.getBookmarkedURL(url, fallback: { url }) { (bookmarkedUrl) in
+      if FileManager.default.fileExists(atPath: bookmarkedUrl.path) {
+        try FileManager.default.removeItem(at: bookmarkedUrl)
+      }
     }
+    
     realm.delete(descendants)
     realm.delete(self)
   }
@@ -372,7 +382,9 @@ extension NodeModel {
   }
   
   private func saveNote() throws {
-    try body.write(to: url, atomically: false, encoding: .utf8)
+    try BookmarkManager.shared.getBookmarkedURL(url, fallback: { url }) { (bookmarkedURL) in
+      try body.write(to: bookmarkedURL, atomically: false, encoding: .utf8)
+    }
     isBodySaved = true
   }
 }
@@ -433,7 +445,9 @@ extension NodeModel {
   }
   
   func getDirectoryInfo() throws -> DirectoryInfo {
-    try FileManager.default.createDirectoryIfNeeded(url: url)
+    try BookmarkManager.shared.getBookmarkedURL(url, fallback: { url }) { (bookmarkedURL) in
+      try FileManager.default.createDirectoryIfNeeded(url: bookmarkedURL)
+    }
     return DirectoryInfo(directoryUrl: url)
   }
   
@@ -470,8 +484,10 @@ extension NodeModel {
   }
   
   private func saveDirectory() throws {
-    try FileManager.default.createDirectoryIfNeeded(url: url)
-    try DirectoryInfo(children: children, directory: self).write(to: url)
+    try BookmarkManager.shared.getBookmarkedURL(url, fallback: { url }) { (bookmarkedURL) in
+      try FileManager.default.createDirectoryIfNeeded(url: bookmarkedURL)
+      try DirectoryInfo(children: children, directory: self).write(to: bookmarkedURL)
+    }
   }
 }
 

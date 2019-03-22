@@ -22,15 +22,21 @@ final class PreferenceManager {
   
   let directoryUrl: Variable<URL>
   
-  private static var defaultDirectoryUrl: URL { return  FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".annay", isDirectory: true) }
+  private static var defaultDirectoryUrl: URL { return FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("preferences", isDirectory: true) }
+  
+  func resetDirectory() {
+    UserDefaults.standard.removeObject(forKey: Key.DirectoryUrl)
+    directoryUrl.value = PreferenceManager.defaultDirectoryUrl
+  }
   
   private init() {
     directoryUrl = Variable<URL>(UserDefaults.standard.url(forKey: Key.DirectoryUrl) ?? PreferenceManager.defaultDirectoryUrl)
-    try! FileManager.default.createDirectoryIfNeeded(url: directoryUrl.value)
     
     DispatchQueue.main.async {
       _ = self.directoryUrl.asObservable().subscribe(onNext: { (url) in
-        try! FileManager.default.createDirectoryIfNeeded(url: url)
+        BookmarkManager.shared.getBookmarkedURL(url, fallback: { PreferenceManager.defaultDirectoryUrl }, handler: { (url) in
+          try! FileManager.default.createDirectoryIfNeeded(url: url)
+        })
         UserDefaults.standard.set(url, forKey: Key.DirectoryUrl)
         UserDefaults.standard.synchronize()
         GeneralPreference.shared.reload()

@@ -131,7 +131,11 @@ final class WorkspaceModel: Object {
   func setDirectoryUrl(_ url: URL) throws {
     if directoryUrl == url { return }
     if FileManager.default.fileExists(atPath: url.path) { throw MarkDownEditorError.fileExists(oldUrl: url) }
-    if FileManager.default.fileExists(atPath: directoryUrl.path) { try FileManager.default.moveItem(at: directoryUrl, to: url) }
+    try BookmarkManager.shared.getBookmarkedURL(directoryUrl, fallback: { directoryUrl }) { (bookmarkedDirectoryUrl) in
+      if FileManager.default.fileExists(atPath: bookmarkedDirectoryUrl.path) {
+        try FileManager.default.moveItem(at: bookmarkedDirectoryUrl, to: url)
+      }
+    }
     directoryUrl = url
   }
   

@@ -35,6 +35,8 @@ struct DirectoryInfo: Codable {
   }
   
   func write(to directoryUrl: URL) throws {
-    try JSONEncoder().encode(self).write(to: directoryUrl.infoFile)
+    try BookmarkManager.shared.getBookmarkedURL(directoryUrl.infoFile, fallback: { directoryUrl.infoFile }) { (bookmarkedURL) in
+      try JSONEncoder().encode(self).write(to: bookmarkedURL)
+    }
   }
 }

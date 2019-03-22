@@ -10,11 +10,14 @@ import Foundation
 
 enum MarkDownEditorError: LocalizedError {
   case fileExists(oldUrl: URL?)
+  case couldNotAccessFile(url: URL)
   
   var errorDescription: String? {
     switch self {
     case .fileExists:
       return Localized("File already exists.")
+    case .couldNotAccessFile(url: let url):
+      return Localized("Could not access file.") + "\n" + url.path
     }
   }
 }

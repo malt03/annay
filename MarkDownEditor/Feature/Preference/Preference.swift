@@ -26,11 +26,9 @@ extension Preference {
   }
 
   func save() {
-    do {
-      let yaml = try YAMLEncoder().encode(self)
-      try yaml.write(to: Self.fileUrl, atomically: true, encoding: .utf8)
-    } catch {
-      NSAlert(error: error).runModal()
+    let yaml = try! YAMLEncoder().encode(self)
+    BookmarkManager.shared.getBookmarkedURL(Self.fileUrl, fallback: { Self.fileUrl }) { (bookmarkedURL) in
+      try! yaml.write(to: bookmarkedURL, atomically: true, encoding: .utf8)
     }
   }
   

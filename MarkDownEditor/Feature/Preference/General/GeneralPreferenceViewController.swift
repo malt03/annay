@@ -28,6 +28,7 @@ final class GeneralPreferenceViewController: NSViewController {
       if result != .OK { return }
       guard let url = openPanel.url else { return }
       PreferenceManager.shared.directoryUrl.value = url
+      BookmarkManager.shared.bookmark(url: url)
     }
   }
   
