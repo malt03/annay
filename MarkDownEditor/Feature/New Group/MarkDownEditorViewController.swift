@@ -121,7 +121,7 @@ final class MarkDownEditorViewController: NSViewController {
   
   private func updateNote(note: NodeModel? = NodeModel.selectedNode.value) {
     if let note = note {
-      textView.isEditable = !note.isDeleted
+      textView.isEditable = !note.isDeletedWithParent
     } else {
       textView.isEditable = false
     }

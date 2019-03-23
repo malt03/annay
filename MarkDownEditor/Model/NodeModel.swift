@@ -30,6 +30,11 @@ final class NodeModel: Object {
   @objc dynamic var isDeleted = false
   @objc private dynamic var deletedAt: Date?
   
+  var isDeletedWithParent: Bool {
+    if isDeleted { return true }
+    return parent?.isDeletedWithParent ?? false
+  }
+  
   var ancestors: [NodeModel] {
     guard let parent = parent else { return [] }
     return [parent] + parent.ancestors
@@ -121,6 +126,14 @@ final class NodeModel: Object {
       try saveDirectory()
     } else {
       try saveNote()
+      reselectIfSelected()
+    }
+  }
+  
+  func saveWithChildren() throws {
+    try save()
+    for child in children {
+      try child.saveWithChildren()
     }
   }
   
@@ -243,12 +256,18 @@ final class NodeModel: Object {
     NodeModel.selectedNode.value = self
   }
   
+  private func reselectIfSelected() {
+    if NodeModel.selectedNode.value?.id == id {
+      select()
+    }
+  }
+  
   func delete() throws -> Bool {
     if isTrash { return false }
-    if isDeleted { return false }
+    if isDeletedWithParent { return false }
     isDeleted = true
     deletedAt = Date()
-    try save()
+    try saveWithChildren()
     return true
   }
   
