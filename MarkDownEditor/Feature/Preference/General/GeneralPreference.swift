@@ -47,7 +47,7 @@ final class GeneralPreference: Preference {
       font.asObservable(),
       styleSheetName.asObservable(),
       resultSelector: { (_, _, _) in }
-    )
+    ).skip(1)
   }
 
   var fontObservable: Observable<NSFont> { return font.asObservable().map { $0.font } }

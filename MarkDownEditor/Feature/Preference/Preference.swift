@@ -39,11 +39,11 @@ extension Preference {
   }
   
   static func create() -> Self {
-    let preference: Self
-    if let saved = (try? String(contentsOf: fileUrl)).flatMap({ try? YAMLDecoder().decode(Self.self, from: $0) }) {
-      preference = saved
-    } else {
-      preference = Self.init()
+    var preference = Self.init()
+    BookmarkManager.shared.getBookmarkedURL(fileUrl, fallback: { fileUrl }) { (bookmarkedUrl) in
+      if let saved = (try? String(contentsOf: bookmarkedUrl)).flatMap({ try? YAMLDecoder().decode(Self.self, from: $0) }) {
+        preference = saved
+      }
     }
     preference.prepare()
     preference.didCreated()

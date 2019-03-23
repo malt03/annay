@@ -65,7 +65,7 @@ final class ShortcutPreference: Preference {
   static var fileUrl: URL { return PreferenceManager.shared.shortcutUrl }
   
   var changed: Observable<Void> {
-    return Observable.combineLatest(newNote.changed, openNote.changed, resultSelector: { _, _ in })
+    return Observable.combineLatest(newNote.changed, openNote.changed, resultSelector: { _, _ in }).skip(1)
   }
   
   private let newNote: ShortcutPreferenceNodeParameters
