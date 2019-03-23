@@ -40,8 +40,7 @@ function update(markdown) {
         indexMap.set(value, index);
     });
 
-    var html = md.render(markdown).replace('$$$$scroll$$$$', '<span id="scroll"></span>');
-    document.getElementById("render").innerHTML = html;
+    document.getElementById("render").innerHTML = md.render(markdown);
 
     $("input:checkbox").on('change', function(event) {
         var values = map.get(event.target.id);
@@ -53,8 +52,12 @@ function update(markdown) {
         window.webkit.messageHandlers.checkboxChanged.postMessage(json);
     });
 
-    var scroll = document.getElementById("scroll");
-    if (scroll) { scroll.scrollIntoView(true); }
+    var dom = $("*:contains('$$$$scroll$$$$'):last");
+    if (dom.length > 0) {
+      var top = dom.offset().top;
+      $(window).scrollTop(top - document.documentElement.clientHeight / 2);
+    }
+    document.getElementById("render").innerHTML = md.render(markdown.replace('$$$$scroll$$$$', ''));
 
     return document.documentElement.outerHTML;
 }

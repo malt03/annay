@@ -12,15 +12,15 @@ _Italic_
 ## List
 ### Default
 - list-1
-  - nested-1
-  - nested-2
+	- nested-1
+	- nested-2
 - list-2
 - list-3
 
 ### Number
 1. list-1
-  1. nested-1
-  2. nested-2
+	1. nested-1
+	2. nested-2
 2.  list-2
 3. list-3
 
@@ -50,7 +50,7 @@ func main() {
 ![Annay](https://malt03.com/assets/images/annay.png)
 
 ## Foot Note
-Here is a footnote reference,[^1] and another.[^longnote]
+Here is a footnote reference,[^1] and another.[^2]
 
 ## Sub/Sup
 29^th^
@@ -60,8 +60,4 @@ H~2~0
 :):(:D
 
 [^1]: Here is the footnote.
-
-[^longnote]: Here's one with multiple blocks.
-
-Subsequent paragraphs are indented to show that they
-belong to the previous footnote.
+[^2]: Here's one with multiple blocks.
