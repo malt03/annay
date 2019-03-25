@@ -17,4 +17,8 @@ final class MainWindow: NSWindow {
     firstResponderSubject.onNext(firstResponder)
     return should
   }
+  
+  override func close() {
+    NSApp.terminate(nil)
+  }
 }
