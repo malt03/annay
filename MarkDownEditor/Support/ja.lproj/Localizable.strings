@@ -38,3 +38,4 @@
 "Default" = "デフォルト";
 "Workspace" = "ワークスペース";
 "Could not access file." = "ファイルにアクセス出来ませんでした。";
+"If there is only one workspace, you can not delete it." = "ワークスペースが１つしかない場合、削除できません。";

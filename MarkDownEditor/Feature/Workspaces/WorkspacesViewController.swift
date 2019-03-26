@@ -112,6 +112,10 @@ final class WorkspacesViewController: NSViewController {
 
   @IBAction private func delete(_ sender: NSMenuItem) {
     guard let row = tableView.rowForMenu else { return }
+    if WorkspaceModel.spaces.count <= 1 {
+      NSAlert(localizedMessageText: "If there is only one workspace, you can not delete it.").runModal()
+      return
+    }
     let workspace = WorkspaceModel.spaces[row]
     workspace.deleteFromSearchableIndex()
     let nodes = [NodeModel](workspace.nodes)
