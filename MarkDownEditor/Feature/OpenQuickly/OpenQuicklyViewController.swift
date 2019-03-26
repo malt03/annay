@@ -56,8 +56,13 @@ final class OpenQuicklyViewController: NSViewController {
     let row = tableView.row(at: location)
     if row == -1 { return }
     guard let node = result.value[safe: row] else { return }
+    openNode(node)
+  }
+  
+  private func openNode(_ node: NodeModel) {
     node.select()
     OpenQuicklyWindowController.hide()
+    NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
   }
   
   func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
@@ -96,8 +101,7 @@ extension OpenQuicklyViewController: NSTextFieldDelegate {
       return true
     case #selector(textView.insertNewline(_:)):
       guard let node = result.value[safe: tableView.selectedRow] else { return true }
-      node.select()
-      OpenQuicklyWindowController.hide()
+      openNode(node)
       return true
     case #selector(textView.cancelOperation(_:)):
       OpenQuicklyWindowController.hide()

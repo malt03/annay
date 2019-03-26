@@ -113,7 +113,7 @@ final class SidebarViewController: NSViewController {
   override func viewDidAppear() {
     super.viewDidAppear()
     NodeModel.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
-      self?.revealInSidebar()
+      self?.revealInSidebarWithFocus(false)
     }).disposed(by: bag)
   }
   
@@ -154,6 +154,10 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func revealInSidebar() {
+    revealInSidebarWithFocus(false)
+  }
+  
+  private func revealInSidebarWithFocus(_ focus: Bool) {
     guard let selected = NodeModel.selectedNode.value else { return }
     for node in selected.ancestors.reversed() {
       outlineView.expandItem(node)
@@ -161,7 +165,9 @@ final class SidebarViewController: NSViewController {
     let row = outlineView.row(forItem: selected)
     if row == -1 { return }
     outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-    moveFocusToSidebar()
+    if focus {
+      moveFocusToSidebar()
+    }
   }
   
   @objc private func moveFocusToSidebar() {
