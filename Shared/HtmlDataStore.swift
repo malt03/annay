@@ -20,7 +20,7 @@ final class HtmlDataStore {
   
   static let shared = HtmlDataStore()
   
-  private let userDefault = UserDefaults(suiteName: "group.org.annay")!
+  private let userDefault = UserDefaults(suiteName: "8AKT7PFJ2M.org.annay")!
   
   private init() {}
   
