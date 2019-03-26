@@ -10,6 +10,9 @@ build/*
 xcuserdata
 Snapshots
 
+project.xcworkspace/
+xcuserdata/
+
 # old skool
 .svn
 
