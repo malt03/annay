@@ -40,7 +40,7 @@ final class WorkspacesViewController: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToWorkspaces), name: .MoveFocusToWorkspaces, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(openWorkspace), name: .OpenWorkspace, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(openWorkspace(_:)), name: .OpenWorkspace, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(createWorkspace), name: .CreateWorkspace, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(selectNextWorkspace), name: .SelectNextWorkspace, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(selectPreviousWorkspace), name: .SelectPreviousWorkspace, object: nil)
@@ -55,10 +55,13 @@ final class WorkspacesViewController: NSViewController {
     view.window?.makeFirstResponder(tableView)
   }
   
-  @objc private func openWorkspace() {
+  @objc private func openWorkspace(_ notification: Notification) {
+    createOrOpenWorkspaceURL = (notification.object as? URL)?.deletingLastPathComponent()
     createOrOpenWorkspaceSegment = .open
     createOrOpenWorkspace()
   }
+  
+  private var createOrOpenWorkspaceURL: URL?
   
   @objc private func createWorkspace() {
     createOrOpenWorkspaceSegment = .create
@@ -96,7 +99,7 @@ final class WorkspacesViewController: NSViewController {
       case let vc as MoveWorkspaceViewController:
         vc.prepare(workspace: WorkspaceModel.spaces[tableView.selectedRow])
       case let vc as CreateOrOpenWorkspaceTabViewController:
-        vc.prepare(segment: createOrOpenWorkspaceSegment)
+        vc.prepare(segment: createOrOpenWorkspaceSegment, presetUrl: createOrOpenWorkspaceURL)
       default: break
       }
     default: break

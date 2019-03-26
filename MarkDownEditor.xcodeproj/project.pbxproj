@@ -68,6 +68,7 @@
 		ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */; };
 		ED5E97A22084F2DD00C71ED5 /* fileIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = ED5E97A02084F2DD00C71ED5 /* fileIcon.icns */; };
 		ED5E97A32084F2DD00C71ED5 /* dirIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = ED5E97A12084F2DD00C71ED5 /* dirIcon.icns */; };
+		ED6D3B9F2249E71700E64827 /* CreateOrOpenWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6D3B9E2249E71700E64827 /* CreateOrOpenWorkspaceViewController.swift */; };
 		ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710037204E16E90030CDFB /* PreferenceManager.swift */; };
 		ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */; };
 		ED83F7152036EB350038D96B /* Workspaces.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED83F7172036EB350038D96B /* Workspaces.storyboard */; };
@@ -248,6 +249,7 @@
 		ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
 		ED5E97A02084F2DD00C71ED5 /* fileIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fileIcon.icns; sourceTree = "<group>"; };
 		ED5E97A12084F2DD00C71ED5 /* dirIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dirIcon.icns; sourceTree = "<group>"; };
+		ED6D3B9E2249E71700E64827 /* CreateOrOpenWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrOpenWorkspaceViewController.swift; sourceTree = "<group>"; };
 		ED710037204E16E90030CDFB /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
 		ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
 		ED83F7142036E7290038D96B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = MarkDownEditor/ja.lproj/Sidebar.strings; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 				ED55C50920130B180070301A /* CreateWorkspace */,
 				ED574004202D950E00D844A3 /* CreateOrOpenWorkspace.storyboard */,
 				ED47CC84201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift */,
+				ED6D3B9E2249E71700E64827 /* CreateOrOpenWorkspaceViewController.swift */,
 			);
 			path = CreateOrOpenWorkspace;
 			sourceTree = "<group>";
@@ -987,6 +990,7 @@
 				EDD0A2B9200F2B9E00D5E7BE /* WorkspacesViewController.swift in Sources */,
 				ED47CC85201ECF780052D6EF /* CreateOrOpenWorkspaceTabViewController.swift in Sources */,
 				EDDED6FB20050C0B0079F3D0 /* TextView.swift in Sources */,
+				ED6D3B9F2249E71700E64827 /* CreateOrOpenWorkspaceViewController.swift in Sources */,
 				ED157E29224371B000A56E19 /* OpenQuicklyNodeTableRowView.swift in Sources */,
 				ED57400F202D975800D844A3 /* PreferenceTabViewController.swift in Sources */,
 				ED47CC87201ED55A0052D6EF /* MarkDownEditorError.swift in Sources */,

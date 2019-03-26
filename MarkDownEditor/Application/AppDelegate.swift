@@ -15,7 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   func application(_ application: NSApplication, open urls: [URL]) {
     guard let url = urls.first else { return }
     if url.isFileURL {
-      alertError { try WorkspaceModel.create(directoryUrl: url) }
+      NotificationCenter.default.post(name: .OpenWorkspace, object: url)
       return
     }
 

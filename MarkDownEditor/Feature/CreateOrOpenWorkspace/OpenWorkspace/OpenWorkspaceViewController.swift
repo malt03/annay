@@ -10,14 +10,14 @@ import Cocoa
 import RxSwift
 import RealmSwift
 
-final class OpenWorkspaceViewController: NSViewController {
+final class OpenWorkspaceViewController: CreateOrOpenWorkspaceViewController {
   private let bag = DisposeBag()
   
   @IBOutlet private weak var workspaceFileTextField: NSTextField!
   @IBOutlet private weak var openButton: NSButton!
   
   private let setFile = PublishSubject<String?>()
-  
+
   override func becomeFirstResponder() -> Bool {
     workspaceFileTextField.becomeFirstResponder()
     return true
@@ -39,13 +39,32 @@ final class OpenWorkspaceViewController: NSViewController {
     }.bind(to: openButton.rx.isEnabled).disposed(by: bag)
   }
   
+  override func viewDidAppear() {
+    super.viewDidAppear()
+    if presetUrl != nil {
+      selectWorkspace()
+    }
+  }
+  
+  private var presetUrl: URL?
+  override func setUrl(_ url: URL) {
+    presetUrl = url
+    selectWorkspace()
+  }
+  
   @IBAction private func selectWorkspace(_ sender: NSButton) {
+    selectWorkspace()
+  }
+  
+  private func selectWorkspace() {
     guard let window = view.window else { return }
     let openPanel = NSOpenPanel()
     openPanel.allowsMultipleSelection = false
     openPanel.canChooseDirectories = true
     openPanel.canCreateDirectories = false
     openPanel.canChooseFiles = true
+    openPanel.directoryURL = presetUrl
+    presetUrl = nil
     
     openPanel.allowedFileTypes = Array(URL.workspaceUtis)
     openPanel.beginSheetModal(for: window) { [weak self] (result) in

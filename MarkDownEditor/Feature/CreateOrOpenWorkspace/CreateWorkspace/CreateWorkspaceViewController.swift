@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import RealmSwift
 
-final class CreateWorkspaceViewController: NSViewController {
+final class CreateWorkspaceViewController: CreateOrOpenWorkspaceViewController {
   private let bag = DisposeBag()
   
   @IBOutlet private weak var workspaceDirectoryTextField: NSTextField!
@@ -18,7 +18,7 @@ final class CreateWorkspaceViewController: NSViewController {
   @IBOutlet private weak var createButton: NSButton!
   
   private let setDirectory = PublishSubject<String?>()
-  
+
   override func becomeFirstResponder() -> Bool {
     workspaceNameTextField.becomeFirstResponder()
     return true

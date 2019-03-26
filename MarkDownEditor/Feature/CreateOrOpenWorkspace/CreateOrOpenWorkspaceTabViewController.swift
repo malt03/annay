@@ -17,13 +17,15 @@ final class CreateOrOpenWorkspaceTabViewController: NSViewController {
     case open
   }
   
-  func prepare(segment: Segment) {
+  func prepare(segment: Segment, presetUrl: URL?) {
+    self.presetUrl = presetUrl
     self.segment = segment
   }
   
   private var segment = Segment.create {
     didSet { reloadSegment() }
   }
+  private var presetUrl: URL?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,11 +42,15 @@ final class CreateOrOpenWorkspaceTabViewController: NSViewController {
     if !isViewLoaded { return }
     segmentedControl.selectedSegment = segment.rawValue
     let vc = viewController(for: segment)
+    if let presetUrl = presetUrl {
+      vc.setUrl(presetUrl)
+    }
+    presetUrl = nil
     parentView.present(viewController: vc)
     view.window?.makeFirstResponder(vc)
   }
   
-  private func viewController(for segment: Segment) -> NSViewController {
+  private func viewController(for segment: Segment) -> CreateOrOpenWorkspaceViewController {
     switch segment {
     case .create: return createWorkspaceViewController
     case .open:   return openWorkspaceViewController
@@ -57,6 +63,5 @@ final class CreateOrOpenWorkspaceTabViewController: NSViewController {
   
   private lazy var createWorkspaceViewController: CreateWorkspaceViewController = {
     return NSStoryboard(name: "CreateWorkspace", bundle: .main).instantiateInitialController() as! CreateWorkspaceViewController
-    
   }()
 }
