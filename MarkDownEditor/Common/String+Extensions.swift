@@ -55,12 +55,16 @@ extension String {
   }
   
   var replacingHomePathToTilde: String {
-    let homePath = FileManager.default.homeDirectoryForCurrentUser.path
-    return replacingOccurrences(of: "^\(homePath)", with: "~", options: .regularExpression)
+    return replacingOccurrences(of: "^\(getHomeDirectoryPath())", with: "~", options: .regularExpression)
   }
   
   var replacingTildeToHomePath: String {
-    let homePath = FileManager.default.homeDirectoryForCurrentUser.path
-    return replacingOccurrences(of: "^~", with: homePath, options: .regularExpression)
+    return replacingOccurrences(of: "^~", with: getHomeDirectoryPath(), options: .regularExpression)
+  }
+  
+  private func getHomeDirectoryPath() -> String {
+    let pw = getpwuid(getuid());
+    let home = pw?.pointee.pw_dir
+    return FileManager.default.string(withFileSystemRepresentation: home!, length: Int(strlen(home)))
   }
 }

@@ -1,15 +1,6 @@
-
-/* Class = "NSButtonCell"; title = "Move"; ObjectID = "Jwg-xY-JIO"; */
 "Jwg-xY-JIO.title" = "移動";
-
-/* Class = "NSTextFieldCell"; title = "Move the workspace"; ObjectID = "N2i-0a-ePG"; */
 "N2i-0a-ePG.title" = "ワークスペースファイルの移動";
-
-/* Class = "NSButtonCell"; title = "Change..."; ObjectID = "T7b-Px-hJW"; */
 "T7b-Px-hJW.title" = "変更...";
-
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "lTr-fd-8yz"; */
 "lTr-fd-8yz.title" = "キャンセル";
-
-/* Class = "NSTextFieldCell"; title = "Directory:"; ObjectID = "tgi-re-CGj"; */
 "tgi-re-CGj.title" = "ディレクトリ:";
+"UdX-MW-8HV.title" = "ワークスペース名:";

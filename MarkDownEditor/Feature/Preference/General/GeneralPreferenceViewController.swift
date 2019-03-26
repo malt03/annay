@@ -56,7 +56,7 @@ final class GeneralPreferenceViewController: NSViewController {
       StyleSheetManager.shared.all.value[s.styleSheetPopupButton.indexOfSelectedItem].select()
     }).disposed(by: bag)
     
-    PreferenceManager.shared.directoryUrl.asObservable().map { $0.path }.bind(to: preferenceDirectoryTextField.rx.text).disposed(by: bag)
+    PreferenceManager.shared.directoryUrl.asObservable().map { $0.path.replacingHomePathToTilde }.bind(to: preferenceDirectoryTextField.rx.text).disposed(by: bag)
   }
 
   @IBAction private func openDirecotry(_ sender: NSButton) {
