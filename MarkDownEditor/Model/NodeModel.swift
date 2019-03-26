@@ -118,7 +118,7 @@ final class NodeModel: Object {
     try parent?.save()
   }
   
-  func save() throws {
+  func save(reselect: Bool = false) throws {
     try parent?.save()
     
     lastUpdatedAt = Date()
@@ -126,14 +126,16 @@ final class NodeModel: Object {
       try saveDirectory()
     } else {
       try saveNote()
-      reselectIfSelected()
+      if reselect {
+        reselectIfSelected()
+      }
     }
   }
   
-  func saveWithChildren() throws {
-    try save()
+  func saveWithChildren(reselect: Bool) throws {
+    try save(reselect: reselect)
     for child in children {
-      try child.saveWithChildren()
+      try child.saveWithChildren(reselect: reselect)
     }
   }
   
@@ -267,7 +269,7 @@ final class NodeModel: Object {
     if isDeletedWithParent { return false }
     isDeleted = true
     deletedAt = Date()
-    try saveWithChildren()
+    try saveWithChildren(reselect: true)
     return true
   }
   
