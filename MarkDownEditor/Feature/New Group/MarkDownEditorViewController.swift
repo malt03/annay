@@ -167,17 +167,25 @@ final class MarkDownEditorViewController: NSViewController {
     })
     editorHidingWebView.update(markdown: markDown)
   }
+  
+  private var lastUpdateTextWorkItem: DispatchWorkItem?
 }
 
 extension MarkDownEditorViewController: NSTextViewDelegate {
   func textDidChange(_ notification: Notification) {
-    if let note = NodeModel.selectedNode.value {
-      Realm.transaction { _ in
-        note.setBody(textView.string)
+    lastUpdateTextWorkItem?.cancel()
+    let updateTextWorkItem = DispatchWorkItem { [weak self] in
+      guard let s = self else { return }
+      if let note = NodeModel.selectedNode.value {
+        Realm.transaction { _ in
+          note.setBody(s.textView.string)
+        }
       }
+      s.textView.textStorage?.highlightMarkdownSyntax()
+      s.updateWebView()
     }
-    updateWebView()
-    textView.textStorage?.highlightMarkdownSyntax()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: updateTextWorkItem)
+    lastUpdateTextWorkItem = updateTextWorkItem
   }
   
   func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
