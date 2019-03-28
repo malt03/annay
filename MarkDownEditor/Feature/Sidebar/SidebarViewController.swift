@@ -130,7 +130,12 @@ final class SidebarViewController: NSViewController {
     let row = outlineView.row(forItem: node)
     if row == -1 { return }
     guard let selectRow = searchNoteRow(row: row, diff: rowDiff) else { return }
-    outlineView.selectRowIndexes(IndexSet(integer: selectRow), byExtendingSelection: false)
+    selectRowWithScroll(selectRow)
+  }
+  
+  private func selectRowWithScroll(_ row: Int) {
+    outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+    outlineView.scrollRowToVisible(row)
   }
   
   private func searchNoteRow(row: Int, diff: Int) -> Int? {
@@ -164,7 +169,7 @@ final class SidebarViewController: NSViewController {
     }
     let row = outlineView.row(forItem: selected)
     if row == -1 { return }
-    outlineView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+    selectRowWithScroll(row)
     if focus {
       moveFocusToSidebar()
     }
