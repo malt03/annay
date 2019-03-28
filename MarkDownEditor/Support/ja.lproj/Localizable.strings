@@ -39,3 +39,5 @@
 "Workspace" = "ワークスペース";
 "Could not access file." = "ファイルにアクセス出来ませんでした。";
 "If there is only one workspace, you can not delete it." = "ワークスペースが１つしかない場合、削除できません。";
+"Can not create under the deleted directory." = "削除されているディレクトリ配下には作成できません。";
+"Can not create under the trash." = "ゴミ箱の配下には作成できません。";

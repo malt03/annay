@@ -39,3 +39,5 @@
 "Workspace" = "Workspace";
 "Could not access file." = "Could not access file.";
 "If there is only one workspace, you can not delete it." = "If there is only one workspace, you can not delete it.";
+"Can not create under the deleted directory." = "Can not create under the deleted directory.";
+"Can not create under the trash." = "Can not create under the trash.";

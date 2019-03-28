@@ -309,6 +309,14 @@ final class SidebarViewController: NSViewController {
   }
   
   private func createDirectory(parent: NodeModel) {
+    if parent.isDeletedWithParent {
+      NSAlert(localizedMessageText: "Can not create under the deleted directory.").runModal()
+      return
+    }
+    if parent.isTrash {
+      NSAlert(localizedMessageText: "Can not create under the trash.").runModal()
+      return
+    }
     alertError {
       let insertedNode = try NodeModel.createDirectory(parent: parent)
       insert(node: insertedNode, in: parent)
@@ -329,6 +337,14 @@ final class SidebarViewController: NSViewController {
   }
 
   private func createNote(parent: NodeModel) {
+    if parent.isDeletedWithParent {
+      NSAlert(localizedMessageText: "Can not create under the deleted directory.").runModal()
+      return
+    }
+    if parent.isTrash {
+      NSAlert(localizedMessageText: "Can not create under the trash.").runModal()
+      return
+    }
     let insertedNode = NodeModel.createNote(in: parent)
     insert(node: insertedNode, in: parent)
   }
