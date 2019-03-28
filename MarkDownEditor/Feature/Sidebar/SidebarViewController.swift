@@ -159,7 +159,7 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func revealInSidebar() {
-    revealInSidebarWithFocus(false)
+    revealInSidebarWithFocus(true)
   }
   
   private func revealInSidebarWithFocus(_ focus: Bool) {
