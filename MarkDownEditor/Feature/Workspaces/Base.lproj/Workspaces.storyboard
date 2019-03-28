@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="gIM-Og-53C">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -212,16 +211,17 @@
                                 <action selector="showInFinder:" target="gIM-Og-53C" id="oCd-Oe-O2z"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Delete" id="Dwa-Mn-L0J">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="delete:" target="gIM-Og-53C" id="M2L-ZP-aIg"/>
-                            </connections>
-                        </menuItem>
                         <menuItem title="Move the workspace file" id="AEx-aw-jWR">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="moveTheWorkspaceFile:" target="gIM-Og-53C" id="BP8-ep-zlj"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="ITt-xB-VbJ"/>
+                        <menuItem title="Delete" id="Dwa-Mn-L0J">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="delete:" target="gIM-Og-53C" id="M2L-ZP-aIg"/>
                             </connections>
                         </menuItem>
                     </items>

@@ -4,6 +4,10 @@ $(document).on('click', function(event) {
     }
 });
 
+function jump(anchor) {
+  window.location.href = "#"+encodeURIComponent(anchor);
+}
+
 function update(markdown) {
     var md = window.markdownit({
         breaks: true,
@@ -22,7 +26,8 @@ function update(markdown) {
     .use(window.markdownitSub)
     .use(window.markdownitSup)
     .use(window.markdownitFootnote)
-    .use(window.markdownitEmoji);
+    .use(window.markdownitEmoji)
+    .use(window.markdownitHeadingAnchor);
 
     var tokens = md.parse(markdown, {});
     var map = new Map();

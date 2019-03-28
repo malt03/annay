@@ -14,7 +14,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="930" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VdG-kY-SIQ" customClass="SplitView" customModule="Annay" customModuleProvider="target">
+                            <splitView autosaveName="EditorSplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VdG-kY-SIQ" customClass="SplitView" customModule="Annay" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="930" height="600"/>
                                 <subviews>
                                     <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="CwQ-a7-3jo">

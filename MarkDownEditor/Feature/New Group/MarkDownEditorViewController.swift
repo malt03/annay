@@ -44,6 +44,14 @@ final class MarkDownEditorViewController: NSViewController {
       self?.updateNote(note: node)
     }).disposed(by: bag)
     
+    OutlineModel.selected.subscribe(onNext: { [weak self] (outline) in
+      guard let s = self else { return }
+      s.textView.scrollRangeToVisible(outline.range)
+      s.textView.setSelectedRange(outline.range)
+      s.webView.jump(outline: outline)
+      s.editorHidingWebView.jump(outline: outline)
+    }).disposed(by: bag)
+    
     prepareTextView()
   }
   

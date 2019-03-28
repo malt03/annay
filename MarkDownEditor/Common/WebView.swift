@@ -63,6 +63,7 @@ final class WebView: WKWebView {
       "markdown-it-sup.min.js",
       "markdown-it-footnote.min.js",
       "markdown-it-emoji.min.js",
+      "markdown-it-headinganchor.min.js",
       "markdown.js",
     ]
     
@@ -104,6 +105,13 @@ final class WebView: WKWebView {
       guard let html = html as? String else { return }
       completionHandler(html)
     })
+  }
+
+  func jump(outline: OutlineModel) {
+    let anchor = outline.title
+      .replacingOccurrences(of: "^#+", with: "", options: .regularExpression)
+      .replacingOccurrences(of: "\\s", with: "", options: .regularExpression)
+    evaluateJavaScript("jump(\"\(anchor)\")")
   }
   
   private func updateRetry() {

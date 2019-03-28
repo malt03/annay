@@ -26,30 +26,55 @@
             </objects>
             <point key="canvasLocation" x="357" y="-138"/>
         </scene>
-        <!--Split View Controller-->
-        <scene sceneID="fUs-gK-hUv">
+        <!--View Controller-->
+        <scene sceneID="4VB-wo-ohH">
             <objects>
-                <splitViewController id="xTu-VI-k9j" sceneMemberID="viewController">
-                    <splitViewItems>
-                        <splitViewItem holdingPriority="251" id="fcn-RF-KbD"/>
-                        <splitViewItem holdingPriority="251" id="Rrt-sU-YBm"/>
-                        <splitViewItem id="NkM-lN-7qU"/>
-                    </splitViewItems>
-                    <splitView key="splitView" autosaveName="MainSplitView" dividerStyle="thin" vertical="YES" id="JK3-no-fdA" customClass="SplitView" customModule="Annay" customModuleProvider="target">
+                <viewController id="6Vo-P4-d1V" sceneMemberID="viewController">
+                    <view key="view" id="WQA-xU-z8E">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <outlet property="delegate" destination="xTu-VI-k9j" id="Fvm-4D-4bS"/>
-                        </connections>
-                    </splitView>
-                    <connections>
-                        <outlet property="splitView" destination="JK3-no-fdA" id="C4C-zt-dX0"/>
-                        <segue destination="pfU-c3-pdr" kind="relationship" relationship="splitItems" id="iM1-I0-Pk0"/>
-                        <segue destination="3Vm-IE-FLl" kind="relationship" relationship="splitItems" id="KCk-2J-w36"/>
-                        <segue destination="wRX-vq-IFj" kind="relationship" relationship="splitItems" id="Lxh-q2-xeS"/>
-                    </connections>
-                </splitViewController>
-                <customObject id="YB4-dE-hZF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                        <subviews>
+                            <splitView autosaveName="MainSplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hC9-4q-gWk" customClass="SplitView" customModule="Annay" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <subviews>
+                                    <containerView fixedFrame="YES" id="r1m-lJ-CSU">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="300"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <connections>
+                                            <segue destination="pfU-c3-pdr" kind="embed" id="ct7-CE-1tt"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView fixedFrame="YES" id="4p6-mI-e9f">
+                                        <rect key="frame" x="91" y="0.0" width="179" height="300"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <connections>
+                                            <segue destination="3Vm-IE-FLl" kind="embed" id="fCm-5n-8ON"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView fixedFrame="YES" id="psE-Cl-wy6">
+                                        <rect key="frame" x="271" y="0.0" width="179" height="300"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <connections>
+                                            <segue destination="wRX-vq-IFj" kind="embed" id="SSL-HR-b42"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <holdingPriorities>
+                                    <real value="250"/>
+                                    <real value="250"/>
+                                    <real value="250"/>
+                                </holdingPriorities>
+                            </splitView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="hC9-4q-gWk" firstAttribute="top" secondItem="WQA-xU-z8E" secondAttribute="top" id="6nB-eP-gOR"/>
+                            <constraint firstItem="hC9-4q-gWk" firstAttribute="leading" secondItem="WQA-xU-z8E" secondAttribute="leading" id="EKY-UL-vep"/>
+                            <constraint firstAttribute="bottom" secondItem="hC9-4q-gWk" secondAttribute="bottom" id="OxI-uZ-3UF"/>
+                            <constraint firstAttribute="trailing" secondItem="hC9-4q-gWk" secondAttribute="trailing" id="X5M-0Q-eNu"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="Wm8-n5-6lR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="357" y="1164"/>
         </scene>
@@ -64,7 +89,7 @@
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="utm-l8-sUO">
                                 <rect key="frame" x="0.0" y="0.0" width="1015" height="640"/>
                                 <connections>
-                                    <segue destination="xTu-VI-k9j" kind="embed" id="Etz-qp-ALR"/>
+                                    <segue destination="6Vo-P4-d1V" kind="embed" id="a99-yu-u5L"/>
                                 </connections>
                             </containerView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="bdV-Iq-Ypy" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">

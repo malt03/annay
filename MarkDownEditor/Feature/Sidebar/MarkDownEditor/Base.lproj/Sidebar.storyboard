@@ -1,11 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="PrQ-Do-4mD">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="dVN-kb-mhV">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="e9O-Qw-gyT">
+            <objects>
+                <viewController id="dVN-kb-mhV" sceneMemberID="viewController">
+                    <view key="view" id="ptt-Em-zJn">
+                        <rect key="frame" x="0.0" y="0.0" width="301" height="730"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <splitView autosaveName="SidebarSplitView" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="iF7-0e-IU8" customClass="SplitView" customModule="Annay" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="301" height="730"/>
+                                <subviews>
+                                    <containerView fixedFrame="YES" id="1RV-4w-qzg">
+                                        <rect key="frame" x="0.0" y="0.0" width="301" height="526"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <connections>
+                                            <segue destination="PrQ-Do-4mD" kind="embed" id="C84-5A-kU7"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView fixedFrame="YES" id="H12-1h-m39">
+                                        <rect key="frame" x="0.0" y="527" width="301" height="203"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <connections>
+                                            <segue destination="M9A-Xy-wy2" kind="embed" id="B3j-st-NLj"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <holdingPriorities>
+                                    <real value="250"/>
+                                    <real value="250"/>
+                                </holdingPriorities>
+                            </splitView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="iF7-0e-IU8" secondAttribute="trailing" id="AGa-ID-yLh"/>
+                            <constraint firstItem="iF7-0e-IU8" firstAttribute="leading" secondItem="ptt-Em-zJn" secondAttribute="leading" id="IIB-u0-ad8"/>
+                            <constraint firstItem="iF7-0e-IU8" firstAttribute="top" secondItem="ptt-Em-zJn" secondAttribute="top" id="kt7-xk-MXP"/>
+                            <constraint firstAttribute="bottom" secondItem="iF7-0e-IU8" secondAttribute="bottom" id="o9i-H6-4IZ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="0tc-xe-kdX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-625.5" y="1382"/>
+        </scene>
+        <!--Outline-->
+        <scene sceneID="549-bc-NpQ">
+            <objects>
+                <controllerPlaceholder storyboardName="Outline" id="M9A-Xy-wy2" sceneMemberID="viewController"/>
+                <customObject id="eyQ-Lx-rMp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-290" y="1865"/>
+        </scene>
         <!--Sidebar View Controller-->
         <scene sceneID="fia-sR-oQH">
             <objects>
@@ -185,9 +237,6 @@
                                     </subviews>
                                     <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="3Ma-rp-ACN"/>
-                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Gdv-iM-9Ja">
                                     <rect key="frame" x="-100" y="-100" width="280" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -277,6 +326,7 @@
                             <constraint firstItem="Xsw-qJ-WBe" firstAttribute="top" secondItem="68f-Wd-hUG" secondAttribute="top" id="qCa-eA-YNm"/>
                             <constraint firstAttribute="trailing" secondItem="Pz3-O6-rZ8" secondAttribute="trailing" id="rOY-1d-MEC"/>
                             <constraint firstItem="Xsw-qJ-WBe" firstAttribute="leading" secondItem="68f-Wd-hUG" secondAttribute="leading" id="swc-VZ-nLg"/>
+                            <constraint firstItem="zOJ-K0-MKD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="68f-Wd-hUG" secondAttribute="leading" constant="16" id="x61-O9-XX4"/>
                             <constraint firstAttribute="trailing" secondItem="Mcp-JE-IhX" secondAttribute="trailing" id="xfJ-lp-2xp"/>
                             <constraint firstAttribute="bottom" secondItem="zOJ-K0-MKD" secondAttribute="bottom" constant="16" id="yaH-SR-kgb"/>
                             <constraint firstAttribute="trailing" secondItem="Xsw-qJ-WBe" secondAttribute="trailing" id="zxN-u8-tDz"/>
