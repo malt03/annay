@@ -83,20 +83,20 @@
             <objects>
                 <viewController id="MeC-WR-dsE" customClass="SuperParentViewController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="zrR-Z7-Ium">
-                        <rect key="frame" x="0.0" y="0.0" width="1015" height="640"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1234" height="717"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="utm-l8-sUO">
-                                <rect key="frame" x="0.0" y="0.0" width="1015" height="640"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1234" height="717"/>
                                 <connections>
                                     <segue destination="6Vo-P4-d1V" kind="embed" id="a99-yu-u5L"/>
                                 </connections>
                             </containerView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="bdV-Iq-Ypy" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="1015" height="640"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1234" height="717"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="RGy-e2-bxW">
-                                        <rect key="frame" x="492" y="304" width="32" height="32"/>
+                                        <rect key="frame" x="601" y="343" width="32" height="32"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
