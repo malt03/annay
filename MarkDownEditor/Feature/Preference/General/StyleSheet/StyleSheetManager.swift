@@ -73,7 +73,7 @@ final class StyleSheetManager {
       s.all.value.append(styleSheet)
     }).disposed(by: bag)
     fileWatcher.fileDeleted.subscribe(onNext: { [weak self] (url) in
-      guard let s = self, let index = s.all.value.index(where: { $0.fileUrl == url }) else { return }
+      guard let s = self, let index = s.all.value.firstIndex(where: { $0.fileUrl == url }) else { return }
       s.all.value.remove(at: index)
     }).disposed(by: bag)
   }

@@ -17,7 +17,7 @@ extension Array where Element: Hashable {
 
 extension Array where Element: Equatable {
   func index(of object: Element) -> Int? {
-    return index { $0 == object }
+    return firstIndex { $0 == object }
   }
   
   @discardableResult

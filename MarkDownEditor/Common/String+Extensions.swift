@@ -63,8 +63,10 @@ extension String {
   }
   
   private func getHomeDirectoryPath() -> String {
-    let pw = getpwuid(getuid());
-    let home = pw?.pointee.pw_dir
-    return FileManager.default.string(withFileSystemRepresentation: home!, length: Int(strlen(home)))
+    guard
+      let pw = getpwuid(getuid()),
+      let home = pw.pointee.pw_dir
+      else { return "" }
+    return FileManager.default.string(withFileSystemRepresentation: home, length: Int(strlen(home)))
   }
 }
