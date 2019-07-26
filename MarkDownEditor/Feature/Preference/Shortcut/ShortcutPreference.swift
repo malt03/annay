@@ -42,15 +42,15 @@ final class ShortcutPreference: Preference {
       codableNode = nil
     }
     switch kind {
-    case .newNote:  newNote.node.value = codableNode
-    case .openNote: openNote.node.value = codableNode
+    case .newNote:  newNote.node.accept(codableNode)
+    case .openNote: openNote.node.accept(codableNode)
     }
   }
   
   func set(keyCombo: KeyCombo?, for kind: ShortcutPreferenceNodeParameters.Kind) {
     switch kind {
-    case .newNote:  newNote.keyCombo.value = keyCombo
-    case .openNote: openNote.keyCombo.value = keyCombo
+    case .newNote:  newNote.keyCombo.accept(keyCombo)
+    case .openNote: openNote.keyCombo.accept(keyCombo)
     }
   }
 

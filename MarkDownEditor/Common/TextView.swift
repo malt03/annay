@@ -8,11 +8,12 @@
 
 import Cocoa
 import RxSwift
+import RxRelay
 
 final class TextView: NSTextView {
   private let bag = DisposeBag()
   
-  private let _isFirstResponder = Variable<Bool>(false)
+  private let _isFirstResponder = BehaviorRelay(value: false)
   var isFirstResponder: Observable<Bool> { return _isFirstResponder.asObservable() }
   var isFirstResponderValue: Bool { return _isFirstResponder.value }
   
@@ -69,13 +70,13 @@ final class TextView: NSTextView {
   
   override func becomeFirstResponder() -> Bool {
     let should = super.becomeFirstResponder()
-    if should { _isFirstResponder.value = true }
+    if should { _isFirstResponder.accept(true) }
     return should
   }
   
   override func resignFirstResponder() -> Bool {
     let should = super.resignFirstResponder()
-    if should { _isFirstResponder.value = false }
+    if should { _isFirstResponder.accept(false) }
     return should
   }
 }

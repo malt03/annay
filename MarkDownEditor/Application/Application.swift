@@ -8,12 +8,13 @@
 
 import Cocoa
 import RxSwift
+import RxRelay
 
 final class Application: NSApplication, NSFontChanging {
   @IBOutlet private weak var navigateMenu: NSMenu!
   private var commandNFlag = false
   
-  let isEnabled = Variable(true)
+  let isEnabled = BehaviorRelay(value: true)
   
   override func sendEvent(_ event: NSEvent) {
     if !isEnabled.value { return }

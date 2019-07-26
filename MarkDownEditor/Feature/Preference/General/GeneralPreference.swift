@@ -8,15 +8,16 @@
 
 import Cocoa
 import RxSwift
+import RxRelay
 
 final class GeneralPreference: Preference {
   static let shared = GeneralPreference.create()
   
   static var fileUrl: URL { return PreferenceManager.shared.generalUrl }
   
-  let isHideEditorWhenUnfocused: Variable<Bool>
-  private var font: Variable<CodableFont>
-  let styleSheetName: Variable<String>
+  let isHideEditorWhenUnfocused: BehaviorRelay<Bool>
+  private var font: BehaviorRelay<CodableFont>
+  let styleSheetName: BehaviorRelay<String>
   
   func didCreated() {
     checkAppearance()
@@ -24,19 +25,19 @@ final class GeneralPreference: Preference {
   
 
   func copy(from preference: GeneralPreference) {
-    isHideEditorWhenUnfocused.value = preference.isHideEditorWhenUnfocused.value
-    font.value = preference.font.value
-    styleSheetName.value = preference.styleSheetName.value
+    isHideEditorWhenUnfocused.accept(preference.isHideEditorWhenUnfocused.value)
+    font.accept(preference.font.value)
+    styleSheetName.accept(preference.styleSheetName.value)
   }
 
   func checkAppearance() {
     if NSAppearance.effective.isDark {
       if styleSheetName.value == GeneralPreference.lightStyle {
-        styleSheetName.value = GeneralPreference.darkStyle
+        styleSheetName.accept(GeneralPreference.darkStyle)
       }
     } else {
       if styleSheetName.value == GeneralPreference.darkStyle {
-        styleSheetName.value = GeneralPreference.lightStyle
+        styleSheetName.accept(GeneralPreference.lightStyle)
       }
     }
   }
@@ -53,7 +54,7 @@ final class GeneralPreference: Preference {
   var fontObservable: Observable<NSFont> { return font.asObservable().map { $0.font } }
 
   func convert(with manager: NSFontManager) {
-    font.value = CodableFont(manager.convert(font.value.font))
+    font.accept(CodableFont(manager.convert(font.value.font)))
   }
   
   func showFontPanel() {
@@ -66,8 +67,8 @@ final class GeneralPreference: Preference {
   static var lightStyle: String { return "light.css" }
   
   init() {
-    self.isHideEditorWhenUnfocused = Variable(false)
-    self.font = Variable(CodableFont(NSFont(name: "Osaka-Mono", size: 14) ?? .systemFont(ofSize: 14)))
-    self.styleSheetName = Variable(NSAppearance.effective.isDark ? GeneralPreference.darkStyle : GeneralPreference.lightStyle)
+    self.isHideEditorWhenUnfocused = BehaviorRelay(value: false)
+    self.font = BehaviorRelay(value: CodableFont(NSFont(name: "Osaka-Mono", size: 14) ?? .systemFont(ofSize: 14)))
+    self.styleSheetName = BehaviorRelay(value: NSAppearance.effective.isDark ? GeneralPreference.darkStyle : GeneralPreference.lightStyle)
   }
 }

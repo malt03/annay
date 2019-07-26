@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import RxRelay
 
 final class PreferenceManager {
   private struct Key {
@@ -20,17 +21,17 @@ final class PreferenceManager {
   var shortcutUrl: URL { return directoryUrl.value.appendingPathComponent("shortcut.yml") }
   var styleSheetsUrl: URL { return directoryUrl.value.appendingPathComponent("stylesheets", isDirectory: true) }
   
-  let directoryUrl: Variable<URL>
+  let directoryUrl: BehaviorRelay<URL>
   
   private static var defaultDirectoryUrl: URL { return FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("preferences", isDirectory: true) }
   
   func resetDirectory() {
     UserDefaults.standard.removeObject(forKey: Key.DirectoryUrl)
-    directoryUrl.value = PreferenceManager.defaultDirectoryUrl
+    directoryUrl.accept(PreferenceManager.defaultDirectoryUrl)
   }
   
   private init() {
-    directoryUrl = Variable<URL>(UserDefaults.standard.url(forKey: Key.DirectoryUrl) ?? PreferenceManager.defaultDirectoryUrl)
+    directoryUrl = BehaviorRelay(value: UserDefaults.standard.url(forKey: Key.DirectoryUrl) ?? PreferenceManager.defaultDirectoryUrl)
     BookmarkManager.shared.getBookmarkedURL(directoryUrl.value, fallback: { PreferenceManager.defaultDirectoryUrl }, handler: { (url) in
       try! FileManager.default.createDirectoryIfNeeded(url: url)
     })

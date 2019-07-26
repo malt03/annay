@@ -103,6 +103,8 @@
 		EDAE6AA520809CEF00E7658B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6AA420809CEF00E7658B /* Assets.xcassets */; };
 		EDAE6AA820809CEF00E7658B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDAE6AA620809CEF00E7658B /* LaunchScreen.storyboard */; };
 		EDB601492022C06A00EDF59C /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB601482022C06A00EDF59C /* Application.swift */; };
+		EDB7960222E9FFBB00819BAE /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB7960122E9FFBB00819BAE /* RxRelay.framework */; };
+		EDB7960422EA01EE00819BAE /* BehaviorRelay+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB7960322EA01EE00819BAE /* BehaviorRelay+Extension.swift */; };
 		EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */; };
 		EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25B2010868C005F3547 /* String+Extensions.swift */; };
 		EDC25C85203BCC9F00C8F38E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDC25C82203BCC9F00C8F38E /* Localizable.strings */; };
@@ -294,6 +296,8 @@
 		EDAE6AA720809CEF00E7658B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDAE6AA920809CEF00E7658B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDB601482022C06A00EDF59C /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		EDB7960122E9FFBB00819BAE /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/Mac/RxRelay.framework; sourceTree = "<group>"; };
+		EDB7960322EA01EE00819BAE /* BehaviorRelay+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BehaviorRelay+Extension.swift"; sourceTree = "<group>"; };
 		EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableCellView.swift; sourceTree = "<group>"; };
 		EDBFF25B2010868C005F3547 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		EDC25C7F203BCC3C00C8F38E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PreviewViewController.strings; sourceTree = "<group>"; };
@@ -360,6 +364,7 @@
 			files = (
 				EDE497082243E4CB009D5A0E /* KeyHolder.framework in Frameworks */,
 				EDE497092243E4CB009D5A0E /* Magnet.framework in Frameworks */,
+				EDB7960222E9FFBB00819BAE /* RxRelay.framework in Frameworks */,
 				EDE4970A2243E4CB009D5A0E /* Realm.framework in Frameworks */,
 				EDE4970B2243E4CB009D5A0E /* RealmSwift.framework in Frameworks */,
 				EDE4970C2243E4CB009D5A0E /* RxCocoa.framework in Frameworks */,
@@ -409,6 +414,7 @@
 				ED2DEB5C206B69CC008E5F1E /* Util.swift */,
 				ED157E2C2243AE6500A56E19 /* NSAppearance+Extensions.swift */,
 				ED11093922442089009FEA26 /* BookmarkManager.swift */,
+				EDB7960322EA01EE00819BAE /* BehaviorRelay+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -752,6 +758,7 @@
 		EDFE82AF20256AD900702C85 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				EDB7960122E9FFBB00819BAE /* RxRelay.framework */,
 				ED2DEB3C206B49D8008E5F1E /* KeyHolder.framework */,
 				ED2DEB36206B49D8008E5F1E /* Magnet.framework */,
 				ED2DEB38206B49D8008E5F1E /* Realm.framework */,
@@ -964,6 +971,7 @@
 				"$(SRCROOT)/Carthage/Build/Mac/RxRealm.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/Yams.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/RxRelay.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -976,6 +984,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRealm.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Yams.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRelay.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1088,6 +1097,7 @@
 				EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */,
 				ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */,
 				ED55C4FD200E50E70070301A /* BackgroundSetableView.swift in Sources */,
+				EDB7960422EA01EE00819BAE /* BehaviorRelay+Extension.swift in Sources */,
 				ED2DEB17206B4148008E5F1E /* DirectoryInfo.swift in Sources */,
 				EDD0A288200CBCB500D5E7BE /* NSPasteboardPasteboardType+Extensions.swift in Sources */,
 				ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */,

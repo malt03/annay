@@ -9,14 +9,15 @@
 import Cocoa
 import Magnet
 import RxSwift
+import RxRelay
 
 // NSObjectを継承しないと、ショートカットキーが何故か機能しない
 final class ShortcutPreferenceNodeParameters: NSObject, Codable {
   private let bag = DisposeBag()
   
   var kind: Kind
-  var keyCombo: Variable<KeyCombo?>
-  var node: Variable<CodableNode?>
+  var keyCombo: BehaviorRelay<KeyCombo?>
+  var node: BehaviorRelay<CodableNode?>
   
   var changed: Observable<Void> {
     return Observable.combineLatest(keyCombo.asObservable(), node.asObservable(), resultSelector: { _, _ in })
@@ -35,8 +36,8 @@ final class ShortcutPreferenceNodeParameters: NSObject, Codable {
   
   init(kind: Kind) {
     self.kind = kind
-    keyCombo = Variable(nil)
-    node = Variable(nil)
+    keyCombo = BehaviorRelay(value: nil)
+    node = BehaviorRelay(value: nil)
   }
   
   func prepare() {

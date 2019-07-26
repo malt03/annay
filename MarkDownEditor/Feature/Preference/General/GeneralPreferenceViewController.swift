@@ -27,7 +27,7 @@ final class GeneralPreferenceViewController: NSViewController {
     openPanel.beginSheetModal(for: window) { (result) in
       if result != .OK { return }
       guard let url = openPanel.url else { return }
-      PreferenceManager.shared.directoryUrl.value = url
+      PreferenceManager.shared.directoryUrl.accept(url)
       BookmarkManager.shared.bookmark(url: url)
     }
   }

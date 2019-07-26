@@ -27,7 +27,7 @@ extension Realm {
     }
   }
   
-  static func add(_ object: Object, update: Bool = false) {
+  static func add(_ object: Object, update: Realm.UpdatePolicy = .error) {
     transaction { $0.add(object, update: update) }
   }
 }

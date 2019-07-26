@@ -10,6 +10,7 @@ import Foundation
 import CoreSpotlight
 import RealmSwift
 import RxSwift
+import RxRelay
 
 final class NodeModel: Object {
   private static var trashId: String { return "trash" }
@@ -241,8 +242,8 @@ final class NodeModel: Object {
     }
   }
   
-  static var selectedNode: Variable<NodeModel?> = {
-    let selectedNode = Variable<NodeModel?>(nil)
+  static var selectedNode: BehaviorRelay<NodeModel?> = {
+    let selectedNode = BehaviorRelay<NodeModel?>(value: nil)
     _ = WorkspaceModel.selectedObservable.map { $0.selectedNode }.bind(to: selectedNode)
     _ = selectedNode.asObservable().subscribe(onNext: { (node) in
       Realm.transaction { _ in
@@ -255,7 +256,7 @@ final class NodeModel: Object {
   func select() {
     if isDirectory { return }
     workspace?.select()
-    NodeModel.selectedNode.value = self
+    NodeModel.selectedNode.accept(self)
   }
   
   private func reselectIfSelected() {

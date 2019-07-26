@@ -11,12 +11,13 @@ import RxSwift
 import KeyHolder
 import Magnet
 import RealmSwift
+import RxRelay
 
 final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
   private let bag = DisposeBag()
   private var refreshNodesToken: NotificationToken?
-  
-  private lazy var selectedWorkspace = Variable(ShortcutPreference.shared.node(for: kind)?.node?.workspace ?? WorkspaceModel.selectedValue)
+
+  private lazy var selectedWorkspace = BehaviorRelay(value: ShortcutPreference.shared.node(for: kind)?.node?.workspace ?? WorkspaceModel.selectedValue)
   
   @IBOutlet private weak var shortcutView: RecordView!
   @IBOutlet private weak var popUpButton: NSPopUpButton!
@@ -56,7 +57,7 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
     
     popUpButton.rx.controlEvent.subscribe(onNext: { [weak self] _ in
       guard let s = self else { return }
-      s.selectedWorkspace.value = WorkspaceModel.spaces[s.popUpButton.indexOfSelectedItem]
+      s.selectedWorkspace.accept(WorkspaceModel.spaces[s.popUpButton.indexOfSelectedItem])
     }).disposed(by: bag)
     
     switch kind! {

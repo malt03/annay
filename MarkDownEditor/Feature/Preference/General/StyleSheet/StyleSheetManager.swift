@@ -8,13 +8,14 @@
 
 import Cocoa
 import RxSwift
+import RxRelay
 
 final class StyleSheetManager {
   private let bag = DisposeBag()
   static let shared = StyleSheetManager()
   
-  let all: Variable<[StyleSheet]>
-  let selected: Variable<StyleSheet>
+  let all: BehaviorRelay<[StyleSheet]>
+  let selected: BehaviorRelay<StyleSheet>
   private let fileWatcher = StyleSheetFileWatcher()
   
   static func createDefaultCsses(force: Bool) {
@@ -46,12 +47,12 @@ final class StyleSheetManager {
       let styleSheets = files.compactMap { StyleSheet(file: $0) }
       all = styleSheets
     }
-    self.all = Variable(all)
+    self.all = BehaviorRelay(value: all)
 
     if NSAppearance.effective.isDark {
-      selected = Variable<StyleSheet>(StyleSheet(file: StyleSheetManager.darkCss)!)
+      selected = BehaviorRelay(value: StyleSheet(file: StyleSheetManager.darkCss)!)
     } else {
-      selected = Variable<StyleSheet>(StyleSheet(file: StyleSheetManager.lightCss)!)
+      selected = BehaviorRelay(value: StyleSheet(file: StyleSheetManager.lightCss)!)
     }
   
     GeneralPreference.shared.styleSheetName.asObservable().map({ [weak self] (name) -> StyleSheet? in
@@ -63,18 +64,32 @@ final class StyleSheetManager {
       guard let s = self, let styleSheet = StyleSheet(file: url) else { return }
       for i in 0..<s.all.value.count {
         if s.all.value[i].fileUrl == url {
-          s.all.value[i].reload()
+          s.all.mutate { (old) -> [StyleSheet] in
+            var new = old
+            new[i].reload()
+            return new
+          }
           if s.all.value[i].fileUrl == s.selected.value.fileUrl {
-            s.selected.value.reload()
+            s.selected.mutate { (old) -> StyleSheet in
+              var new = old
+              new.reload()
+              return new
+            }
           }
           return
         }
       }
-      s.all.value.append(styleSheet)
+      var allValue = s.all.value
+      allValue.append(styleSheet)
+      s.all.accept(allValue)
     }).disposed(by: bag)
     fileWatcher.fileDeleted.subscribe(onNext: { [weak self] (url) in
       guard let s = self, let index = s.all.value.firstIndex(where: { $0.fileUrl == url }) else { return }
-      s.all.value.remove(at: index)
+      s.all.mutate { (old) -> [StyleSheet] in
+        var new = old
+        new.remove(at: index)
+        return new
+      }
     }).disposed(by: bag)
   }
 }

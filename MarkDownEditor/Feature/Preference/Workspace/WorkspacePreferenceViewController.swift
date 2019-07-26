@@ -8,11 +8,12 @@
 
 import Cocoa
 import RxSwift
+import RxRelay
 
 final class WorkspacePreferenceViewController: NSViewController {
   private let bag = DisposeBag()
   
-  private let selectedWorkspace = Variable(WorkspaceModel.selectedValue)
+  private let selectedWorkspace = BehaviorRelay(value: WorkspaceModel.selectedValue)
   
   @IBOutlet private weak var workspacePopUpButton: NSPopUpButton!
   @IBOutlet private weak var fileTypePopUpButton: NSPopUpButton!
@@ -27,7 +28,7 @@ final class WorkspacePreferenceViewController: NSViewController {
     
     workspacePopUpButton.rx.controlEvent.subscribe(onNext: { [weak self] _ in
       guard let s = self else { return }
-      s.selectedWorkspace.value = WorkspaceModel.spaces[s.workspacePopUpButton.indexOfSelectedItem]
+      s.selectedWorkspace.accept(WorkspaceModel.spaces[s.workspacePopUpButton.indexOfSelectedItem])
     }).disposed(by: bag)
 
     selectedWorkspace.asObservable().subscribe(onNext: { [weak self] (workspace) in

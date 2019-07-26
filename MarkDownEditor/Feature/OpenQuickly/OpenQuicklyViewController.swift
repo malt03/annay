@@ -9,6 +9,7 @@
 import Cocoa
 import RxSwift
 import RealmSwift
+import RxRelay
 
 final class OpenQuicklyViewController: NSViewController {
   private let bag = DisposeBag()
@@ -21,7 +22,7 @@ final class OpenQuicklyViewController: NSViewController {
   @IBOutlet private weak var searchTextField: OpenQuicklyTextField!
   @IBOutlet private weak var tableView: NSTableView!
 
-  private let result = Variable<Results<NodeModel>>(.empty)
+  private let result = BehaviorRelay<Results<NodeModel>>(value: .empty)
   
   override func viewDidLoad() {
     super.viewDidLoad()

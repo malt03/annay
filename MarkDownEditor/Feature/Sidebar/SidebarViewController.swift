@@ -9,6 +9,7 @@
 import Cocoa
 import RealmSwift
 import RxSwift
+import RxRelay
 
 extension NSTableView.AutosaveName {
   static var Sidebar: NSTableView.AutosaveName {
@@ -38,8 +39,8 @@ final class SidebarViewController: NSViewController {
   @IBOutlet private var trashMenu: NSMenu!
   @IBOutlet private var backgroundMenu: NSMenu!
   
-  private let isSearching = Variable<Bool>(false)
-  private let queryText = Variable<String?>(nil)
+  private let isSearching = BehaviorRelay(value: false)
+  private let queryText = BehaviorRelay<String?>(value: nil)
   
   private var textEditing = false
   
@@ -155,7 +156,7 @@ final class SidebarViewController: NSViewController {
   }
   
   @objc private func findInWorkspace() {
-    isSearching.value = true
+    isSearching.accept(true)
   }
   
   @objc private func revealInSidebar() {
@@ -235,7 +236,7 @@ final class SidebarViewController: NSViewController {
   }
   
   @IBAction private func finishSearch(_ sender: NSButton) {
-    isSearching.value = false
+    isSearching.accept(false)
   }
   
   @IBAction private func outlineViewDoubleAction(_ sender: NSOutlineView) {
@@ -728,7 +729,7 @@ extension SidebarViewController: NSTextFieldDelegate {
           self.outlineView.selectRowIndexes(IndexSet(integer: selectedRow), byExtendingSelection: false)
         }
       }
-      isSearching.value = false
+      isSearching.accept(false)
       return true
     default: return false
     }

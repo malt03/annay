@@ -56,7 +56,7 @@ final class NodeModelExporter {
             self.urls.append(url)
           }
         }
-        (NSApplication.shared as! Application).isEnabled.value = false
+        (NSApplication.shared as! Application).isEnabled.accept(false)
         self.performSelectAndWrite()
       }
     }
@@ -65,7 +65,7 @@ final class NodeModelExporter {
   private func performSelectAndWrite() {
     guard let item = selectAndWriteQueue.dequeue() else {
       NotificationCenter.default.removeObserver(self)
-      (NSApplication.shared as! Application).isEnabled.value = true
+      (NSApplication.shared as! Application).isEnabled.accept(true)
       strongSelf = nil
       return
     }

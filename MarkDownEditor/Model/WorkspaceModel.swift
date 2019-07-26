@@ -11,6 +11,7 @@ import CoreSpotlight
 import RealmSwift
 import RxSwift
 import RxRealm
+import RxRelay
 
 final class WorkspaceModel: Object {
   private struct Key {
@@ -64,7 +65,7 @@ final class WorkspaceModel: Object {
     return Realm.instance.objects(WorkspaceModel.self).sorted(byKeyPath: "index")
   }
   
-  static private let selected = Variable(getSelected())
+  static private let selected = BehaviorRelay(value: getSelected())
   static var selectedObservable: Observable<WorkspaceModel> { return selected.asObservable() }
   static var selectedValue: WorkspaceModel { return selected.value }
   static var selectedIndex: Int {
@@ -73,7 +74,7 @@ final class WorkspaceModel: Object {
       let ud = UserDefaults.standard
       ud.set(newValue, forKey: Key.SelectedIndex)
       ud.synchronize()
-      selected.value = getSelected()
+      selected.accept(getSelected())
     }
   }
   

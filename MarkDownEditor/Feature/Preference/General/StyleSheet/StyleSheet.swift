@@ -14,10 +14,12 @@ struct StyleSheet: Hashable {
   
   let fileUrl: URL
   
-  var hashValue: Int { return fileUrl.hashValue }
+  func hash(into hasher: inout Hasher) {
+    fileUrl.hash(into: &hasher)
+  }
   
   func select() {
-    GeneralPreference.shared.styleSheetName.value = name
+    GeneralPreference.shared.styleSheetName.accept(name)
   }
   
   mutating func reload() {
