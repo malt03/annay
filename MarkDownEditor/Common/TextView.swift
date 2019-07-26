@@ -32,24 +32,17 @@ final class TextView: NSTextView {
   }
 
   override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-    if sender.draggingPasteboard.replaceNoteToMarkdown() {
-      return super.performDragOperation(sender)
-    }
-    
-    if sender.draggingPasteboard.replaceImagesToMarkdown() {
-      return super.performDragOperation(sender)
-    }
-    
-    if sender.draggingPasteboard.relaceLinkToMarkdown() {
-      return super.performDragOperation(sender)
-    }
-
-    sender.draggingPasteboard.becomeOnlyPlaneText()
+    sender.draggingPasteboard.replace()
     return super.performDragOperation(sender)
   }
   
   override func paste(_ sender: Any?) {
     pasteAsPlainText(sender)
+  }
+  
+  override func pasteAsPlainText(_ sender: Any?) {
+    NSPasteboard.general.replace()
+    super.pasteAsPlainText(sender)
   }
   
   private func writeImages(_ imagesData: [Data], fileExtension: String, sender: NSDraggingInfo) -> Bool {

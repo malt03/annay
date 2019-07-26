@@ -16,6 +16,13 @@ extension NSPasteboard {
     }
   }
   
+  func replace() {
+    if replaceNoteToMarkdown() { return }
+    if replaceImagesToMarkdown() { return }
+    if relaceLinkToMarkdown() { return }
+    becomeOnlyPlaneText()
+  }
+  
   func relaceLinkToMarkdown() -> Bool {
     if replaceFileURLsToMarkdown() { return true }
     if replaceLinkObjectToMarkdown() { return true }
