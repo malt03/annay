@@ -26,4 +26,21 @@ final class ResourceManager {
 
     return url
   }
+  
+  static func copy(from fromUrl: URL, in workspace: WorkspaceModel = WorkspaceModel.selectedValue) throws -> URL {
+    let fileName = UUID().uuidString + "." + fromUrl.pathExtension
+    
+    let workspaceSourceDirectory = workspace.directoryUrl.resourceDirectory
+    
+    var url = URL(fileURLWithPath: "/")
+    
+    try BookmarkManager.shared.getBookmarkedURL(workspaceSourceDirectory, fallback: { workspaceSourceDirectory }) { (bookmarkedURL) in
+      try FileManager.default.createDirectoryIfNeeded(url: url)
+      url = bookmarkedURL.appendingPathComponent(fileName)
+      try FileManager.default.copyItem(at: fromUrl, to: url)
+    }
+    
+    return url
+
+  }
 }

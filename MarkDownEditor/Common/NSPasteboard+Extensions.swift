@@ -27,7 +27,13 @@ extension NSPasteboard {
     let texts = (pasteboardItems ?? []).compactMap { (item) -> String? in
       guard let url = URL(string: item.string(forType: .fileURL) ?? "") else { return nil }
       if url.isConformsToUTI("public.image") {
-        return "![\(url.name)](\(url.absoluteString))"
+        do {
+          let copiedUrl = try ResourceManager.copy(from: url)
+          return "![\(url.name)](\(copiedUrl.absoluteString))"
+        } catch {
+          NSAlert(error: error).runModal()
+          return "![\(url.name)](\(url.absoluteString))"
+        }
       } else {
         return "[\(url.name)](\(url.absoluteString))"
       }
