@@ -49,16 +49,6 @@ function update(markdown) {
 
     document.getElementById("render").innerHTML = md.render(markdown);
 
-    $("input:checkbox").on('change', function(event) {
-        var values = map.get(event.target.id);
-        var json = {
-            content: values[0],
-            index: values[1],
-            isChecked: event.target.checked
-        };
-        window.webkit.messageHandlers.checkboxChanged.postMessage(json);
-    });
-
     var dom = $("*:contains('$$$$scroll$$$$'):last");
     if (dom.length > 0) {
       var top = dom.offset().top;
@@ -66,6 +56,18 @@ function update(markdown) {
     }
     document.getElementById("render").innerHTML = md.render(markdown.replace('$$$$scroll$$$$', ''));
   
+    $("input:checkbox").on('change', function(event) {
+         console.log('hogehoge');
+         var values = map.get(event.target.id);
+         var json = {
+         content: values[0],
+         index: values[1],
+         isChecked: event.target.checked
+         };
+         window.webkit.messageHandlers.checkboxChanged.postMessage(json);
+    });
+  
+
     for (var img of document.getElementsByTagName('img')) {
         var url = img.getAttribute('src');
         if (new URL(url).protocol !== 'file:') { continue; }
