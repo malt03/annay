@@ -87,9 +87,6 @@ var imageTags = {};
 var images = {};
 
 function updateImage(url, image) {
-  console.log(url);
-  console.log(imageTags[url]);
-  console.log(image);
     if (imageTags[url]) {
         for (img of imageTags[url]) {
             img.setAttribute('src', image);
