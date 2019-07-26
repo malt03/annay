@@ -1,3 +1,5 @@
+
+
 $(document).on('click', function(event) {
     if (!$(event.target).closest('.task-list-item,a').length) {
         window.webkit.messageHandlers.backgroundClicked.postMessage("");
@@ -63,8 +65,35 @@ function update(markdown) {
       $(window).scrollTop(top - document.documentElement.clientHeight / 2);
     }
     document.getElementById("render").innerHTML = md.render(markdown.replace('$$$$scroll$$$$', ''));
+  
+    for (var img of document.getElementsByTagName('img')) {
+        var url = img.getAttribute('src');
+        if (new URL(url).protocol !== 'file:') { continue; }
+        if (images[url]) {
+            img.setAttribute('src', images[url]);
+        } else {
+            if (!imageTags[url]) { imageTags[url] = []; }
+            imageTags[url].push(img);
+            window.webkit.messageHandlers.fetchImage.postMessage(url);
+        }
+    }
 
     return document.documentElement.outerHTML;
+}
+
+var imageTags = {};
+var images = {};
+
+function updateImage(url, image) {
+  console.log(url);
+  console.log(imageTags[url]);
+  console.log(image);
+    if (imageTags[url]) {
+        for (img of imageTags[url]) {
+            img.setAttribute('src', image);
+        }
+    }
+    images[url] = image;
 }
 
 function zoomIn() {

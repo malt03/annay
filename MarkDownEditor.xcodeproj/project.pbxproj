@@ -105,6 +105,7 @@
 		EDB601492022C06A00EDF59C /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB601482022C06A00EDF59C /* Application.swift */; };
 		EDB7960222E9FFBB00819BAE /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDB7960122E9FFBB00819BAE /* RxRelay.framework */; };
 		EDB7960422EA01EE00819BAE /* BehaviorRelay+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB7960322EA01EE00819BAE /* BehaviorRelay+Extension.swift */; };
+		EDB7960622EB621B00819BAE /* Data+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB7960522EB621B00819BAE /* Data+Image.swift */; };
 		EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */; };
 		EDBFF25C2010868C005F3547 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF25B2010868C005F3547 /* String+Extensions.swift */; };
 		EDC25C85203BCC9F00C8F38E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDC25C82203BCC9F00C8F38E /* Localizable.strings */; };
@@ -298,6 +299,7 @@
 		EDB601482022C06A00EDF59C /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		EDB7960122E9FFBB00819BAE /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/Mac/RxRelay.framework; sourceTree = "<group>"; };
 		EDB7960322EA01EE00819BAE /* BehaviorRelay+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BehaviorRelay+Extension.swift"; sourceTree = "<group>"; };
+		EDB7960522EB621B00819BAE /* Data+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Image.swift"; sourceTree = "<group>"; };
 		EDBFF25520106EA5005F3547 /* WorkspacesTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableCellView.swift; sourceTree = "<group>"; };
 		EDBFF25B2010868C005F3547 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		EDC25C7F203BCC3C00C8F38E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PreviewViewController.strings; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				ED157E2C2243AE6500A56E19 /* NSAppearance+Extensions.swift */,
 				ED11093922442089009FEA26 /* BookmarkManager.swift */,
 				EDB7960322EA01EE00819BAE /* BehaviorRelay+Extension.swift */,
+				EDB7960522EB621B00819BAE /* Data+Image.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1092,6 +1095,7 @@
 				ED8CE48A204E69F8002F1A5D /* Variable+Extensions.swift in Sources */,
 				ED4EB332207C3F5E00CFEBEB /* MainWindow.swift in Sources */,
 				ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */,
+				EDB7960622EB621B00819BAE /* Data+Image.swift in Sources */,
 				ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */,
 				ED4EB9E0201DA76000B4CBE7 /* OpenQuicklyTextField.swift in Sources */,
 				EDD0A299200EF81800D5E7BE /* SavableInUserDefaults.swift in Sources */,

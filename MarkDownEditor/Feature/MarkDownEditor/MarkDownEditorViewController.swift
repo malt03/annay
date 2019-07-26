@@ -60,6 +60,7 @@ final class MarkDownEditorViewController: NSViewController {
     
     let userController = WKUserContentController()
     userController.add(self, name: "checkboxChanged")
+    userController.add(self, name: "fetchImage")
     let webConfiguration = WKWebViewConfiguration()
     webConfiguration.userContentController = userController
     
@@ -73,6 +74,7 @@ final class MarkDownEditorViewController: NSViewController {
   private func prepareEditorHidingWebView() {
     let userController = WKUserContentController()
     userController.add(self, name: "checkboxChanged")
+    userController.add(self, name: "fetchImage")
     userController.add(self, name: "backgroundClicked")
     let webConfiguration = WKWebViewConfiguration()
     webConfiguration.userContentController = userController
@@ -275,6 +277,18 @@ extension MarkDownEditorViewController: WKScriptMessageHandler {
         else { return }
       alertError { try note.updateCheckbox(content: content, index: index, isChecked: isChecked == 1) }
       updateNote(note: note)
+    case "fetchImage":
+      guard
+        let imageUrlString = message.body as? String,
+        let imageUrl = URL(string: imageUrlString)
+        else { return }
+      if imageUrl.scheme != "file" { return }
+      BookmarkManager.shared.getBookmarkedURL(imageUrl, fallback: { () -> URL? in
+        return nil
+      }, handler: { (bookmarkedUrl) in
+        guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+        webView.evaluateJavaScript("updateImage(\"\(imageUrlString)\", \"\(imageData.imageTagBase64EncodedSrc)\")", completionHandler: nil)
+      })
     default: break
     }
   }
