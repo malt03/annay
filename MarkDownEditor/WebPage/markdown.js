@@ -60,9 +60,9 @@ function update(markdown) {
          console.log('hogehoge');
          var values = map.get(event.target.id);
          var json = {
-         content: values[0],
-         index: values[1],
-         isChecked: event.target.checked
+           content: values[0],
+           index: values[1],
+           isChecked: event.target.checked
          };
          window.webkit.messageHandlers.checkboxChanged.postMessage(json);
     });
