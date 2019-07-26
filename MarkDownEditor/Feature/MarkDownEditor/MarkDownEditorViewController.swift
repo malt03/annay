@@ -287,7 +287,7 @@ extension MarkDownEditorViewController: WKScriptMessageHandler {
         return nil
       }, handler: { (bookmarkedUrl) in
         guard let imageData = try? Data(contentsOf: imageUrl) else { return }
-        webView.evaluateJavaScript("updateImage(\"\(imageUrlString)\", \"\(imageData.imageTagBase64EncodedSrc)\")", completionHandler: nil)
+        message.webView?.evaluateJavaScript("updateImage(\"\(imageUrlString)\", \"\(imageData.imageTagBase64EncodedSrc)\")", completionHandler: nil)
       })
     default: break
     }
