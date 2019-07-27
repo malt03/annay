@@ -1,6 +1,15 @@
 
-
-$(document).on('click', function(event) {
+var isDragging = false;
+$(document).mousedown(function() {
+    isDragging = false;
+})
+.mousemove(function() {
+    isDragging = true;
+})
+.mouseup(function(event) {
+   var wasDragging = isDragging;
+   isDragging = false;
+   if (wasDragging) { return; }
     if (!$(event.target).closest('.task-list-item,a').length) {
         window.webkit.messageHandlers.backgroundClicked.postMessage("");
     }
