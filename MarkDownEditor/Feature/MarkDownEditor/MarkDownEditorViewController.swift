@@ -104,7 +104,7 @@ final class MarkDownEditorViewController: NSViewController {
   }
   
   override func viewWillDisappear() {
-    NotificationCenter.default.removeObserver(self)
+    NotificationCenter.default.removeObserver(self, name: .MoveFocusToEditor, object: nil)
     super.viewWillDisappear()
   }
   

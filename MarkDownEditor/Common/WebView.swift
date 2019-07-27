@@ -144,7 +144,9 @@ final class WebView: WKWebView {
   override func viewWillMove(toWindow newWindow: NSWindow?) {
     super.viewWillMove(toWindow: newWindow)
     if newWindow == nil {
-      NotificationCenter.default.removeObserver(self)
+      NotificationCenter.default.removeObserver(self, name: .ActualSize, object: nil)
+      NotificationCenter.default.removeObserver(self, name: .ZoomIn, object: nil)
+      NotificationCenter.default.removeObserver(self, name: .ZoomOut, object: nil)
     }
   }
 }

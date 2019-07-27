@@ -48,7 +48,11 @@ final class WorkspacesViewController: NSViewController {
   
   override func viewWillDisappear() {
     super.viewWillDisappear()
-    NotificationCenter.default.removeObserver(self)
+    NotificationCenter.default.removeObserver(self, name: .MoveFocusToWorkspaces, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .OpenWorkspace, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .CreateWorkspace, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .SelectNextWorkspace, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .SelectPreviousWorkspace, object: nil)
   }
   
   @objc private func moveFocusToWorkspaces() {
