@@ -20,12 +20,14 @@ final class StyleSheetManager {
   
   static func createDefaultCsses(force: Bool) {
     for url in [darkCss, lightCss] {
-      if FileManager.default.fileExists(atPath: url.path) {
-        if !force { continue }
-        try! FileManager.default.removeItem(at: url)
+      BookmarkManager.shared.getBookmarkedURL(url, fallback: { nil }) { (url) in
+        if FileManager.default.fileExists(atPath: url.path) {
+          if !force { return }
+          try! FileManager.default.removeItem(at: url)
+        }
+        let bundleCss = Bundle.main.url(forResource: url.lastPathComponent, withExtension: nil)!
+        try! FileManager.default.copyItem(at: bundleCss, to: url)
       }
-      let bundleCss = Bundle.main.url(forResource: url.lastPathComponent, withExtension: nil)!
-      try! FileManager.default.copyItem(at: bundleCss, to: url)
     }
   }
   
