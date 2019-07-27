@@ -532,6 +532,7 @@ extension SidebarViewController: NSOutlineViewDataSource, NSOutlineViewDelegate 
   }
   
   func outlineViewSelectionDidChange(_ notification: Notification) {
+    if outlineView.numberOfSelectedRows != 1 { return }
     (outlineView.item(atRow: outlineView.selectedRow) as? NodeModel)?.select()
   }
   
