@@ -109,6 +109,7 @@ final class MarkDownEditorViewController: NSViewController {
     ).subscribe(onNext: { [weak self] (isHideEditor) in
       guard let s = self else { return }
       s.editorHidingWebParentView.isHidden = !isHideEditor
+      s.splitView.isHidden = isHideEditor
     }).disposed(by: bag)
   }
   
@@ -137,6 +138,7 @@ final class MarkDownEditorViewController: NSViewController {
   }
   
   @objc private func moveFocusToEditor() {
+    splitView.isHidden = false
     view.window?.makeKeyAndOrderFront(nil)
     view.window?.makeFirstResponder(textView)
   }
