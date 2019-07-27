@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHw-0N-ZGZ">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="rHw-0N-ZGZ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -206,6 +206,23 @@ CA
                                         <menuItem title="Select All" keyEquivalent="a" id="Ruw-6m-B2m">
                                             <connections>
                                                 <action selector="selectAll:" target="Ady-hI-5gd" id="VNm-Mi-diN"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="1Aa-s0-gOs"/>
+                                        <menuItem title="Bold" keyEquivalent="b" id="sDC-Pz-oEb">
+                                            <connections>
+                                                <action selector="bold:" target="Voe-Tx-rLC" id="KGH-bV-NXx"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Italic" keyEquivalent="i" id="cFH-01-x4p">
+                                            <connections>
+                                                <action selector="italic:" target="Voe-Tx-rLC" id="u8Q-jo-zSH"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Strikethrough" id="j8f-Nc-Bh5">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="strikethrough:" target="Voe-Tx-rLC" id="0jB-KF-3In"/>
                                             </connections>
                                         </menuItem>
                                     </items>

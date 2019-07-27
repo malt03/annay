@@ -63,7 +63,9 @@ extension AppDelegate {
   @IBAction private func actualSize(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .ActualSize, object: nil) }
   @IBAction private func zoomIn(_ sender: NSMenuItem)                   { NotificationCenter.default.post(name: .ZoomIn, object: nil) }
   @IBAction private func zoomOut(_ sender: NSMenuItem)                  { NotificationCenter.default.post(name: .ZoomOut, object: nil) }
-
+  @IBAction private func bold(_ sender: NSMenuItem)                     { NotificationCenter.default.post(name: .Bold, object: nil) }
+  @IBAction private func italic(_ sender: NSMenuItem)                   { NotificationCenter.default.post(name: .Italic, object: nil) }
+  @IBAction private func strikethrough(_ sender: NSMenuItem)            { NotificationCenter.default.post(name: .Strikethrough, object: nil) }
 
   @IBAction private func openQuickly(_ sender: NSMenuItem) {
     OpenQuicklyWindowController.toggle()
@@ -118,4 +120,7 @@ extension Notification.Name {
   static let ActualSize = Notification.Name(rawValue: "AppDelegate/ActualSize")
   static let ZoomIn = Notification.Name(rawValue: "AppDelegate/ZoomIn")
   static let ZoomOut = Notification.Name(rawValue: "AppDelegate/ZoomOut")
+  static let Bold = Notification.Name(rawValue: "AppDelegate/Bold")
+  static let Italic = Notification.Name(rawValue: "AppDelegate/Italic")
+  static let Strikethrough = Notification.Name(rawValue: "AppDelegate/Strikethrough")
 }
