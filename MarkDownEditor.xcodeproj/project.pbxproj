@@ -31,6 +31,7 @@
 		ED2E14F3200560B8003D55A3 /* highlight.pack.js in Resources */ = {isa = PBXBuildFile; fileRef = ED2E149F20055B87003D55A3 /* highlight.pack.js */; };
 		ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */; };
 		ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */; };
+		ED350AA422EC4DEE00AF85E5 /* markdown-it-smartarrows.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED350AA322EC4DEE00AF85E5 /* markdown-it-smartarrows.min.js */; };
 		ED431FFC205628A30042078C /* CodableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED431FFB205628A30042078C /* CodableNode.swift */; };
 		ED43200020562B460042078C /* ShortcutPreferenceNodeParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED431FFF20562B460042078C /* ShortcutPreferenceNodeParameters.swift */; };
 		ED432032205756280042078C /* StyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED432031205756280042078C /* StyleSheet.swift */; };
@@ -211,6 +212,7 @@
 		ED2E159A20056621003D55A3 /* markdown.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = markdown.js; sourceTree = "<group>"; };
 		ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Extensions.swift"; sourceTree = "<group>"; };
 		ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
+		ED350AA322EC4DEE00AF85E5 /* markdown-it-smartarrows.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "markdown-it-smartarrows.min.js"; sourceTree = "<group>"; };
 		ED431FFB205628A30042078C /* CodableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableNode.swift; sourceTree = "<group>"; };
 		ED431FFF20562B460042078C /* ShortcutPreferenceNodeParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreferenceNodeParameters.swift; sourceTree = "<group>"; };
 		ED432031205756280042078C /* StyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSheet.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 		ED2E159C2005662A003D55A3 /* markdown-it */ = {
 			isa = PBXGroup;
 			children = (
+				ED350AA322EC4DEE00AF85E5 /* markdown-it-smartarrows.min.js */,
 				ED2E149120055548003D55A3 /* markdown-it-task-checkbox.min.js */,
 				ED2E149320055563003D55A3 /* markdown-it.min.js */,
 				ED2E1495200555A5003D55A3 /* markdown-it-sub.min.js */,
@@ -936,6 +939,7 @@
 				EDCED8C52005DAD100C514B1 /* monokai-sublime.css in Resources */,
 				ED468A48224C6CF000437F03 /* Outline.storyboard in Resources */,
 				ED2E149420055563003D55A3 /* markdown-it.min.js in Resources */,
+				ED350AA422EC4DEE00AF85E5 /* markdown-it-smartarrows.min.js in Resources */,
 				ED4EB9D2201C814100B4CBE7 /* dark.css in Resources */,
 				ED574002202D950E00D844A3 /* CreateOrOpenWorkspace.storyboard in Resources */,
 				ED574007202D955E00D844A3 /* ShortcutPreference.storyboard in Resources */,

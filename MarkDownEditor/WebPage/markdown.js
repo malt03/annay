@@ -22,6 +22,7 @@ function jump(anchor) {
 function update(markdown) {
     var md = window.markdownit({
         breaks: true,
+        linkify: true,
         highlight: function (str, lang) {
             if (lang && hljs.getLanguage(lang)) {
                 try {
@@ -38,7 +39,8 @@ function update(markdown) {
     .use(window.markdownitSup)
     .use(window.markdownitFootnote)
     .use(window.markdownitEmoji)
-    .use(window.markdownitHeadingAnchor);
+    .use(window.markdownitHeadingAnchor)
+    .use(window.markdownitSmartArrows);
 
     var tokens = md.parse(markdown, {});
     var map = new Map();

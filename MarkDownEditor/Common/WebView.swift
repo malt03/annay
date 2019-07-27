@@ -65,6 +65,7 @@ final class WebView: WKWebView {
       "markdown-it-footnote.min.js",
       "markdown-it-emoji.min.js",
       "markdown-it-headinganchor.min.js",
+      "markdown-it-smartarrows.min.js",
       "markdown.js",
     ]
     
