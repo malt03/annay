@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="maI-6U-xBd">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="7zj-GF-W8A">
+            <objects>
+                <windowController id="maI-6U-xBd" customClass="PreviewWindowController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Preview" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="PreviewWindow" animationBehavior="default" tabbingMode="disallowed" id="dl9-4c-DQC">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <connections>
+                            <outlet property="delegate" destination="maI-6U-xBd" id="igl-VG-ymy"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="m08-e7-qG4" kind="relationship" relationship="window.shadowedContentViewController" id="mxl-Fd-Cnb"/>
+                    </connections>
+                </windowController>
+                <customObject id="ONy-pT-h3c" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-40" y="207"/>
+        </scene>
+        <!--Preview View Controller-->
+        <scene sceneID="882-ko-xdt">
+            <objects>
+                <viewController id="m08-e7-qG4" customClass="PreviewViewController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="gqB-eG-dI0" customClass="BackgroundSetableView" customModule="Annay" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0l9-rR-NuA">
+                                <rect key="frame" x="224" y="119" width="32" height="32"/>
+                            </progressIndicator>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="0l9-rR-NuA" firstAttribute="centerX" secondItem="gqB-eG-dI0" secondAttribute="centerX" id="Qwh-oZ-Vqf"/>
+                            <constraint firstItem="0l9-rR-NuA" firstAttribute="centerY" secondItem="gqB-eG-dI0" secondAttribute="centerY" id="kbW-WR-hSn"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                <color key="value" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="progressIndicator" destination="0l9-rR-NuA" id="ME8-IO-gk7"/>
+                    </connections>
+                </viewController>
+                <customObject id="Sf8-3m-Ecs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="667" y="182"/>
+        </scene>
+    </scenes>
+</document>

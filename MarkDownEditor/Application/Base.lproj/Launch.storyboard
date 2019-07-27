@@ -247,6 +247,18 @@ CA
                                                 <action selector="zoomOut:" target="Voe-Tx-rLC" id="exf-WN-xvk"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="ntL-qc-Eeg"/>
+                                        <menuItem title="Open Preview" keyEquivalent="p" id="s31-U0-tfN">
+                                            <connections>
+                                                <action selector="openPreviewWithSender:" target="Voe-Tx-rLC" id="e2f-YM-E0b"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Open Preview in Full Screen" keyEquivalent="P" id="lsB-mh-SJM">
+                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="openPreviewInFullScreenWithSender:" target="Voe-Tx-rLC" id="8RX-z6-Jr0"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

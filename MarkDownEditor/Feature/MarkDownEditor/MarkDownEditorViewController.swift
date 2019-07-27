@@ -41,7 +41,7 @@ final class MarkDownEditorViewController: NSViewController {
     prepareEditorHidingWebView()
     
     NodeModel.selectedNode.asObservable().subscribe(onNext: { [weak self] (node) in
-      self?.updateNote(note: node)
+      self?.updateNote(note: node, notify: false)
     }).disposed(by: bag)
     
     OutlineModel.selected.subscribe(onNext: { [weak self] (outline) in
@@ -52,6 +52,12 @@ final class MarkDownEditorViewController: NSViewController {
       s.editorHidingWebView.jump(outline: outline)
     }).disposed(by: bag)
     
+    NoteChangeNotification.subject.subscribe(onNext: { [weak self] (notification) in
+      guard let s = self else { return }
+      if notification.sender == s { return }
+      s.updateNote(note: notification.note, notify: false)
+    }).disposed(by: bag)
+
     prepareTextView()
   }
   
@@ -151,7 +157,7 @@ final class MarkDownEditorViewController: NSViewController {
   
   private var noteChangeNotificationToken: NotificationToken?
   
-  private func updateNote(note: NodeModel? = NodeModel.selectedNode.value) {
+  private func updateNote(note: NodeModel? = NodeModel.selectedNode.value, notify: Bool) {
     if let note = note {
       textView.isEditable = !note.isDeletedWithParent
     } else {
@@ -159,7 +165,7 @@ final class MarkDownEditorViewController: NSViewController {
     }
     textView.string = note?.body ?? ""
     textView.textStorage?.highlightMarkdownSyntax()
-    updateWebView(note: note)
+    updateWebView(note: note, notify: notify)
     
     // select()のタイミングがtransaction内になっちゃうので
     DispatchQueue.main.async {
@@ -167,14 +173,16 @@ final class MarkDownEditorViewController: NSViewController {
       self.noteChangeNotificationToken = note?.observe { [weak self] (change) in
         guard let s = self else { return }
         switch change {
-        case .deleted: s.updateNote(note: nil)
+        case .deleted: s.updateNote(note: nil, notify: false)
         default: break
         }
       }
     }
   }
   
-  private func updateWebView(note: NodeModel? = NodeModel.selectedNode.value) {
+  private func updateWebView(note: NodeModel? = NodeModel.selectedNode.value, notify: Bool) {
+    if notify { NoteChangeNotification.subject.onNext(.init(sender: self, note: note)) }
+    
     var markDown = (note?.body ?? "")
     if view.window?.firstResponder == textView {
       let markDownNSString = NSMutableString(string: markDown)
@@ -206,7 +214,7 @@ extension MarkDownEditorViewController: NSTextViewDelegate {
         }
       }
       s.textView.textStorage?.highlightMarkdownSyntax()
-      s.updateWebView()
+      s.updateWebView(notify: true)
     }
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: updateTextWorkItem)
     lastUpdateTextWorkItem = updateTextWorkItem
@@ -298,7 +306,7 @@ extension MarkDownEditorViewController: WKScriptMessageHandler {
         let isChecked = dict["isChecked"] as? Int
         else { return }
       alertError { try note.updateCheckbox(content: content, index: index, isChecked: isChecked == 1) }
-      updateNote(note: note)
+      updateNote(note: note, notify: true)
     case "fetchImage":
       guard
         let imageUrlString = message.body as? String,

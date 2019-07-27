@@ -74,6 +74,14 @@ extension AppDelegate {
   @IBAction private func openPreference(_ sender: NSMenuItem) {
     PreferenceWindowController.show()
   }
+  
+  @IBAction private func openPreview(sender: NSMenuItem) {
+    PreviewWindowController.show(fullScreen: false)
+  }
+  
+  @IBAction private func openPreviewInFullScreen(sender: NSMenuItem) {
+    PreviewWindowController.show(fullScreen: true)
+  }
 
   @IBAction private func saveNote(_ sender: NSMenuItem) {
     Realm.transaction { _ in

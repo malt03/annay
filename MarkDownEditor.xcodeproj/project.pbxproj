@@ -32,6 +32,9 @@
 		ED2E15A820063E59003D55A3 /* Realm+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */; };
 		ED2E15AA20064A0E003D55A3 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */; };
 		ED350AA422EC4DEE00AF85E5 /* markdown-it-smartarrows.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED350AA322EC4DEE00AF85E5 /* markdown-it-smartarrows.min.js */; };
+		ED350AAB22EC58A500AF85E5 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED350AAA22EC58A500AF85E5 /* PreviewViewController.swift */; };
+		ED350AAD22EC606B00AF85E5 /* NoteChangeNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED350AAC22EC606B00AF85E5 /* NoteChangeNotification.swift */; };
+		ED350AAF22EC65FF00AF85E5 /* PreviewWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED350AAE22EC65FF00AF85E5 /* PreviewWindowController.swift */; };
 		ED431FFC205628A30042078C /* CodableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED431FFB205628A30042078C /* CodableNode.swift */; };
 		ED43200020562B460042078C /* ShortcutPreferenceNodeParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED431FFF20562B460042078C /* ShortcutPreferenceNodeParameters.swift */; };
 		ED432032205756280042078C /* StyleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED432031205756280042078C /* StyleSheet.swift */; };
@@ -75,6 +78,7 @@
 		ED59FDB0201330BC0085D9F5 /* WorkspacesTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */; };
 		ED5E97A22084F2DD00C71ED5 /* fileIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = ED5E97A02084F2DD00C71ED5 /* fileIcon.icns */; };
 		ED5E97A32084F2DD00C71ED5 /* dirIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = ED5E97A12084F2DD00C71ED5 /* dirIcon.icns */; };
+		ED6715C922EC6EA700ADF46B /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED6715CB22EC6EA700ADF46B /* Preview.storyboard */; };
 		ED6D3B9F2249E71700E64827 /* CreateOrOpenWorkspaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6D3B9E2249E71700E64827 /* CreateOrOpenWorkspaceViewController.swift */; };
 		ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED710037204E16E90030CDFB /* PreferenceManager.swift */; };
 		ED83F7122036A1C20038D96B /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */; };
@@ -213,6 +217,9 @@
 		ED2E15A720063E59003D55A3 /* Realm+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Extensions.swift"; sourceTree = "<group>"; };
 		ED2E15A920064A0E003D55A3 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		ED350AA322EC4DEE00AF85E5 /* markdown-it-smartarrows.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "markdown-it-smartarrows.min.js"; sourceTree = "<group>"; };
+		ED350AAA22EC58A500AF85E5 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		ED350AAC22EC606B00AF85E5 /* NoteChangeNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteChangeNotification.swift; sourceTree = "<group>"; };
+		ED350AAE22EC65FF00AF85E5 /* PreviewWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewWindowController.swift; sourceTree = "<group>"; };
 		ED431FFB205628A30042078C /* CodableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableNode.swift; sourceTree = "<group>"; };
 		ED431FFF20562B460042078C /* ShortcutPreferenceNodeParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutPreferenceNodeParameters.swift; sourceTree = "<group>"; };
 		ED432031205756280042078C /* StyleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleSheet.swift; sourceTree = "<group>"; };
@@ -263,6 +270,8 @@
 		ED59FDAF201330BC0085D9F5 /* WorkspacesTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesTableRowView.swift; sourceTree = "<group>"; };
 		ED5E97A02084F2DD00C71ED5 /* fileIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = fileIcon.icns; sourceTree = "<group>"; };
 		ED5E97A12084F2DD00C71ED5 /* dirIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = dirIcon.icns; sourceTree = "<group>"; };
+		ED6715CA22EC6EA700ADF46B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preview.storyboard; sourceTree = "<group>"; };
+		ED6715CD22EC6EAD00ADF46B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Preview.strings; sourceTree = "<group>"; };
 		ED6D3B9E2249E71700E64827 /* CreateOrOpenWorkspaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrOpenWorkspaceViewController.swift; sourceTree = "<group>"; };
 		ED710037204E16E90030CDFB /* PreferenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceManager.swift; sourceTree = "<group>"; };
 		ED83F7112036A1C20038D96B /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
@@ -462,6 +471,7 @@
 		ED2E15AF200669B8003D55A3 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				ED350AA522EC583B00AF85E5 /* Preview */,
 				ED468A44224B68A800437F03 /* Outline */,
 				ED4EB9D3201D61B400B4CBE7 /* OpenQuickly */,
 				ED840D20201A2A0E00EF2C42 /* MoveWorkspace */,
@@ -490,6 +500,17 @@
 				EDCA0B1722455AF800026C15 /* Example.md */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		ED350AA522EC583B00AF85E5 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				ED6715CB22EC6EA700ADF46B /* Preview.storyboard */,
+				ED350AAE22EC65FF00AF85E5 /* PreviewWindowController.swift */,
+				ED350AAA22EC58A500AF85E5 /* PreviewViewController.swift */,
+				ED350AAC22EC606B00AF85E5 /* NoteChangeNotification.swift */,
+			);
+			path = Preview;
 			sourceTree = "<group>";
 		};
 		ED432030205756160042078C /* StyleSheet */ = {
@@ -925,6 +946,7 @@
 				EDEA58E320442B1B00B1CA66 /* markdown.js in Resources */,
 				EDA736CA200E24F8000BC5DA /* Sidebar.storyboard in Resources */,
 				ED5543BA224CEB49004A2D9C /* MarkDownEditor.storyboard in Resources */,
+				ED6715C922EC6EA700ADF46B /* Preview.storyboard in Resources */,
 				EDEB7A5F2004EDF000F8C48A /* Assets.xcassets in Resources */,
 				ED83F7152036EB350038D96B /* Workspaces.storyboard in Resources */,
 				ED574019202D9D3200D844A3 /* Main.storyboard in Resources */,
@@ -1036,6 +1058,7 @@
 				ED840D29201A2AC000EF2C42 /* MoveWorkspaceViewController.swift in Sources */,
 				EDD0A28A200CD49800D5E7BE /* NSPasteboard+Extensions.swift in Sources */,
 				ED59FDAE20132B8B0085D9F5 /* Collection+Extensions.swift in Sources */,
+				ED350AAB22EC58A500AF85E5 /* PreviewViewController.swift in Sources */,
 				EDBFF25620106EA5005F3547 /* WorkspacesTableCellView.swift in Sources */,
 				ED468A46224B68C900437F03 /* OutlineModel.swift in Sources */,
 				ED2DEB18206B4148008E5F1E /* WorkspaceModel.swift in Sources */,
@@ -1082,10 +1105,12 @@
 				EDF6A7E7202B082000B85B2C /* PreferenceWindowController.swift in Sources */,
 				ED434F0320079DBD00C2357D /* LocalizedString.swift in Sources */,
 				EDB601492022C06A00EDF59C /* Application.swift in Sources */,
+				ED350AAF22EC65FF00AF85E5 /* PreviewWindowController.swift in Sources */,
 				EDD0805A202B12210021895A /* NewOrOpenNoteShortcutPreferenceViewController.swift in Sources */,
 				ED55C62E203BB51900827140 /* HtmlDataStore.swift in Sources */,
 				EDA736D5200E3E6A000BC5DA /* SplitView.swift in Sources */,
 				ED8CE48C204E7291002F1A5D /* CodableFont.swift in Sources */,
+				ED350AAD22EC606B00AF85E5 /* NoteChangeNotification.swift in Sources */,
 				ED4EB9DB201D650D00B4CBE7 /* OpenQuicklyWindowController.swift in Sources */,
 				ED432032205756280042078C /* StyleSheet.swift in Sources */,
 				ED840D1F201A217300EF2C42 /* WorkspacesTableView.swift in Sources */,
@@ -1183,6 +1208,15 @@
 				ED57401D202D9D3400D844A3 /* ja */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ED6715CB22EC6EA700ADF46B /* Preview.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED6715CA22EC6EA700ADF46B /* Base */,
+				ED6715CD22EC6EAD00ADF46B /* ja */,
+			);
+			name = Preview.storyboard;
 			sourceTree = "<group>";
 		};
 		ED83F7172036EB350038D96B /* Workspaces.storyboard */ = {
