@@ -79,6 +79,9 @@ function update(markdown) {
             window.webkit.messageHandlers.fetchImage.postMessage(url);
         }
     }
+  
+    // 右クリックメニュー非表示
+    document.body.setAttribute('oncontextmenu', 'event.preventDefault();');
 
     return document.documentElement.outerHTML;
 }
