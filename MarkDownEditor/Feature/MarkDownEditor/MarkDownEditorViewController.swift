@@ -23,6 +23,8 @@ final class MarkDownEditorViewController: NSViewController {
   private var webView: WebView!
   private var editorHidingWebView: WebView!
   
+  private var scrollAnchor: String { return "$$$$scroll$$$$" }
+  
   private var isFocusEditor: Observable<Bool> {
     return (view.window as! MainWindow).firstResponderObservable.map { [weak self] (responder) -> Bool in
       guard let s = self else { return false }
@@ -188,7 +190,7 @@ final class MarkDownEditorViewController: NSViewController {
     var markDown = (note?.body ?? "")
     if view.window?.firstResponder == textView {
       let markDownNSString = NSMutableString(string: markDown)
-      markDownNSString.insert("$$$$scroll$$$$", at: textView.selectedRange().location)
+      markDownNSString.insert(scrollAnchor, at: textView.selectedRange().location)
       markDown = markDownNSString as String
     }
     markDown = markDown.replacingOccurrences(of: "\\", with: "\\\\")
@@ -303,10 +305,11 @@ extension MarkDownEditorViewController: WKScriptMessageHandler {
       guard
         let note = NodeModel.selectedNode.value,
         let dict = message.body as? [String: Any],
-        let content = dict["content"] as? String,
+        var content = dict["content"] as? String,
         let index = dict["index"] as? Int,
         let isChecked = dict["isChecked"] as? Int
         else { return }
+      content = content.replacingOccurrences(of: scrollAnchor, with: "")
       alertError { try note.updateCheckbox(content: content, index: index, isChecked: isChecked == 1) }
       updateNote(note: note, notify: true)
     case "fetchImage":
