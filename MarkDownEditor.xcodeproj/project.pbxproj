@@ -87,7 +87,6 @@
 		ED841BD12008EC2B0097996A /* NodeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD02008EC2B0097996A /* NodeTableCellView.swift */; };
 		ED841BD32009217F0097996A /* NSEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD22009217F0097996A /* NSEvent+Extensions.swift */; };
 		ED841BD52009CC0C0097996A /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED841BD42009CC0C0097996A /* KeyCode.swift */; };
-		ED8CE48A204E69F8002F1A5D /* Variable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */; };
 		ED8CE48C204E7291002F1A5D /* CodableFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE48B204E7291002F1A5D /* CodableFont.swift */; };
 		ED8CE48E204E7773002F1A5D /* GeneralPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */; };
 		ED8CE490204E7798002F1A5D /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8CE48F204E7798002F1A5D /* Preference.swift */; };
@@ -278,7 +277,6 @@
 		ED841BD02008EC2B0097996A /* NodeTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTableCellView.swift; sourceTree = "<group>"; };
 		ED841BD22009217F0097996A /* NSEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSEvent+Extensions.swift"; sourceTree = "<group>"; };
 		ED841BD42009CC0C0097996A /* KeyCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
-		ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Variable+Extensions.swift"; sourceTree = "<group>"; };
 		ED8CE48B204E7291002F1A5D /* CodableFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFont.swift; sourceTree = "<group>"; };
 		ED8CE48D204E7773002F1A5D /* GeneralPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPreference.swift; sourceTree = "<group>"; };
 		ED8CE48F204E7798002F1A5D /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
@@ -411,7 +409,6 @@
 				EDD4C746202EB0EB0029FF4C /* NSFont+Extensions.swift */,
 				EDFAC7F02035A339002BB3C9 /* NSTextStorage+Extensions.swift */,
 				EDEDA86C2044F32600260C1E /* Queue.swift */,
-				ED8CE489204E69F8002F1A5D /* Variable+Extensions.swift */,
 				ED8CE48B204E7291002F1A5D /* CodableFont.swift */,
 				ED2DEB5C206B69CC008E5F1E /* Util.swift */,
 				ED157E2C2243AE6500A56E19 /* NSAppearance+Extensions.swift */,
@@ -1092,7 +1089,6 @@
 				EDDE608F203C63B100331A77 /* CSSearchableIndex+Extensions.swift in Sources */,
 				EDD93C492057881600CA6627 /* StyleSheetFileWatcher.swift in Sources */,
 				ED4EB9E6201DB71B00B4CBE7 /* Results+Extensions.swift in Sources */,
-				ED8CE48A204E69F8002F1A5D /* Variable+Extensions.swift in Sources */,
 				ED4EB332207C3F5E00CFEBEB /* MainWindow.swift in Sources */,
 				ED710038204E16E90030CDFB /* PreferenceManager.swift in Sources */,
 				EDB7960622EB621B00819BAE /* Data+Image.swift in Sources */,
