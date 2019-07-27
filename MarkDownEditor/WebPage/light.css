@@ -99,6 +99,10 @@ p, blockquote, table, pre {
   margin: 15px 0;
 }
 
+.task-list-item {
+  list-style: none;
+}
+
 blockquote {
   border-left: 4px solid #40607F;
   padding: 0 15px;
