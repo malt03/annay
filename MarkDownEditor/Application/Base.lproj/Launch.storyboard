@@ -211,18 +211,18 @@ CA
                                         <menuItem isSeparatorItem="YES" id="1Aa-s0-gOs"/>
                                         <menuItem title="Bold" keyEquivalent="b" id="sDC-Pz-oEb">
                                             <connections>
-                                                <action selector="bold:" target="Voe-Tx-rLC" id="KGH-bV-NXx"/>
+                                                <action selector="bold:" target="Ady-hI-5gd" id="pZh-SL-Mh1"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Italic" keyEquivalent="i" id="cFH-01-x4p">
                                             <connections>
-                                                <action selector="italic:" target="Voe-Tx-rLC" id="u8Q-jo-zSH"/>
+                                                <action selector="italic:" target="Ady-hI-5gd" id="4JA-cD-d9Z"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Strikethrough" id="j8f-Nc-Bh5">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="strikethrough:" target="Voe-Tx-rLC" id="0jB-KF-3In"/>
+                                                <action selector="strikethrough:" target="Ady-hI-5gd" id="tLk-xa-2Fe"/>
                                             </connections>
                                         </menuItem>
                                     </items>

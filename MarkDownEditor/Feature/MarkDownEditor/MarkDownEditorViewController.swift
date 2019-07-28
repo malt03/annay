@@ -97,9 +97,6 @@ final class MarkDownEditorViewController: NSViewController {
   override func viewWillAppear() {
     super.viewWillAppear()
     NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToEditor), name: .MoveFocusToEditor, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(bold), name: .Bold, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(italic), name: .Italic, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(strikethrough), name: .Strikethrough, object: nil)
   }
   
   override func viewDidAppear() {
@@ -117,26 +114,7 @@ final class MarkDownEditorViewController: NSViewController {
   
   override func viewWillDisappear() {
     NotificationCenter.default.removeObserver(self, name: .MoveFocusToEditor, object: nil)
-    NotificationCenter.default.removeObserver(self, name: .Bold, object: nil)
-    NotificationCenter.default.removeObserver(self, name: .Italic, object: nil)
-    NotificationCenter.default.removeObserver(self, name: .Strikethrough, object: nil)
     super.viewWillDisappear()
-  }
-  
-  struct Format {
-    let symbol: String
-  }
-  
-  @objc private func bold()          { addFormat(Format(symbol: "**")) }
-  @objc private func italic()        { addFormat(Format(symbol: "*")) }
-  @objc private func strikethrough() { addFormat(Format(symbol: "~~")) }
-  private func addFormat(_ format: Format) {
-    let range = textView.selectedRange()
-    textView.insertText(format.symbol, replacementRange: NSRange(location: range.upperBound, length: 0))
-    textView.insertText(format.symbol, replacementRange: NSRange(location: range.lowerBound, length: 0))
-    if range.length == 0 {
-      textView.setSelectedRange(NSRange(location: range.location + format.symbol.count, length: 0))
-    }
   }
   
   @objc private func moveFocusToEditor() {

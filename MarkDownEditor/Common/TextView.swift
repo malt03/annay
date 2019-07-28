@@ -16,6 +16,22 @@ final class TextView: NSTextView {
   private let _isFirstResponder = BehaviorRelay(value: false)
   var isFirstResponder: Observable<Bool> { return _isFirstResponder.asObservable() }
   var isFirstResponderValue: Bool { return _isFirstResponder.value }
+
+  struct Format {
+    let symbol: String
+  }
+  
+  @objc private func bold(_ sender: Any)          { addFormat(Format(symbol: "**")) }
+  @objc private func italic(_ sender: Any)        { addFormat(Format(symbol: "*")) }
+  @objc private func strikethrough(_ sender: Any) { addFormat(Format(symbol: "~~")) }
+  private func addFormat(_ format: Format) {
+    let range = selectedRange()
+    insertText(format.symbol, replacementRange: NSRange(location: range.upperBound, length: 0))
+    insertText(format.symbol, replacementRange: NSRange(location: range.lowerBound, length: 0))
+    if range.length == 0 {
+      setSelectedRange(NSRange(location: range.location + format.symbol.count, length: 0))
+    }
+  }
   
   override func awakeFromNib() {
     super.awakeFromNib()
