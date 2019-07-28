@@ -20,7 +20,7 @@ final class StyleSheetManager {
   
   static func createDefaultCsses(force: Bool) {
     for url in [darkCss, lightCss] {
-      BookmarkManager.shared.getBookmarkedURL(url, fallback: { nil }) { (url) in
+      BookmarkManager.shared.getBookmarkedURL(url, fallback: { url }) { (url) in
         if FileManager.default.fileExists(atPath: url.path) {
           if !force { return }
           try! FileManager.default.removeItem(at: url)
