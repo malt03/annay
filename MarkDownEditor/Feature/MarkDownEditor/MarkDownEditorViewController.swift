@@ -318,9 +318,7 @@ extension MarkDownEditorViewController: WKScriptMessageHandler {
         let imageUrl = URL(string: imageUrlString)
         else { return }
       if imageUrl.scheme != "file" { return }
-      BookmarkManager.shared.getBookmarkedURL(imageUrl, fallback: { () -> URL? in
-        return nil
-      }, handler: { (bookmarkedUrl) in
+      BookmarkManager.shared.getBookmarkedURL(imageUrl, fallback: { imageUrl }, handler: { (bookmarkedUrl) in
         guard let imageData = try? Data(contentsOf: imageUrl) else { return }
         message.webView?.evaluateJavaScript("updateImage(\"\(imageUrlString)\", \"\(imageData.imageTagBase64EncodedSrc)\")", completionHandler: nil)
       })
