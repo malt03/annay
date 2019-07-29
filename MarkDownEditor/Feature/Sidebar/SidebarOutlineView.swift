@@ -49,6 +49,14 @@ final class SidebarOutlineView: NSOutlineView {
     } else {
       menu = backgroundMenu
     }
+    
+    if let indexesForMenu = indexesForMenu, menu == defaultNoteMenu {
+      let nodes = indexesForMenu.compactMap { self.item(atRow: $0) as? NodeModel }
+      let isGroupable = nodes.count == indexesForMenu.count && nodes.hasSameParent
+      let newDirectoryFromSelectionItem = defaultNoteMenu.items.first { $0.identifier == NSUserInterfaceItemIdentifier("newDirectoryFromSelection") }
+      newDirectoryFromSelectionItem?.isEnabled = isGroupable
+    }
+    
     return super.menu(for: event)
   }
   
