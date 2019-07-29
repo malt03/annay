@@ -106,7 +106,7 @@
 CA
 </string>
                                                         <connections>
-                                                            <action selector="deleteNote:" target="Voe-Tx-rLC" id="Omm-Qe-PwJ"/>
+                                                            <action selector="deleteNote:" target="Ady-hI-5gd" id="r7x-P2-jXH"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Delete Note Immediately" id="o3h-im-mcz">
@@ -115,7 +115,7 @@ CA
 </string>
                                                         <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                                         <connections>
-                                                            <action selector="deleteNoteImmediately:" target="Voe-Tx-rLC" id="yfz-gY-l5b"/>
+                                                            <action selector="deleteNoteImmediately:" target="Ady-hI-5gd" id="dBu-p6-Igq"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem isSeparatorItem="YES" id="MtW-pY-iIG"/>
@@ -125,7 +125,7 @@ CA
 </string>
                                                         <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                                         <connections>
-                                                            <action selector="putBackNote:" target="Voe-Tx-rLC" id="O4N-FJ-BQb"/>
+                                                            <action selector="putBackNote:" target="Ady-hI-5gd" id="8aB-Jq-vPR"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Empty the Trash" keyEquivalent="e" id="UiM-Qd-yqK">

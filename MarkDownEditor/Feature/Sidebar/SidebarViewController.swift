@@ -100,9 +100,6 @@ final class SidebarViewController: NSViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(createGroupWithoutMenu),     name: .CreateGroup,           object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar),            name: .RevealInSidebar,       object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar),         name: .MoveFocusToSidebar,    object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(deleteNote),                 name: .DeleteNote,            object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(deleteNoteImmediately),      name: .DeleteNoteImmediately, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(putBackNote),                name: .PutBackNote,           object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(emptyTrash),                 name: .EmptyTrash,            object: nil)
   }
   
@@ -115,9 +112,6 @@ final class SidebarViewController: NSViewController {
     NotificationCenter.default.removeObserver(self, name: .CreateGroup,           object: nil)
     NotificationCenter.default.removeObserver(self, name: .RevealInSidebar,       object: nil)
     NotificationCenter.default.removeObserver(self, name: .MoveFocusToSidebar,    object: nil)
-    NotificationCenter.default.removeObserver(self, name: .DeleteNote,            object: nil)
-    NotificationCenter.default.removeObserver(self, name: .DeleteNoteImmediately, object: nil)
-    NotificationCenter.default.removeObserver(self, name: .PutBackNote,           object: nil)
     NotificationCenter.default.removeObserver(self, name: .EmptyTrash,            object: nil)
     super.viewWillDisappear()
   }
@@ -381,7 +375,7 @@ final class SidebarViewController: NSViewController {
     NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil)
   }
   
-  @objc private func deleteNote() {
+  @objc private func deleteNote(_ sender: Any) {
     delete(indexes: outlineView.selectedRowIndexes)
   }
   
@@ -416,7 +410,7 @@ final class SidebarViewController: NSViewController {
     outlineView.selectRowIndexes(selectIndexSet, byExtendingSelection: false)
   }
   
-  @objc private func deleteNoteImmediately() {
+  @objc private func deleteNoteImmediately(_ sender: Any) {
     deleteImmediately(indexes: outlineView.selectedRowIndexes)
   }
   
@@ -463,7 +457,7 @@ final class SidebarViewController: NSViewController {
     }
   }
   
-  @objc private func putBackNote() {
+  @objc private func putBackNote(_ sender: Any) {
     putBackFromTrash(indexes: outlineView.selectedRowIndexes)
   }
   
