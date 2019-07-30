@@ -42,6 +42,23 @@ extension Array where Element == NodeModel {
       return true
     }
   }
+  
+  var hasSameParent: Bool {
+    if count == 0 { return false }
+    guard let sameParentId = self[0].parent?.id else { return false }
+    for node in self {
+      guard let parent = node.parent else {
+        return false
+      }
+      if node.isDeleted {
+        return false
+      }
+      if parent.id != sameParentId {
+        return false
+      }
+    }
+    return true
+  }
 }
 
 extension Array where Element == URL {

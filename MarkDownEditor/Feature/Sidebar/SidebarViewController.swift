@@ -92,27 +92,29 @@ final class SidebarViewController: NSViewController {
   
   override func viewWillAppear() {
     super.viewWillAppear()
-    NotificationCenter.default.addObserver(self, selector: #selector(selectNextNote),             name: .SelectNextNote,        object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(selectPreviousNote),         name: .SelectPreviousNote,    object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(findInWorkspace),            name: .FindInWorkspace,       object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutMenu),      name: .CreateNote,            object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(createDirectoryWithoutMenu), name: .CreateDirectory,       object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(createGroupWithoutMenu),     name: .CreateGroup,           object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar),            name: .RevealInSidebar,       object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar),         name: .MoveFocusToSidebar,    object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(emptyTrash),                 name: .EmptyTrash,            object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(selectNextNote),                          name: .SelectNextNote,               object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(selectPreviousNote),                      name: .SelectPreviousNote,           object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(findInWorkspace),                         name: .FindInWorkspace,              object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createNoteWithoutMenu),                   name: .CreateNote,                   object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createDirectoryWithoutMenu),              name: .CreateDirectory,              object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createDirectoryFromSelectionWithoutMenu), name: .CreateDirectoryFromSelection, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(createGroupWithoutMenu),                  name: .CreateGroup,                  object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(revealInSidebar),                         name: .RevealInSidebar,              object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(moveFocusToSidebar),                      name: .MoveFocusToSidebar,           object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(emptyTrash),                              name: .EmptyTrash,                   object: nil)
   }
   
   override func viewWillDisappear() {
-    NotificationCenter.default.removeObserver(self, name: .SelectNextNote,        object: nil)
-    NotificationCenter.default.removeObserver(self, name: .SelectPreviousNote,    object: nil)
-    NotificationCenter.default.removeObserver(self, name: .FindInWorkspace,       object: nil)
-    NotificationCenter.default.removeObserver(self, name: .CreateNote,            object: nil)
-    NotificationCenter.default.removeObserver(self, name: .CreateDirectory,       object: nil)
-    NotificationCenter.default.removeObserver(self, name: .CreateGroup,           object: nil)
-    NotificationCenter.default.removeObserver(self, name: .RevealInSidebar,       object: nil)
-    NotificationCenter.default.removeObserver(self, name: .MoveFocusToSidebar,    object: nil)
-    NotificationCenter.default.removeObserver(self, name: .EmptyTrash,            object: nil)
+    NotificationCenter.default.removeObserver(self, name: .SelectNextNote,               object: nil)
+    NotificationCenter.default.removeObserver(self, name: .SelectPreviousNote,           object: nil)
+    NotificationCenter.default.removeObserver(self, name: .FindInWorkspace,              object: nil)
+    NotificationCenter.default.removeObserver(self, name: .CreateNote,                   object: nil)
+    NotificationCenter.default.removeObserver(self, name: .CreateDirectory,              object: nil)
+    NotificationCenter.default.removeObserver(self, name: .CreateDirectoryFromSelection, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .CreateGroup,                  object: nil)
+    NotificationCenter.default.removeObserver(self, name: .RevealInSidebar,              object: nil)
+    NotificationCenter.default.removeObserver(self, name: .MoveFocusToSidebar,           object: nil)
+    NotificationCenter.default.removeObserver(self, name: .EmptyTrash,                   object: nil)
     super.viewWillDisappear()
   }
   
@@ -298,6 +300,35 @@ final class SidebarViewController: NSViewController {
       let count = NodeModel.deleted.count
       outlineView.removeItems(at: IndexSet(integersIn: 0..<count), inParent: NodeModel.trash, withAnimation: .effectFade)
       alertError { try NodeModel.emptyTrash() }
+    }
+  }
+  
+  @objc private func createDirectoryFromSelectionWithoutMenu() {
+    createDirectoryFromSelection(indexes: outlineView.selectedRowIndexes)
+  }
+  
+  @IBAction func createDirectoryFromSelection(_ sender: NSMenuItem) {
+    guard let indexes = outlineView.indexesForMenu else { return }
+    createDirectoryFromSelection(indexes: indexes)
+  }
+  
+  private func createDirectoryFromSelection(indexes: IndexSet) {
+    let nodes = indexes.compactMap { outlineView.item(atRow: $0) as? NodeModel }
+    let isGroupable = nodes.count == indexes.count && nodes.hasSameParent
+    guard let parent = nodes.first?.parent, isGroupable else {
+      NSAlert(localizedMessageText: "\"New Directory from Select\" can only be used when selecting just under the same directory node.").runModal()
+      return
+    }
+    alertError {
+      let insertedNode = try NodeModel.createDirectory(parent: parent)
+      insert(node: insertedNode, in: parent)
+      outlineView.expandItem(insertedNode)
+      Realm.transaction { _ in
+        for (i, node) in nodes.enumerated() {
+          node.index = i
+          alertError { try node.move(in: insertedNode) }
+        }
+      }
     }
   }
   

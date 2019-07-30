@@ -85,6 +85,12 @@
                                                             <action selector="createDirectory:" target="Voe-Tx-rLC" id="oQF-hz-uTI"/>
                                                         </connections>
                                                     </menuItem>
+                                                    <menuItem title="New Directory from Selection" id="9mZ-kE-JQo">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="createDirectoryFromSelection:" target="Voe-Tx-rLC" id="XBk-FM-Jcv"/>
+                                                        </connections>
+                                                    </menuItem>
                                                     <menuItem title="New Group... [⌥N G]" id="aIz-cv-gDu">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
