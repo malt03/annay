@@ -41,3 +41,4 @@
 "If there is only one workspace, you can not delete it." = "ワークスペースが１つしかない場合、削除できません。";
 "Can not create under the deleted directory." = "削除されているディレクトリ配下には作成できません。";
 "Can not create under the trash." = "ゴミ箱の配下には作成できません。";
+"\"New Directory from Select\" can only be used when selecting just under the same directory node." = "「選択から新規ディレクトリ」は、同じディレクトリ直下のノードだけを選択している場合にのみ使えます。";

@@ -41,3 +41,4 @@
 "If there is only one workspace, you can not delete it." = "If there is only one workspace, you can not delete it.";
 "Can not create under the deleted directory." = "Can not create under the deleted directory.";
 "Can not create under the trash." = "Can not create under the trash.";
+"\"New Directory from Select\" can only be used when selecting just under the same directory node." = "\"New Directory from Select\" can only be used when selecting just under the same directory node.";

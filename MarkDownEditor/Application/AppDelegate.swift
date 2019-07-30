@@ -42,24 +42,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 extension AppDelegate {
-  @IBAction private func findInWorkspace(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .FindInWorkspace, object: nil) }
-  @IBAction private func openWorkspace(_ sender: NSMenuItem)            { NotificationCenter.default.post(name: .OpenWorkspace, object: nil) }
-  @IBAction private func createNote(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .CreateNote, object: nil) }
-  @IBAction private func createDirectory(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .CreateDirectory, object: nil) }
-  @IBAction private func createGroup(_ sender: NSMenuItem)              { NotificationCenter.default.post(name: .CreateGroup, object: nil) }
-  @IBAction private func createWorkspace(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .CreateWorkspace, object: nil) }
-  @IBAction private func revealInSidebar(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .RevealInSidebar, object: nil) }
-  @IBAction private func selectNextNote(_ sender: NSMenuItem)           { NotificationCenter.default.post(name: .SelectNextNote, object: nil) }
-  @IBAction private func selectPreviousNote(_ sender: NSMenuItem)       { NotificationCenter.default.post(name: .SelectPreviousNote, object: nil) }
-  @IBAction private func selectNextWorkspace(_ sender: NSMenuItem)      { NotificationCenter.default.post(name: .SelectNextWorkspace, object: nil) }
-  @IBAction private func selectPreviousWorkspace(_ sender: NSMenuItem)  { NotificationCenter.default.post(name: .SelectPreviousWorkspace, object: nil) }
-  @IBAction private func moveFocusToWorkspaces(_ sender: NSMenuItem)    { NotificationCenter.default.post(name: .MoveFocusToWorkspaces, object: nil) }
-  @IBAction private func moveFocusToSidebar(_ sender: NSMenuItem)       { NotificationCenter.default.post(name: .MoveFocusToSidebar, object: nil) }
-  @IBAction private func moveFocusToEditor(_ sender: NSMenuItem)        { NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil) }
-  @IBAction private func emptyTrash(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .EmptyTrash, object: nil) }
-  @IBAction private func actualSize(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .ActualSize, object: nil) }
-  @IBAction private func zoomIn(_ sender: NSMenuItem)                   { NotificationCenter.default.post(name: .ZoomIn, object: nil) }
-  @IBAction private func zoomOut(_ sender: NSMenuItem)                  { NotificationCenter.default.post(name: .ZoomOut, object: nil) }
+  @IBAction private func findInWorkspace(_ sender: NSMenuItem)              { NotificationCenter.default.post(name: .FindInWorkspace, object: nil) }
+  @IBAction private func openWorkspace(_ sender: NSMenuItem)                { NotificationCenter.default.post(name: .OpenWorkspace, object: nil) }
+  @IBAction private func createNote(_ sender: NSMenuItem)                   { NotificationCenter.default.post(name: .CreateNote, object: nil) }
+  @IBAction private func createDirectory(_ sender: NSMenuItem)              { NotificationCenter.default.post(name: .CreateDirectory, object: nil) }
+  @IBAction private func createDirectoryFromSelection(_ sender: NSMenuItem) { NotificationCenter.default.post(name: .CreateDirectoryFromSelection, object: nil) }
+  @IBAction private func createGroup(_ sender: NSMenuItem)                  { NotificationCenter.default.post(name: .CreateGroup, object: nil) }
+  @IBAction private func createWorkspace(_ sender: NSMenuItem)              { NotificationCenter.default.post(name: .CreateWorkspace, object: nil) }
+  @IBAction private func revealInSidebar(_ sender: NSMenuItem)              { NotificationCenter.default.post(name: .RevealInSidebar, object: nil) }
+  @IBAction private func selectNextNote(_ sender: NSMenuItem)               { NotificationCenter.default.post(name: .SelectNextNote, object: nil) }
+  @IBAction private func selectPreviousNote(_ sender: NSMenuItem)           { NotificationCenter.default.post(name: .SelectPreviousNote, object: nil) }
+  @IBAction private func selectNextWorkspace(_ sender: NSMenuItem)          { NotificationCenter.default.post(name: .SelectNextWorkspace, object: nil) }
+  @IBAction private func selectPreviousWorkspace(_ sender: NSMenuItem)      { NotificationCenter.default.post(name: .SelectPreviousWorkspace, object: nil) }
+  @IBAction private func moveFocusToWorkspaces(_ sender: NSMenuItem)        { NotificationCenter.default.post(name: .MoveFocusToWorkspaces, object: nil) }
+  @IBAction private func moveFocusToSidebar(_ sender: NSMenuItem)           { NotificationCenter.default.post(name: .MoveFocusToSidebar, object: nil) }
+  @IBAction private func moveFocusToEditor(_ sender: NSMenuItem)            { NotificationCenter.default.post(name: .MoveFocusToEditor, object: nil) }
+  @IBAction private func emptyTrash(_ sender: NSMenuItem)                   { NotificationCenter.default.post(name: .EmptyTrash, object: nil) }
+  @IBAction private func actualSize(_ sender: NSMenuItem)                   { NotificationCenter.default.post(name: .ActualSize, object: nil) }
+  @IBAction private func zoomIn(_ sender: NSMenuItem)                       { NotificationCenter.default.post(name: .ZoomIn, object: nil) }
+  @IBAction private func zoomOut(_ sender: NSMenuItem)                      { NotificationCenter.default.post(name: .ZoomOut, object: nil) }
 
   @IBAction private func openQuickly(_ sender: NSMenuItem) {
     OpenQuicklyWindowController.toggle()
@@ -106,6 +107,7 @@ extension Notification.Name {
   static let RevealInSidebar = Notification.Name(rawValue: "AppDelegate/RevealInSidebar")
   static let CreateNote = Notification.Name(rawValue: "AppDelegate/CreateNote")
   static let CreateDirectory = Notification.Name(rawValue: "AppDelegate/CreateDirectory")
+  static let CreateDirectoryFromSelection = Notification.Name(rawValue: "AppDelegate/CreateDirectoryFromSelection")
   static let CreateGroup = Notification.Name(rawValue: "AppDelegate/CreateGroup")
   static let CreateWorkspace = Notification.Name(rawValue: "AppDelegate/CreateWorkspace")
   static let SelectNextNote = Notification.Name(rawValue: "AppDelegate/SelectNextNote")

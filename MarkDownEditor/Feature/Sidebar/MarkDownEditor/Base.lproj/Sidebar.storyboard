@@ -367,7 +367,7 @@
                         <menuItem title="New Directory from Selection" identifier="newDirectoryFromSelection" id="IA4-Sg-0Lq">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="delete:" target="PrQ-Do-4mD" id="Zmt-aj-jeK"/>
+                                <action selector="createDirectoryFromSelection:" target="PrQ-Do-4mD" id="AAe-yn-auP"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="rmG-FC-GND"/>
