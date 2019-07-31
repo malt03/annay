@@ -42,7 +42,12 @@ final class NewOrOpenNoteShortcutPreferenceViewController: NSViewController {
       guard let s = self else { return }
       s.popUpButton.removeAllItems()
       s.popUpButton.addItems(withTitles: spaces.map { $0.nameValue })
-      s.popUpButton.selectItem(at: spaces.index(of: s.selectedWorkspace.value) ?? 0)
+      if s.selectedWorkspace.value.isInvalidated {
+        s.popUpButton.selectItem(at: 0)
+        s.selectedWorkspace.accept(spaces[0])
+      } else {
+        s.popUpButton.selectItem(at: spaces.index(of: s.selectedWorkspace.value) ?? 0)
+      }
       s.outlineView.reloadData()
     }).disposed(by: bag)
     
