@@ -20,7 +20,8 @@ final class WorkspacePreferenceViewController: NSViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    WorkspaceModel.observableSpaces.distinctUntilChanged().subscribe(onNext: { [weak self] (spaces) in
+
+    WorkspaceModel.observableSpaces.map { [WorkspaceModel]($0) }.distinctUntilChanged().subscribe(onNext: { [weak self] (spaces) in
       guard let s = self else { return }
       s.workspacePopUpButton.removeAllItems()
       s.workspacePopUpButton.addItems(withTitles: spaces.map { $0.nameValue })
