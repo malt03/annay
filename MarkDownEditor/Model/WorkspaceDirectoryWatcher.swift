@@ -18,6 +18,8 @@ final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
     return Realm.instance.objects(WorkspaceModel.self).filter("id = %@", workspaceId).first!
   }
   
+  private var startAccessingUrl: URL?
+  
   init(workspace: WorkspaceModel) {
     self.workspaceId = workspace.id
     super.init()
@@ -33,8 +35,24 @@ final class WorkspaceDirectoryWatcher: NSObject, NSFilePresenter {
     NSFileCoordinator.removeFilePresenter(self)
   }
   
+  deinit {
+    startAccessingUrl?.stopAccessingSecurityScopedResource()
+  }
+  
   var presentedItemURL: URL? {
-    return workspace.directoryUrl
+    let url = workspace.directoryUrl
+    let bookmarkedUrl = BookmarkManager.shared.getBookmarkedURLWithoutStartAccessing(url, fallback: { url })
+    
+    startAccessingUrl?.stopAccessingSecurityScopedResource()
+    startAccessingUrl = nil
+    
+    if let bookmarked = bookmarkedUrl.bookmarked {
+      if bookmarked.startAccessingSecurityScopedResource() {
+        startAccessingUrl = bookmarked
+      }
+    }
+    
+    return bookmarkedUrl.main
   }
   
   let presentedItemOperationQueue = OperationQueue()

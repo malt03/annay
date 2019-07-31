@@ -15,40 +15,48 @@ final class BookmarkManager {
     }
   }
   
+  struct BookmarkedURL {
+    let main: URL
+    let bookmarked: URL?
+  }
+  
   static let shared = BookmarkManager()
   
-  func getBookmarkedURL(_ url: URL, fallback: () -> URL?, handler: (_ url: URL) throws -> Void) rethrows {
+  func getBookmarkedURL(_ url: URL, fallback: () -> URL, handler: (_ url: URL) throws -> Void) rethrows {
+    let bookmarkedUrl = getBookmarkedURLWithoutStartAccessing(url, fallback: fallback)
+    
+    _ = bookmarkedUrl.bookmarked?.startAccessingSecurityScopedResource()
+    try handler(bookmarkedUrl.main)
+    bookmarkedUrl.bookmarked?.stopAccessingSecurityScopedResource()
+  }
+  
+  func getBookmarkedURLWithoutStartAccessing(_ url: URL, fallback: () -> URL) -> BookmarkedURL {
     var subURL = url
     var components = [String]()
     
     while subURL.path.count > 1 {
       if let data = UserDefaults.standard.data(forKey: Key.Data(for: subURL)) {
         var isStale = false
-        guard let bookmarkedURL = try? URL.init(resolvingBookmarkData: data, options: [.withSecurityScope, .withoutUI], bookmarkDataIsStale: &isStale) else {
+        guard let bookmarkedURL = try? URL(resolvingBookmarkData: data, options: [.withSecurityScope, .withoutUI], bookmarkDataIsStale: &isStale) else {
           NSAlert(error: MarkDownEditorError.couldNotAccessFile(url: url)).runModal()
-          if let fallbackURL = fallback() { try handler(fallbackURL) }
-          return
+          return BookmarkedURL(main: fallback(), bookmarked: nil)
         }
         if isStale {
           NSAlert(error: MarkDownEditorError.couldNotAccessFile(url: url)).runModal()
-          if let fallbackURL = fallback() { try handler(fallbackURL) }
-          return
+          return BookmarkedURL(main: fallback(), bookmarked: nil)
         }
         var absoluteURL = bookmarkedURL
         for component in components {
           absoluteURL.appendPathComponent(component)
         }
-        _ = bookmarkedURL.startAccessingSecurityScopedResource()
-        try handler(absoluteURL)
-        bookmarkedURL.stopAccessingSecurityScopedResource()
-        return
+        return BookmarkedURL(main: absoluteURL, bookmarked: bookmarkedURL)
       } else {
         components.insert(subURL.lastPathComponent, at: 0)
         subURL = subURL.deletingLastPathComponent()
       }
     }
     
-    if let fallbackURL = fallback() { try handler(fallbackURL) }
+    return BookmarkedURL(main: fallback(), bookmarked: nil)
   }
   
   func bookmark(url: URL) {

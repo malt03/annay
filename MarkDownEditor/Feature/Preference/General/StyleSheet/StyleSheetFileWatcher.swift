@@ -15,13 +15,31 @@ final class StyleSheetFileWatcher: NSObject, NSFilePresenter {
   var fileAddedOrChanged: Observable<URL> { return _fileAddedOrChanged }
   var fileDeleted: Observable<URL> { return _fileDeleted }
   
+  private var startAccessingUrl: URL?
+  
   override init() {
     super.init()
     NSFileCoordinator.addFilePresenter(self)
   }
   
   var presentedItemURL: URL? {
-    return PreferenceManager.shared.styleSheetsUrl
+    let url = PreferenceManager.shared.styleSheetsUrl
+    let bookmarkedUrl = BookmarkManager.shared.getBookmarkedURLWithoutStartAccessing(url, fallback: { url })
+
+    startAccessingUrl?.stopAccessingSecurityScopedResource()
+    startAccessingUrl = nil
+    
+    if let bookmarked = bookmarkedUrl.bookmarked {
+      if bookmarked.startAccessingSecurityScopedResource() {
+        startAccessingUrl = bookmarked
+      }
+    }
+
+    return bookmarkedUrl.main
+  }
+  
+  deinit {
+    startAccessingUrl?.stopAccessingSecurityScopedResource()
   }
   
   let presentedItemOperationQueue = OperationQueue()

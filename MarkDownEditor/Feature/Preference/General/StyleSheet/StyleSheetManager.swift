@@ -39,7 +39,7 @@ final class StyleSheetManager {
     let fileManager = FileManager.default
     var all = [StyleSheet]()
     
-    BookmarkManager.shared.getBookmarkedURL(StyleSheetManager.directoryUrl, fallback: { () -> URL? in
+    BookmarkManager.shared.getBookmarkedURL(StyleSheetManager.directoryUrl, fallback: { () -> URL in
       PreferenceManager.shared.resetDirectory()
       return StyleSheetManager.directoryUrl
     }) { (bookmarkedDirectoryURL) in
