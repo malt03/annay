@@ -156,8 +156,10 @@ final class WorkspaceModel: Object {
       Realm.transaction { _ in
         self.directoryPath = newValue.path
       }
-      nameSubject.onNext(nameValue)
-      directoryUrlSubject.onNext(newValue)
+      DispatchQueue.main.async {
+        self.nameSubject.onNext(self.nameValue)
+        self.directoryUrlSubject.onNext(newValue)
+      }
     }
   }
   
@@ -165,15 +167,8 @@ final class WorkspaceModel: Object {
   
   @discardableResult
   static func create(name: String, parentDirectory: URL, isFolder: Bool, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
-    var url = parentDirectory.appendingPathComponent(name)
-    if isFolder {
-      url.appendPathExtension(URL.folderWorkspaceExtension)
-    } else {
-      url.appendPathExtension(URL.workspaceExtension)
-    }
-
     return try create(
-      directoryUrl: url,
+      directoryUrl: parentDirectory.appendingPathComponent(name).appendingPathExtension(isFolder: isFolder),
       confirmUpdateNote: confirmUpdateNote
     )
   }

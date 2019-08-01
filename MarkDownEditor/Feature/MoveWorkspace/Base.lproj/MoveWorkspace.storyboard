@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="08s-R0-rcp">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="08s-R0-rcp">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -10,14 +10,14 @@
             <objects>
                 <viewController id="1pz-Ca-jxS" customClass="MoveWorkspaceViewController" customModule="Annay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="fBC-jY-MDQ">
-                        <rect key="frame" x="0.0" y="0.0" width="577" height="185"/>
+                        <rect key="frame" x="0.0" y="0.0" width="577" height="214"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZXc-Ra-hRW">
-                                <rect key="frame" x="32" y="69" width="513" height="51"/>
+                                <rect key="frame" x="32" y="69" width="513" height="80"/>
                                 <subviews>
                                     <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a2P-9X-q31">
-                                        <rect key="frame" x="0.0" y="29" width="418" height="22"/>
+                                        <rect key="frame" x="0.0" y="58" width="418" height="22"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="ait-gC-bgx">
                                                 <rect key="frame" x="-2" y="3" width="114" height="17"/>
@@ -57,9 +57,9 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wNq-nu-pIg">
-                                        <rect key="frame" x="0.0" y="0.0" width="513" height="21"/>
+                                        <rect key="frame" x="0.0" y="29" width="513" height="21"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="1000" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iVw-7V-J8c">
+                                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iVw-7V-J8c">
                                                 <rect key="frame" x="-2" y="2" width="114" height="17"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Directory:" id="tgi-re-CGj">
                                                     <font key="font" metaFont="system"/>
@@ -103,16 +103,75 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
+                                    <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lfd-GV-cEo">
+                                        <rect key="frame" x="0.0" y="0.0" width="232" height="21"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="APT-aK-eJl">
+                                                <rect key="frame" x="-2" y="2" width="114" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="File Type:" id="8lD-la-IbN">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <popUpButton horizontalHuggingPriority="1000" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="sZG-Bq-OIa">
+                                                <rect key="frame" x="116" y="-3" width="90" height="25"/>
+                                                <popUpButtonCell key="cell" type="push" title="Package" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Sd2-pC-6ce" id="z6u-k7-4HX">
+                                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="menu"/>
+                                                    <menu key="menu" id="aFe-OI-Spx">
+                                                        <items>
+                                                            <menuItem title="Package" state="on" id="Sd2-pC-6ce">
+                                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                                            </menuItem>
+                                                            <menuItem title="Folder" id="u28-tq-TJE">
+                                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                                            </menuItem>
+                                                        </items>
+                                                    </menu>
+                                                </popUpButtonCell>
+                                                <connections>
+                                                    <action selector="changeIsFolder:" target="1pz-Ca-jxS" id="rXJ-wA-rPK"/>
+                                                </connections>
+                                            </popUpButton>
+                                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="udj-yc-z16">
+                                                <rect key="frame" x="209" y="-4" width="25" height="25"/>
+                                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="t4y-1f-lrj">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="showFileTypeHint:" target="1pz-Ca-jxS" id="Kkc-E7-Vlg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="sZG-Bq-OIa" firstAttribute="height" secondItem="Lfd-GV-cEo" secondAttribute="height" id="eFf-gg-rsM"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="APT-aK-eJl" firstAttribute="width" secondItem="ait-gC-bgx" secondAttribute="width" id="YAf-Ir-lJ6"/>
                                     <constraint firstItem="wNq-nu-pIg" firstAttribute="width" secondItem="ZXc-Ra-hRW" secondAttribute="width" id="ukZ-3y-HIw"/>
                                     <constraint firstItem="iVw-7V-J8c" firstAttribute="width" secondItem="ait-gC-bgx" secondAttribute="width" id="yJF-1X-D5c"/>
                                 </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
@@ -160,7 +219,7 @@ DQ
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FTL-Lt-9SZ">
-                                <rect key="frame" x="14" y="152" width="151" height="17"/>
+                                <rect key="frame" x="14" y="181" width="151" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Move the workspace file" id="N2i-0a-ePG">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -181,6 +240,7 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="fileTypePopUpButton" destination="sZG-Bq-OIa" id="Vec-Ep-P6T"/>
                         <outlet property="moveButton" destination="EMY-d9-0Op" id="Cg0-Lp-fx6"/>
                         <outlet property="workspaceDirectoryTextField" destination="8FS-ia-U8X" id="nN3-C6-bKr"/>
                         <outlet property="workspaceNameTextField" destination="BRd-cF-kIx" id="Eso-7A-g28"/>

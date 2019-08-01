@@ -46,7 +46,7 @@ final class CreateWorkspaceViewController: CreateOrOpenWorkspaceViewController {
     Observable.combineLatest(directoryValidate, nameValidate, resultSelector: { $0 && $1 }).bind(to: createButton.rx.isEnabled).disposed(by: bag)
   }
   
-  @IBAction func showFileTypeHint(_ sender: NSButton) {
+  @IBAction private func showFileTypeHint(_ sender: NSButton) {
     NSAlert(localizedMessageText: "You can select file type which Annay save the markdown files.\nI recommend to select \"Package\" unless there are special circumstances.\nYou could select \"Directory\" when you will use tools such as Box Sync which do not support macOS package files.").runModal()
   }
   
@@ -66,7 +66,7 @@ final class CreateWorkspaceViewController: CreateOrOpenWorkspaceViewController {
     }
   }
   
-  @IBAction func createWorkspace(_ sender: NSButton) {
+  @IBAction private func createWorkspace(_ sender: NSButton) {
     let path = workspaceDirectoryTextField.stringValue.replacingTildeToHomePath
     let url = URL(fileURLWithPath: path, isDirectory: true)
     let isFolder = fileTypePopUpButton.indexOfSelectedItem == 1

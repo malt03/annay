@@ -26,6 +26,14 @@ extension URL {
   static var workspaceExtension: String { return "annay" }
   static var folderWorkspaceExtension: String { return "annayf" }
   
+  func appendingPathExtension(isFolder: Bool) -> URL {
+    if isFolder {
+      return appendingPathExtension(URL.folderWorkspaceExtension)
+    } else {
+      return appendingPathExtension(URL.workspaceExtension)
+    }
+  }
+  
   var isWorkspaceAsFolder: Bool {
     return uti == URL.folderWorkspaceUti
   }

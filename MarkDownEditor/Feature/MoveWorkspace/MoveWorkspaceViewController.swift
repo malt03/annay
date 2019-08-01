@@ -13,18 +13,26 @@ import RealmSwift
 final class MoveWorkspaceViewController: NSViewController {
   private let bag = DisposeBag()
   private let setDirectory = BehaviorSubject<String?>(value: nil)
+  private let isFolderSubject = BehaviorSubject<Bool>(value: true)
   
   @IBOutlet private weak var workspaceNameTextField: NSTextField!
   @IBOutlet private weak var workspaceDirectoryTextField: NSTextField!
+  @IBOutlet private weak var fileTypePopUpButton: NSPopUpButton!
   @IBOutlet private weak var moveButton: NSButton!
 
   private var workspace: WorkspaceModel!
   
   func prepare(workspace: WorkspaceModel) {
     self.workspace = workspace
-    workspaceDirectoryTextField.stringValue = workspace.directoryUrl.deletingLastPathComponent().replacingHomePath
-    setDirectory.onNext(workspaceDirectoryTextField.stringValue)
+    fileTypePopUpButton.selectItem(at: workspace.isFolderUrl ? 1 : 0)
+    isFolderSubject.onNext(workspace.isFolderUrl)
+//    workspaceDirectoryTextField.stringValue = workspace.directoryUrl.deletingLastPathComponent().replacingHomePath
     workspaceNameTextField.stringValue = workspace.nameValue
+    workspaceNameTextField.rx.text.onNext(workspace.nameValue)
+  }
+  
+  private var isFolder: Bool {
+    return fileTypePopUpButton.indexOfSelectedItem == 1
   }
   
   override func viewDidLoad() {
@@ -38,12 +46,16 @@ final class MoveWorkspaceViewController: NSViewController {
     
     let directory = Observable.merge(workspaceDirectoryTextField.rx.text.asObservable(), setDirectory)
     let name = workspaceNameTextField.rx.text
-    Observable.combineLatest(directory, name, resultSelector: { [weak self] (directory, name) -> Bool in
+    
+    moveButton.isEnabled = false
+    
+    Observable.combineLatest(directory, name, isFolderSubject, resultSelector: { [weak self] (directory, _, isFolder) -> Bool in
       guard
         let s = self,
-        let directory = directory,
-        let name = name
+        let directory = directory
         else { return false }
+
+      let name = s.workspaceNameTextField.stringValue
 
       if directory == "" { return false }
       if name == "" { return false }
@@ -51,7 +63,7 @@ final class MoveWorkspaceViewController: NSViewController {
       var isDirectory = ObjCBool(booleanLiteral: false)
       let path = directory.replacingTildeToHomePath
       let oldUrl = s.workspace.directoryUrl
-      let newUrl = URL(fileURLWithPath: path).appendingPathComponent(name).appendingPathExtension(URL.workspaceExtension)
+      let newUrl = URL(fileURLWithPath: path).appendingPathComponent(name).appendingPathExtension(isFolder: isFolder)
       if newUrl.isEqualIgnoringLastSlash(oldUrl) {
         return false
       }
@@ -62,6 +74,13 @@ final class MoveWorkspaceViewController: NSViewController {
     }).bind(to: moveButton.rx.isEnabled).disposed(by: bag)
   }
   
+  @IBAction private func showFileTypeHint(_ sender: NSButton) {
+    NSAlert(localizedMessageText: "You can select file type which Annay save the markdown files.\nI recommend to select \"Package\" unless there are special circumstances.\nYou could select \"Directory\" when you will use tools such as Box Sync which do not support macOS package files.").runModal()
+  }
+  
+  @IBAction private func changeIsFolder(_ sender: NSPopUpButton) {
+    isFolderSubject.onNext(isFolder)
+  }
 
   @IBAction private func selectWorkspace(_ sender: NSButton) {
     guard let window = view.window else { return }
@@ -84,7 +103,7 @@ final class MoveWorkspaceViewController: NSViewController {
     let path = workspaceDirectoryTextField.stringValue.replacingTildeToHomePath
     let name = workspaceNameTextField.stringValue
     do {
-      let url = URL(fileURLWithPath: path, isDirectory: true).appendingPathComponent(name).appendingPathExtension(URL.workspaceExtension)
+      let url = URL(fileURLWithPath: path, isDirectory: true).appendingPathComponent(name).appendingPathExtension(isFolder: isFolder)
       try Realm.transaction { _ in
         try workspace.setDirectoryUrl(url)
       }
