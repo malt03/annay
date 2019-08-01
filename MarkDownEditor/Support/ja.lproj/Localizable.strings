@@ -42,3 +42,4 @@
 "Can not create under the deleted directory." = "削除されているディレクトリ配下には作成できません。";
 "Can not create under the trash." = "ゴミ箱の配下には作成できません。";
 "\"New Directory from Select\" can only be used when selecting just under the same directory node." = "「選択から新規ディレクトリ」は、同じディレクトリ直下のノードだけを選択している場合にのみ使えます。";
+"You can select file type which Annay save the markdown files.\nI recommend to select \"Package\" unless there are special circumstances.\nYou could select \"Directory\" when you will use tools such as Box Sync which do not support macOS package files." = "Annayがマークダウンを保存するためのファイルの形式を選択します。\n特別な事情がなければ「パッケージ」を選択することをおすすめします。\n「ディレクトリ」はBox Sync等、macOSのパッケージファイルに対応していないツールを利用する場合に選択します。";

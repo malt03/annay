@@ -44,16 +44,6 @@ final class WorkspaceModel: Object {
     return directoryUrl.isWorkspaceAsFolder
   }
   
-  func setIsFolderUrl(_ isFolderUrl: Bool) throws {
-    var url = directoryUrl.deletingPathExtension()
-    if isFolderUrl {
-      url.appendPathExtension(URL.folderWorkspaceExtension)
-    } else {
-      url.appendPathExtension(URL.workspaceExtension)
-    }
-    try setDirectoryUrl(url)
-  }
-  
   var savedObservable: Observable<Bool> {
     return Observable.collection(from: nodes.filter("isBodySaved = false")).map { $0.count == 0 }
   }
@@ -113,7 +103,7 @@ final class WorkspaceModel: Object {
   
   @discardableResult
   private static func createDefault() throws -> WorkspaceModel {
-    let workspace = try create(name: Localized("Default Workspace"), parentDirectory: FileManager.default.applicationSupport)
+    let workspace = try create(name: Localized("Default Workspace"), parentDirectory: FileManager.default.applicationSupport, isFolder: false)
     let examplesDirectory = try! NodeModel.createDirectory(name: "Examples", parent: nil)
     let example = NodeModel.createNote(in: examplesDirectory)
     try Realm.transaction { _ in
@@ -174,9 +164,16 @@ final class WorkspaceModel: Object {
   let nodes = LinkingObjects(fromType: NodeModel.self, property: "workspace")
   
   @discardableResult
-  static func create(name: String, parentDirectory: URL, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
+  static func create(name: String, parentDirectory: URL, isFolder: Bool, confirmUpdateNote: NodeModel.ConfirmUpdateNote = { _, _ in }) throws -> WorkspaceModel {
+    var url = parentDirectory.appendingPathComponent(name)
+    if isFolder {
+      url.appendPathExtension(URL.folderWorkspaceExtension)
+    } else {
+      url.appendPathExtension(URL.workspaceExtension)
+    }
+
     return try create(
-      directoryUrl: parentDirectory.appendingPathComponent(name).appendingPathExtension(URL.workspaceExtension),
+      directoryUrl: url,
       confirmUpdateNote: confirmUpdateNote
     )
   }

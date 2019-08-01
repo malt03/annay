@@ -42,3 +42,4 @@
 "Can not create under the deleted directory." = "Can not create under the deleted directory.";
 "Can not create under the trash." = "Can not create under the trash.";
 "\"New Directory from Select\" can only be used when selecting just under the same directory node." = "\"New Directory from Select\" can only be used when selecting just under the same directory node.";
+"You can select file type which Annay save the markdown files.\nI recommend to select \"Package\" unless there are special circumstances.\nYou could select \"Directory\" when you will use tools such as Box Sync which do not support macOS package files." = "You can select file type which Annay save the markdown files.\nI recommend to select \"Package\" unless there are special circumstances.\nYou could select \"Directory\" when you will use tools such as Box Sync which do not support macOS package files.";
